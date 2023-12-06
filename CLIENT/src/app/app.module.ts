@@ -11,6 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderAdminComponent,
     FooterComponent,
     SidebarComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
