@@ -29,7 +29,7 @@ import { HomePageComponent } from './home-page/home-page.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule//Quan tọng, k có là k chạy
+    HttpClientModule, // Quan tọng, k có là k chạy
   ],
   providers: [],
   bootstrap: [AppComponent]
