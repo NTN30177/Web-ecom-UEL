@@ -1,0 +1,55 @@
+.frame_btn_footer{
+    border-radius: 7px;
+    background: #7A1E08;
+    padding: 16px;
+    gap: 242px;
+    margin: auto;
+    color: white;
+    width: 80%;
+}
+.btn_delete{
+    border-radius: 3.5px;
+    background: var(--primary-01, #9B3A23);
+    border: 1px solid var(--semantic-03, #9B3A23);
+    display: flex;
+    padding: 14px 16px;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--neutral-08, #FFF);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.72px;
+}
+.btn_group_footer{
+    display: flex;
+    padding: 0px 12px;
+    gap: 46px;
+}
+.btn_cancel{
+    display: flex;
+    background: var(--primary-01, #7A1E08);
+    padding: 14px 16px;
+    justify-content: center;
+    /* gap: 10px; */
+    color: var(--neutral-08, #FFF);
+    border: 1px solid var(--semantic-03, #7A1E08);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.72px;
+    width: 20%;
+}
+.btn_create{
+    border: 1px solid var(--semantic-03, #5590FF);
+    display: flex;
+    padding: 14px 16px;
+    justify-content: center;
+    /* gap: 10px; */
+    border-radius: 3.5px;
+    background: #5590FF;
+    color: var(--neutral-08, #FFF);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.72px;
+    width: 70%;
+}

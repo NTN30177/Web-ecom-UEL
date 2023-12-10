@@ -6,7 +6,7 @@
     <div class="col-12">Sản phẩm/Thêm sản phẩm</div>
     <div class="col-12 header-info__main">Thêm sản phẩm</div>
   </div>
-  <hr>
+  <hr />
 </div>
 
 <div class="container">
@@ -17,12 +17,11 @@
           <div class="col p-0">Thông tin sản phẩm</div>
         </div>
         <div class="row">
-          <div class="hr"></div>
-          <!--           <div class="hr"></div>
- -->
+          <hr />
         </div>
 
-        <div class="row product-info__body ">
+        <div class="row product-info__body gap-1.5">
+
           <div class="form-group p-0">
             <label for="productName ">Tên sản phẩm:</label>
             <input type="text" class="form-control" id="productName" placeholder="Nhập tên sản phẩm"
@@ -31,8 +30,9 @@
               *ngIf="productName.errors?.['required'] &&( productName.touched || productName.dirty)">*Bạn chưa nhập
               tên</small>
             <small class="text-danger"
-              *ngIf="productName.errors?.['pattern'] &&( productName.touched || productName.dirty)">*Tên phải bắt đầu
-              với bảng chữ cái</small>
+              *ngIf="productName.errors?.['pattern'] &&( productName.touched || productName.dirty)">*Tên phải bắt đầu với
+              bảng chữ cái</small>
+
           </div>
           <div class="form-group p-0">
             <label for="sku">SKU:</label>
@@ -48,16 +48,17 @@
           <div class="form-group p-0">
             <label for="description">Nhập mô tả:</label>
             <textarea class="form-control" id="description" cols="20" placeholder="Nhập mô tả sản phẩm" rows="10"
-              formControlName="description" [class.is-invalid]="
-                productDescription.invalid && productDescription.touched
-              "></textarea>
+              formControlName="description"
+              [class.is-invalid]="productDescription.invalid && productDescription.touched"></textarea>
 
-            <small class="text-danger" [class.d-none]="
-                productDescription.valid || productDescription.untouched
-              ">*Bạn chưa nhập mô tả sản phẩm</small>
+            <small class="text-danger" [class.d-none]="productDescription.valid || productDescription.untouched">*Bạn
+              chưa nhập mô tả
+              sản phẩm</small>
             <small class="text-danger"
               *ngIf="productDescription.errors?.['pattern'] &&( productDescription.touched || productDescription.dirty)">Mô
-              tả phải bắt đầu với bảng chữ cái</small>
+              tả
+              phải bắt đầu với bảng chữ cái</small>
+
           </div>
         </div>
       </div>
@@ -73,6 +74,8 @@
                   {{ color }}
                 </option>
               </select>
+              <small class="text-danger" [class.d-none]="productColor.valid || productColor.untouched">*Bạn chưa chọn màu
+                sắc</small>
             </div>
             <div class="col-auto delete-varirant" *ngIf="selectedType != 'Phụ kiện'" (click)="deleteVariant(i)">
               <div class="icon"><i class="fas fa-trash-alt"></i></div>
@@ -83,72 +86,92 @@
 
             <div class="col-4">
               <label for="color ">Size S:</label>
-              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeS" />
+              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeS"
+                [class.is-invalid]="productSizeS.invalid && productSizeS.touched" />
+              <small class="text-danger" [class.d-none]="productSizeS.valid || productSizeS.untouched">*Nhập số
+                lượng</small>
+
             </div>
             <div class="col-4">
               <label for="color ">Size M:</label>
-              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeM" />
+              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeM"
+                [class.is-invalid]="productSizeM.invalid && productSizeM.touched" />
+              <small class="text-danger" [class.d-none]="productSizeM.valid || productSizeM.untouched">*Nhập số
+                lượng</small>
+
             </div>
             <div class="col-4"></div>
             <div class="col-4">
               <label for="color ">Size L:</label>
 
-              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeL" />
+              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeL"
+                [class.is-invalid]="productSizeL.invalid && productSizeL.touched" />
+              <small class="text-danger" [class.d-none]="productSizeL.valid || productSizeL.untouched">*Nhập số
+                lượng</small>
             </div>
             <div class="col-4">
               <label for="color ">Size XL:</label>
 
-              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeXL" />
+              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeXL"
+                [class.is-invalid]="productSizeXL.invalid && productSizeXL.touched" />
+              <small class="text-danger" [class.d-none]="productSizeXL.valid || productSizeXL.untouched">*Nhập số
+                lượng</small>
             </div>
             <div class="col-4">
               <label for="color ">Size XXL:</label>
 
-              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng"
-                formControlName="sizeXXL" />
+              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeXXL"
+                [class.is-invalid]="productSizeXXL.invalid && productSizeXXL.touched" />
+              <small class="text-danger" [class.d-none]="productSizeXXL.valid || productSizeXXL.untouched">*Nhập số
+                lượng</small>
             </div>
+
           </div>
           <div class="row g-2 color-detail__quantity" *ngIf="selectedType == 'Phụ kiện'">
-            <div class="col-12 p-0 d-flex justify-content-between">
+            <div class="col-12 p-0 d-flex justify-content-between ">
               <div class="col-5 form-group color">
                 <label for="color ">Màu sắc :</label>
-                <select class="col-auto mt-2" formControlName="colorFreeSize" [class.is-invalid]="
-                    productColorFreeSize.invalid && productColorFreeSize.touched
-                  ">
+                <select class="col-auto mt-2" formControlName="colorFreeSize"[class.is-invalid]="
+                productColorFreeSize.invalid && productColorFreeSize.touched">
                   <option value="">Chọn màu sắc</option>
                   <option *ngFor="let color of colors" [value]="color">
                     {{ color }}
                   </option>
                 </select>
+
+                <small class="text-danger" [class.d-none]="productColorFreeSize.valid || productColorFreeSize.untouched">Nhập
+                  màu</small>
               </div>
               <div class="col-5 color-free__size">
                 <label for="color  ">Free size</label>
                 <div>
-                  <input type="text" class="form-control" id="color" placeholder="Nhập số lượng"
-                    formControlName="freeSize" [class.is-invalid]="
+                  <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="freeSize" [class.is-invalid]="
                       productFreeSize.invalid && productFreeSize.touched
                     " />
+                  <small class="text-danger" [class.d-none]="productFreeSize.valid || productFreeSize.untouched">*Nhập số
+                    lượng</small>
                 </div>
               </div>
               <div class="col-auto delete-varirant" (click)="deleteVariant(i)">
                 <label for=""></label>
-                <div class="icon align-items-end">
-                  <i class="fas fa-trash-alt"></i>
-                </div>
+                <div class="icon align-items-end "><i class="fas fa-trash-alt"></i></div>
               </div>
             </div>
           </div>
           <div class="form-group col-12 img">
             <label for="img ">Hình ảnh cho màu ne</label>
-            <input type="file" class="text-center" />
+            <input type="file" class="text-center">
+            <!-- <input type="file" class="text-center" (change)="onFileChange($event)" [class.is-invalid]="productImagesFreeSize.invalid && productImagesFreeSize.touched" /> -->
           </div>
+            <!-- <small class="text-danger" [class.d-none]="productImagesFreeSize.valid || productImagesFreeSize.untouched">Nhập hình ảnh</small> -->
         </div>
       </div>
       <div class="container action-add__variant">
         <div class="row action-add__product">
-          <div class="col-auto add-variant" (click)="addVariant()">
+          <div class="col-auto add-variant" (click)="addVariant()" >
             <div class="icon">+</div>
             <div class="content">Thêm biến thể</div>
-          </div>
+          </div>          
         </div>
       </div>
     </div>
@@ -159,10 +182,7 @@
           <div class="col p-0">Thông tin sản phẩm</div>
         </div>
         <div class="row">
-          <!--           <div class="hr"></div>
-
-          -->
-          <div class="hr"></div>
+          <hr />
         </div>
         <div class="row product-info__body">
           <div class="row form-group p-0">
@@ -180,6 +200,8 @@
             </div>
             <small class="text-danger" [class.d-none]="productPrice.valid || productPrice.untouched">*Bạn chưa nhập
               giá</small>
+
+
           </div>
 
           <div class="row form-group p-0">
@@ -200,7 +222,7 @@
           <div class="col p-0">Phân loại</div>
         </div>
         <div class="row">
-          <div class="hr"></div>
+          <hr />
         </div>
         <div class="row product-info__body">
           <div class="form-group type p-0">
@@ -242,7 +264,7 @@
               <div class="content" *ngIf="!showInputSubtype">
                 Thêm Subtype mới
               </div>
-              <div class="content" *ngIf="showInputSubtype" (click)="clickSaveAdd('subType', $event)">
+              <div class="content" *ngIf="showInputSubtype" (click)="clickSaveAdd('subType',$event)">
                 Lưu Subtype mới
               </div>
             </div>
