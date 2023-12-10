@@ -12,6 +12,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomePageComponent } from './home-page/home-page.component';
+import { ManageAccountComponent } from './manage-account/manage-account.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HomePageComponent } from './home-page/home-page.component';
     FooterComponent,
     SidebarComponent,
     PageNotFoundComponent,
-    HomePageComponent
+    HomePageComponent,
+    ManageAccountComponent
   ],
   imports: [
     BrowserModule,
