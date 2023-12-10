@@ -18,6 +18,8 @@ import { AccountAddressComponent } from './account-address/account-address.compo
 import { AccountOrderComponent } from './account-order/account-order.component';
 import { AccountHelpComponent } from './account-help/account-help.component';
 import { ManageProductComponent } from './manage-product/manage-product.component';
+import { AccountAddressPopupComponent } from './account-address-popup/account-address-popup.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -34,14 +36,16 @@ import { ManageProductComponent } from './manage-product/manage-product.componen
     AccountAddressComponent,
     AccountOrderComponent,
     AccountHelpComponent,
-    ManageProductComponent
+    ManageProductComponent,
+    AccountAddressPopupComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule, // Quan tọng, k có là k chạy
+    HttpClientModule,
+    BrowserAnimationsModule, // Quan tọng, k có là k chạy
   ],
   providers: [],
   bootstrap: [AppComponent]
