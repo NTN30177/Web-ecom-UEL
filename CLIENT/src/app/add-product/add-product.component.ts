@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
   styleUrl: './add-product.component.css',
 })
-
 export class AddProductComponent implements OnInit {
   variantForm: FormGroup;
 
@@ -18,17 +21,20 @@ export class AddProductComponent implements OnInit {
   newSubType: any;
   subTypes: string[] = ['Type 1', 'Type 2'];
   selectedSubType: string = '';
+  showDivSubtype:boolean = false;
 
   newCollection: any;
   collections: string[] = ['Type 1', 'Type 2'];
   selectedCollection: string = '';
+  showDivCollection:boolean = false;
 
-  showVariantForm: boolean = false; 
+  showVariantForm: boolean = false;
   variants: any[] = [];
   showInputType: boolean = false;
   showInputSubtype: boolean = false;
   showInputCollection: boolean = false;
 
+  product = { name: '', sku: '', description: '',price:'', type:'', subType:'', color:'', quantityS:'',quantityM:'', quantityL:'',quantityXL:'',quantityXXL:'',quantityFreeSize:''};
   constructor(private fb: FormBuilder) {
     this.variantForm = this.fb.group({
       color: ['', Validators.required],
@@ -40,8 +46,9 @@ export class AddProductComponent implements OnInit {
         XXL: [null, Validators.required],
       }),
       image: ['', Validators.required],
-    });}
-    
+    });
+  }
+
   ngOnInit(): void {}
   addDiv(type: string): void {
     if (type === 'type') {
@@ -53,28 +60,41 @@ export class AddProductComponent implements OnInit {
     }
   }
 
-  clickSelectAdd(type: string): void {
+  clickSelectChoose(type: string, event: Event): void {
     this.showInputType = false;
     this.showInputCollection = false;
     this.showInputSubtype = false;
-    if(this.selectedSubType!=''){
+    
+    if (type === 'type' && this.selectedType) {
+      this.showDivSubtype = true;
+      this.selectedSubType = '';
+      this.selectedCollection = '';
       this.clearAllVariants();
-      this.addVariant()
-    } 
+      this.showDivCollection = true;
+    } else if (type === 'subType' && this.selectedSubType) {
+      // this.showVariantForm = true;
+      console.log('1')
+      this.addVariant();
+    }
   }
+  
   clickSaveAdd(type: string, event: Event): void {
     event.stopPropagation();
-    if (type === 'type' && this.newType.trim() !== '') {
+    if (type === 'type' && this.newType) {
       this.selectedType = this.newType;
       this.types.push(this.newType);
       this.newType = '';
       this.showInputType = false;
+      this.showDivSubtype = true;
+      this.showDivCollection = true;
+
     }
     if (type === 'subtype' && this.newSubType.trim() !== '') {
       this.selectedSubType = this.newSubType;
       this.subTypes.push(this.newSubType);
       this.newSubType = '';
       this.showInputSubtype = false;
+
     }
   }
   addVariant() {
@@ -83,10 +103,14 @@ export class AddProductComponent implements OnInit {
   }
   deleteVariant(index: number) {
     this.variants.splice(index, 1);
+    if (this.variants.length === 0) {
+      setTimeout(() => {
+        this.addVariant();
+      }, 500); 
+    }
   }
   clearAllVariants() {
     this.variants = [];
     this.variantForm.reset();
   }
-  
 }
