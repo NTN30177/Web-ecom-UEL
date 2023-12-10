@@ -13,6 +13,11 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { HttpClientModule } from '@angular/common/http';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ManageAccountComponent } from './manage-account/manage-account.component';
+import { AccountInfoComponent } from './account-info/account-info.component';
+import { AccountAddressComponent } from './account-address/account-address.component';
+import { AccountOrderComponent } from './account-order/account-order.component';
+import { AccountHelpComponent } from './account-help/account-help.component';
+import { ManageProductComponent } from './manage-product/manage-product.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,12 @@ import { ManageAccountComponent } from './manage-account/manage-account.componen
     SidebarComponent,
     PageNotFoundComponent,
     HomePageComponent,
-    ManageAccountComponent
+    ManageAccountComponent,
+    AccountInfoComponent,
+    AccountAddressComponent,
+    AccountOrderComponent,
+    AccountHelpComponent,
+    ManageProductComponent
   ],
   imports: [
     BrowserModule,
