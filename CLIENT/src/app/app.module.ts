@@ -14,8 +14,8 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { BtnManageComponent } from './btn-manage/btn-manage.component';
 import { ViewColorComponent } from './admin/view-color/view-color.component';
 import { DataTablesModule } from 'angular-datatables';
-import { ManageAccountComponent } from './manage-account/manage-account.component';
-import { AccountInfoComponent } from './account-info/account-info.component';
+import { ManageAccountComponent } from './user/manage-account/manage-account.component';
+import { AccountInfoComponent } from './user/manage-account/account-info/account-info.component';
 import { AccountAddressComponent } from './account-address/account-address.component';
 import { AccountOrderComponent } from './account-order/account-order.component';
 import { AccountHelpComponent } from './account-help/account-help.component';
@@ -26,6 +26,7 @@ import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminRoutingModule } from './admin/admin-routing.module';
 import { UserRoutingModule } from './user/user-routing.module';
+import { SideMenuComponent } from './user/manage-account/side-menu/side-menu.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { UserRoutingModule } from './user/user-routing.module';
     AccountAddressPopupComponent,
     UserComponent,
     AdminComponent,
+    SideMenuComponent,
   ],
   imports: [
     BrowserModule,

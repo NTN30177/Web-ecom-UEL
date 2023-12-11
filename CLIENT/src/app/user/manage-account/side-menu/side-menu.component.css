@@ -98,12 +98,9 @@ ul {
     font-weight: 400;
     font-size: 14px;
     line-height: 16px;
+    text-decoration: none;
     color: rgba(0, 0, 0, 1);
 }
-
-/* a {
-    text-decoration: none;
-} */
 
 .order-block {
     margin-top: 32px;
@@ -189,7 +186,7 @@ ul {
     margin-right: 20px;
 }
 
-button:hover{
+button:hover {
     background-color: #000000;
     color: white;
 }
@@ -285,10 +282,10 @@ button:hover{
     letter-spacing: 0.72px;
 }
 
-/* button:hover {
+button:hover {
     background-color: #000000;
     color: white;
-} */
+}
 
 .button-set button {
     background-color: #000000;
