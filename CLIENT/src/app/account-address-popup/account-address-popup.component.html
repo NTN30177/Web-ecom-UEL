@@ -1,1 +1,39 @@
-<p>account-address-popup works!</p>
+<div id="popup-address-add" class="popup-address" [formGroup]="addressForm">
+    <div class="row ">
+        <div class="col-sm-6 col-12 ">
+            <input type="text" placeholder="Họ tên" formControlName="fullName">
+        </div>
+        <div class="col-sm-6 col-12">
+            <input type="text" placeholder="Số điện thoại" formControlName="phoneNumber">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-12">
+            <input type="text" placeholder="Địa chỉ" formControlName="address">
+        </div>
+        <div class="col-sm-6 col-12">
+            <select formControlName="province">
+                <option value="" selected>Chọn tỉnh/thành</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-12">
+            <select formControlName="district">
+                <option value="" selected>Chọn quận/huyện</option>
+            </select>
+        </div>
+        <div class="col-sm-6 col-12">
+            <select formControlName="ward">
+                <option value="" selected>Chọn phường/xã</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="form-check align-items-center ">
+            <input class="form-check-input " type="checkbox" formControlName="isDefault">
+            <label class="form-check-label " for="isDefault">Đặt làm mặc định</label>
+        </div>
+    </div>
+    <button mat-button (click)= "addAddress()">Thêm</button>
+</div>
