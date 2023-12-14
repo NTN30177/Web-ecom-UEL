@@ -16,17 +16,18 @@ import { ViewColorComponent } from './admin/view-color/view-color.component';
 import { DataTablesModule } from 'angular-datatables';
 import { ManageAccountComponent } from './user/manage-account/manage-account.component';
 import { AccountInfoComponent } from './user/manage-account/account-info/account-info.component';
-import { AccountAddressComponent } from './account-address/account-address.component';
+import { AccountAddressComponent } from './user/manage-account/account-address/account-address.component';
 import { AccountOrderComponent } from './account-order/account-order.component';
 import { AccountHelpComponent } from './account-help/account-help.component';
-import { ManageProductComponent } from './manage-product/manage-product.component';
 import { AccountAddressPopupComponent } from './account-address-popup/account-address-popup.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminRoutingModule } from './admin/admin-routing.module';
-import { UserRoutingModule } from './user/user-routing.module';
 import { SideMenuComponent } from './user/manage-account/side-menu/side-menu.component';
+import { ManageProductComponent } from './manage-product/manage-product.component';
+import { UserModule } from './user/user.module';
+import { UserRoutingModule } from './user/user-routing.module';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,6 @@ import { SideMenuComponent } from './user/manage-account/side-menu/side-menu.com
     AccountOrderComponent,
     AccountHelpComponent,
     ManageProductComponent,
-    ManageProductComponent,
     AccountAddressPopupComponent,
     UserComponent,
     AdminComponent,
@@ -61,7 +61,8 @@ import { SideMenuComponent } from './user/manage-account/side-menu/side-menu.com
     DataTablesModule,
     BrowserAnimationsModule, // Quan tọng, k có là k chạy
     AdminRoutingModule,
-    UserRoutingModule
+    // UserModule,
+    UserRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

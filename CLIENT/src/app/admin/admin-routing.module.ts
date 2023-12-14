@@ -6,7 +6,7 @@ import { HomePageComponent } from '../home-page/home-page.component';
 import { ViewColorComponent } from './view-color/view-color.component';
 import { ManageAccountComponent } from '../user/manage-account/manage-account.component';
 import { AccountInfoComponent } from '../user/manage-account/account-info/account-info.component';
-import { AccountAddressComponent } from '../account-address/account-address.component';
+import { AccountAddressComponent } from '../user/manage-account/account-address/account-address.component';
 import { AccountOrderComponent } from '../account-order/account-order.component';
 import { ManageProductComponent } from '../manage-product/manage-product.component';
 import { AdminComponent } from './admin.component';
@@ -22,13 +22,6 @@ const routes: Routes = [
       { path: 'product', component: ManageProductComponent },
     ],
   },
-
-  { path: 'account', component: ManageAccountComponent },
-  { path: 'account/info', component: AccountInfoComponent },
-  { path: 'account/address', component: AccountAddressComponent },
-  { path: 'account/order', component: AccountOrderComponent },
-  { path: '', component: HomePageComponent },
-  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

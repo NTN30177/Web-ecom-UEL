@@ -10,7 +10,7 @@
 </div>
 
 <div class="container">
-  <form class="row" [formGroup]="addProductForm" (ngSubmit)="onSubmit()" ngNoForm>
+  <form class="row" [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
     <div class="col-8 header-info__left">
       <div class="container product-info product-info__detail">
         <div class="row product-info__title">
@@ -62,12 +62,13 @@
         </div>
       </div>
       <div id="variant-container">
-        <div *ngFor="let variantForm of variants; let i = index"
+        <div *ngFor="let v of count(variantCounter); let i = index"
           class="container product-info product-info__body variant-div" [class.col-12]="selectedType == 'Phụ kiện'">
           <div class="col-12 p-0 d-flex justify-content-between" *ngIf="selectedType != 'Phụ kiện'">
             <div class="form-group color">
               <label for="color ">Màu sắc :</label>
-              <select class="col-auto mt-2" name="color" id="color" placeholder="Nhập color" formControlName="color">
+              <div>{{i+1}}</div>
+              <select class="col-auto mt-2" name="color" id="color" placeholder="Nhập color" formControlName="color{{i+1}}">
                 <option value="">Chọn màu sắc</option>
                 <option *ngFor="let color of colors" [value]="color">
                   {{ color }}
@@ -83,37 +84,35 @@
 
             <div class="col-4">
               <label for="color ">Size S:</label>
-              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeS" />
+              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeS{{i+1}}" />
             </div>
             <div class="col-4">
               <label for="color ">Size M:</label>
-              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeM" />
+              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeM{{i+1}}" />
             </div>
             <div class="col-4"></div>
             <div class="col-4">
               <label for="color ">Size L:</label>
 
-              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeL" />
+              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeL{{i+1}}" />
             </div>
             <div class="col-4">
               <label for="color ">Size XL:</label>
 
-              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeXL" />
+              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeXL{{i+1}}" />
             </div>
             <div class="col-4">
               <label for="color ">Size XXL:</label>
 
               <input type="text" class="form-control" id="color" placeholder="Nhập số lượng"
-                formControlName="sizeXXL" />
+                formControlName="sizeXXL{{i+1}}" />
             </div>
           </div>
           <div class="row g-2 color-detail__quantity" *ngIf="selectedType == 'Phụ kiện'">
             <div class="col-12 p-0 d-flex justify-content-between">
               <div class="col-5 form-group color">
-                <label for="color ">Màu sắc :</label>
-                <select class="col-auto mt-2" formControlName="colorFreeSize" [class.is-invalid]="
-                    productColorFreeSize.invalid && productColorFreeSize.touched
-                  ">
+                <label for="color ">Màu sắc {{i+1}}:</label>
+                <select class="col-auto mt-2" formControlName="colorFreeSize{{i+1}}" >
                   <option value="">Chọn màu sắc</option>
                   <option *ngFor="let color of colors" [value]="color">
                     {{ color }}
@@ -124,9 +123,7 @@
                 <label for="color  ">Free size</label>
                 <div>
                   <input type="text" class="form-control" id="color" placeholder="Nhập số lượng"
-                    formControlName="freeSize" [class.is-invalid]="
-                      productFreeSize.invalid && productFreeSize.touched
-                    " />
+                    formControlName="freeSize{{i+1}}" />
                 </div>
               </div>
               <div class="col-auto delete-varirant" (click)="deleteVariant(i)">
@@ -139,7 +136,7 @@
           </div>
           <div class="form-group col-12 img">
             <label for="img ">Hình ảnh cho màu ne</label>
-            <input type="file" class="text-center" />
+            <input type="file" class="text-center" formControlName="variantImages{{i+1}}" />
           </div>
         </div>
       </div>
@@ -282,7 +279,7 @@
         <button class="btn_cancel" id="btn_cancel" name="btn_cancel">
           Hủy
         </button>
-        <button class="btn_create" id="btn_create" name="btn_create" (click)="markAllAsTouched()">
+        <button class="btn_create" id="btn_create" name="btn_create" type="submit" (click)="onSubmit()">
           Lưu
         </button>
       </div>

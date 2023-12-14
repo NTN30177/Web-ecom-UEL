@@ -12,6 +12,7 @@ interface VariantColor {
   }
   
   interface Product {
+    id:string
     title: string;
     slug: string;
     price: number;
