@@ -1,63 +1,40 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Product } from '../interfaces/product';
 
+import { Observable, catchError, map, retry, throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 
 export class ManageProductService {
   cartData = new EventEmitter<Product[]|[]>()
-  constructor(private http: HttpClient) {}
-  addProduct(data: any) {
-    console.log(data)
-    return this.http.post('http://localhost:3000/product/add-product', data);
-  }
-
+  constructor(private _http: HttpClient) {}
   
-  productList() {
-    return this.http.get<Product[]>('http://localhost:3000/products');
+  postBook(aBook: any): Observable<any> {
+    const headers = new HttpHeaders().set(
+      'Content-Type',
+      'application/json;charset=utf-8'
+    );
+    const requestOptions: Object = {
+      headers: headers,
+      responseType: 'text',
+    };
+    return this._http
+      .post<any>(
+        'http://localhost:3000/product/add-product',
+        JSON.stringify(aBook),
+        requestOptions
+      )
+      .pipe(
+        map((res) => JSON.parse(res) ),
+        retry(3),
+        catchError(this.handleError)
+      );
   }
-  deleteProduct(id: number) {
-    return this.http.delete(`http://localhost:3000/products/${id}`);
+  handleError(error: HttpErrorResponse) {
+    return throwError(() => new Error(error.message));
   }
-  getProduct(id: string) {
-    return this.http.get<Product>(`http://localhost:3000/products/${id}`);
-  }
-  updateProduct(product:Product){
-    return this.http.put<Product>(`http://localhost:3000/products/${product.id}`,product);
-  }
-  popularProducts(){
-    return this.http.get<Product[]>(`http://localhost:3000/products`);
-  }
-  trendyProduct(){
-    return this.http.get<Product[]>(`http://localhost:3000/products`);
-  }
-  searchProduct(query:string){
-    return this.http.get<Product[]>(`http://localhost:3000/products?q=${query}`);
-  }
-  localAddToCart(data:Product){
-    let cartData=[]
-    let localCart=localStorage.getItem('localCart');
-    if(!localCart){
-      localStorage.setItem("localCart",JSON.stringify([data]));
-    }else{
-      cartData=JSON.parse(localCart)
-      cartData.push(data)
-      localStorage.setItem("localCart",JSON.stringify([cartData]));
-    }
-    this.cartData.emit(cartData);
-  }
-  removeItemFromCart(productId: number){
-    let cartData = localStorage.getItem("localCart");
-    if(cartData){
-      let items:Product[]=JSON.parse(cartData);
-      // items=items.filter((item:Product)=>productId!==item.id)
-      localStorage.setItem("localCart",JSON.stringify([cartData]));
-    this.cartData.emit(items);
-  }
+ 
 }
-  // addToCart(cartData:Cart){
-  //   return this.http.post(`http://localhost:3000/products`, cartData)
-  // }
-}
+  

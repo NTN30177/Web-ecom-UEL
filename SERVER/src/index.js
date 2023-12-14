@@ -5,8 +5,10 @@ const path = require('path');
 const route = require('./routes');
 const cors = require("cors");
 const methodOverride = require('method-override')
-
-
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(express.json());
  
 //Http Request Logger
 const morgan =require("morgan")
@@ -18,6 +20,7 @@ app.use((req, res, next) => {
     res.append('Access-Control-Allow-Headers', 'Content-Type');
     next();
 });
+
 
 app.use(methodOverride('_method'));
 

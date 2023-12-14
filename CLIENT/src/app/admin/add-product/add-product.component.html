@@ -26,38 +26,21 @@
           <div class="form-group p-0">
             <label for="productName ">Tên sản phẩm:</label>
             <input type="text" class="form-control" id="productName" placeholder="Nhập tên sản phẩm"
-              formControlName="name" [class.is-invalid]="productName.invalid && productName.touched" />
-            <small class="text-danger"
-              *ngIf="productName.errors?.['required'] &&( productName.touched || productName.dirty)">*Bạn chưa nhập
-              tên</small>
-            <small class="text-danger"
-              *ngIf="productName.errors?.['pattern'] &&( productName.touched || productName.dirty)">*Tên phải bắt đầu
-              với bảng chữ cái</small>
+              formControlName="productName"  />
+         
           </div>
           <div class="form-group p-0">
             <label for="sku">SKU:</label>
-            <input type="text" class="form-control" id="sku" placeholder="ed:SDCDS25" formControlName="sku"
-              [class.is-invalid]="productSku.invalid && productSku.touched" />
-            <small class="text-danger"
-              *ngIf="productSku.errors?.['required'] &&( productSku.touched || productSku.dirty)">*Bạn chưa nhập
-              sku</small>
-            <small class="text-danger"
-              *ngIf="productSku.errors?.['pattern'] &&( productSku.touched || productSku.dirty)">Sku phải bắt đầu với
-              bảng chữ cái</small>
+            <input type="text" class="form-control" id="sku" placeholder="ed:SDCDS25" formControlName="productSku"
+               />
+          
           </div>
           <div class="form-group p-0">
             <label for="description">Nhập mô tả:</label>
             <textarea class="form-control" id="description" cols="20" placeholder="Nhập mô tả sản phẩm" rows="10"
-              formControlName="description" [class.is-invalid]="
-                productDescription.invalid && productDescription.touched
-              "></textarea>
+              formControlName="description"></textarea>
 
-            <small class="text-danger" [class.d-none]="
-                productDescription.valid || productDescription.untouched
-              ">*Bạn chưa nhập mô tả sản phẩm</small>
-            <small class="text-danger"
-              *ngIf="productDescription.errors?.['pattern'] &&( productDescription.touched || productDescription.dirty)">Mô
-              tả phải bắt đầu với bảng chữ cái</small>
+            
           </div>
         </div>
       </div>
@@ -68,7 +51,7 @@
             <div class="form-group color">
               <label for="color ">Màu sắc :</label>
               <div>{{i+1}}</div>
-              <select class="col-auto mt-2" name="color" id="color" placeholder="Nhập color" formControlName="color{{i+1}}">
+              <select class="col-auto mt-2" name="color" id="color" placeholder="Nhập color" formArrayName="color">
                 <option value="">Chọn màu sắc</option>
                 <option *ngFor="let color of colors" [value]="color">
                   {{ color }}
@@ -84,35 +67,35 @@
 
             <div class="col-4">
               <label for="color ">Size S:</label>
-              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeS{{i+1}}" />
+              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formArrayName="sizeS" />
             </div>
             <div class="col-4">
               <label for="color ">Size M:</label>
-              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeM{{i+1}}" />
+              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formArrayName="sizeM" />
             </div>
             <div class="col-4"></div>
             <div class="col-4">
               <label for="color ">Size L:</label>
 
-              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeL{{i+1}}" />
+              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formArrayName="sizeL" />
             </div>
             <div class="col-4">
               <label for="color ">Size XL:</label>
 
-              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeXL{{i+1}}" />
+              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formArrayName="sizeXL" />
             </div>
             <div class="col-4">
               <label for="color ">Size XXL:</label>
 
               <input type="text" class="form-control" id="color" placeholder="Nhập số lượng"
-                formControlName="sizeXXL{{i+1}}" />
+                formArrayName="sizeXXL" />
             </div>
           </div>
           <div class="row g-2 color-detail__quantity" *ngIf="selectedType == 'Phụ kiện'">
             <div class="col-12 p-0 d-flex justify-content-between">
               <div class="col-5 form-group color">
                 <label for="color ">Màu sắc {{i+1}}:</label>
-                <select class="col-auto mt-2" formControlName="colorFreeSize{{i+1}}" >
+                <select class="col-auto mt-2" formArrayName="color" >
                   <option value="">Chọn màu sắc</option>
                   <option *ngFor="let color of colors" [value]="color">
                     {{ color }}
@@ -123,7 +106,7 @@
                 <label for="color  ">Free size</label>
                 <div>
                   <input type="text" class="form-control" id="color" placeholder="Nhập số lượng"
-                    formControlName="freeSize{{i+1}}" />
+                  formArrayName="freeSize" />
                 </div>
               </div>
               <div class="col-auto delete-varirant" (click)="deleteVariant(i)">
@@ -136,7 +119,7 @@
           </div>
           <div class="form-group col-12 img">
             <label for="img ">Hình ảnh cho màu ne</label>
-            <input type="file" class="text-center" formControlName="variantImages{{i+1}}" />
+            <input type="file" class="text-center" formArrayName="images" />
           </div>
         </div>
       </div>
@@ -167,16 +150,13 @@
             <div class="row price text-center d-flex justify-content-center align-items-center">
               <div class="col-9 pe-0">
                 <input type="text" class="form-control" id="productPrice" placeholder="Nhập giá bán"
-                  formControlName="price" [class.is-invalid]="
-                    productPrice.invalid && productPrice.touched
-                  " />
+                  formControlName="price"/>
               </div>
               <div class="col-3 p-0">
                 <input type="text" class="form-control" id="productPriceD" value="VNĐ" disabled />
               </div>
             </div>
-            <small class="text-danger" [class.d-none]="productPrice.valid || productPrice.untouched">*Bạn chưa nhập
-              giá</small>
+          
           </div>
 
           <div class="row form-group p-0">
@@ -202,15 +182,14 @@
         <div class="row product-info__body">
           <div class="form-group type p-0">
             <label for="color ">Type :</label>
-            <select class="col-12" (click)="clickSelectChoose('type', $event)" formControlName="type"
-              [class.is-invalid]="productType.invalid && productType.touched">
+            <select class="col-12" (click)="clickSelectChoose('type', $event)" formControlName="typeName"
+              >
               <option value="">Chọn type</option>
               <option *ngFor="let type of types" [value]="type">
                 {{ type }}
               </option>
             </select>
-            <small class="text-danger" [class.d-none]="productType.valid || productType.untouched">*Bạn chưa chọn type
-              sản phẩm</small>
+
 
             <input *ngIf="showInputType" type="text" class="form-control add-new" formControlName="newTypeInput" />
             <div class="col-auto add-action" (click)="addDiv('type')">
@@ -223,14 +202,13 @@
           </div>
           <div class="form-group type p-0" *ngIf="showDivSubtype">
             <label for="color ">Subtype :</label>
-            <select class="col-12" (click)="clickSelectChoose('subType', $event)" formControlName="subType">
+            <select class="col-12" (click)="clickSelectChoose('subType', $event)" formControlName="subTypeName">
               <option value="">Chọn type</option>
               <option *ngFor="let subType of subTypes" [value]="subType">
                 {{ subType }}
               </option>
             </select>
-            <small class="text-danger" [class.d-none]="productSubType.valid || productSubType.untouched">*Bạn chưa chọn
-              Subtype sản phẩm</small>
+         
 
             <input *ngIf="showInputSubtype" type="text" class="form-control add-new"
               formControlName="newSubTypeInput" />
@@ -246,7 +224,7 @@
           </div>
           <div class="form-group type p-0" *ngIf="showDivCollection">
             <label for="color ">Collection :</label>
-            <select class="col-12" (click)="clickSelectChoose('collection', $event)" formControlName="collection">
+            <select class="col-12" (click)="clickSelectChoose('collection', $event)" formControlName="collectionName">
               <option value="">Chọn BST</option>
               <option *ngFor="let collection of collections" [value]="collection">
                 {{ collection }}

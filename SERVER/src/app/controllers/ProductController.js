@@ -1,13 +1,14 @@
 const saveProduct = async (req, res) => {
-  const formData = req.body
-  const title = req.body.formData
- console.log(title)
-}
+  const {productName} = req.body;
+  // const title = formData.title;
+console.log('123')
+  console.log( productName,'1');}
+
 const saveProduct2 = async (req, res) => {
     try {
-      const { title, price, description, typeName, subTypeName, collectionName } = req.body;
-      const author = req.session.user_id;
-      const imagePaths = req.files.map((file) => file.filename);
+      const { productName, price, description, typeName, subTypeName, collectionName } = req.body;
+      const author = req.session.user_id|'64ca103baeac1741e179f4c7';
+      // const imagePaths = req.files.map((file) => file.filename);
       const variantsData = req.body.colorName;
       const variants = createVariantsFromData(req, variantsData, req.files, imagePaths, typeName);
       const images = req.files.map((file) => file.filename);

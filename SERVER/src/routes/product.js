@@ -7,5 +7,6 @@ router.post(
     '/add-product',
     // upload.single('image'),
     productController.saveProduct,
+    
 );
 module.exports = router;

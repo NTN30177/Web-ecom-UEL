@@ -32,6 +32,8 @@ export class AddProductComponent implements OnInit {
   selectedSubType: boolean = false;
   showDivSubtype: boolean = true;
 
+i=1
+
   newCollection: any;
   collections: string[] = ['Type 1', 'Type 2'];
   selectedCollection: string = '';
@@ -42,39 +44,71 @@ export class AddProductComponent implements OnInit {
   showInputType: boolean = false;
   showInputSubtype: boolean = false;
   showInputCollection: boolean = false;
-
-  
-  addProductForm: FormGroup = new FormGroup({
-    name: new FormControl(''),
-    sku: new FormControl(''),
-    description: new FormControl(''),
-    price: new FormControl(''),
-    cost: new FormControl(''),
-    type: new FormControl(''),
-    subType: new FormControl(''),
-    collection: new FormControl(''),
-    newTypeInput: new FormControl(''),
-    newSubTypeInput: new FormControl(''),
-    images: new FormControl(''),
-    imagesFreeSize: new FormControl(''),
-    newCollectionInput: new FormControl(''),
-  });
-
+  // addProductForm!: FormGroup;
 
   submitted = false;
   typeFormControl: any;
-  variantCounter: number =0;
+  variantCounter: number = 0;
   addProductMessage: string | undefined;
+  books: any;
+  errMessage: any;
 
-  constructor(private _productServer:ManageProductService,
-     private fb: FormBuilder, 
-     private http: HttpClient,
-     private router:Router
+
+  addProductForm: FormGroup = new FormGroup({
+    productName: new FormControl(''),
+    productSku: new FormControl(''),
+    description: new FormControl(''),
+    price: new FormControl(''),
+    cost: new FormControl(''),
+    typeName: new FormControl(''),
+    subTypeName: new FormControl(''),
+    collectionName: new FormControl(''),
+    color: new FormArray([]),
+    sizeS: new FormArray([]),
+    sizeL: new FormArray([]),
+    sizeM: new FormArray([]),
+    sizeXL: new FormArray([]),
+    sizeXXL: new FormArray([]),
+    freeSize: new FormArray([]),
+    images: new FormArray([]),
+    newTypeInput: new FormControl(''),
+    newSubTypeInput: new FormControl(''),
+    newCollectionInput: new FormControl(''),
+  });
+  addProductForm1: FormGroup<{ productName: FormControl<string | null>; productSku: FormControl<string | null>; description: FormControl<string | null>; price: FormControl<string | null>; cost: FormControl<string | null>; typeName: FormControl<string | null>; color: FormArray<never>; sizeS: FormArray<never>; sizeL: FormArray<never>; sizeM: FormArray<never>; sizeXL: FormArray<never>; sizeXXL: FormArray<never>; freeSize: FormArray<never>; images: FormArray<never>; subTypeName: FormControl<string | null>; collectionName: FormControl<string | null>; newTypeInput: FormControl<string | null>; newSubTypeInput: FormControl<string | null>; newCollectionInput: FormControl<string | null>; }>;
+
+  constructor(
+    private _productService: ManageProductService,
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private router: Router
   ) {
-   }
+    this.addProductForm1 = this.fb.group({
+      productName: [''],
+      productSku: [''],
+      description: [''],
+      price: [''],
+      cost: [''],
+      typeName: [''],
+      color: new FormArray([]),
+      sizeS: new FormArray([]),
+      sizeL: new FormArray([]),
+      sizeM: new FormArray([]),
+      sizeXL: new FormArray([]),
+      sizeXXL: new FormArray([]),
+      freeSize: new FormArray([]),
+      images: new FormArray([]),
+      subTypeName: [''],
+      collectionName: [''],
+      newTypeInput: [''],
+      newSubTypeInput: [''],
+      newCollectionInput: [''],
+    });
+   
+  }
   ngOnInit(): void {
     this.addVariant();
-
+    
   }
   count(end: number): number[] {
     return new Array(end).fill(0).map((_, index) => index + 1);
@@ -89,36 +123,35 @@ export class AddProductComponent implements OnInit {
     });
   }
 
-  onSubmit(){
+  onSubmit() {
     const formData = this.addProductForm.value;
-    console.log(formData)
-    this._productServer.addProduct(formData).subscribe((result) => {
-      if(result){
-        this.addProductMessage="Product is successfully added"
-        console.log('95');
-      }
-      setTimeout(()=>(this.addProductMessage=undefined),3000,
-      this.router.navigate(['']))
-    })
+    this._productService.postBook(formData).subscribe({
+      next: (data) => {
+        this.books = data;
+      },
+      error: (err) => {
+        this.errMessage = err;
+      },
+    });
 
+    console.log(formData);
   }
   onSubmit3() {
-    this.submitted=true
+    this.submitted = true;
     const formData = this.addProductForm.value;
     console.log(formData);
     this.addProductForm.reset();
-    alert('Success'); 
+    alert('Success');
     if (this.addProductForm.valid) {
-      return
+      return;
     }
   }
 
-
   get productName() {
-    return this.addProductForm.get('name') as FormControl;
+    return this.addProductForm.get('productName') as FormControl;
   }
   get productSku() {
-    return this.addProductForm.get('sku') as FormControl;
+    return this.addProductForm.get('productSku') as FormControl;
   }
   get productDescription() {
     return this.addProductForm.get('description') as FormControl;
@@ -130,16 +163,16 @@ export class AddProductComponent implements OnInit {
     return this.addProductForm.get('cost') as FormControl;
   }
   get productType() {
-    return this.addProductForm.get('type') as FormControl;
+    return this.addProductForm.get('typeName') as FormControl;
   }
   get productSubType() {
-    return this.addProductForm.get('subType') as FormControl;
+    return this.addProductForm.get('subTypeName') as FormControl;
+  }
+  get productCollection() {
+    return this.addProductForm.get('collectionName') as FormControl;
   }
   get productColor() {
     return this.addProductForm.get('color') as FormControl;
-  }
-  get productColorFreeSize() {
-    return this.addProductForm.get('colorFreeSize') as FormControl;
   }
   get productSizeS() {
     return this.addProductForm.get('sizeS') as FormControl;
@@ -162,9 +195,6 @@ export class AddProductComponent implements OnInit {
   get productImages() {
     return this.addProductForm.get('images') as FormControl;
   }
-  get productImagesFreeSize() {
-    return this.addProductForm.get('imagesFreeSize') as FormControl;
-  }
 
   addDiv(type: string): void {
     if (type === 'type') {
@@ -182,15 +212,10 @@ export class AddProductComponent implements OnInit {
     if (type === 'type' && selectedValue != 'Phụ kiện') {
       this.clearAllVariants();
       this.addVariant();
-
-
-      
     } else if (type === 'type' && selectedValue == 'Phụ kiện') {
       this.selectedType = 'Phụ kiện';
       this.clearAllVariants();
       this.addVariant();
-
-
     }
   }
 
@@ -208,7 +233,7 @@ export class AddProductComponent implements OnInit {
         this.types.push(newTypeValue);
         // this.clearAllVariants();
         // this.addVariant();
-        this.addDiv('subtype')
+        this.addDiv('subtype');
       }
       this.showInputType = false;
     } else if (
@@ -240,60 +265,16 @@ export class AddProductComponent implements OnInit {
 
   addVariant() {
     this.variantCounter++;
-    console.log(this.variantCounter ,'vc')
-    const variantImages = `variantImages${this.variantCounter}`;
-    const color = `color${this.variantCounter}`;
-    const colorFreeSize = `colorFreeSize${this.variantCounter}`;
-    const freeSize = `freeSize${this.variantCounter}`;
-    const sizeS = `sizeS${this.variantCounter}`;
-    const sizeL = `sizeL${this.variantCounter}`;
-    const sizeM = `sizeM${this.variantCounter}`;
-    const sizeXL = `sizeXL${this.variantCounter}`;
-    const sizeXXL = `sizeXXL${this.variantCounter}`;
-    this.addProductForm.addControl(color, this.fb.control(''));
-    this.addProductForm.addControl(colorFreeSize, this.fb.control(''));
-    this.addProductForm.addControl(variantImages, this.fb.control(''));
-    this.addProductForm.addControl(sizeS, this.fb.control(''));
-    this.addProductForm.addControl(sizeL, this.fb.control(''));
-    this.addProductForm.addControl(sizeM, this.fb.control(''));
-    this.addProductForm.addControl(sizeXL, this.fb.control(''));
-    this.addProductForm.addControl(sizeXXL, this.fb.control(''));
-    this.addProductForm.addControl(freeSize, this.fb.control(''));
-   
-    // this.variants.push(this.variantForm.value);
-    // this.variantForm.reset();
   }
   deleteVariant(index: number) {
-    this.variantCounter--
-    const variantImages = `variantImages${index+1}`;
-    const color = `color${index+1}`;
-    const colorFreeSize = `colorFreeSize${index+1}`;
-    const freeSize = `freeSize${index+1}`;
-    const sizeS = `sizeS${index+1}`;
-    const sizeL = `sizeL${index+1}`;
-    const sizeM = `sizeM${index+1}`;
-    const sizeXL = `sizeXL${index+1}`;
-    const sizeXXL = `sizeXXL${index+1}`;
-    this.addProductForm.removeControl(color);
-    this.addProductForm.removeControl(colorFreeSize);
-    this.addProductForm.removeControl(variantImages);
-    this.addProductForm.removeControl(sizeS);
-    this.addProductForm.removeControl(sizeL);
-    this.addProductForm.removeControl(sizeM);
-    this.addProductForm.removeControl(sizeXL);
-    this.addProductForm.removeControl(sizeXXL);
-    this.addProductForm.removeControl(freeSize);
-    this.variants.splice(index, 1);
     if (this.variantCounter === 0) {
-      
       setTimeout(() => {
-    this.addVariant();
-
+        this.addVariant();
       }, 500);
     }
   }
   clearAllVariants() {
-    this.variantCounter===0
+    this.variantCounter === 0;
     // this.addVariant();
     // this.addProductForm.reset();
   }

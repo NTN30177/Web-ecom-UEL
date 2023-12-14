@@ -1,29 +1,29 @@
 import { Component } from '@angular/core';
-import { AccountAddressPopupComponent } from '../account-address-popup/account-address-popup.component';
+// import { AccountAddressPopupComponent } from '../account-address-popup/account-address-popup.component';
 import { MatDialog } from '@angular/material/dialog';
+import { AccountAddressPopupComponent } from '../account-address-popup/account-address-popup.component';
 
 @Component({
   selector: 'app-account-address',
   templateUrl: './account-address.component.html',
-  styleUrl: './account-address.component.css'
+  styleUrl: './account-address.component.css',
 })
 export class AccountAddressComponent {
-
-  constructor(private  dialogRef : MatDialog){}
+  constructor(private dialogRef: MatDialog) {}
 
   addresses = [
     {
       name: 'Phương Nguyên',
       phone: '0986428483',
       address: 'Tô Vĩnh Diện, Đông Hoà, Dĩ An, Bình Dương',
-      isDefault: false
+      isDefault: false,
     },
     {
       name: 'Phương Nhi',
       phone: '0986838999',
       address: 'Tô Vĩnh Diện, Đông Hoà, Dĩ An, Bình Dương',
-      isDefault: false
-    }
+      isDefault: false,
+    },
   ];
 
   setDefaultAddress(index: number) {
@@ -38,12 +38,10 @@ export class AccountAddressComponent {
       const dialogRef = this.dialogRef.open(AccountAddressPopupComponent, {
         hasBackdrop: true,
       });
-  
-      dialogRef.afterClosed().subscribe(result => {
+
+      dialogRef.afterClosed().subscribe((result) => {
         console.log('Dialog result:', result);
       });
     }
   }
-
-
 }
