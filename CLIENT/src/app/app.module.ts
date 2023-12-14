@@ -21,6 +21,7 @@ import { AccountOrderComponent } from './account-order/account-order.component';
 import { AccountHelpComponent } from './account-help/account-help.component';
 import { AccountAddressPopupComponent } from './account-address-popup/account-address-popup.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
 import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminRoutingModule } from './admin/admin-routing.module';
@@ -60,6 +61,7 @@ import { UserRoutingModule } from './user/user-routing.module';
     HttpClientModule, // Quan tọng, k có là k chạy
     DataTablesModule,
     BrowserAnimationsModule, // Quan tọng, k có là k chạy
+    MatDialogModule,
     AdminRoutingModule,
     // UserModule,
     UserRoutingModule,
