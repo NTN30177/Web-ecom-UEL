@@ -86,7 +86,7 @@ ul {
     .sideMenu,
     .sideMenu_user {
         width: 100%;
-        ;
+        cursor: pointer;
     }
 
 
