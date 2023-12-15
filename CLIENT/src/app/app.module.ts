@@ -27,10 +27,10 @@ import { AdminComponent } from './admin/admin.component';
 import { AdminRoutingModule } from './admin/admin-routing.module';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { ManageProductComponent } from './manage-product/manage-product.component';
-import { UserModule } from './user/user.module';
 import { UserRoutingModule } from './user/user-routing.module';
 import { PaymentComponent } from './payment/payment.component';
 import { AddressListPopupComponent } from './address-list-popup/address-list-popup.component';
+import { AddProduct2Component } from './admin/add-product-2/add-product-2.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +56,7 @@ import { AddressListPopupComponent } from './address-list-popup/address-list-pop
     SideMenuComponent,
     PaymentComponent,
     AddressListPopupComponent,
+    AddProduct2Component,
   ],
   imports: [
     BrowserModule,

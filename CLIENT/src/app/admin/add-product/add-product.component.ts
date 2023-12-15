@@ -7,7 +7,6 @@ import {
   FormControl,
   FormArray,
 } from '@angular/forms';
-import { Product } from '../../interfaces/product';
 import { ManageProductService } from '../../services/manage-product.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
