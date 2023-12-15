@@ -1,3 +1,86 @@
-<app-header-admin></app-header-admin>
-<router-outlet></router-outlet>
-<app-sidebar></app-sidebar>
+<!-- Import Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+
+
+<mat-toolbar>
+    <div class="toolbar-content">
+      <div class="logo-container">
+        <img src="/assets/img/Logo.svg">
+      </div>
+      <div class="menu-icon-container">
+        <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()" style="color: white;">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+    </div>
+    <mat-form-field appearance="fill" style="margin-top: 20px; width: 30%; ">
+        <mat-label>Search...</mat-label>
+        <input matInput   />
+        <mat-icon matPrefix>search</mat-icon>
+    </mat-form-field>
+    <div style="margin-left: auto;">
+        <button mat-icon-button matTooltip="Mail" style="color: white;">
+            <mat-icon>mail</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Notifications" style="color: white;">
+            <mat-icon>notifications</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Layers" style="color: white;">
+            <mat-icon>layers</mat-icon>
+        </button>
+        <!-- <button mat-icon-button matTooltip="My Account">
+            <mat-icon>account_circle</mat-icon>
+        </button> -->
+        <img src="/assets/img/tho.jpg" alt="Avatar" class="my-account" style="margin-top: -15px;">
+        
+    </div>
+</mat-toolbar>
+<mat-sidenav-container autosize="true">
+    <mat-sidenav [ngClass]="!isCollapsed ? 'expanded' : ''" [mode]="isMobile ? 'over' : 'side'" [opened]="isMobile ? 'false' : 'true'">
+        <div style="border: 1px solid var(--Base-Line, #E6E7EC); border-radius: 16px; margin: 10px;">
+            <div class="frame_acc">
+                <div class="avatar-container">
+                    <img class="avatar-image" src="/assets/img/tho.jpg" alt="Avatar">
+                    <div class="user-name"><strong>Tan Pham</strong><br><span style="font-size: 10.5px;">Superadmin</span></div>
+                </div>
+            </div>
+        </div>
+      <mat-nav-list>
+        <ng-container *ngFor="let menuItem of menuItems">
+          <ng-container *ngIf="!menuItem.children; else expansionPanel">
+            <mat-list-item routerLink="{{ menuItem.link }}" [ngClass]="{ 'selected': menuItem.isSelected }" (click)="selectMenuItem(menuItem)">
+              <span class="entry">
+                <mat-icon>{{ menuItem.icon }}</mat-icon>
+                <span class="item-text" *ngIf="!isCollapsed">{{ menuItem.name }}</span>
+              </span>
+            </mat-list-item>
+          </ng-container>
+          <ng-template #expansionPanel>
+            <mat-expansion-panel [class.mat-elevation-z0]="true" [expanded]="menuItem.isOpen">
+              <mat-expansion-panel-header (click)="toggleSubMenu(menuItem)" [ngClass]="{ 'selected': menuItem.isSelected }" (click)="selectMenuItem(menuItem)">
+                <mat-icon>{{ menuItem.icon }}</mat-icon><span class="item-text">{{ menuItem.name }}</span>
+              </mat-expansion-panel-header>
+              <mat-nav-list>
+                <mat-list-item routerLink="{{ child.link }}" *ngFor="let child of menuItem.children">
+                  <mat-icon>{{ child.icon }}</mat-icon><span class="item-text">{{ child.name }}</span>
+                </mat-list-item>
+              </mat-nav-list>
+            </mat-expansion-panel>
+          </ng-template>
+        </ng-container>
+      </mat-nav-list>
+      <div style="border: 1px solid var(--Base-Line, #E6E7EC); border-radius: 16px; margin: 10px; margin-top: auto;">
+        <div class="frame_acc">
+            <div class="avatar-container">
+                <mat-icon style="color: #C54C3D; margin-right: 10px;"> chat</mat-icon>
+                <div class="user-name"><strong>Chat</strong><br><span style="font-size: 10.5px;">Trò chuyện...</span></div>
+            </div>
+        </div>
+    </div>
+    </mat-sidenav>
+    <mat-sidenav-content style="background-color: white;">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+  

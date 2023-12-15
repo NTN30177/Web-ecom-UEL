@@ -7,6 +7,8 @@ import { AccountInfoComponent } from '../manage-account/account-info/account-inf
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
 import { AccountAddressComponent } from '../manage-account/account-address/account-address.component';
 import { PaymentComponent } from '../payment/payment.component';
+import { LoginComponent } from '../login/login.component';
+import { RegisterComponent } from '../register/register.component';
 
 const routes: Routes = [
   {
@@ -25,7 +27,13 @@ const routes: Routes = [
         component: HomePageComponent,
       },
       {
-        path:'payment', component: PaymentComponent
+        path:'payment', component: PaymentComponent,
+      },
+      {
+        path:'login', component: LoginComponent,
+      },
+      {
+        path:'register', component: RegisterComponent,
       }
     ],
   },

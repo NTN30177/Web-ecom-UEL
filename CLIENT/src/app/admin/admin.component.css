@@ -1,0 +1,137 @@
+h1 {
+    padding: 0 1rem;
+}
+
+h2 {padding: 1rem;}
+
+mat-toolbar{
+    position:fixed;
+    top:0;
+    z-index: 2;
+    background: var(--primary-01, #9B3A23);
+}
+
+.toolbar-content {
+    display: flex;
+    justify-content: space-between;
+    width:265px;
+    /* background-color: #A74028; */
+    
+  }
+  
+  .logo-container {
+    margin-right: auto;
+  }
+  
+  .menu-icon-container {
+    margin-left: auto;
+  }
+  
+
+mat-sidenav-container {
+    height:100%;
+}
+
+mat-sidenav {
+    padding-top: 3.5rem;
+    @media screen and (min-width: 600px) {
+      padding-top: 4rem;
+    }
+
+    .entry{
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding:0.75rem;
+    }
+  }
+
+mat-sidenav-content{
+    padding-top: 3.5rem;
+    @media screen and (min-width: 600px) {
+        padding-top: 4rem;
+    }
+}
+.expanded {
+    width: 280px;   
+}
+
+.item-text {
+  margin-left: 10px;
+}
+
+.mat-expansion-panel-header {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight:500;
+  line-height: var(--mat-expansion-header-text-line-height);
+  letter-spacing: var(--mat-expansion-header-text-tracking);
+}
+.mdc-list-item__primary-text {
+  font-family: 'Montserrat', sans-serif;
+  line-height: var(--mdc-list-list-item-label-text-line-height);
+  font-size: 14px;
+  font-weight:500;
+  letter-spacing: var(--mdc-list-list-item-label-text-tracking);
+}
+/* Thêm vào file CSS của bạn */
+mat-list-item.selected, mat-expansion-panel-header.selected {
+  box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.2);
+  background-color: #fff; /* Thay đổi màu nền nếu cần */
+}
+/* Thêm vào file CSS của bạn */
+mat-form-field {
+  font-family: 'Montserrat', sans-serif;
+  
+}
+/* Thêm vào file CSS của bạn */
+.mat-form-field-label {
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+
+/* Tùy chỉnh font cho mdc-floating-label */
+.mdc-text-field--filled .mdc-floating-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: var(--mdc-filled-text-field-label-text-size);
+  font-weight: var(--mdc-filled-text-field-label-text-weight);
+  letter-spacing: var(--mdc-filled-text-field-label-text-tracking);
+}
+
+.frame_acc{
+  display: flex;
+  padding: 10.5px 20px;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.avatar-container {
+  display: flex; /* Hiển thị phần tử theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+.avatar-image {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+   
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.my-account {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-top: -15px;
+  margin-left: 10px;
+}

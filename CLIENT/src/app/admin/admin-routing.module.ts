@@ -8,9 +8,10 @@ import { ManageAccountComponent } from '../manage-account/manage-account.compone
 import { AccountInfoComponent } from '../manage-account/account-info/account-info.component';
 import { AccountAddressComponent } from '../manage-account/account-address/account-address.component';
 import { AccountOrderComponent } from '../manage-account/account-order/account-order.component';
-import { ManageProductComponent } from '../manage-product/manage-product.component';
+import { ManageProductComponent } from './manage-product/manage-product.component';
 import { AdminComponent } from './admin.component';
 import { AddProduct2Component } from './add-product-2/add-product-2.component';
+import { CreateCampaignComponent } from '../create-campaign/create-campaign.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: "/drink", pathMatch: 'full'},
@@ -22,6 +23,7 @@ const routes: Routes = [
       { path: 'add-product-2', component: AddProduct2Component },
       { path: 'view-color', component: ViewColorComponent },
       { path: 'product', component: ManageProductComponent },
+      { path: 'create-campaign', component: CreateCampaignComponent },
     ],
   },
 ];

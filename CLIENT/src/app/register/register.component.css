@@ -1,0 +1,73 @@
+html, body{
+    line-height: 25px;
+    color: #000;
+    font-family: Montserrat;
+    font-style: normal;
+    line-height: normal;
+}
+.text_head{
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 1.44px;
+    text-align: center;
+}
+p{
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.96px;
+}
+label{
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.96px;
+}
+::placeholder{
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.8px;
+}
+form{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;            
+}
+form i {
+    margin-left: -30px;
+    cursor: pointer;
+}
+.input-primary{
+    border-radius: 35px;
+    border: 1px solid var(--neutral-04, #88817F);
+    height: 50px;
+    margin-bottom: 5px;
+}
+.btn-primary{
+    background-color: black;
+    color: var(--neutral-08, #FFF);
+    border-radius: 35px;
+    border: 1px solid black;
+    font-size: 16px;
+    letter-spacing: 0.96px;
+    font-weight: 700;
+    height: 50px;
+}
+.btn-primary:hover{
+    background-color: white;
+    color: black;
+    border-radius: 35px;
+    border: 1px solid black;
+    font-size: 16px;
+    letter-spacing: 0.96px;
+    font-weight: 700;
+    height: 50px;
+}
+a{
+    text-decoration: none;
+    color: #C54C3D;
+}
+a:hover{
+    color: black;
+}
+.error-message{
+    color: red; font-size: 13px;
+}

@@ -1,0 +1,95 @@
+html, body{
+    line-height: 25px;
+    color: #000;
+    font-family: Montserrat;
+    font-style: normal;
+    line-height: normal;
+}
+.text_head{
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: 1.44px;
+}
+p {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.80px;
+}
+
+::placeholder{
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.8px;
+}
+
+.input-primary{
+    border-radius: 35px;
+    border: 1px solid var(--neutral-04, #88817F);
+    height: 50px;
+    border-color: #000!important;
+}
+.btn-primary{
+    background-color: black;
+    color: var(--neutral-08, #FFF);
+    border-radius: 35px;
+    border: 1px solid black;
+    font-size: 16px;
+    letter-spacing: 0.96px;
+    font-weight: 700;
+    height: 50px;
+}
+.btn-primary:hover{
+    background-color: white;
+    color: black;
+    border-radius: 35px;
+    border: 1px solid black;
+    font-size: 16px;
+    letter-spacing: 0.96px;
+    font-weight: 700;
+    height: 50px;
+}
+.frame{
+    border-radius: 23px;
+    background: #FFF;
+    box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.25);
+    padding: 15px;
+    margin-top: 50px;
+}
+.img-fluid{
+    border-radius: 10px;
+}
+a{
+    text-decoration: none;
+    color: #000;
+}
+.form-group{
+    position: relative;
+}
+
+#togglePassword {
+    position: absolute;
+    top: 33%;
+    right: 15px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.error-message {
+    margin-top: 5px;
+    color: red;
+    font-size: 13px;
+}
+.error-input {
+    border: 1px solid red;
+  }
+
+  .input-primary.error-input {
+    border: 1px solid red;
+}
+  
+  
+
+@media (max-width: 576px) {
+.hidden-mobile {
+  display: none;
+}}

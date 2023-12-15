@@ -1,0 +1,18 @@
+[
+    { "name": "Black Friday", "startDate": "2023-01-01", "endDate": "2023-01-01", "quantity": 100, "cost": 5000 },
+    { "name": "Black Friday", "startDate": "2023-02-15", "endDate": "2023-02-15", "quantity": 150, "cost": 7500 },
+    { "name": "Tết Nguyên Đán", "startDate": "2024-02-15", "endDate": "2024-03-15", "quantity": 150, "cost": 7500 },
+    { "name": "Ngày Nhà giáo Việt Nam 20/11", "startDate": "2023-11-15", "endDate": "2023-11-20", "quantity": 150, "cost": 7500 },
+    { "name": "Merry Christmas", "startDate": "2023-12-15", "endDate": "2023-12-25", "quantity": 150, "cost": 7500 },
+    { "name": "Merry Christmas", "startDate": "2023-12-10", "endDate": "2023-12-26", "quantity": 150, "cost": 7500 },
+    { "name": "Tết Nguyên Đán", "startDate": "2024-02-01", "endDate": "2024-02-15", "quantity": 150, "cost": 7500 },
+    { "name": "Happy New Year", "startDate": "2023-02-15", "endDate": "2023-02-15", "quantity": 150, "cost": 7500 },
+    { "name": "Merry Christmas", "startDate": "2023-12-10", "endDate": "2023-12-19", "quantity": 150, "cost": 7500 },
+    { "name": "Siêu Sale sập sàn", "startDate": "2024-02-15", "endDate": "2024-02-15", "quantity": 150, "cost": 7500 },
+    { "name": "Happy New Year", "startDate": "2023-02-15", "endDate": "2023-02-15", "quantity": 150, "cost": 7500 },
+    { "name": "Merry Christmas", "startDate": "2023-12-25", "endDate": "2024-01-5", "quantity": 150, "cost": 7500 },
+    { "name": "Mừng Đảng Mừng Xuân", "startDate": "2024-02-15", "endDate": "2024-02-15", "quantity": 150, "cost": 7500 },
+    { "name": "Siêu Sale sập sàn", "startDate": "2023-02-15", "endDate": "2023-02-15", "quantity": 150, "cost": 7500 },
+    { "name": "Larosé's Birthday", "startDate": "2023-02-15", "endDate": "2023-02-15", "quantity": 150, "cost": 7500 },
+    { "name": "Larosé's Birthday", "startDate": "2024-09-1", "endDate": "2024-09-30", "quantity": 200, "cost": 10000 }
+]
