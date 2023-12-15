@@ -29,6 +29,8 @@ import { SideMenuComponent } from './side-menu/side-menu.component';
 import { ManageProductComponent } from './manage-product/manage-product.component';
 import { UserModule } from './user/user.module';
 import { UserRoutingModule } from './user/user-routing.module';
+import { PaymentComponent } from './payment/payment.component';
+import { AddressListPopupComponent } from './address-list-popup/address-list-popup.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { UserRoutingModule } from './user/user-routing.module';
     UserComponent,
     AdminComponent,
     SideMenuComponent,
+    PaymentComponent,
+    AddressListPopupComponent,
   ],
   imports: [
     BrowserModule,

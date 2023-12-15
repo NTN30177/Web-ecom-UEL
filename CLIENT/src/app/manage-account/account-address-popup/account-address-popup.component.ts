@@ -29,15 +29,19 @@ export class AccountAddressPopupComponent {
     // Update the HTML to display the new address
     this.addresses.push(newAddress);
     console.log("list:", this.addresses)
+    this.dialogRef.close()
   }
-  closeDialog() {
-    // // Get the form values when the "Thêm" button is clicked
-    // const formData = this.addressForm.value;
-    // console.log('Form Data:', formData);
+  closePopup() {
+    this.dialogRef.close()
+  }
+  // closeDialog() {
+  //   // // Get the form values when the "Thêm" button is clicked
+  //   // const formData = this.addressForm.value;
+  //   // console.log('Form Data:', formData);
 
-    // Close the dialog and optionally send data back to the parent component
-    this.dialogRef.close(/* any data you want to pass back to the parent component */);
-  }
+  //   // Close the dialog and optionally send data back to the parent component
+  //   this.dialogRef.close(/* any data you want to pass back to the parent component */);
+  // }
 
 
 }
