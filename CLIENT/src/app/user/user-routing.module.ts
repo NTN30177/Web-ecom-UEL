@@ -23,10 +23,6 @@ const routes: Routes = [
           ),
       },
       {
-        path: '',
-        component: HomePageComponent,
-      },
-      {
         path:'payment', component: PaymentComponent,
       },
       {
@@ -34,7 +30,11 @@ const routes: Routes = [
       },
       {
         path:'register', component: RegisterComponent,
-      }
+      },
+      {
+        path: '',
+        component: HomePageComponent,
+      },
     ],
   },
 ];

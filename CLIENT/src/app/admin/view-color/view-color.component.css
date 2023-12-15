@@ -5,6 +5,8 @@
   font-weight: 400;
   line-height: normal;
   letter-spacing: 0.72px;
+  padding: -10px;
+  
 }
 .header-info {
   display: flex;

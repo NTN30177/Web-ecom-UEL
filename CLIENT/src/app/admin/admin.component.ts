@@ -44,7 +44,7 @@ export class AdminComponent {
       icon: 'shopping_basket',
       children: [
         { name: 'Quản lý sản phẩm', icon: 'bubble_chart', link: '/register' },
-        { name: 'Thêm sản phẩm', icon: 'library_add', link: '#' }
+        { name: 'Thêm sản phẩm', icon: 'library_add', link: './add-product' }
       ]
     },
     {
@@ -67,7 +67,7 @@ export class AdminComponent {
       name: 'Màu sắc',
       icon: 'palette',
       children: [
-        { name: 'Quản lý màu sắc', icon: 'bubble_chart', link: '#' },
+        { name: 'Quản lý màu sắc', icon: 'bubble_chart', link: 'view-color' },
         { name: 'Thêm màu sắc', icon: 'library_add', link: '#' }
       ]
     },
