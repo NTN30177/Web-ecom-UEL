@@ -17,10 +17,24 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'order',
+        loadChildren: () =>
+          import('./account-order/account-order.module').then(
+            (m) => m.AccountOrderModule
+          ),
+      },
+      {
         path: 'address',
         loadChildren: () =>
           import('./account-address/account-address.module').then(
             (m) => m.AccountAddressModule
+          ),
+      },
+      {
+        path: 'help',
+        loadChildren: () =>
+          import('./account-help/account-help.module').then(
+            (m) => m.AccountHelpModule
           ),
       },
       { path: '', redirectTo: 'info', pathMatch: 'full' },

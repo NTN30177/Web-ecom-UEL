@@ -14,8 +14,15 @@ body {
 .custom {
     padding-left: 20px;
 } */
-
-
+.info-header{
+    font-size: 28px;
+    /* padding-top: 20px; */
+    font-weight: 700;
+    letter-spacing: 1.92px;
+}
+.row{
+    margin-bottom: 10px;
+}
 .order-block {
     margin-top: 32px;
 }
@@ -139,6 +146,12 @@ body {
 
 }
 
+.message{
+    font-style: italic;
+}
+.message span{
+    color: var(--Primary-01, #9B3A23);
+}
 
 
 

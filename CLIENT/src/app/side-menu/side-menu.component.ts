@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrl: './side-menu.component.css'
 })
 export class SideMenuComponent {
-
+  toggleMenu() {
+    const menu = document.getElementById('menu');
+    if (menu) {
+      menu.classList.toggle('show');
+    }
+  }
 }

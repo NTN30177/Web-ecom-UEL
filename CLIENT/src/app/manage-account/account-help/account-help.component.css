@@ -1,0 +1,55 @@
+
+
+.button-send {
+    /* display: inline-flex; */
+    display: flex;
+    border-radius: 20px;
+    background: var(--Neutral-01, #000);
+    color: white;
+    height: 39px;
+    width: 215px;
+    padding: 8px 10px;
+    align-items: center;
+    gap: 4px;
+    align-self: stretch;
+
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.84px;
+}
+
+/* .button-set button {
+    background-color: #000000;
+    color: white;
+    margin-top: 8px;
+    border-radius: 50px;
+    /* width: 177px;
+    height: 31px; */
+/* line-height: 39px; */
+/* font-weight: 700px;
+    font-size: 14px; */
+/* padding: 8px 20px; */
+/* } */
+
+.help-block {
+    background-color: rgba(241, 241, 241, 1);
+    color: #000000;
+    border-radius: 15px;
+    margin: 26px 0;
+    padding: 16px 0;
+    /* height: 77px; */
+
+
+}
+
+.help-block p {
+    margin-bottom: 0;
+}
+
+.name{
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+}
