@@ -38,12 +38,12 @@ export class AdminComponent {
 
 
   menuItems: MenuItem[] = [
-    { name: 'Dashboard', icon: 'dashboard', link: '/login' },
+    { name: 'Dashboard', icon: 'dashboard', link: '' },
     {
       name: 'Sản phẩm',
       icon: 'shopping_basket',
       children: [
-        { name: 'Quản lý sản phẩm', icon: 'bubble_chart', link: '/register' },
+        { name: 'Quản lý sản phẩm', icon: 'bubble_chart', link: '' },
         { name: 'Thêm sản phẩm', icon: 'library_add', link: '#' }
       ]
     },
@@ -75,8 +75,8 @@ export class AdminComponent {
       name: 'Chiến dịch',
       icon: 'flag',
       children: [
-        { name: 'Quản lý chiến dịch', icon: 'bubble_chart', link: '/manage-campaign' },
-        { name: 'Thêm chiến dịch', icon: 'library_add', link: '/create-campaign' }
+        { name: 'Quản lý chiến dịch', icon: 'bubble_chart', link: 'manage-campaign' },
+        { name: 'Thêm chiến dịch', icon: 'library_add', link: 'create-campaign' }
       ]
     },
     {

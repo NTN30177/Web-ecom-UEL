@@ -1,22 +1,23 @@
-html, body{
+body{
     line-height: 25px;
     color: #000;
-    font-family: 'Montserrat', sans-serif;
     font-style: normal;
     line-height: normal;
 }
 .container_content{
     display: flex;
     flex-direction: column;
-    gap: 36px;
+    gap: 20px;
     margin: 20px;
     margin-top: 35px;
     background-color: white;
+
 }
 .text_head{
     font-size: 25px;
     font-weight: 700;
     letter-spacing: 1.44px;
+
 }
 p {
     font-size: 16px;
@@ -37,7 +38,6 @@ label{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    /* gap: 32px; */
 }
 .frame_title{
     border-radius: 14px 14px 0px 0px;
@@ -110,7 +110,6 @@ input{
     background: var(--primary-01, #7A1E08);
     padding: 14px 16px;
     justify-content: center;
-    /* gap: 10px; */
     color: var(--neutral-08, #FFF);
     border: 1px solid var(--semantic-03, #7A1E08);
     font-size: 12px;
@@ -124,7 +123,6 @@ input{
     float: right;
     padding: 14px 16px;
     justify-content: center;
-    /* gap: 10px; */
     border-radius: 3.5px;
     background: #5590FF;
     color: var(--neutral-08, #FFF);
@@ -139,4 +137,29 @@ a{
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 0.84px;
+}
+
+body,
+.container_content,
+.text_head,
+p,
+label,
+::placeholder,
+.frame_header,
+.frame_title,
+.frame_body,
+input,
+.frame_poster,
+.btn_choose_poster,
+.frame_btn_footer,
+.btn_delete,
+.btn_group_footer,
+.btn_cancel,
+.btn_create,
+a,
+.form-label,
+.form-control,
+.form-select,
+input[type="number"] {
+  font-family: 'Montserrat', sans-serif;
 }

@@ -44,8 +44,10 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ForgotPasswordModalComponent } from './login/forgot-password-modal/forgot-password-modal.component';
 import { ForgotPasswordModalSuccessComponent } from './login/forgot-password-modal-success/forgot-password-modal-success.component';
-import { CreateCampaignComponent } from './create-campaign/create-campaign.component';
-import { ManageCampaignComponent } from './manage-campaign/manage-campaign.component';
+import { CreateCampaignComponent } from './admin/create-campaign/create-campaign.component';
+import { ManageCampaignComponent } from './admin/manage-campaign/manage-campaign.component';
+import { MatButtonModule } from '@angular/material/button';
+
 
 
 
@@ -108,6 +110,8 @@ import { ManageCampaignComponent } from './manage-campaign/manage-campaign.compo
     MatTabsModule,
     MatInputModule,
     MatSidenavModule,
+    MatButtonModule,
+
 
 
 
