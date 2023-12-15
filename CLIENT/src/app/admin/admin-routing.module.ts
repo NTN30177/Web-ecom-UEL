@@ -10,6 +10,7 @@ import { AccountAddressComponent } from '../manage-account/account-address/accou
 import { AccountOrderComponent } from '../manage-account/account-order/account-order.component';
 import { ManageProductComponent } from '../manage-product/manage-product.component';
 import { AdminComponent } from './admin.component';
+import { AddProduct2Component } from './add-product-2/add-product-2.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: "/drink", pathMatch: 'full'},
@@ -18,6 +19,7 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       { path: 'add-product', component: AddProductComponent },
+      { path: 'add-product-2', component: AddProduct2Component },
       { path: 'view-color', component: ViewColorComponent },
       { path: 'product', component: ManageProductComponent },
     ],

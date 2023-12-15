@@ -29,6 +29,7 @@ import { SideMenuComponent } from './side-menu/side-menu.component';
 import { ManageProductComponent } from './manage-product/manage-product.component';
 import { UserModule } from './user/user.module';
 import { UserRoutingModule } from './user/user-routing.module';
+import { AddProduct2Component } from './admin/add-product-2/add-product-2.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { UserRoutingModule } from './user/user-routing.module';
     UserComponent,
     AdminComponent,
     SideMenuComponent,
+    AddProduct2Component,
   ],
   imports: [
     BrowserModule,

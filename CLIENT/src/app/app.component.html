@@ -1,1 +1,61 @@
-<router-outlet></router-outlet>
+<!-- <form [formGroup]="rfDataModal" style="margin-bottom: 20px;">
+    <div style="margin-bottom: 10px;">
+      <label for="hoTen">Họ tên</label>
+      <input id="hoTen" nz-input formControlName="hoTen" />
+      
+    </div>
+  
+    <div>
+      <table style="width: 100%;" *ngIf="dichVuControls.length > 0">
+        <thead>
+          <tr>
+            <th width="80px">STT</th>
+            <th width="40%">Dịch vụ</th>
+            <th width="20%">Đơn giá</th>
+            <th width="20%">Số lượng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let contr of dichVuControls; index as i">
+            <tr [formGroup]="contr">
+              <td>
+                {{ i + 1 }}
+                <button
+                  type="button"
+                  (click)="removeDichVu(i)"
+                >
+                  Xóa
+                </button>
+              </td>
+              <td>
+                <label for="tenDichVu">Dịch vụ</label>
+                <input id="tenDichVu" nz-input formControlName="tenDichVu" />
+                
+              </td>
+              <td>
+                <label for="donGia">Đơn giá</label>
+                <input id="donGia" nz-input formControlName="donGia" readonly />
+              </td>
+              <td>
+                <label for="soLuong">Số lượng</label>
+                <input id="soLuong" formControlName="soLuong" style="width:100%"></input>
+                
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  
+    <button type="button" (click)="addDichVu()">Thêm DV DV</button>
+    <button type="button" (click)="save()">Lưu</button>
+  </form>
+  
+  <pre>
+    {{ rfDataModal.value | json }}
+  </pre>
+  <pre>
+    {{ dicVus.valid | json }}
+  </pre>
+   -->
+  <router-outlet></router-outlet>

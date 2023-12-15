@@ -1,0 +1,273 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  integrity="sha512-..." crossorigin="anonymous" />
+  <pre>
+    {{ rfDataModal.value | json }}
+  </pre>
+  <pre>
+    <!-- {{ variant.valid | json }} -->
+  </pre>
+<div class="container">
+  <div class="row header-info">
+    <div class="col-12">Sản phẩm/Thêm sản phẩm</div>
+    <div class="col-12 header-info__main">Thêm sản phẩm</div>
+  </div>
+  <hr>
+</div>
+
+<div class="container">
+  <form class="row" [formGroup]="rfDataModal" (ngSubmit)="onSubmit()">
+    <div class="col-8 header-info__left" >
+      <div class="container product-info product-info__detail">
+        <div class="row product-info__title">
+          <div class="col p-0">Thông tin sản phẩm</div>
+        </div>
+        <div class="row">
+          <div class="hr"></div>
+          <!--           <div class="hr"></div>
+ -->
+        </div>
+
+        <div class="row product-info__body ">
+          <div class="form-group p-0">
+            <label for="productName ">Tên sản phẩm:</label>
+            <input type="text" class="form-control" id="productName" placeholder="Nhập tên sản phẩm"
+              formControlName="productName"  />
+         
+          </div>
+          <div class="form-group p-0">
+            <label for="sku">SKU:</label>
+            <input type="text" class="form-control" id="sku" placeholder="ed:SDCDS25" formControlName="productSku"
+               />
+          
+          </div>
+          <div class="form-group p-0">
+            <label for="description">Nhập mô tả:</label>
+            <textarea class="form-control" id="description" cols="20" placeholder="Nhập mô tả sản phẩm" rows="10"
+              formControlName="description"></textarea>
+
+            
+          </div>
+        </div>
+      </div>
+      <div id="variant-container" *ngFor="let contr of dichVuControls; index as i">
+        <div [formGroup]="contr"
+          class="container product-info product-info__body variant-div" >
+          
+          <div class="col-12 p-0 d-flex justify-content-between" *ngIf="selectedType != 'Phụ kiện'">
+            <div class="form-group color">
+              <label for="color ">Màu sắc :</label>
+              <div>{{i+1}}</div>
+              
+              <select class="col-auto mt-2" name="color" id="color" placeholder="Nhập color" formControlName="color">
+                <option value="">Chọn màu sắc</option>
+                <option *ngFor="let color of colors" [value]="color">
+                  {{ color }}
+                </option>
+              </select>
+            </div>
+            <div class="col-auto delete-varirant" *ngIf="selectedType != 'Phụ kiện'" (click)="deleteVariant(i)">
+              <div class="icon"><i class="fas fa-trash-alt"></i></div>
+            </div>
+          </div>
+          <div class="row g-2 color-detail__quantity" *ngIf="selectedType != 'Phụ kiện'">
+            <label for="color ">Số lượng</label>
+
+            <div class="col-4">
+              <label for="color ">Size S:</label>
+              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeS" />
+            </div>
+            <div class="col-4">
+              <label for="color ">Size M:</label>
+              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeM" />
+            </div>
+            <div class="col-4"></div>
+            <div class="col-4">
+              <label for="color ">Size L:</label>
+
+              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeL" />
+            </div>
+            <div class="col-4">
+              <label for="color ">Size XL:</label>
+
+              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng" formControlName="sizeXL" />
+            </div>
+            <div class="col-4">
+              <label for="color ">Size XXL:</label>
+
+              <input type="text" class="form-control" id="color" placeholder="Nhập số lượng"
+                formControlName="sizeXXL" />
+            </div>
+          </div>
+          <div class="row g-2 color-detail__quantity" *ngIf="selectedType == 'Phụ kiện'">
+            <div class="col-12 p-0 d-flex justify-content-between">
+              <div class="col-5 form-group color">
+                <label for="color ">Màu sắc {{i+1}}:</label>
+                <select class="col-auto mt-2" formControlName="colorFreeSize" >
+                  <option value="">Chọn màu sắc</option>
+                  <option *ngFor="let color of colors" [value]="color">
+                    {{ color }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-5 color-free__size">
+                <label for="color  ">Free size</label>
+                <div>
+                  <input type="text" class="form-control" id="color" placeholder="Nhập số lượng"
+                  formControlName="freeSize" />
+                </div>
+              </div>
+              <div class="col-auto delete-varirant" (click)="deleteVariant(i)">
+                <label for=""></label>
+                <div class="icon align-items-end">
+                  <i class="fas fa-trash-alt"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-12 img">
+            <label for="img ">Hình ảnh cho màu ne</label>
+            <input type="file" class="text-center" formControlName="images" />
+          </div>
+        </div>
+      </div>
+      <div class="container action-add__variant">
+        <div class="row action-add__product">
+          <div class="col-auto add-variant" (click)="addVariant()">
+            <div class="icon">+</div>
+            <div class="content">Thêm biến thể</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-4 header-info__right">
+      <div class="container product-info product-info__detail">
+        <div class="row product-info__title">
+          <div class="col p-0">Thông tin sản phẩm</div>
+        </div>
+        <div class="row">
+          <!--           <div class="hr"></div>
+
+          -->
+          <div class="hr"></div>
+        </div>
+        <div class="row product-info__body">
+          <div class="row form-group p-0">
+            <label for="productPrice">Giá bán</label>
+            <div class="row price text-center d-flex justify-content-center align-items-center">
+              <div class="col-9 pe-0">
+                <input type="text" class="form-control" id="productPrice" placeholder="Nhập giá bán"
+                  formControlName="price"/>
+              </div>
+              <div class="col-3 p-0">
+                <input type="text" class="form-control" id="productPriceD" value="VNĐ" disabled />
+              </div>
+            </div>
+          
+          </div>
+
+          <div class="row form-group p-0">
+            <label for="productCode">Giá Gốc</label>
+            <div class="row price text-center d-flex justify-content-center align-items-center">
+              <div class="col-9 pe-0">
+                <input type="text" class="form-control" id="productCode" placeholder="Nhập giá gốc" formControlName="cost" />
+              </div>
+              <div class="col-3 ps-0">
+                <input type="text" class="form-control" id="productCodeD" value="VNĐ" disabled />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container product-info product-info__detail">
+        <div class="row product-info__title">
+          <div class="col p-0">Phân loại</div>
+        </div>
+        <div class="row">
+          <div class="hr"></div>
+        </div>
+        <div class="row product-info__body">
+          <div class="form-group type p-0">
+            <label for="color ">Type :</label>
+            <select class="col-12" (change)="selectChange($event)" formControlName="typeName"
+              >
+              <option value="">Chọn type</option>
+              <option *ngFor="let type of types" [value]="type">
+                {{ type }}
+              </option>
+            </select>
+
+
+            <input *ngIf="showInputType" type="text" class="form-control add-new" formControlName="newTypeInput" />
+            <div class="col-auto add-action" (click)="addDiv('typeName')">
+              <div class="icon">+</div>
+              <div class="content" *ngIf="!showInputType">Thêm type mới</div>
+              <div class="content" *ngIf="showInputType" (click)="clickSaveAdd('typeName', $event)">
+                Lưu type mới
+              </div>
+            </div>
+          </div>
+          <div class="form-group type p-0" *ngIf="showDivSubtype">
+            <label for="color ">Subtype :</label>
+            <select class="col-12"  formControlName="subTypeName">
+              <option value="">Chọn type</option>
+              <option *ngFor="let subType of subTypes" [value]="subType">
+                {{ subType }}
+              </option>
+            </select>
+         
+
+            <input *ngIf="showInputSubtype" type="text" class="form-control add-new"
+              formControlName="newSubTypeInput" />
+            <div class="col-auto add-action" (click)="addDiv('subTypeName')">
+              <div class="icon">+</div>
+              <div class="content" *ngIf="!showInputSubtype">
+                Thêm Subtype mới
+              </div>
+              <div class="content" *ngIf="showInputSubtype" (click)="clickSaveAdd('subTypeName', $event)">
+                Lưu Subtype mới
+              </div>
+            </div>
+          </div>
+          <div class="form-group type p-0" *ngIf="showDivCollection">
+            <label for="color ">Collection :</label>
+            <select class="col-12"  formControlName="collectionName">
+              <option value="">Chọn BST</option>
+              <option *ngFor="let collection of collections" [value]="collection">
+                {{ collection }}
+              </option>
+            </select>
+            <input *ngIf="showInputCollection" type="text" class="form-control add-new"
+              formControlName="newCollectionInput" />
+            <div class="col-auto add-action" (click)="addDiv('collectionName')">
+              <div class="icon">+</div>
+              <div class="content" *ngIf="!showInputCollection">
+                Thêm BST mới
+              </div>
+              <div class="content" *ngIf="showInputCollection" (click)="clickSaveAdd('collectionName', $event)">
+                Lưu BST mới
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="frame_btn_footer">
+  <div class="row">
+    <div class="form-group col-md-6 col-sm-6 ps-4">
+      <button class="btn_delete" id="btn_delete" name="btn_delete">Xóa</button>
+    </div>
+    <div class="col-md-6 col-sm-6 pe-4">
+      <div class="form-group btn_group_footer text-end">
+        <button class="btn_cancel" id="btn_cancel" name="btn_cancel">
+          Hủy
+        </button>
+        <button class="btn_create" id="btn_create" name="btn_create" type="submit" (click)="onSubmit()">
+          Lưu
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
