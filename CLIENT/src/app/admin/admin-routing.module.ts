@@ -26,6 +26,7 @@ const routes: Routes = [
       { path: 'product', component: ManageProductComponent },
       { path: 'create-campaign', component: CreateCampaignComponent },
       { path: 'manage-campaign', component: ManageCampaignComponent },
+      { path: 'manage-product', component: ManageProductComponent },
     ],
   },
 ];

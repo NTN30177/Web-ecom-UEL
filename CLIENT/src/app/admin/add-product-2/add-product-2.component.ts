@@ -119,7 +119,6 @@ export class AddProduct2Component implements OnInit {
         variantFormGroup.get('colorFreeSize')?.disable();
         variantFormGroup.get('freeSize')?.disable();
     });
- 
     } else{
       this.rfDataModal.get('color')?.disable(); 
       this.rfDataModal.get('sizeS')?.disable(); 
@@ -143,9 +142,6 @@ export class AddProduct2Component implements OnInit {
 
     console.log(formData);
   }
-
-
- 
 
   addDiv(type: string): void {
     if (type === 'typeName') {
