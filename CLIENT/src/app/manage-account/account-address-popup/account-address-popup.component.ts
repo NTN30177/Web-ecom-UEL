@@ -11,6 +11,7 @@ export class AccountAddressPopupComponent {
   addressForm: FormGroup;
 
   addresses: any[] = [];
+  
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<AccountAddressPopupComponent>) {
     this.addressForm = this.fb.group({
       fullName: ['', Validators.required],

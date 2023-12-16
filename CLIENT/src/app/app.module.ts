@@ -29,7 +29,7 @@ import { SideMenuComponent } from './side-menu/side-menu.component';
 import { ManageProductComponent } from './admin/manage-product/manage-product.component';
 import { UserRoutingModule } from './user/user-routing.module';
 import { PaymentComponent } from './payment/payment.component';
-import { AddressListPopupComponent } from './address-list-popup/address-list-popup.component';
+import { AddressListPopupComponent } from './payment/address-list-popup/address-list-popup.component';
 import { AddProduct2Component } from './admin/add-product-2/add-product-2.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { PanelMenuModule } from 'primeng/panelmenu';
