@@ -47,13 +47,11 @@ export class AddProduct2Component implements OnInit {
 
   submitted = false;
   typeFormControl: any;
-  variantounter: number = 0;
   addProductMessage: string | undefined;
   books: any;
   errMessage: any;
  
 
-  // rfDataModal1: FormGroup<{ productName: FormControl<string | null>; productSku: FormControl<string | null>; description: FormControl<string | null>; price: FormControl<string | null>; cost: FormControl<string | null>; typeName: FormControl<string | null>; color: FormArray<never>; sizeS: FormArray<never>; sizeL: FormArray<never>; sizeM: FormArray<never>; sizeXL: FormArray<never>; sizeXXL: FormArray<never>; freeSize: FormArray<never>; images: FormArray<never>; subTypeName: FormControl<string | null>; collectionName: FormControl<string | null>; newTypeInput: FormControl<string | null>; newSubTypeInput: FormControl<string | null>; newCollectionInput: FormControl<string | null>; }>;
   rfDataModal: FormGroup;
   constructor(
     private _productService: ManageProductService,
@@ -81,8 +79,56 @@ export class AddProduct2Component implements OnInit {
     return this.rfDataModal.get('variant') as FormArray;
   }
 
-  get dichVuControls(): FormGroup[] {
+  get variantsControls(): FormGroup[] {
     return this.variant.controls as FormGroup[];
+  }
+  get productName() {
+    return this.rfDataModal.get('productName') as FormControl;
+  }
+  get productSku() {
+    return this.rfDataModal.get('productSku') as FormControl;
+  }
+  get productDescription() {
+    return this.rfDataModal.get('description') as FormControl;
+  }
+  get productPrice() {
+    return this.rfDataModal.get('price') as FormControl;
+  }
+  get productCost() {
+    return this.rfDataModal.get('cost') as FormControl;
+  }
+  get productType() {
+    return this.rfDataModal.get('typeName') as FormControl;
+  }
+  get productSubType() {
+    return this.rfDataModal.get('subTypeName') as FormControl;
+  }
+  get productCollection() {
+    return this.rfDataModal.get('collectionName') as FormControl;
+  }
+  get productColor() {
+    return this.rfDataModal.get('color') as FormControl;
+  }
+  get productSizeS() {
+    return this.rfDataModal.get('sizeS') as FormControl;
+  }
+  get productSizeL() {
+    return this.rfDataModal.get('sizeL') as FormControl;
+  }
+  get productSizeM() {
+    return this.rfDataModal.get('sizeM') as FormControl;
+  }
+  get productSizeXL() {
+    return this.rfDataModal.get('sizeXL') as FormControl;
+  }
+  get productSizeXXL() {
+    return this.rfDataModal.get('sizeXXL') as FormControl;
+  }
+  get productFreeSize() {
+    return this.rfDataModal.get('freeSize') as FormControl;
+  }
+  get productImages() {
+    return this.rfDataModal.get('images') as FormControl;
   }
 
   markFormGroupTouched(formGroup: FormGroup) {
@@ -100,7 +146,6 @@ export class AddProduct2Component implements OnInit {
     if (this.rfDataModal.invalid || this.variant.invalid) {
       alert('Vui lòng kiểm tra lại thông tin form');
       this.markFormGroupTouched(this.rfDataModal);
-      // this.markFormGroupTouched(this.variant);
     } else {
       alert('Save Data');
     }

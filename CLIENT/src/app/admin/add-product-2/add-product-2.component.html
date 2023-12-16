@@ -23,15 +23,19 @@
         </div>
         <div class="row">
           <div class="hr"></div>
-          <!--           <div class="hr"></div>
- -->
         </div>
 
         <div class="row product-info__body ">
           <div class="form-group p-0">
             <label for="productName ">Tên sản phẩm:</label>
             <input type="text" class="form-control" id="productName" placeholder="Nhập tên sản phẩm"
-              formControlName="productName"  />
+              formControlName="productName"  
+              [class.is-invalid]="productName.invalid&&productName.touched"
+              />
+              <div *ngIf="productName.errors &&(productName.invalid||productName.touched)">
+                <small class="text-danger" *ngIf="productName.errors['required']"></small>
+
+              </div>
          
           </div>
           <div class="form-group p-0">
@@ -49,7 +53,7 @@
           </div>
         </div>
       </div>
-      <div id="variant-container" *ngFor="let contr of dichVuControls; index as i">
+      <div id="variant-container" *ngFor="let contr of variantsControls; index as i">
         <div [formGroup]="contr"
           class="container product-info product-info__body variant-div" >
           
