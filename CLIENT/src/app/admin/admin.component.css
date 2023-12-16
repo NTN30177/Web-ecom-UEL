@@ -135,3 +135,17 @@ mat-form-field {
   margin-top: -15px;
   margin-left: 10px;
 }
+:host ::ng-deep .mdc-list-item__primary-text {
+  font-family: 'Montserrat', sans-serif;
+  line-height: var(--mdc-list-list-item-label-text-line-height);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: var(--mdc-list-list-item-label-text-tracking);
+}
+
+/* Đối với các nút mat-icon-button */
+button.mat-icon-button {
+  background-color: transparent; /* Đặt nền của nút là trong suốt */
+  border: none; /* Loại bỏ viền */
+  cursor: pointer; /* Biến con trỏ thành pointer khi rê chuột vào nút */
+}

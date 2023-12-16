@@ -1,12 +1,16 @@
-/* Add this to your global styles or the component's CSS file */
+/* Import Montserrat font */
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
+/* Apply Montserrat font to the entire document */
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Additional styling for specific elements if needed */
 html, body {
     line-height: 25px;
     color: #000;
-    font-family: Montserrat;
 }
-
 .container_content {
     display: flex;
     flex-direction: column;
@@ -50,8 +54,7 @@ p, label, ::placeholder {
 table {
     width: 100%;
     text-align: center;
-    border-collapse: collapse; /* Collapse the borders */
-
+    border-collapse: collapse;
 }
 
 thead {
@@ -63,17 +66,10 @@ thead {
     font-weight: 700;
     letter-spacing: 0.84px;
 }
-/* 
-td:nth-child(1) {
-    padding-left: 15px;
-    text-align: left;
-} */
 
-/* Add this to your component's CSS file */
 .mat-tab-body-content, .mat-tab-label {
     font-family: 'Montserrat', sans-serif !important;
 }
-
 
 /* Adjust padding for Mat-Icon */
 mat-icon {
@@ -83,18 +79,16 @@ mat-icon {
 
 .custom-datatable thead th,
 .custom-datatable tbody td {
-    border: none; /* Remove border from th and td */
-    padding: 15px; /* Add padding to td */
-    text-align: center; /* Align text to the left in table cells */
+    border: none;
+    padding: 15px;
+    text-align: center;
 }
-
 
 .custom-datatable tbody td:nth-child(1) {
     text-align: left;
-
 }
 
-.custom-datatable thead th{
+.custom-datatable thead th {
     background-color: #F9FCFF;
     text-align: center;
     font-size: 14px;

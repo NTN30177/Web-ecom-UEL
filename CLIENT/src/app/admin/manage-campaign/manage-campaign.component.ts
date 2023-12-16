@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
-import {  CampaignService } from '../services/campaign.service';
-import { Campaign } from '../interfaces/campaign';
+import { Campaign } from '../../interfaces/campaign';
+import { CampaignService } from '../../services/campaign.service';
 
 @Component({
   selector: 'app-manage-campaign',
