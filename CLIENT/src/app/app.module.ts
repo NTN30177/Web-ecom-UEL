@@ -29,7 +29,7 @@ import { SideMenuComponent } from './side-menu/side-menu.component';
 import { ManageProductComponent } from './admin/manage-product/manage-product.component';
 import { UserRoutingModule } from './user/user-routing.module';
 import { PaymentComponent } from './payment/payment.component';
-import { AddressListPopupComponent } from './address-list-popup/address-list-popup.component';
+import { AddressListPopupComponent } from './payment/address-list-popup/address-list-popup.component';
 import { AddProduct2Component } from './admin/add-product-2/add-product-2.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { PanelMenuModule } from 'primeng/panelmenu';
@@ -47,12 +47,7 @@ import { ForgotPasswordModalSuccessComponent } from './login/forgot-password-mod
 import { CreateCampaignComponent } from './admin/create-campaign/create-campaign.component';
 import { ManageCampaignComponent } from './admin/manage-campaign/manage-campaign.component';
 import { MatButtonModule } from '@angular/material/button';
-
-
-
-
-
-
+import { AddColorComponent } from './admin/add-color/add-color.component';
 
 
 
@@ -87,7 +82,7 @@ import { MatButtonModule } from '@angular/material/button';
     ForgotPasswordModalSuccessComponent,
     CreateCampaignComponent,
     ManageCampaignComponent,
-    
+    AddColorComponent,
   ],
   imports: [
     BrowserModule,

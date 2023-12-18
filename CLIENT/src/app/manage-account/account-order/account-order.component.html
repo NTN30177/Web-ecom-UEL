@@ -1,10 +1,10 @@
 
-    <div class="row">
-        <div class="col-md-8">
-            <h2>QUẢN LÝ ĐƠN HÀNG</h2>
+    <div class="row mb-2 ">
+        <div class="col-sm-8 col order-header text-uppercase align-self-center mb-2 text-xs">
+            quản lý đơn hàng
         </div>
-        <div class="col-md-4 col status">
-            <div> <label for="">Trạng thái đơn hàng</label></div>
+        <div class="col-sm-4 col status">
+            <div class="mb-1 "> <label for="">Trạng thái đơn hàng</label></div>
             <div>
                 <select class="selection" name="" id="">
                     <option value="">Tất cả</option>
@@ -16,7 +16,7 @@
             </div>
         </div>
     </div>
-
+    <hr style="background: #CCC;">
     <div class="table-responsive table-responsive-sm">
       <table class="table responsive table-striped table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="dataTable">
 

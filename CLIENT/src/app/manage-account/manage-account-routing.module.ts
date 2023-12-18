@@ -37,6 +37,13 @@ const routes: Routes = [
             (m) => m.AccountHelpModule
           ),
       },
+      {
+        path: 'favorite',
+        loadChildren: () =>
+          import('./account-favorite/account-favorite-routing.module').then(
+            (m) => m.AccountFavoriteRoutingModule
+          ),
+      },
       { path: '', redirectTo: 'info', pathMatch: 'full' },
     ],
   },
