@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router'; // Import Router
 import { MatDialog } from '@angular/material/dialog';
 import { ForgotPasswordModalComponent } from './forgot-password-modal/forgot-password-modal.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 
 
