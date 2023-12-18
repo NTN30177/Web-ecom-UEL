@@ -45,9 +45,9 @@ export class AdminComponent {
         {
           name: 'Quản lý sản phẩm',
           icon: 'bubble_chart',
-          link: '/manage-product',
+          link: './manage-product',
         },
-        { name: 'Thêm sản phẩm', icon: 'library_add', link: './add-product' },
+        { name: 'Thêm sản phẩm', icon: 'library_add', link: './add-product-2' },
       ],
     },
     {

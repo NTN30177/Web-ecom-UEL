@@ -38,6 +38,9 @@ const productSchema = new mongoose.Schema(
         price: {
             type: Number,
         },
+        sku: {
+            type: String,
+        },
         discount: {
             type: Number,
             default: 0,
