@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const slug  = require('mongoose-slug-updater');
+const slug = require('mongoose-slug-updater');
 mongoose.plugin(slug)
 
 
@@ -16,10 +16,10 @@ const provinceSchema = new mongoose.Schema({
         type: String,
         trim: true,
     },
-    name_with_type:{  
+    name_with_type: {
         type: String,
     },
-    code:{  
+    code: {
         type: String,
     }
 });
@@ -33,7 +33,7 @@ const districtSchema = new mongoose.Schema({
         type: String,
         trim: true,
     },
-    name_with_type:{  
+    name_with_type: {
         type: String,
     },
     path: {
@@ -45,7 +45,7 @@ const districtSchema = new mongoose.Schema({
     code: {
         type: String,
     },
-    parent_code:{
+    parent_code: {
         type: String,
     }
 });
@@ -58,7 +58,7 @@ const wardSchema = new mongoose.Schema({
         type: String,
         trim: true,
     },
-    name_with_type:{  
+    name_with_type: {
         type: String,
     },
     path: {
@@ -70,7 +70,7 @@ const wardSchema = new mongoose.Schema({
     code: {
         type: String,
     },
-    parent_code:{
+    parent_code: {
         type: String,
     }
 });
