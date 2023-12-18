@@ -18,7 +18,7 @@ const userSchema = mongoose.Schema(
             type: String,
             required: true,
         },
-        mobile: {
+        phone: {
             type: String,
             // required: true
         },
@@ -34,11 +34,12 @@ const userSchema = mongoose.Schema(
             type: String,
             default: '',
         },
-        historySearch: [
-            {
-                type: String,
-            },
-        ],
+        historySearch: {
+            type: Array,
+        },
+        specific_address: {
+            type: String,
+        },
         province: {
             type: String,
             default: '',
@@ -55,12 +56,49 @@ const userSchema = mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'CartItem',
         },
-        
-        
+        addresslist: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User_address',
+            },
+        ]
     },
     {
         timestamps: true,
-    },
+    }
 );
 
+const addressSchema = mongoose.Schema(
+    {
+        name: {
+            type: String,
+            required: true,
+        },
+        phone: {
+            type: String,
+            // required: true
+        },
+        specific_address: {
+            type: String,
+        },
+        province: {
+            type: String,
+            default: '',
+        },
+        district: {
+            type: String,
+            default: '',
+        },
+        ward: {
+            type: String,
+            default: '',
+        },
+    },
+    {
+        timestamps: true,
+    }
+)
+
+
 module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User_address', addressSchema);
