@@ -47,6 +47,10 @@ import { ForgotPasswordModalSuccessComponent } from './login/forgot-password-mod
 import { CreateCampaignComponent } from './admin/create-campaign/create-campaign.component';
 import { ManageCampaignComponent } from './admin/manage-campaign/manage-campaign.component';
 import { MatButtonModule } from '@angular/material/button';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NgxFileDropModule } from 'ngx-file-drop';
+import { UploadImgComponent } from './admin/upload-img/upload-img.component';
+import { CartComponent } from './cart/cart.component';
 import { AddColorComponent } from './admin/add-color/add-color.component';
 
 
@@ -82,6 +86,8 @@ import { AddColorComponent } from './admin/add-color/add-color.component';
     ForgotPasswordModalSuccessComponent,
     CreateCampaignComponent,
     ManageCampaignComponent,
+    UploadImgComponent,
+    CartComponent,
     AddColorComponent,
   ],
   imports: [
@@ -106,6 +112,8 @@ import { AddColorComponent } from './admin/add-color/add-color.component';
     MatInputModule,
     MatSidenavModule,
     MatButtonModule,
+    NzFormModule,
+    NgxFileDropModule
 
 
 

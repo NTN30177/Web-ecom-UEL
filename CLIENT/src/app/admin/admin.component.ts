@@ -2,11 +2,11 @@ import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
-import { FlatTreeControl } from '@angular/cdk/tree';
-import {
-  MatTreeFlattener,
-  MatTreeFlatDataSource,
-} from '@angular/material/tree';
+// import { FlatTreeControl } from '@angular/cdk/tree';
+// import {
+//   MatTreeFlattener,
+//   MatTreeFlatDataSource,
+// } from '@angular/material/tree';
 
 interface MenuItem {
   name: string;
@@ -16,13 +16,13 @@ interface MenuItem {
   isOpen?: boolean; // Thêm trường để theo dõi trạng thái mở của submenu
   isSelected?: boolean; // Thêm trường để theo dõi trạng thái chọn
 }
-interface FlatMenuItem {
-  expandable: boolean;
-  name: string;
-  icon: string;
-  link?: string;
-  level: number;
-}
+// interface FlatMenuItem {
+//   expandable: boolean;
+//   name: string;
+//   icon: string;
+//   link?: string;
+//   level: number;
+// }
 
 @Component({
   selector: 'app-admin',
@@ -45,9 +45,9 @@ export class AdminComponent {
         {
           name: 'Quản lý sản phẩm',
           icon: 'bubble_chart',
-          link: 'manage-product',
+          link: './manage-product',
         },
-        { name: 'Thêm sản phẩm', icon: 'library_add', link: 'add-product' },
+        { name: 'Thêm sản phẩm', icon: 'library_add', link: './add-product-2' },
       ],
     },
     {
