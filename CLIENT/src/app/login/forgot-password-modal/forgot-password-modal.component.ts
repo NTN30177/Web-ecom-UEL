@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ForgotPasswordModalSuccessComponent } from '../forgot-password-modal-success/forgot-password-modal-success.component';
 
+
 @Component({
   selector: 'app-forgot-password-modal',
   templateUrl: './forgot-password-modal.component.html',

@@ -5,6 +5,9 @@ html, body{
     font-style: normal;
     line-height: normal;
 }
+:host {
+    font-family: 'Montserrat', sans-serif;
+  }
 .text_head{
     font-size: 25px;
     font-weight: 700;

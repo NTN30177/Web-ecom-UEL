@@ -2,6 +2,9 @@
     <div class="text_head pt-5 pb-4">ĐĂNG KÝ</div>
     <div class="row">
         <form action="" name="page_register" method="post" (submit)="register()" [formGroup]="registerForm">
+            <!-- <div *ngIf="showOptionZeroError" class="error-message">
+                Vui lòng chọn giá trị.
+              </div> -->
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-12 ps-5 pe-3 mt-5">
                 <p>Thông tin khách hàng</p>
@@ -101,7 +104,8 @@
                                 <span style="color: red;">*</span>
                             </label>
                             <select name="cus_ward_id" id="cus_ward_id" class="form-control input-primary" formControlName="cus_ward_id">
-                                <option selected>Chọn Phường/Xã</option>
+                                <option [value]="0">Chọn Phường/Xã</option>
+                                <option [value]="1">Chọn Phường/Xã</option>
                             </select>
                             <div id="cus_ward_id_error" class="error-message"></div>
                         </div>
