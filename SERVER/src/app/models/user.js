@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 const userSchema = mongoose.Schema(
     {
-        name: {
+        first_name: {
+            type: String,
+            required: true,
+        },
+        last_name: {
             type: String,
             required: true,
         },
@@ -9,17 +13,24 @@ const userSchema = mongoose.Schema(
             type: String,
             required: true,
         },
-        image: {
-            type: String,
-            default: 'user.png',
-            // required: true
-        },
+
         password: {
             type: String,
             required: true,
         },
         phone: {
             type: String,
+            // required: true
+        },
+        gender: {
+            type: String
+        },
+        date_of_birth: {
+            type: String
+        },
+        image: {
+            type: String,
+            default: 'user.png',
             // required: true
         },
         is_admin: {
@@ -70,6 +81,10 @@ const userSchema = mongoose.Schema(
 
 const addressSchema = mongoose.Schema(
     {
+        is_default: {
+            type: Number,
+            default: 0,
+        },
         name: {
             type: String,
             required: true,
