@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   passwordMismatchError: string = '';
+  showOptionZeroError: boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router) { }
 
@@ -25,10 +26,10 @@ export class RegisterComponent implements OnInit {
       'cus_email': ['', [Validators.required, this.emailValidator()]],
       'cus_phonenumber': ['', [Validators.required, this.phonenumberValidator()]],
       'cus_dob': ['', Validators.required],
-      'cus_gender': ['', Validators.required],
-      'cus_region_id': ['', Validators.required],
-      'cus_district_id': ['', Validators.required],
-      'cus_ward_id': ['', Validators.required],
+      'cus_gender': [0, [Validators.required, this.optionValidator(0)]],  // Set default value for cus_gender with 0
+      'cus_region_id': [0, [Validators.required, this.optionValidator(0)]],
+      'cus_district_id': [0, [Validators.required, this.optionValidator(0)]],
+      'cus_ward_id': [0, [Validators.required, this.optionValidator(0)]],
       'cus_address_id': ['', Validators.required],
       'cus_password': ['', Validators.required],
       'cus_reenterpassword': ['', Validators.required],
@@ -46,9 +47,96 @@ export class RegisterComponent implements OnInit {
     this.registerForm.get('cus_gender')?.setValue(0);
     this.registerForm.get('cus_region_id')?.setValue(0);
     this.registerForm.get('cus_district_id')?.setValue(0);
+    this.registerForm.get('cus_ward_id')?.setValue(0);
   }
 
+  isOptionZeroSelected(controlName: string) {
+    const control = this.registerForm.get(controlName);
+    return control?.value === 0;
+  }
 
+  optionValidator(optionValue: number) {
+    return (control: FormControl) => {
+      if (control.value === optionValue) {
+        return { invalidOption: true };
+      }
+      return null;
+    };
+  }
+
+  clearSpecificErrorMessage(controlName: string) {
+    const errorElement = document.getElementById(`${controlName}_error`);
+    const inputElement = document.getElementById(controlName);
+
+    if (errorElement) {
+      errorElement.innerHTML = '';
+    }
+
+    if (inputElement) {
+      inputElement.classList.remove('error-input');
+    }
+  }
+
+  displayErrorMessage(controlName: string, errorMessage: string) {
+    const errorElement = document.getElementById(`${controlName}_error`);
+    const inputElement = document.getElementById(controlName);
+
+    if (errorElement) {
+      errorElement.innerHTML = errorMessage;
+    }
+
+    if (inputElement) {
+      inputElement.classList.add('error-input');
+    }
+  }
+
+  validateAndClearError(controlName: string) {
+    const control = this.registerForm.get(controlName);
+    const errorElement = document.getElementById(`${controlName}_error`);
+    const inputElement = document.getElementById(controlName);
+
+    if (control && errorElement && inputElement) {
+      if (control.valid) {
+        // Clear error messages and remove error class for valid controls
+        this.clearSpecificErrorMessage(controlName);
+      } else {
+        // Show error messages and apply red border for invalid controls
+        this.displayErrorMessage(controlName, '* Vui lòng nhập/chọn giá trị.');
+        if (controlName === 'cus_reenterpassword' && control.errors?.['passwordMismatch']) {
+        this.displayErrorMessage(controlName, 'Mật khẩu nhập lại không khớp.');
+      }
+        inputElement.classList.add('error-input');
+      }
+    }
+  }
+
+  register() {
+    // Mark all controls as touched to trigger validation messages
+    this.registerForm.markAllAsTouched();
+
+    // Check if any option with value 0 is selected
+    const hasOptionZeroSelected = this.isOptionZeroSelected('cus_gender') ||
+      this.isOptionZeroSelected('cus_region_id') ||
+      this.isOptionZeroSelected('cus_district_id') ||
+      this.isOptionZeroSelected('cus_ward_id');
+
+    // Show error only if an option with value 0 is selected
+    this.showOptionZeroError = hasOptionZeroSelected;
+
+    if (this.registerForm.valid && !hasOptionZeroSelected) {
+      // Clear error messages and remove error class for all controls
+      Object.keys(this.registerForm.controls).forEach(field => {
+        this.clearSpecificErrorMessage(field);
+      });
+
+      this.router.navigate(['/login']);
+    } else {
+      // Show error messages and apply red border for each invalid field
+      Object.keys(this.registerForm.controls).forEach(field => {
+        this.validateAndClearError(field);
+      });
+    }
+  }
 
   emailValidator() {
     return (control: any) => {
@@ -98,82 +186,6 @@ export class RegisterComponent implements OnInit {
     } else {
       // If passwords match, make sure to clear the warning
       confirmPasswordControl.setErrors(null);
-    }
-  }
-
-  register() {
-    // Mark all controls as touched to trigger validation messages
-    this.registerForm.markAllAsTouched();
-
-    if (this.registerForm.valid) {
-      // Clear error messages and remove error class for all controls
-      Object.keys(this.registerForm.controls).forEach(field => {
-        const errorElement = document.getElementById(`${field}_error`);
-        const inputElement = document.getElementById(field);
-
-        if (errorElement) {
-          errorElement.innerHTML = '';
-        }
-
-        if (inputElement) {
-          inputElement.classList.remove('error-input');
-        }
-      });
-
-      // Redirect to "dangky" page upon successful registration
-      this.router.navigate(['/login']);
-    } else {
-      // Show error messages and apply red border for each invalid field
-      Object.keys(this.registerForm.controls).forEach(field => {
-        const control = this.registerForm.get(field);
-        const errorElement = document.getElementById(`${field}_error`);
-        const inputElement = document.getElementById(field);
-
-        // Clear error messages and remove error class for all controls
-        if (errorElement) {
-          errorElement.innerHTML = '';
-        }
-
-        if (inputElement) {
-          inputElement.classList.remove('error-input');
-        }
-
-        if (control && control.errors) {
-          if (control.errors['required']) {
-            if (errorElement) {
-              errorElement.innerHTML = '* Vui lòng nhập/chọn giá trị.';
-            }
-
-            if (inputElement) {
-              inputElement.classList.add('error-input');
-            }
-          } else if (control.errors['invalidEmailFormat']) {
-            if (errorElement) {
-              errorElement.innerHTML = '* Vui lòng nhập đúng định dạng Email.';
-            }
-
-            if (inputElement) {
-              inputElement.classList.add('error-input');
-            }
-          } else if (control.errors['invalidPhoneFormat']) {
-            if (errorElement) {
-              errorElement.innerHTML = '* Vui lòng nhập đúng định dạng SĐT.';
-            }
-
-            if (inputElement) {
-              inputElement.classList.add('error-input');
-            }
-          } else if (control.errors['passwordMismatch']) {
-            if (errorElement) {
-              errorElement.innerHTML = '* Mật khẩu nhập lại không khớp.';
-            }
-
-            if (inputElement) {
-              inputElement.classList.add('error-input');
-            }
-          }
-        }
-      });
     }
   }
 }
