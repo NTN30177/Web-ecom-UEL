@@ -233,7 +233,7 @@
           <div class="form-group type p-0" *ngIf="showDivSubtype">
             <label for="color ">Subtype :</label>
             <select class="col-12" formControlName="subTypeName">
-              <option value="">Chọn type</option>
+              <option value="">Chọn Subtype</option>
               <option *ngFor="let subType of subTypes" [value]="subType._id">
                 {{ subType.subTypeName }}
               </option>

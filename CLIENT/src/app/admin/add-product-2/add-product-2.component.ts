@@ -34,7 +34,7 @@ export class AddProduct2Component implements OnInit {
   newType: any;
 
   newSubType: any;
-  selectedSubType: boolean = false;
+  // selectedSubType: boolean = false;
   showDivSubtype: boolean = true;
 
   i = 1;
@@ -171,10 +171,6 @@ export class AddProduct2Component implements OnInit {
   }
 
   checkTypeToValidate() {
-    this.rfDataModal.get('newTypeInput')?.disable();
-    this.rfDataModal.get('newSubTypeInput')?.disable();
-    this.rfDataModal.get('newCollectionInput')?.disable();
-    this.rfDataModal.get('cost')?.disable();
     console.log(this.accessory);
     if (!this.accessory) {
       console.log(this.accessory);
@@ -265,19 +261,68 @@ export class AddProduct2Component implements OnInit {
 
   handleTypeName(): void {
     const newTypeValue = this.rfDataModal.get('newTypeInput')?.value;
-    if (newTypeValue !== null) {
-      this.rfDataModal.get('typeName')?.setValue(newTypeValue);
-      this.rfDataModal.get('newTypeInput')?.setValue('');
-      if (newTypeValue !== '') {
-        const newTypeObject = { nameColor: newTypeValue };
-        // this.types.push(newTypeObject);
-        this.addDiv('subTypeName');
-      }
-      this.showInputType = false;
+    if (newTypeValue !== '' && !this.isTypeValueExists(newTypeValue)) {
+      const newTypeObject: IType = {
+        typeName: newTypeValue,
+        slug: '',
+        subtypes: [],
+        _id: newTypeValue,
+      };
+      this.types?.push(newTypeObject);
+      this.addDiv('subTypeName');
     }
+    this.rfDataModal.get('typeName')?.setValue(newTypeValue);
+    this.rfDataModal.get('newTypeInput')?.setValue('');
+    this.showInputType = false;
   }
-
   handleSubTypeName(): void {
+    const newSubTypeValue = this.rfDataModal.get('newSubTypeInput')?.value;
+    console.log(newSubTypeValue)
+    if (newSubTypeValue !== '' && !this.isSubTypeValueExists(newSubTypeValue)) {
+      const newTypeObject: ISubType = {
+        subTypeName: newSubTypeValue,
+        slug: '',
+        products: [],
+        _id: newSubTypeValue,
+      };
+      if (this.subTypes === undefined ) {
+        const newTypeObject: ISubType = {
+          subTypeName: newSubTypeValue,
+          slug: '',
+          products: [],
+          _id: newSubTypeValue,
+        };
+      }
+      this.subTypes?.push(newTypeObject);
+      this.showInputSubtype = false;
+    }
+
+    this.rfDataModal.get('subTypeName')?.setValue(newSubTypeValue);
+    this.rfDataModal.get('newSubTypeInput')?.setValue('');
+    this.showInputType = false;
+  }
+  
+  private isTypeValueExists(newTypeValue: string): boolean {
+    return this.types !== undefined && this.types.some(type => type.typeName === newTypeValue);
+  }
+  private isSubTypeValueExists(newSubTypeValue: string): boolean {
+    return (
+      this.types !== undefined &&
+      (this.subTypes ?? []).some(type => type.subTypeName === newSubTypeValue)
+    );
+  }
+  private isCollectionValueExists(newCollectionValue: string): boolean {
+    return (
+      this.types !== undefined &&
+      (this.collections ?? []).some(type => type.subTypeName === newCollectionValue)
+    );
+  }
+  
+
+
+  
+
+  handleSubTypeName2(): void {
     const newSubTypeValue = this.rfDataModal.get('newSubTypeInput')?.value;
     if (newSubTypeValue !== null) {
       this.rfDataModal.get('subTypeName')?.setValue(newSubTypeValue);
@@ -285,12 +330,30 @@ export class AddProduct2Component implements OnInit {
       if (newSubTypeValue !== '') {
         // this.subTypes.push(newSubTypeValue);
       }
-      this.selectedSubType = true;
+      // this.selectedSubType = true;
       this.showInputSubtype = false;
     }
   }
 
   handleCollection(): void {
+    const newCollectionValue = this.rfDataModal.get('newCollectionInput')?.value;
+    console.log(newCollectionValue)
+    if (newCollectionValue !== '' && !this.isCollectionValueExists(newCollectionValue)) {
+      const newTypeObject: ISubType = {
+        subTypeName: newCollectionValue,
+        slug: '',
+        products: [],
+        _id: newCollectionValue,
+      };
+      this.subTypes?.push(newTypeObject);
+      this.showInputSubtype = false;
+    }
+    this.rfDataModal.get('collectionName')?.setValue(newCollectionValue);
+    this.rfDataModal.get('newCollectionInput')?.setValue('');
+    this.showInputCollection = false;
+  }
+
+  handleCollection2(): void {
     const newCollectionValue =
       this.rfDataModal.get('newCollectionInput')?.value;
     if (newCollectionValue !== null) {

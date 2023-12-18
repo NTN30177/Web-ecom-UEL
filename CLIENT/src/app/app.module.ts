@@ -50,6 +50,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { UploadImgComponent } from './admin/upload-img/upload-img.component';
+import { CartComponent } from './cart/cart.component';
 
 
 
@@ -91,6 +92,7 @@ import { UploadImgComponent } from './admin/upload-img/upload-img.component';
     CreateCampaignComponent,
     ManageCampaignComponent,
     UploadImgComponent,
+    CartComponent,
     
   ],
   imports: [
