@@ -269,7 +269,8 @@ export class AddProduct2Component implements OnInit {
       this.rfDataModal.get('typeName')?.setValue(newTypeValue);
       this.rfDataModal.get('newTypeInput')?.setValue('');
       if (newTypeValue !== '') {
-        // this.types.push(newTypeValue);
+        const newTypeObject = { nameColor: newTypeValue };
+        // this.types.push(newTypeObject);
         this.addDiv('subTypeName');
       }
       this.showInputType = false;
