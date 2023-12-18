@@ -75,12 +75,25 @@ const wardSchema = new mongoose.Schema({
     }
 });
 
-
+const addressSchema = new mongoose.Schema(
+    {
+        addressDetail: {
+            type: String,
+        },
+        addressCode: {
+            type: String,
+        },
+    },
+    {
+        timestamps: true,
+    },
+);
 
 
 const Province = mongoose.model('Province', provinceSchema);
 const District = mongoose.model('District', districtSchema);
 const Ward = mongoose.model('Ward', wardSchema);
+const Address = mongoose.model('Address', addressSchema);
 
 
 
@@ -88,5 +101,5 @@ const Ward = mongoose.model('Ward', wardSchema);
 module.exports = {
     Province,
     District,
-    Ward
+    Ward, Address
 };

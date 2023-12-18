@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -11,12 +12,21 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   passwordMismatchError: string = '';
   showOptionZeroError: boolean = false;
+  infoResult: any;
+  errMessage: any;
+  districts: any;
+  provinces: any;
+  wards: any;
 
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(private fb: FormBuilder,
+     private router: Router,
+     private _authService: AuthService
+     ) { }
 
   ngOnInit() {
     this.initForm();
     this.setDefaultValues();
+    this.apiProvince()
   }
 
   initForm() {
@@ -35,6 +45,54 @@ export class RegisterComponent implements OnInit {
       'cus_reenterpassword': ['', Validators.required],
     }, {
       validators: this.passwordMatchValidator.bind(this)
+    });
+  }
+  selectChangeP(event: any) {
+    const selectedValue = event.target.value;
+    console.log(selectedValue, 'district')
+    this.apiDistrict(selectedValue)
+    console.log(selectedValue, 'district')
+
+  }
+  selectChangeD(event: any) {
+    const selectedValue = event.target.value;
+    this.apiWard(selectedValue)
+  }
+
+  apiProvince() {
+    console.log('1235')
+    this._authService.getProvince().subscribe({
+      next: (data: any) => {
+        this.provinces = data;
+        console.log(this.provinces)
+      },
+      error: (err: any) => {
+        this.errMessage = err;
+      },
+    });
+  }
+  apiDistrict(id:any) {
+    console.log('1235')
+    this._authService.getDistrict(id).subscribe({
+      next: (data: any) => {
+        this.districts = data;
+        console.log(this.districts)
+      },
+      error: (err: any) => {
+        this.errMessage = err;
+      },
+    });
+  }
+  apiWard(id:any) {
+    console.log('ward')
+    this._authService.getWard(id).subscribe({
+      next: (data: any) => {
+        this.wards = data;
+        console.log(this.wards)
+      },
+      error: (err: any) => {
+        this.errMessage = err;
+      },
     });
   }
 
@@ -136,7 +194,33 @@ export class RegisterComponent implements OnInit {
         this.validateAndClearError(field);
       });
     }
+    this.postRegister()
   }
+  postRegister(){
+    if (!this.registerForm.invalid) {
+      alert('Vui lòng kiểm tra lại thông tin form');
+    } else {
+      this._authService.postInfoUser(this.registerForm.value).subscribe({
+        next: (data: any) => {
+          if(data==true){
+            this.infoResult ='Vui lòng xác thực địa chỉ gmail'
+            setTimeout(() => {
+              // this.router.navigate(['/']); 
+            }, 5000);
+          } else{
+            this.infoResult ='Hệ thống lỗi, vui lòng đăng ký lại'
+          }
+        },
+        error: (err: any) => {
+          this.errMessage = err;
+        },
+      });
+      console.log('save')
+
+      alert('Lưu dữ liệu thành công');
+    }
+  }
+  
 
   emailValidator() {
     return (control: any) => {
@@ -188,4 +272,5 @@ export class RegisterComponent implements OnInit {
       confirmPasswordControl.setErrors(null);
     }
   }
+
 }
