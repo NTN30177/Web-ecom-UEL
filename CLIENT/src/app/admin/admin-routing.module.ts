@@ -13,6 +13,7 @@ import { AdminComponent } from './admin.component';
 import { AddProduct2Component } from './add-product-2/add-product-2.component';
 import { CreateCampaignComponent } from './create-campaign/create-campaign.component';
 import { ManageCampaignComponent } from './manage-campaign/manage-campaign.component';
+import { AddColorComponent } from './add-color/add-color.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: "/drink", pathMatch: 'full'},
@@ -27,6 +28,7 @@ const routes: Routes = [
       { path: 'create-campaign', component: CreateCampaignComponent },
       { path: 'manage-campaign', component: ManageCampaignComponent },
       { path: 'manage-product', component: ManageProductComponent },
+      { path: 'add-color', component: AddColorComponent },
     ],
   },
 ];

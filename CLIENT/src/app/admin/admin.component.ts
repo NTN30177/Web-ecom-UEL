@@ -71,7 +71,7 @@ export class AdminComponent {
       icon: 'palette',
       children: [
         { name: 'Quản lý màu sắc', icon: 'bubble_chart', link: 'view-color' },
-        { name: 'Thêm màu sắc', icon: 'library_add', link: '#' },
+        { name: 'Thêm màu sắc', icon: 'library_add', link: 'add-color' },
       ],
     },
     {

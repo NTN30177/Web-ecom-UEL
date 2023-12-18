@@ -47,12 +47,7 @@ import { ForgotPasswordModalSuccessComponent } from './login/forgot-password-mod
 import { CreateCampaignComponent } from './admin/create-campaign/create-campaign.component';
 import { ManageCampaignComponent } from './admin/manage-campaign/manage-campaign.component';
 import { MatButtonModule } from '@angular/material/button';
-
-
-
-
-
-
+import { AddColorComponent } from './admin/add-color/add-color.component';
 
 
 
@@ -87,7 +82,7 @@ import { MatButtonModule } from '@angular/material/button';
     ForgotPasswordModalSuccessComponent,
     CreateCampaignComponent,
     ManageCampaignComponent,
-    
+    AddColorComponent,
   ],
   imports: [
     BrowserModule,

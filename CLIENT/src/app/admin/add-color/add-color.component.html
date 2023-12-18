@@ -1,0 +1,47 @@
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!-- Then load DataTables -->
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<div class="container_content">
+    <div class="row header-info">
+        <div class="col-12">Màu sắc / Tạo màu sắc</div>
+        <div class="col-12 header-info__main">Tạo màu sắc</div>
+    </div>
+    <hr />
+    <div class="container">
+        <form class="row" [formGroup]="addColorForm" (ngSubmit)="onSubmit()">
+            <div class="container color-info">
+                <div class="row color-info__title">
+                    <div class="col p-0">Thông tin màu sắc</div>
+                </div>
+                <div class="row">
+                    <div class="hr"></div>
+                </div>
+                <div class="row color-info__detail">
+                    <div class="form-group p-0">
+                        <label for="colorName">Tên màu sắc</label>
+                        <input type="text" class="form-control" id="colorName" placeholder="Nhập tên màu sắc..." formControlName="color_name" />
+                    </div>
+                    <div class="form-group p-0 img">
+                        <label for="img">Hình ảnh màu sắc</label>
+                        <input type="file" class="text-center" id="color_img"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <div class="frame_btn_footer mt-5">
+            <div class="row">
+                <div class="form-group col-md-6 col-sm-6 ps-4">
+                    <button class="btn_delete" id="btn_delete" name="btn_delete">Xóa</button>
+                </div>
+                <div class="col-md-6 col-sm-6 pe-4">
+                    <div class="form-group btn_group_footer text-end">
+                        <button class="btn_cancel" id="btn_cancel" name="btn_cancel">Hủy</button>
+                        <button class="btn_create" id="btn_create" name="btn_create">Tạo màu sắc</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
