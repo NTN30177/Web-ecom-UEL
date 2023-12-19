@@ -1,17 +1,18 @@
-import { Component, OnInit, Renderer2, ElementRef, HostListener } from '@angular/core';
-import { SearchService } from './header.service';
+import { Component, ElementRef, Renderer2, ViewEncapsulation, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css', './styles.css']
+  styleUrls: ['./styles.css', './header.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class HeaderComponent {
   isSearchFormActive: boolean = false;
   isMainMenuOpen: boolean = false;
-  submenuOpen: boolean = false; 
+  submenuOpen: boolean = false;
+  isSubActionVisible: boolean = false;
 
-  constructor(private elRef: ElementRef) {}
+  constructor(private elRef: ElementRef, private renderer: Renderer2) {}
 
   toggleSearchForm(): void {
     this.isSearchFormActive = !this.isSearchFormActive;
@@ -23,18 +24,41 @@ export class HeaderComponent {
 
   toggleMainMenu(): void {
     this.isMainMenuOpen = !this.isMainMenuOpen;
+    const mainMenu = this.elRef.nativeElement.querySelector('.main-menu');
+
+    if (this.isMainMenuOpen) {
+      this.renderer.addClass(mainMenu, 'open');
+    } else {
+      this.renderer.removeClass(mainMenu, 'open');
+    }
   }
 
-  toggleSubmenu(): void {
-    this.submenuOpen = !this.submenuOpen;
+  isClickInsideMenu(event: Event): boolean {
+    const mainMenu = this.elRef.nativeElement.querySelector('.main-menu');
+    return mainMenu.contains(event.target);
   }
 
   @HostListener('document:click', ['$event'])
-  handleClickOutside(event: Event): void {
-    if (!this.elRef.nativeElement.contains(event.target)) {
-      this.isSearchFormActive = false;
+  handleDocumentClick(event: Event): void {
+    if (!this.isClickInsideMenu(event)) {
       this.isMainMenuOpen = false;
-      this.submenuOpen = false; 
+      const mainMenu = this.elRef.nativeElement.querySelector('.main-menu');
+      this.renderer.removeClass(mainMenu, 'open');
     }
+  }
+
+  closeMainMenu(event: Event): void {
+    const targetElement = event.target as HTMLElement;
+
+    if (targetElement.classList.contains('ti-close') || targetElement.closest('.ti-close')) {
+      event.stopPropagation();
+      this.isMainMenuOpen = false;
+      const mainMenu = this.elRef.nativeElement.querySelector('.main-menu');
+      this.renderer.removeClass(mainMenu, 'open');
+    }
+  }
+
+  toggleSubAction(): void {
+    this.isSubActionVisible = !this.isSubActionVisible;
   }
 }
