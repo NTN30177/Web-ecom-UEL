@@ -26,7 +26,7 @@ const userSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
-    is_varified: {
+    is_verified: {
       type: Number,
       default: 0,
     },

@@ -9,5 +9,6 @@ router.post('/register',
  userController.saveAccount);//
 
  router.get('/verify', userController.verifyEmail);
+ router.post('/login', userController.verifyLogin);
 
 module.exports = router;

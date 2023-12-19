@@ -74,9 +74,30 @@ export class AuthService {
       )
       .pipe(
         map((res) => JSON.parse(res)),
-       
         catchError(this.handleError)
       );
+  }
+  verifiedInForUser(data: any): Observable<any> {
+    const headers = new HttpHeaders().set(
+      'Content-Type',
+      'application/json;charset=utf-8'
+    );
+    const requestOptions: Object = {
+      headers: headers,
+      responseType: 'text',
+    };
+    console.log('122')
+    return this._http
+      .post<any>(
+        `${local}/login`,
+        data
+        // requestOptions
+      )
+      .pipe(
+        map((res) => res),
+        catchError(this.handleError)
+      );
+
   }
   
 

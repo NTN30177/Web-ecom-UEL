@@ -120,15 +120,49 @@ const verifyEmail = async (req, res) => {
   try {
     const updateInfo = await User.updateOne(
       { _id: req.query.id },
-      { $set: { is_varified: 1 } }
+      { $set: { is_verified: 1 } }
     ).lean();
     console.log(updateInfo);
-    res.render("http://localhost:4200/");
+    res.send(updateInfo);
   } catch (err) {
     console.log(err.message);
   }
 };
+  const verifyLogin = async (req, res, next) => {
+    try {
+      console.log('111')
+      const { cus_account, cus_password } = req.body;
+      const userData = await User.findOne({ email: cus_account });
+      if (userData) {
+        console.log(cus_account, cus_password)
+        const passwordMatch = await bcrypt.compare(cus_password, userData.password);
+        console.log(passwordMatch, cus_password, userData.password)
+        if (passwordMatch) {
+          if (userData.is_verified === 0) {
+            console.log(userData._id.toString())
+            sendVerifyEmail(userData.name, userData.email, userData._id.toString());
+            res.send({ message: "Vui lòng xác minh emmail" });
+            console.log( "Vui lòng xác minh emmail")
+          } else {
+            console.log('Đăng nhập thành công')
+            req.session.user_id = userData._id;
+            console.log(req.session.user_id)
+
+            res.send({ message: "Đăng nhập thành công" });
+          }
+        } else {
+          console.log('Đăng nhập thất bại')
+          res.send({ message: "Đăng nhập thất bại" });
+        }
+      } else {
+        res.send({ message: "Email is incorrect" });
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+  
 
 module.exports = {
-  x,saveAccount, verifyEmail
+  x,saveAccount, verifyEmail, verifyLogin
 };

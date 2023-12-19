@@ -64,7 +64,7 @@ export class RegisterComponent implements OnInit {
     this._authService.getProvince().subscribe({
       next: (data: any) => {
         this.provinces = data;
-        console.log(this.provinces)
+        console.log(this.provinces, '123')
       },
       error: (err: any) => {
         this.errMessage = err;
@@ -186,7 +186,6 @@ export class RegisterComponent implements OnInit {
       Object.keys(this.registerForm.controls).forEach(field => {
         this.clearSpecificErrorMessage(field);
       });
-
       this.router.navigate(['/login']);
     } else {
       // Show error messages and apply red border for each invalid field
@@ -197,15 +196,15 @@ export class RegisterComponent implements OnInit {
     this.postRegister()
   }
   postRegister(){
-    if (!this.registerForm.invalid) {
+    if (this.registerForm.invalid) {
       alert('Vui lòng kiểm tra lại thông tin form');
     } else {
       this._authService.postInfoUser(this.registerForm.value).subscribe({
         next: (data: any) => {
-          if(data==true){
+          if(data){
             this.infoResult ='Vui lòng xác thực địa chỉ gmail'
             setTimeout(() => {
-              // this.router.navigate(['/']); 
+              this.infoResult=''
             }, 5000);
           } else{
             this.infoResult ='Hệ thống lỗi, vui lòng đăng ký lại'

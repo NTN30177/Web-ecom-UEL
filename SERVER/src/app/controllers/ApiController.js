@@ -17,6 +17,7 @@ const getColor = async (req, res, next) => {
   };
 
 
+
 const getType = async (req, res, next) => {
   try {
     const type = await Type.find({ _id: { $ne: '64c4c7f4e2a184d32cff6540' } });
@@ -62,6 +63,7 @@ const collection = async (req, res, next) => {
 const getProvince = async (req, res, next) => {
   try {
     const province = await Province.find({}).lean();
+    console.log(province)
     res.json(province);
   } catch (err) {
     console.log(err);

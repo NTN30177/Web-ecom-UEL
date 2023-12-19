@@ -105,6 +105,7 @@ const createVariantsFromData = (req, typeName, imageList) => {
   return variants;
 };
 
+
 const createProduct = (title, sku, price, description, author, variants) => {
   return new Product({
     title,
@@ -113,6 +114,8 @@ const createProduct = (title, sku, price, description, author, variants) => {
     description,
     author,
     variants,
+    
+
   });
 };
 
