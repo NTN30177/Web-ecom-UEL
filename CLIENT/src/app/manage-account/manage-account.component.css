@@ -18,6 +18,7 @@ html, body{
   }
 .account-container {
     margin: 100px 60px 100px 40px;
+    color: #000;
 }
 
 .custom {
