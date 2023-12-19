@@ -1,3 +1,14 @@
+
+html, body{
+    line-height: 25px;
+    color: #000;
+    font-family: Montserrat;
+    font-style: normal;
+    line-height: normal;
+}
+:host {
+    font-family: 'Montserrat', sans-serif;
+  }
 .adress-list-popup {
     display: inline-flex;
     padding: 21px 32px 32px 32px;
@@ -11,4 +22,11 @@
     padding: 16px 32px;
     cursor: pointer;
     margin-bottom: 20px;
+}
+.address-block:hover{
+    color: white;
+    background: var(--Primary-02, #C54C3D);
+}
+.name{
+    font-weight: 700;
 }
