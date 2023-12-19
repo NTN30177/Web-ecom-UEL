@@ -8,7 +8,17 @@
 /* html,body{
     font-family: Montserrat
 } */
-
+.order-header{
+    font-size: 28px;
+    /* padding-top: 20px; */
+    font-weight: 700;
+    letter-spacing: 1.92px;
+}
+@media (max-width: 767px) {
+    .order-header {
+        font-size: 14px; /* Điều chỉnh kích thước văn bản cho màn hình điện thoại */
+    }
+}
 .status {
     font-size: 12px;
     font-weight: 400;

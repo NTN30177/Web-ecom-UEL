@@ -27,4 +27,7 @@ body { margin: 0; font-family: 'Montserrat', sans-serif; }
 #main .home-banner.bg-before.bg-before02 .slider-banner .owl-next {
     bottom: 50%;
 }
+:host {
+    font-family: 'Montserrat', sans-serif;
+  }
 

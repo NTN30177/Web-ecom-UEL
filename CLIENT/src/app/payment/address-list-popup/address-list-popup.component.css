@@ -1,0 +1,21 @@
+.adress-list-popup {
+    display: inline-flex;
+    padding: 21px 32px 32px 32px;
+
+    flex-direction: column;
+}
+
+.address-block {
+    border-radius: 14px;
+    border: 1px solid var(--Semantic-02, #CCC);
+    padding: 16px 32px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+.address-block:hover{
+    color: white;
+    background: var(--Primary-02, #C54C3D);
+}
+.name{
+    font-weight: 700;
+}
