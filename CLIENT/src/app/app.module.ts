@@ -10,6 +10,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './admin/sidebar/sidebar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 import { HomePageComponent } from './home-page/home-page.component';
 import { BtnManageComponent } from './btn-manage/btn-manage.component';
 import { ViewColorComponent } from './admin/view-color/view-color.component';
@@ -53,7 +54,6 @@ import { ManageCampaignComponent } from './manage-campaign/manage-campaign.compo
 
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,6 +86,7 @@ import { ManageCampaignComponent } from './manage-campaign/manage-campaign.compo
     CreateCampaignComponent,
     ManageCampaignComponent,
     
+    
   ],
   imports: [
     BrowserModule,
@@ -108,7 +109,7 @@ import { ManageCampaignComponent } from './manage-campaign/manage-campaign.compo
     MatTabsModule,
     MatInputModule,
     MatSidenavModule,
-
+    CarouselModule,
 
 
   ],
