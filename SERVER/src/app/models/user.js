@@ -1,98 +1,103 @@
-const mongoose = require('mongoose');
-const userSchema = mongoose.Schema(
-    {
-        first_name: {
-            type: String,
-            required: true,
-        },
-        last_name: {
-            type: String,
-            required: true,
-        },
-        email: {
-            type: String,
-            required: true,
-        },
-
-        password: {
-            type: String,
-            required: true,
-        },
-        phone: {
-            type: String,
-            // required: true
-        },
-        gender: {
-            type: String
-        },
-        date_of_birth: {
-            type: String
-        },
-        image: {
-            type: String,
-            default: 'user.png',
-            // required: true
-        },
-        is_admin: {
-            type: Number,
-            required: true,
-        },
-        is_varified: {
-            type: Number,
-            default: 0,
-        },
-        token: {
-            type: String,
-            default: '',
-        },
-        historySearch: {
-            type: Array,
-        },
-        cart: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'CartItem',
-        },
-        addresslist: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'User_address',
-            },
-        ],
-        orderList: {
-            type: Array,
-        },
+const mongoose = require("mongoose");
+const userSchema = new mongoose.Schema(
+  {
+    first_name: {
+      type: String,
+      required: true,
     },
-    {
-        timestamps: true,
-    }
+    last_name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+
+    password: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+      // required: true
+    },
+    gender: {
+      type: String,
+    },
+    date_of_birth: {
+      type: String,
+    },
+    image: {
+      type: String,
+      default: "user.png",
+      // required: true
+    },
+    is_admin: {
+      type: Number,
+      required: true,
+    },
+    is_verified: {
+      type: Number,
+      default: 0,
+    },
+    token: {
+      type: String,
+      default: "",
+    },
+    historySearch: {
+      type: Array,
+    },
+    cart: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "CartItem",
+    },
+    addressList: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User_address",
+      },
+    ],
+    orderList: {
+      type: Array,
+    },
+  },
+  {
+    timestamps: true,
+  }
 );
 
-const addressSchema = mongoose.Schema(
-    {
-        is_default: {
-            type: Boolean,
-        },
-        name: {
-            type: String,
-            required: true,
-        },
-        phone: {
-            type: String,
-            // required: true
-        },
-        specific_address: {
-            type: String,
-        },
-        ward: {
-            type: String,
-            default: '',
-        },
+const addressSchema = new mongoose.Schema(
+  {
+    is_default: {
+      type: Boolean,
     },
-    {
-        timestamps: true,
-    }
-)
+    name: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+      // required: true
+    },
+    specific_address: {
+      type: String,
+    },
 
+    ward: {
+      type: String,
+      default: "",
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-module.exports = mongoose.model('User', userSchema);
-module.exports = mongoose.model('User_address', addressSchema);
+const User = mongoose.model("User", userSchema);
+const UserAddress = mongoose.model("UserAddress", addressSchema);
+
+module.exports = {
+  User,
+  UserAddress,
+};
