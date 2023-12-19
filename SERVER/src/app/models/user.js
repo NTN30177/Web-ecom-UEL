@@ -48,21 +48,6 @@ const userSchema = mongoose.Schema(
         historySearch: {
             type: Array,
         },
-        // specific_address: {
-        //     type: String,
-        // },
-        // province: {
-        //     type: String,
-        //     default: '',
-        // },
-        // district: {
-        //     type: String,
-        //     default: '',
-        // },
-        // ward: {
-        //     type: String,
-        //     default: '',
-        // },
         cart: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'CartItem',
@@ -72,7 +57,10 @@ const userSchema = mongoose.Schema(
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'User_address',
             },
-        ]
+        ],
+        orderList: {
+            type: Array,
+        },
     },
     {
         timestamps: true,
@@ -94,14 +82,6 @@ const addressSchema = mongoose.Schema(
         },
         specific_address: {
             type: String,
-        },
-        province: {
-            type: String,
-            default: '',
-        },
-        district: {
-            type: String,
-            default: '',
         },
         ward: {
             type: String,
