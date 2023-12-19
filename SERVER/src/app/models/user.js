@@ -1,7 +1,11 @@
 const mongoose = require("mongoose");
-const userSchema = mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
-    name: {
+    first_name: {
+      type: String,
+      required: true,
+    },
+    last_name: {
       type: String,
       required: true,
     },
@@ -9,17 +13,24 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    image: {
-      type: String,
-      default: "user.png",
-      // required: true
-    },
+
     password: {
       type: String,
       required: true,
     },
-    mobile: {
+    phone: {
       type: String,
+      // required: true
+    },
+    gender: {
+      type: String,
+    },
+    date_of_birth: {
+      type: String,
+    },
+    image: {
+      type: String,
+      default: "user.png",
       // required: true
     },
     is_admin: {
@@ -34,30 +45,20 @@ const userSchema = mongoose.Schema(
       type: String,
       default: "",
     },
-    historySearch: [
-      {
-        type: String,
-      },
-    ],
-    address: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Address",
-      },
-    ],
-    // district: {
-    //     type: String,
-    //     default: '',
-    // },
-    // ward: {
-    //     type: String,
-    //     default: '',
-    // },
+    historySearch: {
+      type: Array,
+    },
     cart: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "CartItem",
     },
-    billList: {
+    addressList: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User_address",
+      },
+    ],
+    orderList: {
       type: Array,
     },
   },
@@ -66,4 +67,37 @@ const userSchema = mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("User", userSchema);
+const addressSchema = new mongoose.Schema(
+  {
+    is_default: {
+      type: Boolean,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+      // required: true
+    },
+    specific_address: {
+      type: String,
+    },
+
+    ward: {
+      type: String,
+      default: "",
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+const User = mongoose.model("User", userSchema);
+const UserAddress = mongoose.model("UserAddress", addressSchema);
+
+module.exports = {
+  User,
+  UserAddress,
+};

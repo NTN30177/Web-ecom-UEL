@@ -1,5 +1,5 @@
 const { Address } = require("../models/address");
-const User = require("../models/user");
+const {User, UserAddress} = require("../models/user");
 const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
 const randomstring = require("randomstring");
@@ -36,29 +36,34 @@ const saveAccount = async (req, res, next) => {
     const cart = new CartItem({
       productItem: [],
     });
-    const address = new Address({
-      addressDetail:req.body.cus_address_id,
-      addressCode: req.body.cus_ward_id
+    const address = new UserAddress({
+      is_default:true,
+      name:req.body.cus_lastname,
+      phone:req.body.cus_phonenumber,
+      specific_address:req.body.cus_address_id,
+      ward: req.body.cus_ward_id
     });
     await cart.save();
     await address.save();
-    const nameAll = req.body.cus_firstname +' '+ req.body.cus_lastname
     const user = new User({
-      name: nameAll,
+      first_name: req.body.cus_firstname,
+      last_name: req.body.cus_lastname,
       email: req.body.cus_email,
       mobile: req.body.cus_phonenumber,
+      gender: req.body.cus_gender,
+      date_of_birth: req.body.cus_dob,
       // image: req.file.filename,
       // image:
       password: spassword,
       is_admin: 0,
       cart: [cart._id],
-      bilList:[],
-      address:[address._id]
+      orderList:[],
+      addressList:[address._id]
       
     });
     const userData = await user.save();
     if (userData) {
-      sendVerifyEmail(nameAll, req.body.cus_email, userData._id);
+      sendVerifyEmail(cus_lastname, req.body.cus_email, userData._id);
       res.status(200).send({
         message:
           "Your registration has been successfully. Please verify your email",
