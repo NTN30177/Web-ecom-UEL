@@ -112,6 +112,8 @@ export class AddProduct2Component implements OnInit {
           this.errMessage = err;
         },
       });
+      console.log('save')
+
       alert('Lưu dữ liệu thành công');
     }
   }
