@@ -57,6 +57,25 @@ table {
     border-collapse: collapse;
 }
 
+#custom{
+    border-collapse: separate;
+    border-spacing: 0 20px; /* Khoảng cách giữa các dòng là 10px */
+}
+
+#example th,
+#example td {
+  transition: background-color 0.3s ease; /* Hiệu ứng chuyển động màu nền */
+}
+
+#example tbody tr {
+    background-color: #f9fcff; /* Màu nền mặc định cho các dòng */
+  }
+
+#example tbody{
+    background-color: #f9fcff;
+
+}
+
 thead {
     border-top: 1px solid var(--semantic-03, #D9D9D9);
     border-bottom: 1px solid var(--semantic-03, #D9D9D9);

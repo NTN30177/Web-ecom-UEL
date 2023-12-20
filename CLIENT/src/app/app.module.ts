@@ -51,6 +51,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { CartComponent } from './cart/cart.component';
 import { AddColorComponent } from './admin/add-color/add-color.component';
+import { FeedbackOrderComponent } from './manage-account/account-order/feedback-order/feedback-order.component';
+import { FeedbackOrderSuccessComponent } from './manage-account/account-order/feedback-order-success/feedback-order-success.component';
 import { OrderTrackingComponent } from './manage-account/order-tracking/order-tracking.component';
 import { TermPolicyComponent } from './term-policy/term-policy.component';
 import { DeliveryPolicyComponent } from './delivery-policy/delivery-policy.component';
@@ -89,6 +91,9 @@ import { DeliveryPolicyComponent } from './delivery-policy/delivery-policy.compo
     ManageCampaignComponent,
     CartComponent,
     AddColorComponent,
+    FeedbackOrderComponent,
+    FeedbackOrderSuccessComponent,
+
     OrderTrackingComponent,
     TermPolicyComponent,
     DeliveryPolicyComponent,
