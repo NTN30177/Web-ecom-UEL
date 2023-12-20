@@ -1,23 +1,25 @@
-html, body{
+html,
+body {
     line-height: 25px;
     color: #000;
     font-family: Montserrat;
     font-style: normal;
     line-height: normal;
 }
+
 :host {
     font-family: 'Montserrat', sans-serif;
-  }
+}
 
 .order-container {
     color: #000;
-font-size: 14px;
+    font-size: 14px;
     margin: auto;
     margin-top: 100px;
     max-width: 800px;
     border: 1px solid #ccc;
     border-radius: 15px;
-    padding: 10px 12px;
+    padding: 20px 22px;
     /* font-size: 1rem; */
     /* font-style: normal; */
     /* font-weight: 600; */
@@ -79,6 +81,11 @@ img {
     font-size: 12px;
 }
 
+.hr-custom {
+    color: #ffe1d9;
+    height: 1.5px;
+}
+
 .address-container {
     border-radius: 8px;
     border: 1px solid var(--Semantic-02, #CCC);
@@ -105,7 +112,7 @@ img {
     font-weight: 400;
     border-radius: 20px;
     border: 1px solid var(--semantic-02, #CCC);
-    gap:3px
+    gap: 3px
 }
 
 
@@ -123,20 +130,45 @@ img {
     width: auto;
     cursor: pointer;
 }
-.btn-choose-address:hover{
+
+.btn-choose-address:hover {
     background-color: #9B3A23;
     color: white
 }
 
-.button-add{
+.button-add {
     border-radius: 4px;
-background: var(--Primary-01, #9B3A23);
-display: flex;
-height: 39px;
-padding: 8px 10px;
-align-items: center;
-gap: 4px;
-color: white;
-font-weight: 700;
-cursor: pointer;
+    background: var(--Primary-01, #9B3A23);
+    display: flex;
+    height: 39px;
+    padding: 8px 10px;
+    align-items: center;
+    gap: 4px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.payment-method-block {
+    border-radius: 8px;
+    border: 1px solid var(--Semantic-02, #CCC);
+    padding: 20px;
+}
+
+.payment-select-option {
+    display: flex;
+    width: 100%;
+    padding: 20px;
+    justify-content: space-between;
+    align-items: center;
+
+    border-radius: 4px;
+    border: 1px solid var(--Semantic-02, #CCC);
+    background: var(--Base-On-Background, #FFF);
+    box-shadow: 0px 0px 5.6px 0px rgba(0, 0, 0, 0.08);
+}
+
+.method-change{
+    color: rgba(155, 58, 35, 1);
+    cursor: pointer;
 }

@@ -51,7 +51,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { CartComponent } from './cart/cart.component';
 import { AddColorComponent } from './admin/add-color/add-color.component';
-import { OrderTrackingComponent } from './order-tracking/order-tracking.component';
+import { OrderTrackingComponent } from './manage-account/order-tracking/order-tracking.component';
 
 
 @NgModule({

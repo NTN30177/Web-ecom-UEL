@@ -10,7 +10,7 @@ import { PaymentComponent } from '../payment/payment.component';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
 import { CartComponent } from '../cart/cart.component';
-import { OrderTrackingComponent } from '../order-tracking/order-tracking.component';
+import { OrderTrackingComponent } from '../manage-account/order-tracking/order-tracking.component';
 
 const routes: Routes = [
   {
