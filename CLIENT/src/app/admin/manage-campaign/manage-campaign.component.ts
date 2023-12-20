@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
@@ -9,6 +9,7 @@ import { CampaignService } from '../../services/campaign.service';
   selector: 'app-manage-campaign',
   templateUrl: './manage-campaign.component.html',
   styleUrls: ['./manage-campaign.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ManageCampaignComponent implements OnInit, OnDestroy {
   allCampaigns: Campaign[] = [];
@@ -21,6 +22,11 @@ export class ManageCampaignComponent implements OnInit, OnDestroy {
       pagingType: 'full_numbers',
       pageLength: 10
     };
+    $(document).ready(function() {
+      $('#example').DataTable({language: {
+        url: 'https://cdn.datatables.net/plug-ins/1.10.21/i18n/Vietnamese.json',
+      },});
+  } );
   }
 
   @ViewChild(DataTableDirective, { static: false })
