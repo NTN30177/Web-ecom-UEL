@@ -52,6 +52,8 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { CartComponent } from './cart/cart.component';
 import { AddColorComponent } from './admin/add-color/add-color.component';
 import { OrderTrackingComponent } from './manage-account/order-tracking/order-tracking.component';
+import { TermPolicyComponent } from './term-policy/term-policy.component';
+import { DeliveryPolicyComponent } from './delivery-policy/delivery-policy.component';
 
 
 @NgModule({
@@ -88,6 +90,8 @@ import { OrderTrackingComponent } from './manage-account/order-tracking/order-tr
     CartComponent,
     AddColorComponent,
     OrderTrackingComponent,
+    TermPolicyComponent,
+    DeliveryPolicyComponent,
   ],
   imports: [
     BrowserModule,
