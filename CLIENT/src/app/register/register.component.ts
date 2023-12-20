@@ -248,7 +248,7 @@ export class RegisterComponent implements OnInit {
       }
 
       // Check if it's a valid phone number starting with 0
-      const phonePattern = /^0\d{9}$/; // Adjust the pattern according to your needs
+      const phonePattern = /^0\d{9}$/;
       const isValidPhone = phonePattern.test(value);
 
       if (!isValidPhone) {
