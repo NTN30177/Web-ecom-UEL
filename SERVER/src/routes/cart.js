@@ -1,9 +1,8 @@
-const express = require('express')
+const express = require("express");
 const router = express.Router();
-const cartController = require('../app/controllers/CartController');
-// const upload = multer({ storage: storage });
+const cartController = require("../app/controllers/CartController");
 
-// router.post()
-
+router.get("/product", cartController.getProductCart);
+router.put("/product", cartController.addOrPutProductToCart);
 
 module.exports = router;

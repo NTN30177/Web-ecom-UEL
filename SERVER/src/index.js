@@ -57,4 +57,5 @@ db.connect();
 
 route(app);
 app.use(cors());
-app.use('/static', express.static(path.join(__dirname, 'public')))
+// app.use('/static', express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')));

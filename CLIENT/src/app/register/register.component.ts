@@ -58,7 +58,6 @@ export class RegisterComponent implements OnInit {
     const selectedValue = event.target.value;
     this.apiWard(selectedValue)
   }
-
   apiProvince() {
     console.log('1235')
     this._authService.getProvince().subscribe({
