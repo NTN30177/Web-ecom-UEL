@@ -51,6 +51,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { CartComponent } from './cart/cart.component';
 import { AddColorComponent } from './admin/add-color/add-color.component';
+import { OrderTrackingComponent } from './order-tracking/order-tracking.component';
 
 
 @NgModule({
@@ -84,9 +85,9 @@ import { AddColorComponent } from './admin/add-color/add-color.component';
     ForgotPasswordModalSuccessComponent,
     CreateCampaignComponent,
     ManageCampaignComponent,
-    
     CartComponent,
     AddColorComponent,
+    OrderTrackingComponent,
   ],
   imports: [
     BrowserModule,

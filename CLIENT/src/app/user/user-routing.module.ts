@@ -10,6 +10,7 @@ import { PaymentComponent } from '../payment/payment.component';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
 import { CartComponent } from '../cart/cart.component';
+import { OrderTrackingComponent } from '../order-tracking/order-tracking.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,9 @@ const routes: Routes = [
       },
       {
         path:'cart', component: CartComponent,
+      },
+      {
+        path: 'order-tracking', component: OrderTrackingComponent,
       },
       {
         path: '',
