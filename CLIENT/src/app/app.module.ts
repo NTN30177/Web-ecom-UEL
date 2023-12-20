@@ -5,9 +5,7 @@ import { AppComponent } from './app.component';
 import { AddProductComponent } from './admin/add-product/add-product.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
-import { HeaderAdminComponent } from './admin/header-admin/header-admin.component';
 import { FooterComponent } from './footer/footer.component';
-import { SidebarComponent } from './admin/sidebar/sidebar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -64,9 +62,7 @@ import { DatePipe } from '@angular/common';
     AppComponent,
     AddProductComponent,
     HeaderComponent,
-    HeaderAdminComponent,
     FooterComponent,
-    SidebarComponent,
     PageNotFoundComponent,
     HomePageComponent,
     BtnManageComponent,

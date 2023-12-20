@@ -20,5 +20,4 @@ export class ViewColorComponent implements OnInit {
   } );
     
   }
-
 }
