@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AccountAddressPopupComponent } from '../manage-account/account-address-popup/account-address-popup.component';
 import { AddressListPopupComponent } from './address-list-popup/address-list-popup.component';
+import { MethodListComponent } from './method-list/method-list.component';
 
 @Component({
   selector: 'app-payment',
@@ -56,6 +57,12 @@ export class PaymentComponent implements OnInit {
       console.log('Selected Address:', selectedAddress);
       // Update the default address in the parent component
       this.defaultAddress = selectedAddress;
+    });
+  }
+
+  openMethodSelectionPopup() {
+    const dialogRef = this.dialogRef.open(MethodListComponent, {
+      hasBackdrop: true,
     });
   }
 }

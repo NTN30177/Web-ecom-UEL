@@ -1,5 +1,5 @@
 <div class="adress-list-popup">
-    <div class="align-self-end mb-2" (click)= "closePopup()">
+    <div class="align-self-end mb-4 close-icon" (click)= "closePopup()">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg"
             viewBox="0 0 16 16">
             <path
@@ -7,7 +7,7 @@
         </svg>
     </div>
     <!-- Loop qua danh sách địa chỉ và hiển thị thông tin -->
-    <div *ngFor="let address of addresses; let i = index" class="row address-block"  (click)= "chooseAddress(address)">
+    <div *ngFor="let address of addresses; let i = index" class="row address-block" (click)= "chooseAddress(address)">
         <div class="name">
             <p>{{ address.name }}</p>
         </div>

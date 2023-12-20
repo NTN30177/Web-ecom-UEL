@@ -10,6 +10,9 @@ import { PaymentComponent } from '../payment/payment.component';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
 import { CartComponent } from '../cart/cart.component';
+import { OrderTrackingComponent } from '../manage-account/order-tracking/order-tracking.component';
+import { TermPolicyComponent } from '../term-policy/term-policy.component';
+import { DeliveryPolicyComponent } from '../delivery-policy/delivery-policy.component';
 
 const routes: Routes = [
   {
@@ -34,6 +37,15 @@ const routes: Routes = [
       },
       {
         path:'cart', component: CartComponent,
+      },
+      {
+        path: 'order-tracking', component: OrderTrackingComponent,
+      },
+      {
+        path: 'term-policy', component: TermPolicyComponent,
+      },
+      {
+        path: 'delivery-policy', component: DeliveryPolicyComponent,
       },
       {
         path: '',

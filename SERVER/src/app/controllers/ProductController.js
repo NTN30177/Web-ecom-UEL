@@ -16,6 +16,7 @@ const saveProduct2 = async (req, res) => {
 
 const saveProduct = async (req, res) => {
   try {
+    console.log('route')
     const {
       productName,
       productSku,
@@ -39,7 +40,9 @@ const saveProduct = async (req, res) => {
       author,
       variants
     );
+    console.log(product,'p')
     await product.save();
+
     const type = await findOrCreateType(typeName);
     await findOrCreateSubType(type, subTypeName, product);
     if (collectionName) {
@@ -102,6 +105,7 @@ const createVariantsFromData = (req, typeName, imageList) => {
   return variants;
 };
 
+
 const createProduct = (title, sku, price, description, author, variants) => {
   return new Product({
     title,
@@ -110,6 +114,8 @@ const createProduct = (title, sku, price, description, author, variants) => {
     description,
     author,
     variants,
+    
+
   });
 };
 

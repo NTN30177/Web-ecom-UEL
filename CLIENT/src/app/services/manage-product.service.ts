@@ -26,13 +26,13 @@ export class ManageProductService {
     };
     return this._http
       .post<any>(
-        `${this.local}+/product/add-product`,
+        `${this.local}/product/add-product`,
         product
         // requestOptions
       )
       .pipe(
         map((res) => JSON.parse(res)),
-        retry(3),
+       
         catchError(this.handleError)
       );
   }

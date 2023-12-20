@@ -1,0 +1,143 @@
+*{
+    font-family: Montserrat;
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 1);
+}
+
+ul, li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+b {
+    font-weight: 700;
+}
+
+.container-fluid{
+    padding-left: 45px;
+    padding-right: 45px;
+    margin-top: 80px;
+    margin-bottom: 34px;
+}
+
+.container{
+    max-width: 1200px;
+    padding-left: 225px;
+    padding-right: 225px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.breadcrumb__list{
+    padding: 10px 0;
+    margin-bottom: 10px;
+}
+
+.breadcrumb__item {
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb__list {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #f7f8f9;
+}
+
+.breadcrumb__link {
+    font-size: 12px;
+    line-height: 24px;
+    text-decoration: none;
+}
+
+@media (max-width: 767.98px) {
+    .breadcrumb__link {
+        font-size: 12px;
+        line-height: 16px;
+    }
+}
+
+.breadcrumb__item:first-child .breadcrumb__link {
+    color: #6c6d70;
+}
+
+.breadcrumb__item:first-child .breadcrumb__link:hover {
+    color: rgba(0, 0, 0, 1);
+}
+
+
+.breadcrumb__item{
+    display: inline;
+    font-size: 12px;
+}
+
+.breadcrumb__item + .breadcrumb__item:before{
+    padding: 8px;
+    content: "/\00a0";
+}
+
+.banner-policy{
+	margin-bottom: 40px;
+}
+
+.banner-section {
+    margin-top: 10px;
+}
+
+.img-banner-look {
+    border-radius: 80px 0px;
+    overflow: hidden;
+}
+
+.img-banner-look img {
+    display: block;
+    border-radius: 0 0 80px 0;
+    overflow: hidden;
+}
+
+img {
+    border: none;
+    max-width: 100%;
+    height: auto;
+}
+
+.page_content .page_header{
+    font-size: 24px;
+    font-family: "Montserrat";
+    font-weight: 700;
+}
+
+.page_content .sub_header{
+    margin-top: 32px;
+    font-size: 20px;
+    font-family: "Montserrat";
+    font-weight: 700;
+}
+
+.page_content .sub_content{
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+
+.page_content .sub_header_1{
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.page_content .sub_header_2{
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.page_content .sub_header_3{
+    margin-top: 5px;
+    font-size: 16px;
+    font-weight: 700;
+}

@@ -1,6 +1,6 @@
 <div id="popup-address-add" class="popup-address" [formGroup]="addressForm">
 
-    <div class="align-self-end " (click)= "closePopup()">
+    <div class="align-self-end mb-2 " (click)= "closePopup()">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg"
             viewBox="0 0 16 16">
             <path
@@ -21,27 +21,30 @@
             <input type="text" placeholder="Địa chỉ" formControlName="address">
         </div>
         <div class="col-sm-6 col-12">
-            <select formControlName="province">
+            <select class="address-select" formControlName="province">
                 <option value="" selected>Chọn tỉnh/thành</option>
             </select>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-6 col-12">
-            <select formControlName="district">
+            <select formControlName="district" class="address-select">
                 <option value="" selected>Chọn quận/huyện</option>
             </select>
         </div>
         <div class="col-sm-6 col-12">
-            <select formControlName="ward">
+            <select class="address-select" formControlName="ward">
                 <option value="" selected>Chọn phường/xã</option>
             </select>
         </div>
     </div>
-    <div class="col-12">
-        <div class="form-check align-items-center ">
-            <input class="form-check-input " type="checkbox" formControlName="isDefault">
-            <label class="form-check-label " for="isDefault">Đặt làm mặc định</label>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-check">
+                <input class="form-check-input check-custom" type="checkbox" id="isDefault" formControlName="isDefault">
+                <label class="form-check-label " for="isDefault">Đặt làm mặc định</label>
+
+            </div>
         </div>
     </div>
     <!-- <button mat-button class="" (click)= "addAddress()">Thêm</button> -->

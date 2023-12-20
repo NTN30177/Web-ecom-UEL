@@ -1,10 +1,23 @@
+
+html, body{
+    line-height: 25px;
+    color: #000;
+    font-family: Montserrat;
+    font-style: normal;
+    line-height: normal;
+}
+:host {
+    font-family: 'Montserrat', sans-serif;
+  }
 .adress-list-popup {
-    display: inline-flex;
+    display: flex;
     padding: 21px 32px 32px 32px;
 
     flex-direction: column;
 }
-
+.close-icon{
+    cursor: pointer;
+}
 .address-block {
     border-radius: 14px;
     border: 1px solid var(--Semantic-02, #CCC);

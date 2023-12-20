@@ -1,0 +1,427 @@
+html {
+    font-family: Montserrat sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.84px;
+}
+
+hr{
+    margin: 0 10px;
+}
+
+ul, li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.media-left, .media-right, .media-body {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.media-body{
+    width: 10000px;
+}
+
+.media, .media-body {
+    zoom: 1;
+    overflow: hidden;
+}
+
+.breadcrumb__list{
+    padding: 10px 0;
+    margin-bottom: 10px;
+}
+.breadcrumb__item {
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb-order {
+    padding: 0 10px;
+    margin-top: 80px;
+}
+
+.breadcrumb.breadcrumb-order{
+    display: none !important;
+}
+
+.breadcrumb__list {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb__link {
+    font-size: 14px;
+    line-height: 24px;
+    text-decoration: none;
+}
+
+@media (max-width: 767.98px) {
+    .breadcrumb__link {
+        font-size: 12px;
+        line-height: 16px;
+    }
+}
+.breadcrumb__item:first-child .breadcrumb__link {
+    color: #6c6d70;
+}
+.breadcrumb__item:first-child .breadcrumb__link:hover {
+    color: #221f20;
+}
+
+.breadcrumb__item + .breadcrumb__item .breadcrumb__link {
+    color: #221f20;
+}
+
+.breadcrumb__item{
+    display: inline;
+    font-size: 12px;
+}
+
+.breadcrumb__item + .breadcrumb__item:before{
+    padding: 8px;
+    color: black;
+    content: "/\00a0";
+}
+
+.order-track {
+    max-width: 1200px;
+    margin-top: 30px;
+    margin-bottom: 0px;
+    overflow: hidden;
+}
+
+.order-track .title {
+    font-family: Montserrat;
+    font-size: 32px;
+    color: #000;
+    font-weight: 700;
+    line-height: 48px;
+}
+
+.order-track .title-notice{
+    color: #12B76A;
+    margin-top: 21px;
+    font-weight: 600;
+    margin-bottom: 36px;
+}
+
+.order-track .header-icon{
+    display: inline;
+}
+
+.order-track .step .divider {
+    border-bottom: #000 2px solid;
+    height: 1px;
+    margin-bottom: 20px;
+}
+
+.order-track .step .infor {
+    margin: 10px 0px;
+}
+
+.order-track .step .infor .left{
+    float: left;
+    font-size: 14px;
+    color: #000;
+    margin-left: -10px;
+}
+
+.order-track .step .infor .left span{
+    font-size: 16px;
+    font-weight: 600;
+    padding-left: 6px;
+}
+
+.order-track .step .infor .right{
+    float: right;
+    font-size: 14px;
+    color: #667085;
+    margin-right: -10px;
+}
+
+.order-track .order-process-bar{
+    padding: 16px;
+    position: relative;
+    border-radius: 16px 0;
+}
+
+.order-track .order-process-bar ul {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    grid-gap: 12px;
+}
+
+.order-track .order-process-bar::after{
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 8px;
+    top: 26px;
+    right: 16px;
+    z-index: 10;
+    background-color: #f2f2f2;
+}
+
+.order-track .order-process-bar ul:before {
+    position: absolute;
+    height: 8px;
+    background-color: #f2f2f2;
+    content: "";
+    width: 100%;
+    top: 10px;
+}
+
+.order-process-bar ul li {
+    position: relative;
+    padding-top: 31px;
+    width: fit-content;
+    text-align: center;
+    font-size: 12px;
+    line-height: 16px;
+    color: rgba(18, 183, 106, 1);
+}
+
+.order-process-bar ul li span{
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.order-process-bar ul li p{
+    color:#000;
+    margin-top: 16px;
+    font-size: 10px;
+    font-weight: 400;
+}
+
+.order-track .order-process-bar ul li::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 22px;
+    border-radius: 11px;
+    z-index: 12;
+    background-color: rgba(18, 183, 106, 1);  
+}
+
+.order-track .group {
+    border-top: #979797 2px dashed;
+}
+
+.order-track .group-left, .order-track .group-right {
+    margin-top: 25px;
+}
+
+.order-track .group-left .media, .order-track .group-right .media {
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.order-track .group-left .media {
+    margin-left: -10px;
+}
+
+.order-track .group-right .media {
+    margin-right: -10px;
+}
+
+.order-track .group .media .title {
+    font-size: 18px;
+    color: #000;
+    margin: 0px 0px 20px 0px;
+    border-bottom: #000 2px solid;
+    padding-bottom: 20px;
+    line-height: normal;
+}
+
+.order-track .group .media .text-1 {
+    font-size: 16px;
+    color: #000;
+    font-weight: 400;
+}
+
+.order-track .list-group {
+    margin-left: -10px;
+    background-color: #f2f2f2;
+}
+
+.order-track .list-group-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: transparent;
+    border: none;
+}
+
+.order-track .list-group-item.title {
+    font-size: 18px;
+    color: #000;
+    margin: 0px 0px;
+    padding: 15px 20px;
+    line-height: normal;
+}
+
+.order-track .list-group-item.divider {
+    border-bottom:#000 2px solid;
+    margin: 0px 20px;
+    padding: 0px;
+}
+
+.order-track .list-group-item.divider-1 {
+    border-bottom:#000 2px solid;
+    margin: 0px 15px;
+    padding: 0px;
+}
+
+.order-track .list-group-item.items {
+    max-height: 1125px;
+    overflow-y: scroll;
+    padding: 0px 20px;
+}
+
+.order-track .items .media {
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-top: 0px;
+}
+
+.order-track .items .media .media-left {
+    padding-right: 14px;
+}
+
+.order-track .items .media .media-body {
+    position: relative;
+}
+
+.order-track .items .media .media-body .voucher-icon {
+    border-radius: 11px;
+    border: 1px solid rgba(155, 58, 35, 1);
+    width: 127px;
+    height: 26px;
+    padding-left: 8px;
+    padding-top: 5px;
+    padding-right: 8px;
+    padding-bottom: 5px;
+    display: inline;
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(155, 58, 35, 1);
+}
+
+.order-track .items .media .media-body .voucher-icon .voucher-icon__img {
+    width: 16px;
+    height: 16px;
+}
+
+.order-track .items .divider {
+    border-bottom:#aeaeae 2px dashed;
+}
+
+.order-track .items .media-object {
+    width: 150px;
+    height: 215px;
+    background-color: #cccccc;
+}
+
+.order-track .items h5 {
+    display: block;
+    clear: both;
+    margin-bottom: 20px;
+}
+
+.order-track .items h4.media-heading{
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.order-track .items h4.media-heading, .order-track .items h5 .price,
+.order-track .items h5 .size, .order-track .items h5 .quantity,
+.order-track .items h5 .value {
+    color: #000;
+    font-size: 16px;
+    line-height: 1.5em;
+}
+
+.order-track .items h5 .quantity{
+    margin-left: 23px;
+}
+
+.order-track .items h5 .price{
+    font-weight: 600;
+}
+
+.order-track .items h5 .del{
+    margin-left: 8px;
+    color: rgba(204, 204, 204, 1);
+    font-weight: 400;
+    text-decoration-line: line-through;
+}
+
+.order-track .items h5 .pvalue {
+    text-decoration: line-through;
+    font-size: 12px;
+    margin-left: 20px;
+}
+
+  
+.order-track .calculate .pleft {
+    float: left;
+}
+
+.order-track .calculate .pright {
+    float: right;
+    color: rgba(125, 125, 125, 1);
+    font-weight: 700;
+}
+
+.order-track .calculate h4 {
+    font-size: 16px;
+    display: block;
+    clear: both;
+    margin-bottom: 0px;
+    line-height: 1.5rem;
+    padding-bottom: 20px;
+}
+
+.order-track .calculate h4.title {
+    line-height: 1.1;
+}
+
+.order-track .calculate .divider {
+    clear: both;
+    border-bottom:#aeaeae 2px dashed;
+    display: block;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.order-track .butn {
+    padding: 24px 0px;
+    margin-right: -10px;
+    margin-bottom: 35px;
+}
+
+.order-track .butn .btn-back {
+    width: 40%;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+    background-color: #000;
+}
