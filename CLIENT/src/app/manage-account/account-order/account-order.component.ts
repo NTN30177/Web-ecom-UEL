@@ -1,5 +1,10 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
+import { FeedbackOrderComponent } from './feedback-order/feedback-order.component';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-account-order',
@@ -16,6 +21,7 @@ export class AccountOrderComponent implements OnInit, AfterViewInit, OnDestroy {
   dtTrigger: Subject<any> = new Subject<any>();
 
   // constructor(private orderService: OrderService) {}
+  constructor(private router: Router,    public dialog: MatDialog) {}
 
   ngOnInit(): void {
     // this.orderService.getOrders().subscribe((data) => {
@@ -32,7 +38,9 @@ export class AccountOrderComponent implements OnInit, AfterViewInit, OnDestroy {
         status: 'Đặt hàng thành công',
         products: [
           '1x Đầm phối đai phụ kiện, Tím nhạt',
-          '1x Đầm phối đai phụ kiện, Tím nhạt'
+          '1x Đầm phối đai phụ kiện, Tím nhạt',
+          '1x Đầm phối đai phụ kiện, Tím nhạt',
+          '1x Đầm phối đai phụ kiện, Tím nhạt',
         ],
         total: '2,930,000 ₫'
       },
@@ -42,7 +50,8 @@ export class AccountOrderComponent implements OnInit, AfterViewInit, OnDestroy {
         status: 'Đặt hàng thành công',
         products: [
           '1x Đầm phối đai phụ kiện, Tím nhạt',
-          '1x Đầm phối đai phụ kiện, Tím nhạt'
+          '1x Đầm phối đai phụ kiện, Tím nhạt',
+          '1x Đầm phối đai phụ kiện, Tím nhạt',
         ],
         total: '2,887,000 ₫'
       },
@@ -142,6 +151,7 @@ export class AccountOrderComponent implements OnInit, AfterViewInit, OnDestroy {
         status: 'Đặt hàng thành công',
         products: [
           '1x Đầm phối đai phụ kiện, Tím nhạt',
+          '1x Đầm phối đai phụ kiện, Tím nhạt',
           '1x Đầm phối đai phụ kiện, Tím nhạt'
         ],
         total: '2,887,000 ₫'
@@ -168,6 +178,10 @@ export class AccountOrderComponent implements OnInit, AfterViewInit, OnDestroy {
       },
       // Add more mock orders as needed
     ];
+
+    this.orders.forEach(order => {
+      order.totalProducts = order.products.length;
+    });
   }
   ngAfterViewInit(): void {
     const table = $('#dataTable');
@@ -197,5 +211,16 @@ export class AccountOrderComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     // Unsubscribe the DataTable
     this.dtTrigger.unsubscribe();
+  }
+
+  openFeedbackOrderDialog(): void{
+    const dialogRef = this.dialog.open(FeedbackOrderComponent, {
+      width: '70%',
+    });
+
+    // Handle the modal close event if needed
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed', result);
+    });
   }
 }

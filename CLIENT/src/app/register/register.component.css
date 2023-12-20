@@ -1,11 +1,9 @@
-html, body{
-    line-height: 25px;
-    color: #000;
-    font-style: normal;
-    line-height: normal;
-}
+
 :host {
     font-family: 'Montserrat', sans-serif;
+    line-height: 25px;
+    color: #000;
+
   }
 .text_head{
     font-size: 24px;

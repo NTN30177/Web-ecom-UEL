@@ -51,6 +51,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { CartComponent } from './cart/cart.component';
 import { AddColorComponent } from './admin/add-color/add-color.component';
+import { FeedbackOrderComponent } from './manage-account/account-order/feedback-order/feedback-order.component';
+import { FeedbackOrderSuccessComponent } from './manage-account/account-order/feedback-order-success/feedback-order-success.component';
+
 
 
 @NgModule({
@@ -87,6 +90,9 @@ import { AddColorComponent } from './admin/add-color/add-color.component';
     
     CartComponent,
     AddColorComponent,
+    FeedbackOrderComponent,
+    FeedbackOrderSuccessComponent,
+
   ],
   imports: [
     BrowserModule,

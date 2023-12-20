@@ -8,7 +8,8 @@ import { AccountOrderRoutingModule } from './account-order-routing.module';
   declarations: [],
   imports: [
     CommonModule,
-    AccountOrderRoutingModule
+    AccountOrderRoutingModule,
+    
   ]
 })
 export class AccountOrderModule { }
