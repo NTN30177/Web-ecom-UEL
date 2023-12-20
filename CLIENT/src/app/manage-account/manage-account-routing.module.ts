@@ -24,6 +24,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'order-tracking',
+        loadChildren: () =>
+          import('./order-tracking/order-tracking.module').then(
+            (m) => m.OrderTrackingModule
+          ),
+      },
+      {
         path: 'address',
         loadChildren: () =>
           import('./account-address/account-address.module').then(

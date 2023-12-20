@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
@@ -9,6 +9,10 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+
+  @ViewChild('cusFirstname') cusFirstname!: ElementRef;
+  @ViewChild('cusLastname') cusLastname!: ElementRef;
+
   registerForm!: FormGroup;
   passwordMismatchError: string = '';
   showOptionZeroError: boolean = false;
@@ -20,7 +24,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
      private router: Router,
-     private _authService: AuthService
+     private _authService: AuthService,
+     private renderer: Renderer2
      ) { }
 
   ngOnInit() {
@@ -95,7 +100,6 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  // Getter for easy access to form controls
   get formControls() {
     return this.registerForm.controls;
   }
@@ -122,35 +126,35 @@ export class RegisterComponent implements OnInit {
   }
 
   clearSpecificErrorMessage(controlName: string) {
-    const errorElement = document.getElementById(`${controlName}_error`);
-    const inputElement = document.getElementById(controlName);
+    const errorElement = this.renderer.selectRootElement(`#${controlName}_error`);
+    const inputElement = this.renderer.selectRootElement(`#${controlName}`);
 
     if (errorElement) {
-      errorElement.innerHTML = '';
+      this.renderer.setProperty(errorElement, 'innerHTML', '');
     }
 
     if (inputElement) {
-      inputElement.classList.remove('error-input');
+      this.renderer.removeClass(inputElement, 'error-input');
     }
   }
 
   displayErrorMessage(controlName: string, errorMessage: string) {
-    const errorElement = document.getElementById(`${controlName}_error`);
-    const inputElement = document.getElementById(controlName);
+    const errorElement = this.renderer.selectRootElement(`#${controlName}_error`);
+    const inputElement = this.renderer.selectRootElement(`#${controlName}`);
 
     if (errorElement) {
-      errorElement.innerHTML = errorMessage;
+      this.renderer.setProperty(errorElement, 'innerHTML', errorMessage);
     }
 
     if (inputElement) {
-      inputElement.classList.add('error-input');
+      this.renderer.addClass(inputElement, 'error-input');
     }
   }
 
   validateAndClearError(controlName: string) {
     const control = this.registerForm.get(controlName);
-    const errorElement = document.getElementById(`${controlName}_error`);
-    const inputElement = document.getElementById(controlName);
+    const errorElement = this.renderer.selectRootElement(`#${controlName}_error`);
+    const inputElement = this.renderer.selectRootElement(`#${controlName}`);
 
     if (control && errorElement && inputElement) {
       if (control.valid) {
@@ -160,9 +164,9 @@ export class RegisterComponent implements OnInit {
         // Show error messages and apply red border for invalid controls
         this.displayErrorMessage(controlName, '* Vui lòng nhập/chọn giá trị.');
         if (controlName === 'cus_reenterpassword' && control.errors?.['passwordMismatch']) {
-        this.displayErrorMessage(controlName, 'Mật khẩu nhập lại không khớp.');
-      }
-        inputElement.classList.add('error-input');
+          this.displayErrorMessage(controlName, 'Mật khẩu nhập lại không khớp.');
+        }
+        this.renderer.addClass(inputElement, 'error-input');
       }
     }
   }
@@ -247,7 +251,7 @@ export class RegisterComponent implements OnInit {
       }
 
       // Check if it's a valid phone number starting with 0
-      const phonePattern = /^0\d{9}$/; // Adjust the pattern according to your needs
+      const phonePattern = /^0\d{9}$/;
       const isValidPhone = phonePattern.test(value);
 
       if (!isValidPhone) {

@@ -5,9 +5,7 @@ import { AppComponent } from './app.component';
 import { AddProductComponent } from './admin/add-product/add-product.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
-import { HeaderAdminComponent } from './admin/header-admin/header-admin.component';
 import { FooterComponent } from './footer/footer.component';
-import { SidebarComponent } from './admin/sidebar/sidebar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -51,6 +49,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { CartComponent } from './cart/cart.component';
 import { AddColorComponent } from './admin/add-color/add-color.component';
+import { FeedbackOrderComponent } from './manage-account/account-order/feedback-order/feedback-order.component';
+import { FeedbackOrderSuccessComponent } from './manage-account/account-order/feedback-order-success/feedback-order-success.component';
+import { OrderTrackingComponent } from './manage-account/order-tracking/order-tracking.component';
+import { TermPolicyComponent } from './term-policy/term-policy.component';
+import { DeliveryPolicyComponent } from './delivery-policy/delivery-policy.component';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -58,9 +62,7 @@ import { AddColorComponent } from './admin/add-color/add-color.component';
     AppComponent,
     AddProductComponent,
     HeaderComponent,
-    HeaderAdminComponent,
     FooterComponent,
-    SidebarComponent,
     PageNotFoundComponent,
     HomePageComponent,
     BtnManageComponent,
@@ -84,9 +86,14 @@ import { AddColorComponent } from './admin/add-color/add-color.component';
     ForgotPasswordModalSuccessComponent,
     CreateCampaignComponent,
     ManageCampaignComponent,
-    
     CartComponent,
     AddColorComponent,
+    FeedbackOrderComponent,
+    FeedbackOrderSuccessComponent,
+
+    OrderTrackingComponent,
+    TermPolicyComponent,
+    DeliveryPolicyComponent,
   ],
   imports: [
     BrowserModule,
@@ -117,7 +124,7 @@ import { AddColorComponent } from './admin/add-color/add-color.component';
 
 
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

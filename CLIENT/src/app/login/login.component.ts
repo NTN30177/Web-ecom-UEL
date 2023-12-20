@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router'; // Import Router
 import { MatDialog } from '@angular/material/dialog';
@@ -12,6 +12,9 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  @ViewChild('cusAccount') cusAccountInput: ElementRef | undefined;
+  @ViewChild('cusPassword') cusPasswordInput: ElementRef | undefined;
+  
   loginForm: FormGroup;
   infoResult: string | undefined;
   errMessage: any;
@@ -19,8 +22,10 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    public dialog: MatDialog, // Inject MatDialog
-    private _authService: AuthService
+    public dialog: MatDialog,
+    private _authService: AuthService,
+    private renderer: Renderer2
+
   ) {
     this.loginForm = this.fb.group({
       cus_account: [
@@ -42,7 +47,7 @@ export class LoginComponent implements OnInit {
 
       // Check if it's a valid email or phone number
       const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-      const phonePattern = /^\d{10}$/; // Adjust the pattern according to your needs
+      const phonePattern = /^0\d{9}$/
 
       const isValidEmail = emailPattern.test(value);
       const isValidPhone = phonePattern.test(value);
@@ -62,15 +67,15 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       // Clear error messages and remove error class for all controls
       Object.keys(this.loginForm.controls).forEach((field) => {
-        const errorElement = document.getElementById(`${field}_error`);
-        const inputElement = document.getElementById(field);
+        const errorElement = this.renderer.selectRootElement(`#${field}_error`);
+        const inputElement = this.renderer.selectRootElement(`#${field}`);
 
         if (errorElement) {
-          errorElement.innerHTML = '';
+          this.renderer.setProperty(errorElement, 'innerHTML', '');
         }
 
         if (inputElement) {
-          inputElement.classList.remove('error-input');
+          this.renderer.removeClass(inputElement, 'error-input');
         }
       });
 
@@ -80,35 +85,34 @@ export class LoginComponent implements OnInit {
       // Show error messages and apply red border for each invalid field
       Object.keys(this.loginForm.controls).forEach((field) => {
         const control = this.loginForm.get(field);
-        const errorElement = document.getElementById(`${field}_error`);
-        const inputElement = document.getElementById(field);
+        const errorElement = this.renderer.selectRootElement(`#${field}_error`);
+        const inputElement = this.renderer.selectRootElement(`#${field}`);
 
         // Clear error messages and remove error class for all controls
         if (errorElement) {
-          errorElement.innerHTML = '';
+          this.renderer.setProperty(errorElement, 'innerHTML', '');
         }
 
         if (inputElement) {
-          inputElement.classList.remove('error-input');
+          this.renderer.removeClass(inputElement, 'error-input');
         }
 
         if (control && control.errors) {
           if (control.errors['required']) {
             if (errorElement) {
-              errorElement.innerHTML = '* Vui lòng nhập giá trị.';
+              this.renderer.setProperty(errorElement, 'innerHTML', '* Vui lòng nhập giá trị.');
             }
 
             if (inputElement) {
-              inputElement.classList.add('error-input');
+              this.renderer.addClass(inputElement, 'error-input');
             }
           } else if (control.errors['invalidFormat']) {
             if (errorElement) {
-              errorElement.innerHTML =
-                '* Vui lòng nhập đúng định dạng Email/SĐT.';
+              this.renderer.setProperty(errorElement, 'innerHTML', '* Vui lòng nhập đúng định dạng Email/SĐT.');
             }
 
             if (inputElement) {
-              inputElement.classList.add('error-input');
+              this.renderer.addClass(inputElement, 'error-input');
             }
           }
         }

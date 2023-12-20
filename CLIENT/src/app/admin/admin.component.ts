@@ -1,12 +1,7 @@
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
-// import { FlatTreeControl } from '@angular/cdk/tree';
-// import {
-//   MatTreeFlattener,
-//   MatTreeFlatDataSource,
-// } from '@angular/material/tree';
 
 interface MenuItem {
   name: string;
@@ -16,20 +11,21 @@ interface MenuItem {
   isOpen?: boolean; // Thêm trường để theo dõi trạng thái mở của submenu
   isSelected?: boolean; // Thêm trường để theo dõi trạng thái chọn
 }
-// interface FlatMenuItem {
-//   expandable: boolean;
-//   name: string;
-//   icon: string;
-//   link?: string;
-//   level: number;
-// }
+
+interface FlatMenuItem {
+  expandable: boolean;
+  name: string;
+  icon: string;
+  link?: string;
+  level: number;
+}
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css',
 })
-export class AdminComponent {
+export class AdminComponent implements OnInit, AfterViewInit {
   title = 'material-responsive-sidenav';
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
@@ -37,79 +33,86 @@ export class AdminComponent {
   isCollapsed = false;
 
   menuItems: MenuItem[] = [
-    { name: 'Dashboard', icon: 'dashboard', link: '' },
+    { name: 'Dashboard', icon: 'fas fa-tachometer-alt', link: '' },
     {
       name: 'Sản phẩm',
-      icon: 'shopping_basket',
+      icon: 'fas fa-shopping-basket',
       children: [
         {
           name: 'Quản lý sản phẩm',
-          icon: 'bubble_chart',
-          link: './manage-product',
+          icon: 'fas fa-list-alt',
+          link: 'manage-product',
         },
-        { name: 'Thêm sản phẩm', icon: 'library_add', link: './add-product-2' },
+        { name: 'Thêm sản phẩm', icon: 'fas fa-plus-square', link: 'add-product' },
       ],
     },
     {
       name: 'Người dùng',
-      icon: 'person',
+      icon: 'fas fa-user',
       children: [
-        { name: 'Quản lý người dùng', icon: 'bubble_chart', link: '#' },
-        { name: 'Thêm người dùng', icon: 'library_add', link: '#' },
+        { name: 'Quản lý người dùng', icon: 'fas fa-list-alt', link: '#' },
+        { name: 'Thêm người dùng', icon: 'fas fa-plus-square', link: '#' },
       ],
     },
     {
       name: 'Đơn hàng',
-      icon: 'shopping_cart',
+      icon: 'fas fa-shopping-cart',
       children: [
-        { name: 'Quản lý đơn hàng', icon: 'bubble_chart', link: '#' },
-        { name: 'Thêm đơn hàng', icon: 'library_add', link: '#' },
+        { name: 'Quản lý đơn hàng', icon: 'fas fa-list-alt', link: '#' },
+        { name: 'Thêm đơn hàng', icon: 'fas fa-plus-square', link: '#' },
       ],
     },
     {
       name: 'Màu sắc',
-      icon: 'palette',
+      icon: 'fas fa-palette',
       children: [
-        { name: 'Quản lý màu sắc', icon: 'bubble_chart', link: 'view-color' },
-        { name: 'Thêm màu sắc', icon: 'library_add', link: 'add-color' },
+        { name: 'Quản lý màu sắc', icon: 'fas fa-list-alt', link: 'view-color' },
+        { name: 'Thêm màu sắc', icon: 'fas fa-plus-square', link: 'add-color' },
       ],
     },
     {
       name: 'Chiến dịch',
-      icon: 'flag',
+      icon: 'fas fa-flag',
       children: [
         {
           name: 'Quản lý chiến dịch',
-          icon: 'bubble_chart',
+          icon: 'fas fa-list-alt',
           link: 'manage-campaign',
         },
         {
           name: 'Thêm chiến dịch',
-          icon: 'library_add',
+          icon: 'fas fa-plus-square',
           link: 'create-campaign',
         },
       ],
     },
     {
       name: 'Tin tức',
-      icon: 'article',
+      icon: 'fas fa-newspaper',
       children: [
-        { name: 'Quản lý tin tức', icon: 'bubble_chart', link: '#' },
-        { name: 'Thêm tin tức', icon: 'library_add', link: '#' },
+        { name: 'Quản lý tin tức', icon: 'fas fa-list-alt', link: '#' },
+        { name: 'Thêm tin tức', icon: 'fas fa-plus-square', link: '#' },
       ],
     },
     {
       name: 'Thông báo',
-      icon: 'notifications',
+      icon: 'fas fa-bell',
       children: [
-        { name: 'Quản lý thông báo', icon: 'bubble_chart', link: '#' },
-        { name: 'Thêm thông báo', icon: 'library_add', link: '#' },
+        { name: 'Quản lý thông báo', icon: 'fas fa-list-alt', link: '#' },
+        { name: 'Thêm thông báo', icon: 'fas fa-plus-square', link: '#' },
       ],
     },
   ];
 
-  constructor(private observer: BreakpointObserver, private router: Router,
-    private cdr: ChangeDetectorRef) {}
+  constructor(
+    private observer: BreakpointObserver,
+    private router: Router,
+    private cdr: ChangeDetectorRef
+  ) {}
+
+  ngOnInit(): void {
+    // console.log('AdminComponent initialized');
+  }
 
   ngAfterViewInit() {
     this.observer.observe(['(max-width: 800px)']).subscribe((screenSize) => {
@@ -137,6 +140,7 @@ export class AdminComponent {
     });
     menuItem.isOpen = !menuItem.isOpen;
   }
+
   selectMenuItem(menuItem: MenuItem) {
     this.menuItems.forEach((item) => {
       item.isSelected = false;

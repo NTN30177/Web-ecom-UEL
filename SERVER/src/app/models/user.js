@@ -23,10 +23,11 @@ const userSchema = new mongoose.Schema(
       // required: true
     },
     gender: {
-      type: Boolean,
+      type: Number,
+      enum: [0, 1]
     },
     date_of_birth: {
-      type: String,
+      type: Date,
     },
     image: {
       type: String,
@@ -86,7 +87,6 @@ const addressSchema = new mongoose.Schema(
 
     ward: {
       type: String,
-      default: "",
     },
   },
   {
