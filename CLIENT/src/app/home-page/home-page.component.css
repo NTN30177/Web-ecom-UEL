@@ -1,0 +1,324 @@
+
+html {
+    font-family: Montserrat;
+    margin-top: 40px;
+}
+.container {
+    max-width: 1380px;
+}
+
+.bg-before {
+    position: relative;
+}
+.bg-before:before {
+    content: "";
+    border: 1px solid #D1D2D4;
+    box-sizing: border-box;
+    border-radius: 24px 0px;
+    padding: 13px 24px;
+    position: absolute;
+    content: "";
+    bottom: 0;
+    right: -5px;
+    z-index: -1;
+    width: 100%;
+    height: 93%;
+    top: 16px;
+    width: 95%;
+}
+.bg-before02.bg-before:before {
+    border-radius: 80px 0px 80px 0px;
+    right: -10px;
+    height: 97%;
+}
+.home-banner {
+    margin-bottom: 40px;
+    border-top-left-radius: 80px;
+    border-bottom-right-radius: 80px;
+    background: #FFF;
+}
+.slider-banner {
+    height: 549px;
+    border-top-left-radius: 80px;
+    border-bottom-right-radius: 80px;
+    overflow: hidden;
+}
+.home-new-prod .exclusive-tabs {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 39px;
+}
+.home-new-prod .exclusive-tabs .exclusive-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    align-self: stretch;
+}
+.home-new-prod .exclusive-head .exclusive-tab {
+    display: flex;
+    padding: 8px 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.home-new-prod .exclusive-head > ul {
+    display: flex;
+    gap: 15px;
+    
+}
+.home-new-prod .exclusive-head .exclusive-tab.new-prod {
+    border-radius: 20px;
+    border: 1px solid var(--Neutral-01, #000);
+    background: var(--Neutral-01, #000);
+    color: var(--Neutral-08, var(--Base-On-Background, #FFF));
+
+    /* Heading/18px - Bold */
+    font-family: Montserrat;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 1.08px;
+}
+.home-new-prod .exclusive-head .exclusive-tab.hot-prod {
+    border-radius: 20px;
+    border: 1px solid var(--Neutral-01, #000);
+    color: var(--Neutral-01, #000);
+
+    /* Heading/18px - Bold */
+    font-family: Montserrat;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 1.08px;
+}
+.exclusive-content {
+    margin-bottom: 24px;
+    position: relative;
+    min-height: 100px;
+}
+.exclusive-inner.active {
+    display: block;
+}
+.exclusive-inner__list-products {
+    z-index: 1;
+    position: relative;
+}
+.exclusive-inner__list-products .owl-stage-outer {
+    margin: 0 -7px;
+    padding: 0 7px;
+}
+.exclusive-inner__list-products .item-new-prod .product {
+    position: relative;
+}
+.best-seller {
+    background-image: url(https://pubcdn.ivymoda.com/ivy2/images/bg-seller.png);
+    padding: 7px 18px 7px 15px;
+}
+.info-tag {
+    position: absolute;
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    top: 0;
+    left: -7px;
+    z-index: 3;
+}
+.info-tag:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 17px solid #D73831;
+    border-left: 7px solid transparent;
+    bottom: -16px;
+    left: 0px;
+}
+.item-new-prod .percent_02 {
+    padding: 5px 10px;
+    border-radius: 10px;
+    background: var(--Primary-02, #C54C3D);
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 3;
+
+    color: var(--Neutral-08, var(--Base-On-Background, #FFF));
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.6px;
+}
+.item-new-prod .percent_02 span {
+    position: absolute;
+    font-size: 8px;
+    line-height: 12px;
+}
+.thumb-product a{
+    position: relative;
+}
+.thumb-product img {
+    border-radius: 20px;
+    /* position: absolute; */
+}
+.list-color {
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+.list-color .favorite i {
+    color: #9B3A23;
+    width: 20px;
+}
+.list-color ul {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.item-new-prod .info-product img {
+    display: block;
+    width: 35px;
+    height: 20px;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-size: 250%;
+    background-position: 50%;
+}
+.item-new-prod .info-product a {
+    padding: 2px;
+}
+.list-color ul li.color {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    cursor: pointer;
+}
+.list-color ul li.color-active:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #9B3A23;
+    border-radius: 16px;
+    transform: rotate(0deg);
+}
+.product .title-product a {
+    color: #000;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.84px;
+    margin-bottom: 5px;
+}
+.price-product {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.price-product ins {
+    color: #000;
+    font-family: Montserrat;
+    /* Heading 03/14px - Bold */
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.84px;
+}
+.price-product del {
+    color: var(--Semantic-01, #7D7D7D);
+    font-family: Montserrat;
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.48px;
+    text-decoration-line: strikethrough;
+}
+.price-product ins h4 {
+    font-weight: bold;
+}
+.add-to-cart a {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #221F20;
+    border-radius: 8px;
+    width: 40px;
+    height: 25px;
+    color: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.add-to-cart a:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.thumb-product #ao {
+    display: block;
+}
+
+.thumb-product #ao2 {
+    display: none;
+}
+
+.thumb-product:hover #ao {
+    display: none;
+}
+
+.thumb-product:hover #ao2 {
+    display: block;
+}
+.static.img-hover {
+    display: none;
+}
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Responsive */
+
+
+/* Mobile & Tablet */
+@media (max-width: 1024px) {
+
+}
+
+/* Tablet */
+@media (min-width: 740px) and (max-width: 1023px) {
+
+}
+
+/* Mobile */
+@media (max-width: 739px) {
+
+}

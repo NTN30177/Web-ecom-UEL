@@ -10,6 +10,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './admin/sidebar/sidebar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 import { HomePageComponent } from './home-page/home-page.component';
 import { BtnManageComponent } from './btn-manage/btn-manage.component';
 import { ViewColorComponent } from './admin/view-color/view-color.component';
@@ -47,8 +48,9 @@ import { ForgotPasswordModalSuccessComponent } from './login/forgot-password-mod
 import { CreateCampaignComponent } from './admin/create-campaign/create-campaign.component';
 import { ManageCampaignComponent } from './admin/manage-campaign/manage-campaign.component';
 import { MatButtonModule } from '@angular/material/button';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { CartComponent } from './cart/cart.component';
 import { AddColorComponent } from './admin/add-color/add-color.component';
-
 
 
 @NgModule({
@@ -82,6 +84,8 @@ import { AddColorComponent } from './admin/add-color/add-color.component';
     ForgotPasswordModalSuccessComponent,
     CreateCampaignComponent,
     ManageCampaignComponent,
+    
+    CartComponent,
     AddColorComponent,
   ],
   imports: [
@@ -105,7 +109,9 @@ import { AddColorComponent } from './admin/add-color/add-color.component';
     MatTabsModule,
     MatInputModule,
     MatSidenavModule,
+    CarouselModule,
     MatButtonModule,
+    NzFormModule,
 
 
 

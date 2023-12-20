@@ -1,4 +1,5 @@
-#main {
+html {
+    font-size: 62.5%;
 }
 body {
     color: #6C6D70;
@@ -809,14 +810,7 @@ img {
     padding-left: 0;
     margin: 0 0 0 0;
 }
-.list-color ul li {
-    width: 18px;
-    margin-right: 10px;
-    display: inline-block;
-    position: relative;
-    cursor: pointer;
-    vertical-align: middle;
-}
+
 .list-color ul li.color-active:before {
     content: "";
     position: absolute;
@@ -1296,6 +1290,65 @@ img {
 .block-info .list-item .header-action{
 
 }
+.header-actions .sub-action {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: #FFF;
+    display: none;
+    z-index: 2;
+    border: 1px solid #E7E8E9;
+    box-sizing: border-box;
+    border-radius: 4px;
+    width: max-content;
+    min-width: 255px;
+}
+.top-action {
+    padding: 24px 24px 20px;
+    position: relative;
+    border-bottom: 1px solid #F7F8F9;
+    margin-bottom: 24px;
+}
+.header-actions .icon {
+    font-size: 16px;
+    color: #000;
+    position: relative;
+}
+
+.sub-action .tit-top-action {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    color: #221F20;
+}
+.sub-action ul {
+    padding: 0 24px;
+}
+.sub-action ul li a {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    color: #808285;
+    margin-bottom: 24px;
+    display: block;
+}
+.sub-action ul li a i {
+    display: inline-block;
+    margin-right: 12px;
+    vertical-align: middle;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* Responsive */
@@ -1444,11 +1497,7 @@ img {
         line-height: 0;
         align-items: center;
     }
-    .list-color ul li {
-        width: 15px;
-        height: 15px;
-        margin-right: 5px;
-    }
+  
     .list-color ul li.color-active:before {
         left: 5px;
         top: 1.5px;

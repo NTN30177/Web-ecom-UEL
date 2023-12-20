@@ -1,17 +1,17 @@
 // models.ts
 
-interface VariantColor {
+interface IVariantColor {
     size: string;
     quantity: number;
   }
   
-  interface Variant {
+  interface IVariant {
     color: string; // Assuming color is a string, modify accordingly
     images: string[];
-    variantColor: VariantColor[];
+    variantColor: IVariantColor[];
   }
   
-  interface Product {
+  interface IProduct {
     id:string
     title: string;
     slug: string;
@@ -20,27 +20,29 @@ interface VariantColor {
     description: string;
     author: string;
     images: string[];
-    variants: Variant[];
+    variants: IVariant[];
   }
   
-  interface Subtype {
+  interface ISubType {
+    _id: string;
     subTypeName: string;
     slug: string;
     products: string[]; // Assuming product IDs are stored as strings, modify accordingly
   }
   
-  interface Type {
+  interface IType {
+    _id: string;
     typeName: string;
     slug: string;
     subtypes: string[]; // Assuming subtype IDs are stored as strings, modify accordingly
   }
   
-  interface OrderItem {
+  interface IOrderItem {
     product: string; // Assuming product ID is stored as a string, modify accordingly
-    variants: Variant[];
+    variants: IVariant[];
   }
   
-  interface Order {
+  interface IOrder {
     orderItems: string[]; // Assuming order item IDs are stored as strings, modify accordingly
     shippingAddress: string;
     ward: string;
@@ -54,27 +56,28 @@ interface VariantColor {
     dateOrdered: Date;
   }
   
-  interface CartItem {
+  interface ICartItem {
     productItem: {
       productId: string; // Assuming product ID is stored as a string, modify accordingly
-      variants: Variant[];
+      variants: IVariant[];
     }[];
   }
   
-  interface Color {
+  interface IColor {
+    _id: string;
     nameColor: string;
     image: string;
   }
   
   export {
-    Variant,
-    VariantColor,
-    Product,
-    Subtype,
-    Type,
-    OrderItem,
-    Order,
-    CartItem,
-    Color,
+    IVariant,
+    IVariantColor,
+    IProduct,
+    ISubType,
+    IType,
+    IOrderItem,
+    IOrder,
+    ICartItem,
+    IColor,
   };
   
