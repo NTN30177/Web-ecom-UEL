@@ -53,6 +53,7 @@ import { CartComponent } from './cart/cart.component';
 import { AddColorComponent } from './admin/add-color/add-color.component';
 import { OrderTrackingComponent } from './order-tracking/order-tracking.component';
 import { TermPolicyComponent } from './term-policy/term-policy.component';
+import { DeliveryPolicyComponent } from './delivery-policy/delivery-policy.component';
 
 
 @NgModule({
@@ -90,6 +91,7 @@ import { TermPolicyComponent } from './term-policy/term-policy.component';
     AddColorComponent,
     OrderTrackingComponent,
     TermPolicyComponent,
+    DeliveryPolicyComponent,
   ],
   imports: [
     BrowserModule,
