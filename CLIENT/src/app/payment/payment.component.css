@@ -92,6 +92,12 @@ img {
     padding: 20px;
 }
 
+.block-header {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.96px;
+}
+
 .name {
     display: flex;
     align-items: center;
@@ -168,7 +174,107 @@ img {
     box-shadow: 0px 0px 5.6px 0px rgba(0, 0, 0, 0.08);
 }
 
-.method-change{
+.method-change {
     color: rgba(155, 58, 35, 1);
     cursor: pointer;
+}
+
+.cart-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    gap: 18px;
+}
+
+
+.cart-footer>div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 200;
+}
+
+.payment-footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start !important;
+    align-self: stretch;
+}
+
+.estimated-cost__value {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    flex-direction: column;
+}
+
+.total-discount {
+    color: #000;
+    font-family: Montserrat;
+    font-size: 8px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.48px;
+}
+
+.btn-submit button {
+    width: 100%;
+    padding: 15px;
+    border-radius: 11px;
+    border: none;
+    background-color: #9b3a23;
+    color: white;
+    font-weight: bold;
+}
+
+.total-discount>span {
+    color: red;
+}
+
+.total-final-block {
+    display: flex;
+    padding: 15px 10px 25px 10px;
+    flex-direction: column;
+    align-items: center;
+    gap: 27px;
+    border-radius: 8px;
+    border: 1px solid var(--Semantic-04, #F1F1F1);
+    background: var(--Base-On-Background, #FFF);
+    box-shadow: 0px 0px 5.6px 0px rgba(0, 0, 0, 0.08);
+}
+
+.product-total__title {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.product-total__value {
+    text-align: right;
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: 1.26px;
+}
+
+.total-note {
+    color: rgba(155, 58, 35, 1);
+    font-size: 8px;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.button-buy {
+    display: flex;
+    width: 633px;
+    padding: 15px 0px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 4px;
+    background: var(--Primary-01, #9B3A23);
+    font-weight: 700;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 1)
 }
