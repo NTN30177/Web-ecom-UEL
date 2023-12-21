@@ -55,6 +55,8 @@ import { OrderTrackingComponent } from './manage-account/order-tracking/order-tr
 import { TermPolicyComponent } from './term-policy/term-policy.component';
 import { DeliveryPolicyComponent } from './delivery-policy/delivery-policy.component';
 import { ManageOrderComponent } from './admin/manage-order/manage-order.component';
+import { DeliveryPolicyComponent } from './delivery-policy/delivery-policy.component';
+
 
 
 @NgModule({
@@ -95,6 +97,7 @@ import { ManageOrderComponent } from './admin/manage-order/manage-order.componen
     TermPolicyComponent,
     DeliveryPolicyComponent,
     ManageOrderComponent,
+    DeliveryPolicyComponent
   ],
   imports: [
     BrowserModule,
@@ -125,7 +128,7 @@ import { ManageOrderComponent } from './admin/manage-order/manage-order.componen
 
 
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

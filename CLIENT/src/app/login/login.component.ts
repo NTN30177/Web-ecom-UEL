@@ -129,8 +129,6 @@ export class LoginComponent implements OnInit {
       this._authService.verifiedInForUser(this.loginForm.value).subscribe({
         next: (data: any) => {
           this.infoResult = data.message;
-          console.log(this.infoResult);
-          alert('Lưu dữ liệu thành công');
         },
         error: (err) => {
           this.errMessage = err;

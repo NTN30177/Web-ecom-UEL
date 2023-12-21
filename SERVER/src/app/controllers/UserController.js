@@ -66,7 +66,7 @@ const saveAccount = async (req, res, next) => {
       sendVerifyEmail(cus_lastname, req.body.cus_email, userData._id);
       res.status(200).send({
         message:
-          "Your registration has been successfully. Please verify your email",
+          "Your registration has been succesSsfully. Please verify your email",
         link: "1",
       });
     } else {
@@ -156,7 +156,6 @@ const verifyEmail = async (req, res) => {
             res.send({ message: "Đăng nhập thành công" });
           }
         } else {
-          console.log('Đăng nhập thất bại')
           res.send({ message: "Đăng nhập thất bại" });
         }
       } else {

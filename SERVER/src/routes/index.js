@@ -8,7 +8,9 @@ const apiRouter = require('./api');
 
 function route(app) {
 
+
     app.use('/product', productRouter);
+    app.use('/user', userRouter);
     app.use('/admin', adminRouter);
     // app.use('/cart',  cartRouter);
     // app.use('/cart',  cartRouter);
@@ -16,7 +18,7 @@ function route(app) {
     app.get('/error', function (req, res) {
         res.render('404');
     });
-    app.use('',  userRouter);
+
 
 }
 

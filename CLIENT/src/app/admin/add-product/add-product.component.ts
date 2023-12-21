@@ -124,6 +124,7 @@ i=1
 
   onSubmit() {
     const formData = this.addProductForm.value;
+    
     this._productService.postProduct(formData).subscribe({
       next: (data) => {
         this.books = data;
