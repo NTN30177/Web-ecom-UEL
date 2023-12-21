@@ -200,11 +200,16 @@ const addOrPutProductToCart = async (req, res, next) => {
           existingColor.variantColor.push({ size, quantity: quantityColorNew });
         }
       } else {
-        existingProduct.variants.push({
-          color: colorId,
-          images: [imageCart],
-          variantColor: [{ size, quantity }],
-        });
+        if(quantityColorNew>1){
+          
+        } else{
+          existingProduct.variants.push({
+            color: colorId,
+            images: [imageCart],
+            variantColor: [{ size, quantity }],
+          });
+
+        }
       }
     }
 

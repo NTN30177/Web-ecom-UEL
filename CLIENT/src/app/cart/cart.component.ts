@@ -28,33 +28,31 @@ export class CartComponent implements OnInit {
     return 1;
   }
   totalQuantity() {}
-  apiCartProduct() {
+  async apiCartProduct() {
     console.log('1235');
-    this._cartService.getProductCart().subscribe({
-      next: (data: any) => {
-        console.log('test123')
-
-        this.productsCart = data.productItemUser;
-        console.log(this.productsCart, '123');
-      },
-      error: (err: any) => {
-        this.errMessage = err;
-      },
-    });
+    try {
+      const data = await this._cartService.getProductCart().toPromise();
+      console.log('test123');
+      this.productsCart = data.productItemUser;
+      console.log(this.productsCart, '123');
+    } catch (err) {
+      this.errMessage = err;
+    }
   }
-  apiChangeQuantityProductItem(data: object) {
+  
+  async apiChangeQuantityProductItem(data: object) {
     console.log(data, '55555');
-    this._cartService.putProductItemCart(data).subscribe({
-      next: (data: any) => {
-        console.log(data,'dataput')
-        this.apiCartProduct();
-      },
-      error: (err: any) => {
-        this.errMessage = err;
-      },
-    });
+  
+    try {
+      const responseData = await this._cartService.putProductItemCart(data).toPromise();
+      console.log(responseData, 'dataput');
+      this.apiCartProduct();
+    } catch (err) {
+      this.errMessage = err;
+    }
   }
-  changeQuantity(
+  
+  async changeQuantity(
     colorID: any,
     productID: any,
     sizeLIST: any,
@@ -67,7 +65,7 @@ export class CartComponent implements OnInit {
       quantityAction: quantityACTION,
     };
     console.log(data, '123');
-    this.apiChangeQuantityProductItem(data);
+    await this.apiChangeQuantityProductItem(data);
   }
   convertStringToNumbers(string: string) {
     let valueNumber = string.replace(/[^\d]/g, '');
@@ -89,6 +87,8 @@ export class CartComponent implements OnInit {
   
       this.previousColor = newColor;
       await this.changeQuantity(newColor,productId, size, quantity)
+      console.log('test change color 2')
+
       await this.changeQuantity(currentColor,productId, size, 0)
       console.log('test change color')
 
