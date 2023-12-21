@@ -1,0 +1,48 @@
+
+
+<div class="container_content">
+    <div class="frame_header">
+      <p style="gap: 5px;">Đơn hàng/ Quản lý đơn hàng</p>
+      <p class="text_head">Quản lý đơn hàng</p>
+    </div>
+    <hr>
+    <form action="" name="page_manageorder" method="post">
+      <div class="col-md-12">
+        <div class="frame_title">
+          <p><strong>Bảng danh sách đơn hàng</strong></p>
+        </div>
+        <div class="frame_body">
+              <div class="mt-4">
+                <table id="manage-orders" class="table table-hover custom-datatable" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                  <thead>
+                    <tr>
+                      <th>Order ID</th>
+                      <th>Trạng thái</th>
+                      <th style="text-align: center">Số lượng</th>
+                      <th>Khách hàng</th>
+                      <th>Mã Tracking</th>
+                      <th style="text-align: center">Chi tiết đơn hàng</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let order of orders">
+                      <td>{{order.orderId}}</td>
+                      <td>{{order.status}}</td>
+                      <td style="text-align: center">{{order.quantity}}</td>
+                      <td>{{order.customer}}</td>
+                      <td>{{order.trackingCode}}</td>
+
+                      <td style="text-align: center">
+                        <!-- Edit icon with a click event -->
+                        <i class="fas fa-pen-square custom-smaller-icon"></i>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  
+  

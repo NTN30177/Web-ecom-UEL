@@ -6,7 +6,6 @@ body {
     font-style: normal;
     line-height: normal;
 }
-
 :host {
     font-family: 'Montserrat', sans-serif;
 }

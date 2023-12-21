@@ -1,6 +1,7 @@
+
 <div class="container_content">
   <div class="frame_header">
-    <p style="gap: 5px;">Chiến dịch</p>
+    <p style="gap: 5px;">Chiến dịch/ Quản lý chiến dịch</p>
     <p class="text_head">Quản lý chiến dịch</p>
   </div>
   <hr>
@@ -13,7 +14,7 @@
         <mat-tab-group>
           <mat-tab label="Tất cả">
             <div class="mt-4">
-              <table class="table table-hover custom-datatable" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="custom">
+              <table class="table table-hover custom-datatable" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="manage-campaigns">
                 <thead>
                   <tr>
                     <th>Tên chiến dịch</th>
@@ -46,7 +47,7 @@
 
           <mat-tab label="Hiện tại">
             <div class="mt-4">
-              <table class="table table-bordered table-striped table-hover custom-datatable" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="custom">
+              <table class="table table-hover custom-datatable" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="manage-campaigns">
                 <thead>
                   <tr>
                     <th>Tên chiến dịch</th>
@@ -79,7 +80,7 @@
           
           <mat-tab label="Quá khứ">
             <div class="mt-4">
-              <table class="table table-bordered table-striped table-hover custom-datatable" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="custom">
+              <table class="table table-hover custom-datatable" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="manage-campaigns">
                 <thead>
                   <tr>
                     <th>Tên chiến dịch</th>
@@ -112,7 +113,7 @@
           
           <mat-tab label="Tương lai">
             <div class="mt-4">
-              <table class="table table-bordered table-striped table-hover custom-datatable" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="custom">
+              <table class="table table-hover custom-datatable" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="manage-campaigns">
                 <thead>
                   <tr>
                     <th>Tên chiến dịch</th>
@@ -147,6 +148,4 @@
     </div>
   </form>
 </div>
-
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 

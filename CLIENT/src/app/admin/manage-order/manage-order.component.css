@@ -1,15 +1,4 @@
-/* Import Montserrat font */
-@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
-/* Apply Montserrat font to the entire document */
-* {
-    font-family: 'Montserrat', sans-serif;
-}
-
-html, body {
-    line-height: 25px;
-    color: #000;
-}
 .container_content {
     display: flex;
     flex-direction: column;
@@ -56,19 +45,11 @@ table {
     border-collapse: collapse;
 }
 
-#manage-campaigns{
+#manage-orders{
     border-collapse: separate;
     border-spacing: 0 20px; /* Khoảng cách giữa các dòng là 10px */
 }
 
-#example th,
-#example td {
-  transition: background-color 0.3s ease; /* Hiệu ứng chuyển động màu nền */
-}
-
-#example tbody tr {
-    background-color: #f9fcff; /* Màu nền mặc định cho các dòng */
-}
 
 .mat-tab-body-content, .mat-tab-label {
     font-family: 'Montserrat', sans-serif !important;
@@ -84,12 +65,9 @@ mat-icon {
 .custom-datatable tbody td {
     border: none;
     padding: 15px;
-    text-align: center;
-}
-
-.custom-datatable tbody td:nth-child(1) {
     text-align: left;
 }
+
 
 .custom-datatable thead th {
     background-color: #F9FCFF;
@@ -108,6 +86,7 @@ mat-icon {
 
 }
 
-.smaller-icon {
-    font-size: 20px;
-}
+.custom-smaller-icon {
+    font-size: 1.5em; /* Adjust the font size as needed */
+  }
+

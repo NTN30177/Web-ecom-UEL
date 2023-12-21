@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
@@ -11,7 +11,7 @@ import { CampaignService } from '../../services/campaign.service';
   styleUrls: ['./manage-campaign.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ManageCampaignComponent implements OnInit, OnDestroy {
+export class ManageCampaignComponent implements OnInit, AfterViewInit, OnDestroy {
   allCampaigns: Campaign[] = [];
 
   constructor(private fb: FormBuilder, private _service: CampaignService) {}
@@ -20,13 +20,22 @@ export class ManageCampaignComponent implements OnInit, OnDestroy {
     this.campaigns();
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 10
-    };
-    $(document).ready(function() {
-      $('#example').DataTable({language: {
+      pageLength: 10,
+      searching: true,
+      language: {
         url: 'https://cdn.datatables.net/plug-ins/1.10.21/i18n/Vietnamese.json',
-      },});
-  } );
+      },
+    };
+    
+  }
+
+  ngAfterViewInit(): void {
+    // Khởi tạo DataTables trong hàm này để đảm bảo rằng DOM đã được tạo xong
+    $('#example').DataTable({
+      language: {
+        url: 'https://cdn.datatables.net/plug-ins/1.10.21/i18n/Vietnamese.json',
+      },
+    });
   }
 
   @ViewChild(DataTableDirective, { static: false })
@@ -66,12 +75,10 @@ export class ManageCampaignComponent implements OnInit, OnDestroy {
   }
 
   editCampaign(campaign: Campaign): void {
-    // Implement edit logic here
     console.log('Edit campaign:', campaign);
   }
 
   deleteCampaign(campaign: Campaign): void {
-    // Implement delete logic here
     console.log('Delete campaign:', campaign);
   }
 }

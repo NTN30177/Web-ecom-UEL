@@ -13,6 +13,8 @@ export class CartComponent implements OnInit {
   colorList: any;
   productsCart: any;
   errMessage: any;
+  previousSize: any;
+  previousColor: any;
   constructor(private _cartService: CartService, private fb: FormBuilder) {
     this.rfDataModal = this.fb.group({
       productName: ['', [Validators.required]],
@@ -30,6 +32,8 @@ export class CartComponent implements OnInit {
     console.log('1235');
     this._cartService.getProductCart().subscribe({
       next: (data: any) => {
+        console.log('test123')
+
         this.productsCart = data.productItemUser;
         console.log(this.productsCart, '123');
       },
@@ -42,6 +46,7 @@ export class CartComponent implements OnInit {
     console.log(data, '55555');
     this._cartService.putProductItemCart(data).subscribe({
       next: (data: any) => {
+        console.log(data,'dataput')
         this.apiCartProduct();
       },
       error: (err: any) => {
@@ -65,14 +70,56 @@ export class CartComponent implements OnInit {
     this.apiChangeQuantityProductItem(data);
   }
   convertStringToNumbers(string: string) {
-    let valueNumber = string.replace(/[^\d]/g, "");
+    let valueNumber = string.replace(/[^\d]/g, '');
     return parseInt(valueNumber);
   }
   formatMoneyVietNam(so: number | bigint) {
-    const valueString = new Intl.NumberFormat("vi-VN", {
-      style: "currency",
-      currency: "VND",
+    const valueString = new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
     }).format(so);
     return valueString;
   }
+  async onColorChange(event: any, currentColor: string, productId: string, size: string, quantity: number) {
+    try{
+      const newColor = event.target.value;
+      console.log('Trước khi chọn:', currentColor);
+  
+      console.log('Sau khi chọn:', newColor);
+  
+      this.previousColor = newColor;
+      await this.changeQuantity(newColor,productId, size, quantity)
+      await this.changeQuantity(currentColor,productId, size, 0)
+      console.log('test change color')
+
+    }catch(err){
+      console.error(err);
+    }
+  }
+
+  async onSizeChange(event: any, currentColor: string, productId: string, sizeCurrent: string, quantity: number) {
+    try {
+      this.previousColor = sizeCurrent;
+      const newSize = event.target.value;
+  
+      console.log('Trước khi chọn:', currentColor, productId, sizeCurrent, quantity);
+      console.log('Sau khi chọn:', newSize);
+  
+      this.previousSize = newSize;
+  
+      // Assuming that changeQuantity returns a promise
+      await this.changeQuantity(currentColor, productId, newSize, quantity);
+      console.log('test change size')
+      await this.changeQuantity(currentColor, productId, sizeCurrent, 0);
+      console.log(newSize, 'ns');
+
+  
+
+    } catch (error) {
+      console.error('An error occurred:', error);
+      // Handle the error appropriately
+    }
+  }
+  
+
 }

@@ -4,20 +4,21 @@ import { Subject } from 'rxjs';
 @Component({
   selector: 'app-view-color',
   templateUrl: './view-color.component.html',
-  styleUrl: './view-color.component.css',
+  styleUrls: ['./view-color.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
 export class ViewColorComponent implements OnInit {
-  constructor() {}
-  dtoptions: DataTables.Settings = {};
+  dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
 
   ngOnInit(): void {
-    $(document).ready(function() {
-      $('#example').DataTable({language: {
-        url: 'https://cdn.datatables.net/plug-ins/1.10.21/i18n/Vietnamese.json',
-      },});
-  } );
-    
+    if (!$.fn.dataTable.isDataTable('#example')) {
+      this.dtOptions = {
+        language: {
+          url: 'https://cdn.datatables.net/plug-ins/1.10.21/i18n/Vietnamese.json',
+        },
+      };
+      this.dtTrigger.next(null);
+    }
   }
 }

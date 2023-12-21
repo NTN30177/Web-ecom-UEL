@@ -1,7 +1,7 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router'; // Import Router
-import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ForgotPasswordModalComponent } from './forgot-password-modal/forgot-password-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
@@ -120,24 +120,38 @@ export class LoginComponent implements OnInit {
     }
     this.verifiedLogin();
   }
-
   verifiedLogin() {
     if (this.loginForm.invalid) {
       alert('Vui lòng kiểm tra lại thông tin form');
     } else {
-      console.log('1235');
       this._authService.verifiedInForUser(this.loginForm.value).subscribe({
         next: (data: any) => {
           this.infoResult = data.message;
+          this.openInfoResultModal(); // Mở modal với thông tin kết quả
+          setTimeout(() => {
+            this.infoResult = undefined;
+          }, 5000);
         },
         error: (err) => {
           this.errMessage = err;
-          console.log(this.errMessage)
+          console.log(this.errMessage);
         },
       });
-      console.log('save');
     }
   }
+
+  openInfoResultModal(): void {
+    const dialogRef = this.dialog.open(InfoResultModalComponent, {
+      width: '500px',
+      data: { infoResult: this.infoResult },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed', result);
+    });
+  }
+
+  
 
   openForgotPasswordDialog(): void {
     // Open the modal when the "Quên mật khẩu?" link is clicked
@@ -157,5 +171,27 @@ export class LoginComponent implements OnInit {
   // Hàm để chuyển đổi giữa hiển thị và ẩn mật khẩu
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
+  }
+}
+
+//Popup hiển thị kết quả đăng nhập
+@Component({
+  selector: 'app-info-result-modal',
+  template: `
+    <div style="padding: 20px; text-align: center; font-size:20px; font-family: 'Montserrat', sans-serif;">
+      {{ data.infoResult }}
+    </div>
+  `,
+})
+export class InfoResultModalComponent implements OnInit {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { infoResult: string },
+    public dialogRef: MatDialogRef<InfoResultModalComponent>
+  ) {}
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.dialogRef.close(); // Tắt modal sau 5 giây
+    }, 5000);
   }
 }
