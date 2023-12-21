@@ -11,6 +11,81 @@
       </div>
     </section>
 
+<!--  -->
+<!-- <owl-carousel-o [options]="newprodOptions">
+  <ng-template carouselSlide *ngFor="let bannersArrays of bannersArray">
+    <div class="owl-item">
+      <div class="item-new-prod">
+        <div class="product">
+            <div class="info-tag best-seller">Best Seller</div>
+            <span class="percent percent_02">-50%
+            </span>
+            <div class="thumb-product">
+              <a href="" (mouseenter)="setHoveredState(true)" (mouseleave)="setHoveredState(false)">
+                <img *ngIf="!isHovered" [src]="getLink('linkMoi1')" alt="" class="static">
+                <img *ngIf="isHovered" [src]="getLink('linkMoi2')" alt="" class="static img-hover">
+              </a>
+            </div>
+            
+            <div class="info-product">
+                <div class="list-color">
+                  <ul>
+                    <li *ngFor="let color of colorsArray"
+                        [ngClass]="{'color': true, 'color-active': selectedColorId === color.id}"
+                        (click)="changeColor(color.id)">
+                      <a href="javascript:void(0)" class="color-picked" data-id="{{ color.id }}">
+                        <img src="{{ color.imgSrc }}" alt="{{ color.alt }}">
+                      </a>
+                    </li>
+                  </ul>
+                    <div class="favorite">
+                        <i class="ti-heart">
+                        </i>
+                    </div>
+                </div>
+                <div class="title-product">
+                    <a href="">Jumpsuit Hai Dây Phối Bèo</a>
+                </div>
+                <div class="price-product">
+                    <ins>
+                        <h4>895.000đ</h4>
+                    </ins>
+                    <del>
+                      <span>1.790.000đ</span>
+                    </del>
+                </div>
+            </div>
+            <div class="add-to-cart">
+                <a href="javascript:void(0)#" class="js-cart-button" onclick="toggleSizeTable('sizeTable2')">
+                    <i class="ti-shopping-cart"></i>
+                </a>
+            </div>
+            <div id="sizeTable2" class="sizeTable js-list-size">
+                <ul>
+                    <li>
+                        <button class="btn bt-large">s</button>
+                    </li>
+                    <li>
+                        <button class="btn bt-large">m</button>
+                    </li>
+                    <li>
+                        <button class="btn bt-large">l</button>
+                    </li>
+                    <li>
+                        <button class="btn bt-large">xl</button>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>                      
+    </div>
+  </ng-template>  
+</owl-carousel-o>  -->
+
+<!--  -->
+
+
     <section class="home-new-prod">
       <div class="exclusive-tabs">
         <div class="exclusive-head">
@@ -34,10 +109,9 @@
                               <div class="thumb-product">
                                 <a href="" (mouseenter)="setHoveredState(true)" (mouseleave)="setHoveredState(false)">
                                   <img *ngIf="!isHovered" [src]="getLink('linkMoi1')" alt="" class="static">
-                                  <img *ngIf="isHovered" [src]="getLink('linkMoi2')" alt="" class="static img-hover">
+                                  <img *ngIf="!isHovered" [src]="getLink('linkMoi2')" alt="" class="static img-hover">
                                 </a>
                               </div>
-                              
                               <div class="info-product">
                                   <div class="list-color">
                                     <ul>
@@ -67,25 +141,16 @@
                                   </div>
                               </div>
                               <div class="add-to-cart">
-                                  <a href="javascript:void(0)#" class="js-cart-button" onclick="toggleSizeTable('sizeTable2')">
-                                      <i class="ti-shopping-cart"></i>
-                                  </a>
+                                <a href="javascript:void(0)#" class="js-cart-button" (click)="toggleSizeTable(i)">
+                                  <i class="ti-shopping-cart"></i>
+                                </a>
                               </div>
-                              <div id="sizeTable2" class="sizeTable js-list-size">
-                                  <ul>
-                                      <li>
-                                          <button class="btn bt-large">s</button>
-                                      </li>
-                                      <li>
-                                          <button class="btn bt-large">m</button>
-                                      </li>
-                                      <li>
-                                          <button class="btn bt-large">l</button>
-                                      </li>
-                                      <li>
-                                          <button class="btn bt-large">xl</button>
-                                      </li>
-                                  </ul>
+                              <div id="sizeTable{{i}}" class="sizeTable js-list-size">
+                                <ul>
+                                  <li *ngFor="let size of getSizeTable(i).sizes">
+                                    <button class="btn bt-large" (click)="addToCart()">{{ size }}</button>
+                                  </li>
+                                </ul>
                               </div>
 
                           </div>
@@ -100,10 +165,9 @@
                               <div class="thumb-product">
                                 <a href="" (mouseenter)="setHoveredState(true)" (mouseleave)="setHoveredState(false)">
                                   <img *ngIf="!isHovered" [src]="getLink('linkMoi1')" alt="" class="static">
-                                  <img *ngIf="isHovered" [src]="getLink('linkMoi2')" alt="" class="static img-hover">
+                                  <img *ngIf="!isHovered" [src]="getLink('linkMoi2')" alt="" class="static img-hover">
                                 </a>
                               </div>
-                              
                               <div class="info-product">
                                   <div class="list-color">
                                     <ul>
@@ -133,289 +197,16 @@
                                   </div>
                               </div>
                               <div class="add-to-cart">
-                                  <a href="javascript:void(0)#" class="js-cart-button" onclick="toggleSizeTable('sizeTable2')">
-                                      <i class="ti-shopping-cart"></i>
-                                  </a>
-                              </div>
-                              <div id="sizeTable2" class="sizeTable js-list-size">
-                                  <ul>
-                                      <li>
-                                          <button class="btn bt-large">s</button>
-                                      </li>
-                                      <li>
-                                          <button class="btn bt-large">m</button>
-                                      </li>
-                                      <li>
-                                          <button class="btn bt-large">l</button>
-                                      </li>
-                                      <li>
-                                          <button class="btn bt-large">xl</button>
-                                      </li>
-                                  </ul>
-                              </div>
-
-                          </div>
-                      </div>                      
-                      </div>
-                      <div class="owl-item">
-                        <div class="item-new-prod">
-                          <div class="product">
-                              <div class="info-tag best-seller">Best Seller</div>
-                              <span class="percent percent_02">-50%
-                              </span>
-                              <div class="thumb-product">
-                                <a href="" (mouseenter)="setHoveredState(true)" (mouseleave)="setHoveredState(false)">
-                                  <img *ngIf="!isHovered" [src]="getLink('linkMoi1')" alt="" class="static">
-                                  <img *ngIf="isHovered" [src]="getLink('linkMoi2')" alt="" class="static img-hover">
+                                <a href="javascript:void(0)#" class="js-cart-button" (click)="toggleSizeTable(i)">
+                                  <i class="ti-shopping-cart"></i>
                                 </a>
                               </div>
-                              
-                              <div class="info-product">
-                                  <div class="list-color">
-                                    <ul>
-                                      <li *ngFor="let color of colorsArray"
-                                          [ngClass]="{'color': true, 'color-active': selectedColorId === color.id}"
-                                          (click)="changeColor(color.id)">
-                                        <a href="javascript:void(0)" class="color-picked" data-id="{{ color.id }}">
-                                          <img src="{{ color.imgSrc }}" alt="{{ color.alt }}">
-                                        </a>
-                                      </li>
-                                    </ul>
-                                      <div class="favorite">
-                                          <i class="ti-heart">
-                                          </i>
-                                      </div>
-                                  </div>
-                                  <div class="title-product">
-                                      <a href="">Jumpsuit Hai Dây Phối Bèo</a>
-                                  </div>
-                                  <div class="price-product">
-                                      <ins>
-                                          <h4>895.000đ</h4>
-                                      </ins>
-                                      <del>
-                                        <span>1.790.000đ</span>
-                                      </del>
-                                  </div>
-                              </div>
-                              <div class="add-to-cart">
-                                  <a href="javascript:void(0)#" class="js-cart-button" onclick="toggleSizeTable('sizeTable2')">
-                                      <i class="ti-shopping-cart"></i>
-                                  </a>
-                              </div>
-                              <div id="sizeTable2" class="sizeTable js-list-size">
-                                  <ul>
-                                      <li>
-                                          <button class="btn bt-large">s</button>
-                                      </li>
-                                      <li>
-                                          <button class="btn bt-large">m</button>
-                                      </li>
-                                      <li>
-                                          <button class="btn bt-large">l</button>
-                                      </li>
-                                      <li>
-                                          <button class="btn bt-large">xl</button>
-                                      </li>
-                                  </ul>
-                              </div>
-
-                          </div>
-                      </div>                      
-                      </div>                      
-                      <div class="owl-item">
-                        <div class="item-new-prod">
-                          <div class="product">
-                              <div class="info-tag best-seller">Best Seller</div>
-                              <span class="percent percent_02">-50%
-                              </span>
-                              <div class="thumb-product">
-                                <a href="" (mouseenter)="setHoveredState(true)" (mouseleave)="setHoveredState(false)">
-                                  <img *ngIf="!isHovered" [src]="getLink('linkMoi1')" alt="" class="static">
-                                  <img *ngIf="isHovered" [src]="getLink('linkMoi2')" alt="" class="static img-hover">
-                                </a>
-                              </div>
-                              
-                              <div class="info-product">
-                                  <div class="list-color">
-                                    <ul>
-                                      <li *ngFor="let color of colorsArray"
-                                          [ngClass]="{'color': true, 'color-active': selectedColorId === color.id}"
-                                          (click)="changeColor(color.id)">
-                                        <a href="javascript:void(0)" class="color-picked" data-id="{{ color.id }}">
-                                          <img src="{{ color.imgSrc }}" alt="{{ color.alt }}">
-                                        </a>
-                                      </li>
-                                    </ul>
-                                      <div class="favorite">
-                                          <i class="ti-heart">
-                                          </i>
-                                      </div>
-                                  </div>
-                                  <div class="title-product">
-                                      <a href="">Jumpsuit Hai Dây Phối Bèo</a>
-                                  </div>
-                                  <div class="price-product">
-                                      <ins>
-                                          <h4>895.000đ</h4>
-                                      </ins>
-                                      <del>
-                                        <span>1.790.000đ</span>
-                                      </del>
-                                  </div>
-                              </div>
-                              <div class="add-to-cart">
-                                  <a href="javascript:void(0)#" class="js-cart-button" onclick="toggleSizeTable('sizeTable2')">
-                                      <i class="ti-shopping-cart"></i>
-                                  </a>
-                              </div>
-                              <div id="sizeTable2" class="sizeTable js-list-size">
-                                  <ul>
-                                      <li>
-                                          <button class="btn bt-large">s</button>
-                                      </li>
-                                      <li>
-                                          <button class="btn bt-large">m</button>
-                                      </li>
-                                      <li>
-                                          <button class="btn bt-large">l</button>
-                                      </li>
-                                      <li>
-                                          <button class="btn bt-large">xl</button>
-                                      </li>
-                                  </ul>
-                              </div>
-
-                          </div>
-                      </div>                      
-                      </div>                      
-                      <div class="owl-item">
-                        <div class="item-new-prod">
-                          <div class="product">
-                              <div class="info-tag best-seller">Best Seller</div>
-                              <span class="percent percent_02">-50%
-                              </span>
-                              <div class="thumb-product">
-                                <a href="" (mouseenter)="setHoveredState(true)" (mouseleave)="setHoveredState(false)">
-                                  <img *ngIf="!isHovered" [src]="getLink('linkMoi1')" alt="" class="static">
-                                  <img *ngIf="isHovered" [src]="getLink('linkMoi2')" alt="" class="static img-hover">
-                                </a>
-                              </div>
-                              
-                              <div class="info-product">
-                                  <div class="list-color">
-                                    <ul>
-                                      <li *ngFor="let color of colorsArray"
-                                          [ngClass]="{'color': true, 'color-active': selectedColorId === color.id}"
-                                          (click)="changeColor(color.id)">
-                                        <a href="javascript:void(0)" class="color-picked" data-id="{{ color.id }}">
-                                          <img src="{{ color.imgSrc }}" alt="{{ color.alt }}">
-                                        </a>
-                                      </li>
-                                    </ul>
-                                      <div class="favorite">
-                                          <i class="ti-heart">
-                                          </i>
-                                      </div>
-                                  </div>
-                                  <div class="title-product">
-                                      <a href="">Jumpsuit Hai Dây Phối Bèo</a>
-                                  </div>
-                                  <div class="price-product">
-                                      <ins>
-                                          <h4>895.000đ</h4>
-                                      </ins>
-                                      <del>
-                                        <span>1.790.000đ</span>
-                                      </del>
-                                  </div>
-                              </div>
-                              <div class="add-to-cart">
-                                  <a href="javascript:void(0)#" class="js-cart-button" onclick="toggleSizeTable('sizeTable2')">
-                                      <i class="ti-shopping-cart"></i>
-                                  </a>
-                              </div>
-                              <div id="sizeTable2" class="sizeTable js-list-size">
-                                  <ul>
-                                      <li>
-                                          <button class="btn bt-large">s</button>
-                                      </li>
-                                      <li>
-                                          <button class="btn bt-large">m</button>
-                                      </li>
-                                      <li>
-                                          <button class="btn bt-large">l</button>
-                                      </li>
-                                      <li>
-                                          <button class="btn bt-large">xl</button>
-                                      </li>
-                                  </ul>
-                              </div>
-
-                          </div>
-                      </div>                      
-                      </div>                      
-                      <div class="owl-item">
-                        <div class="item-new-prod">
-                          <div class="product">
-                              <div class="info-tag best-seller">Best Seller</div>
-                              <span class="percent percent_02">-50%
-                              </span>
-                              <div class="thumb-product">
-                                <a href="" (mouseenter)="setHoveredState(true)" (mouseleave)="setHoveredState(false)">
-                                  <img *ngIf="!isHovered" [src]="getLink('linkMoi1')" alt="" class="static">
-                                  <img *ngIf="isHovered" [src]="getLink('linkMoi2')" alt="" class="static img-hover">
-                                </a>
-                              </div>
-                              
-                              <div class="info-product">
-                                  <div class="list-color">
-                                    <ul>
-                                      <li *ngFor="let color of colorsArray"
-                                          [ngClass]="{'color': true, 'color-active': selectedColorId === color.id}"
-                                          (click)="changeColor(color.id)">
-                                        <a href="javascript:void(0)" class="color-picked" data-id="{{ color.id }}">
-                                          <img src="{{ color.imgSrc }}" alt="{{ color.alt }}">
-                                        </a>
-                                      </li>
-                                    </ul>
-                                      <div class="favorite">
-                                          <i class="ti-heart">
-                                          </i>
-                                      </div>
-                                  </div>
-                                  <div class="title-product">
-                                      <a href="">Jumpsuit Hai Dây Phối Bèo</a>
-                                  </div>
-                                  <div class="price-product">
-                                      <ins>
-                                          <h4>895.000đ</h4>
-                                      </ins>
-                                      <del>
-                                        <span>1.790.000đ</span>
-                                      </del>
-                                  </div>
-                              </div>
-                              <div class="add-to-cart">
-                                  <a href="javascript:void(0)#" class="js-cart-button" onclick="toggleSizeTable('sizeTable2')">
-                                      <i class="ti-shopping-cart"></i>
-                                  </a>
-                              </div>
-                              <div id="sizeTable2" class="sizeTable js-list-size">
-                                  <ul>
-                                      <li>
-                                          <button class="btn bt-large">s</button>
-                                      </li>
-                                      <li>
-                                          <button class="btn bt-large">m</button>
-                                      </li>
-                                      <li>
-                                          <button class="btn bt-large">l</button>
-                                      </li>
-                                      <li>
-                                          <button class="btn bt-large">xl</button>
-                                      </li>
-                                  </ul>
+                              <div id="sizeTable{{i}}" class="sizeTable js-list-size">
+                                <ul>
+                                  <li *ngFor="let size of getSizeTable(i).sizes">
+                                    <button class="btn bt-large" (click)="addToCart()">{{ size }}</button>
+                                  </li>
+                                </ul>
                               </div>
 
                           </div>
@@ -433,6 +224,33 @@
                   <div class="owl-dot"><span></span></div>
               </div>
           </div>
+          </div>
+        </div>
+      </div>
+      <div class="popup-container" *ngIf="showAddToCartPopup">
+        <div class="popup">
+          <div class="hed-pop-not">
+            <div class="tit___hed-pop-not">Đã thêm vào giỏ hàng!</div>
+            <i class="close-icon ti-close" (click)="closePopup()"></i>
+          </div>
+          <div class="notify_wrapper">
+            <div class="notify__content">
+              <div class="notify__message"></div>
+              <div class="notify__product">
+                <div class="notify-product">
+                  <div class="notify-product__thumbnail">
+                    <img src="https://static.dchic.vn/uploads/media/2023/12/DTT_0884-93723949-576x768.JPG" alt="">
+                  </div>
+                  <div class="notify-product__content">
+                    <div class="notify-product__title">Quần Kaki Excool dáng Straight</div>
+                    <div class="notify-product__option">Xám/M</div>
+                    <div class="notify-product__prices">
+                      <ins>499.000đ</ins>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

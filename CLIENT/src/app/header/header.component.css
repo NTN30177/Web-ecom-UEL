@@ -1,6 +1,3 @@
-html {
-    font-size: 62.5%;
-}
 body {
     color: #6C6D70;
     font-family: 'Montserrat', sans-serif;
@@ -31,7 +28,8 @@ img {
 .ti-angle-right {
     cursor: pointer;
 }
-#header {
+#main #header {
+    font-size: 62.5%;
     background-color: #fff;
     position: fixed;
     top: 0;
@@ -439,6 +437,10 @@ input#search-form__input {
     width: max-content;
     min-width: 255px;
 }
+.header-actions .sub-action.account-open {
+    display: block;
+}
+
 .header-actions .sub-action-cart {
     position: fixed;
     top: 0;
@@ -580,6 +582,7 @@ input#search-form__input {
     background: #0A0A0B;
     border: 1px solid transparent;
     margin-bottom: 20px;
+    border-radius: 35px;
 
 }
 
@@ -596,6 +599,7 @@ input#search-form__input {
 .bottom-action .action-login {
     color: #4B4E51;
     border: 1px solid #4B4E51;
+    border-radius: 37px ;
 }
 .bottom-action {
     position: absolute;
@@ -1290,19 +1294,7 @@ img {
 .block-info .list-item .header-action{
 
 }
-.header-actions .sub-action {
-    position: absolute;
-    top: 40px;
-    right: 0;
-    background: #FFF;
-    display: none;
-    z-index: 2;
-    border: 1px solid #E7E8E9;
-    box-sizing: border-box;
-    border-radius: 4px;
-    width: max-content;
-    min-width: 255px;
-}
+
 .top-action {
     padding: 24px 24px 20px;
     position: relative;
@@ -1337,6 +1329,19 @@ img {
     margin-right: 12px;
     vertical-align: middle;
 }
+/* styles.css hoặc styles.scss */
+
+/* Tùy chỉnh màu nền cho Snackbar */
+.custom-snackbar {
+    background-color: #333;
+    color: #fff;
+}
+  
+  /* Tùy chỉnh góc bo tròn của Snackbar */
+.custom-snackbar .mat-simple-snackbar {
+    border-radius: 10px;
+}
+  
 
 
 
