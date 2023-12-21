@@ -21,6 +21,7 @@ const routes: Routes = [
     path: 'admin',
     component: AdminComponent,
     children: [
+      { path: '', redirectTo: 'add-product-2', pathMatch: 'full' },
       { path: 'add-product', component: AddProductComponent },
       { path: 'add-product-2', component: AddProduct2Component },
       { path: 'view-color', component: ViewColorComponent },
