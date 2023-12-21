@@ -53,8 +53,8 @@ import { FeedbackOrderComponent } from './manage-account/account-order/feedback-
 import { FeedbackOrderSuccessComponent } from './manage-account/account-order/feedback-order-success/feedback-order-success.component';
 import { OrderTrackingComponent } from './manage-account/order-tracking/order-tracking.component';
 import { TermPolicyComponent } from './term-policy/term-policy.component';
-import { DeliveryPolicyComponent } from './delivery-policy/delivery-policy.component';
 import { ManageOrderComponent } from './admin/manage-order/manage-order.component';
+import { DeliveryPolicyComponent } from './delivery-policy/delivery-policy.component';
 import { DatePipe } from '@angular/common';
 
 
