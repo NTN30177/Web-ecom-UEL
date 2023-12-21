@@ -1,0 +1,63 @@
+<div class="method-container">
+    <div class="method-header">
+        <div>Chọn phương thức thanh toán</div>
+        <svg style="cursor: pointer;" (click)="closePopup()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-x-lg" viewBox="0 0 16 16">
+            <path
+                d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+        </svg>
+    </div>
+
+    <div class="method-item-block ">
+        <div class="method-item" style="border: 1px solid var(--Primary-02, #C54C3D);">
+            <input type="radio" id="cash">
+            <label for="cash">
+                <div class="d-flex gap-4 align-items-center ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="42" height="30" viewBox="0 0 42 30" fill="none">
+                        <path
+                            d="M39.445 6.66584L5.74086 0.863375C4.70692 0.685372 3.72405 1.37952 3.54605 2.41347L0.32246 21.138C0.144457 22.172 0.838609 23.1548 1.87255 23.3328L35.5767 29.1353C36.6107 29.3133 37.5935 28.6191 37.7715 27.5852L40.9951 8.86065C41.1731 7.8267 40.479 6.84384 39.445 6.66584ZM3.29232 20.6853L3.93704 16.9404C6.00551 17.2965 7.39333 19.2616 7.03723 21.33L3.29232 20.6853ZM5.54883 7.57814L6.19355 3.83324L9.93846 4.47795C9.58235 6.54643 7.61731 7.93425 5.54883 7.57814ZM19.6917 20.6167C17.106 20.1715 15.4437 17.2953 15.9777 14.1934C16.5118 11.091 19.0407 8.93691 21.6259 9.38197C24.211 9.82702 25.874 12.7028 25.3399 15.8052C24.8057 18.9082 22.2763 21.0616 19.6917 20.6167ZM35.124 26.1654L31.3791 25.5207C31.7352 23.4522 33.7003 22.0644 35.7688 22.4205L35.124 26.1654ZM37.3806 13.0582C35.3121 12.7021 33.9243 10.7371 34.2804 8.66862L38.0253 9.31334L37.3806 13.0582Z"
+                            fill="#008D1A" />
+                    </svg>
+                    <div>COD <br> Thanh toán khi nhận hàng</div>
+                </div>
+            </label>
+        </div>
+        <div class="method-item">
+            <input type="radio" id="momo">
+            <label for="momo">
+                <div class="d-flex gap-4 align-items-center ">
+                    <div><img src="./logo/momo.png" width="28.125px" height="30px"></div>
+                    <div>Ví momo</div>
+                </div>
+            </label>
+        </div>
+        <div class="method-item">
+            <input type="radio" id="zalopay">
+            <label for="zalopay">
+                <div class="d-flex gap-4 align-items-center ">
+                    <div><img src="./logo/momo.png" width="28.125px" height="30px"></div>
+                    <div>Ví Zalopay</div>
+                </div>
+            </label>
+        </div>
+        <div class="method-item">
+            <input type="radio" id="momo">
+            <label for="momo">
+                <div class="d-flex gap-4 align-items-center ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-qr-code-scan" viewBox="0 0 16 16">
+                        <path d="M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1v2.5a.5.5 0 0 1-1 0zm12 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0V1h-2.5a.5.5 0 0 1-.5-.5M.5 12a.5.5 0 0 1 .5.5V15h2.5a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H15v-2.5a.5.5 0 0 1 .5-.5M4 4h1v1H4z"/>
+                        <path d="M7 2H2v5h5zM3 3h3v3H3zm2 8H4v1h1z"/>
+                        <path d="M7 9H2v5h5zm-4 1h3v3H3zm8-6h1v1h-1z"/>
+                        <path d="M9 2h5v5H9zm1 1v3h3V3zM8 8v2h1v1H8v1h2v-2h1v2h1v-1h2v-1h-3V8zm2 2H9V9h1zm4 2h-1v1h-2v1h3zm-4 2v-1H8v1z"/>
+                        <path d="M12 9h2V8h-2z"/>
+                      </svg>
+                    <div>Chuyển khoản ngân hàng bằng QR Code</div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <div class="confirm-block">
+        <div class="confirm-button">Xác nhận</div>
+    </div>
+</div>

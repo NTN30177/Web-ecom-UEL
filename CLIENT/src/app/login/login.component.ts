@@ -1,33 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router'; // Import Router
 import { MatDialog } from '@angular/material/dialog';
 import { ForgotPasswordModalComponent } from './forgot-password-modal/forgot-password-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
-
-
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  @ViewChild('cusAccount') cusAccountInput: ElementRef | undefined;
+  @ViewChild('cusPassword') cusPasswordInput: ElementRef | undefined;
+  
   loginForm: FormGroup;
+  infoResult: string | undefined;
+  errMessage: any;
 
-  constructor(private fb: FormBuilder, private router: Router,    public dialog: MatDialog // Inject MatDialog
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    public dialog: MatDialog,
+    private _authService: AuthService,
+    private renderer: Renderer2
+
   ) {
     this.loginForm = this.fb.group({
-      'cus_account': ['', [Validators.required, this.emailOrPhoneNumberValidator()]],
-      'cus_password': ['', Validators.required]
+      cus_account: [
+        '',
+        [Validators.required, this.emailOrPhoneNumberValidator()],
+      ],
+      cus_password: ['', Validators.required],
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  
   emailOrPhoneNumberValidator() {
     return (control: any) => {
       const value = control.value;
@@ -37,7 +47,7 @@ export class LoginComponent implements OnInit {
 
       // Check if it's a valid email or phone number
       const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-      const phonePattern = /^\d{10}$/; // Adjust the pattern according to your needs
+      const phonePattern = /^0\d{9}$/
 
       const isValidEmail = emailPattern.test(value);
       const isValidPhone = phonePattern.test(value);
@@ -51,67 +61,85 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-  // Mark all controls as touched to trigger validation messages
-  this.loginForm.markAllAsTouched();
+    // Mark all controls as touched to trigger validation messages
+    this.loginForm.markAllAsTouched();
 
-  if (this.loginForm.valid) {
-    // Clear error messages and remove error class for all controls
-    Object.keys(this.loginForm.controls).forEach(field => {
-      const errorElement = document.getElementById(`${field}_error`);
-      const inputElement = document.getElementById(field);
-
-      if (errorElement) {
-        errorElement.innerHTML = '';
-      }
-
-      if (inputElement) {
-        inputElement.classList.remove('error-input');
-      }
-    });
-
-    // Redirect to "dangky" page upon successful login
-    this.router.navigate(['/register']);
-  } else {
-    // Show error messages and apply red border for each invalid field
-    Object.keys(this.loginForm.controls).forEach(field => {
-      const control = this.loginForm.get(field);
-      const errorElement = document.getElementById(`${field}_error`);
-      const inputElement = document.getElementById(field);
-
+    if (this.loginForm.valid) {
       // Clear error messages and remove error class for all controls
-      if (errorElement) {
-        errorElement.innerHTML = '';
-      }
+      Object.keys(this.loginForm.controls).forEach((field) => {
+        const errorElement = this.renderer.selectRootElement(`#${field}_error`);
+        const inputElement = this.renderer.selectRootElement(`#${field}`);
 
-      if (inputElement) {
-        inputElement.classList.remove('error-input');
-      }
+        if (errorElement) {
+          this.renderer.setProperty(errorElement, 'innerHTML', '');
+        }
 
-      if (control && control.errors) {
-        if (control.errors['required']) {
-          if (errorElement) {
-            errorElement.innerHTML = '* Vui lòng nhập giá trị.';
-          }
+        if (inputElement) {
+          this.renderer.removeClass(inputElement, 'error-input');
+        }
+      });
 
-          if (inputElement) {
-            inputElement.classList.add('error-input');
-          }
-        } else if (control.errors['invalidFormat']) {
-          if (errorElement) {
-            errorElement.innerHTML = '* Vui lòng nhập đúng định dạng Email/SĐT.';
-          }
+      // Redirect to "dangky" page upon successful login
+      // this.router.navigate(['/register']);
+    } else {
+      // Show error messages and apply red border for each invalid field
+      Object.keys(this.loginForm.controls).forEach((field) => {
+        const control = this.loginForm.get(field);
+        const errorElement = this.renderer.selectRootElement(`#${field}_error`);
+        const inputElement = this.renderer.selectRootElement(`#${field}`);
 
-          if (inputElement) {
-            inputElement.classList.add('error-input');
+        // Clear error messages and remove error class for all controls
+        if (errorElement) {
+          this.renderer.setProperty(errorElement, 'innerHTML', '');
+        }
+
+        if (inputElement) {
+          this.renderer.removeClass(inputElement, 'error-input');
+        }
+
+        if (control && control.errors) {
+          if (control.errors['required']) {
+            if (errorElement) {
+              this.renderer.setProperty(errorElement, 'innerHTML', '* Vui lòng nhập giá trị.');
+            }
+
+            if (inputElement) {
+              this.renderer.addClass(inputElement, 'error-input');
+            }
+          } else if (control.errors['invalidFormat']) {
+            if (errorElement) {
+              this.renderer.setProperty(errorElement, 'innerHTML', '* Vui lòng nhập đúng định dạng Email/SĐT.');
+            }
+
+            if (inputElement) {
+              this.renderer.addClass(inputElement, 'error-input');
+            }
           }
         }
-      }
-    });
+      });
+    }
+    this.verifiedLogin();
   }
-}
 
+  verifiedLogin() {
+    if (this.loginForm.invalid) {
+      alert('Vui lòng kiểm tra lại thông tin form');
+    } else {
+      console.log('1235');
+      this._authService.verifiedInForUser(this.loginForm.value).subscribe({
+        next: (data: any) => {
+          this.infoResult = data.message;
+        },
+        error: (err) => {
+          this.errMessage = err;
+          console.log(this.errMessage)
+        },
+      });
+      console.log('save');
+    }
+  }
 
-  openForgotPasswordDialog(): void{
+  openForgotPasswordDialog(): void {
     // Open the modal when the "Quên mật khẩu?" link is clicked
     const dialogRef = this.dialog.open(ForgotPasswordModalComponent, {
       width: '70%',
@@ -124,10 +152,10 @@ export class LoginComponent implements OnInit {
   }
 
   // Khai báo biến showPassword và khởi tạo nó là false
-showPassword: boolean = false;
+  showPassword: boolean = false;
 
-// Hàm để chuyển đổi giữa hiển thị và ẩn mật khẩu
-togglePasswordVisibility(): void {
-  this.showPassword = !this.showPassword;
-}  
+  // Hàm để chuyển đổi giữa hiển thị và ẩn mật khẩu
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
 }

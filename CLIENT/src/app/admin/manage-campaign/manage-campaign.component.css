@@ -6,7 +6,6 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-/* Additional styling for specific elements if needed */
 html, body {
     line-height: 25px;
     color: #000;
@@ -57,14 +56,18 @@ table {
     border-collapse: collapse;
 }
 
-thead {
-    border-top: 1px solid var(--semantic-03, #D9D9D9);
-    border-bottom: 1px solid var(--semantic-03, #D9D9D9);
-    background: #F9FCFF;
-    text-align: center;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.84px;
+#manage-campaigns{
+    border-collapse: separate;
+    border-spacing: 0 20px; /* Khoảng cách giữa các dòng là 10px */
+}
+
+#example th,
+#example td {
+  transition: background-color 0.3s ease; /* Hiệu ứng chuyển động màu nền */
+}
+
+#example tbody tr {
+    background-color: #f9fcff; /* Màu nền mặc định cho các dòng */
 }
 
 .mat-tab-body-content, .mat-tab-label {
@@ -95,6 +98,14 @@ mat-icon {
     font-weight: 700;
     letter-spacing: 0.84px;
     padding: 20px;
+}
+.custom-datatable tbody td {
+    background-color: #f9fcff; /* Màu nền mặc định cho các dòng */
+
+}
+.custom-datatable tbody tr {
+    vertical-align: middle;
+
 }
 
 .smaller-icon {

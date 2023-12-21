@@ -1,84 +1,88 @@
-<div class="container order-container">
-    <div class="header row ">
-        <div class="col-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-arrow-left" viewBox="0 0 16 16">
+<div class=" order-container">
+    <div class="payment-header row ">
+        <div style="cursor: pointer;" class="col-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                 <path fill-rule="evenodd"
                     d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
             </svg></div>
-        <div class="col-10 main-title text-center me-1 ">
+        <div class="col-10 payment-main-title text-center me-1 ">
             Thông tin đơn hàng
         </div>
     </div>
     <!-- <div class="row">
         <hr class="col-12 gy-4" style="margin-top: 0; margin-bottom: 0;" />
     </div> -->
-    <hr class="col-12 gy-4 mb-3 ">
+    <hr class="col-12 gy-4 mb-4 ">
 
-
-    <div class="row order-item">
-        <div class="col-3 col-sm-auto">
-            <img src="" alt="" class="img-fluid" style="max-width: 100%">
-        </div>
-        <div class="col d-flex flex-column justify-content-start gap-3 cart-item__detail">
-            <div class="cart-item__voucher-small">
-                <div class="col d-flex align-items-center justify-content-between">
-                    <div class="voucher-icon p-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-gift-fill" viewBox="0 0 16 16">
-                            <path
-                                d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v.006c0 .07 0 .27-.038.494H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.038A2.968 2.968 0 0 1 3 2.506zm1.068.5H7v-.5a1.5 1.5 0 1 0-3 0c0 .085.002.274.045.43a.522.522 0 0 0 .023.07M9 3h2.932a.56.56 0 0 0 .023-.07c.043-.156.045-.345.045-.43a1.5 1.5 0 0 0-3 0zm6 4v7.5a1.5 1.5 0 0 1-1.5 1.5H9V7zM2.5 16A1.5 1.5 0 0 1 1 14.5V7h6v9z" />
-                        </svg>
+    <div>
+        <div class="row order-item mb-5">
+            <div class="col-3 col-sm-auto">
+                <img src="" alt="" class="img-fluid" style="max-width: 100%">
+            </div>
+            <div class="col d-flex flex-column justify-content-start gap-3 cart-item__detail">
+                <div class="cart-item__voucher-small">
+                    <div class="col d-flex align-items-center justify-content-between">
+                        <div class="voucher-icon p-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-gift-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v.006c0 .07 0 .27-.038.494H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.038A2.968 2.968 0 0 1 3 2.506zm1.068.5H7v-.5a1.5 1.5 0 1 0-3 0c0 .085.002.274.045.43a.522.522 0 0 0 .023.07M9 3h2.932a.56.56 0 0 0 .023-.07c.043-.156.045-.345.045-.43a1.5 1.5 0 0 0-3 0zm6 4v7.5a1.5 1.5 0 0 1-1.5 1.5H9V7zM2.5 16A1.5 1.5 0 0 1 1 14.5V7h6v9z" />
+                            </svg>
+                        </div>
+                        <div class="voucher-title fw6">Mua 1 tặng 1</div>
                     </div>
-                    <div class="voucher-title fw6">Mua 1 tặng 1</div>
+                </div>
+
+                <div class="fw6">Piece Suits - Set áo vest dáng oversize</div>
+
+                <div class="d-flex gap-4 ">
+                    <div>Ghi khói/ M</div>
+                    <div>Số lượng: 1</div>
+                </div>
+
+                <div class="d-flex gap-3 cart-item__price">
+                    <input class="discount-hide" type="hidden" value="20">
+                    <input class="origin-price__hide" type="hidden" value="100">
+                    <div class="sale-price fw6">259.000đ</div>
+                    <div class="origin-price align-self-center ">500.000đ</div>
                 </div>
             </div>
-            <div class=" text-start">
-                <div class="col fw6">Piece Suits - Set áo vest dáng oversize</div>
-            </div>
-            <div class="d-flex gap-4 ">
-                <div>Ghi khói/ M</div>
-                <div>Số lượng: 1</div>
-            </div>
 
-            <div class="d-flex gap-3 cart-item__price">
-                <input class="discount-hide" type="hidden" value="20">
-                <input class="origin-price__hide" type="hidden" value="100">
-                <div class="sale-price fw6">259.000đ</div>
-                <div class="origin-price align-self-center ">500.000đ</div>
-            </div>
         </div>
+        <hr class="gy-4 mb-5 hr-custom">
     </div>
-    <hr class="col-12 gy-4 mb-3">
 
-    <div class="address-container flex-column ">
+    <!-- <hr class="col-12 gy-4 mb-5"> -->
+
+    <div class="address-container flex-column mb-5 ">
 
         <div class="row align-items-center ">
             <div class="col-8">
-                <div class="fw6 mb-4">Thông tin nhận hàng</div>
+                <div class="block-header mb-5">Thông tin nhận hàng</div>
 
-                <div *ngIf= "defaultAddress" class="">
+                <div *ngIf="defaultAddress" class="">
                     <div class="name">
-                      <p>{{ defaultAddress.name }}</p>
-                      <div *ngIf="defaultAddress.isDefault" class="default-tag align-self-center">Mặc định
-                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor"
-                          class="bi bi-star" viewBox="0 0 16 16">
-                          <path
-                            d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
-                        </svg>
-                      </div>
+                        <p>{{ defaultAddress.name }}</p>
+                        <div *ngIf="defaultAddress.isDefault" class="default-tag align-self-center">Mặc định
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor"
+                                class="bi bi-star" viewBox="0 0 16 16">
+                                <path
+                                    d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
+                            </svg>
+                        </div>
                     </div>
                     <div>Điện thoại: {{ defaultAddress.phone }}</div>
                     <div>Địa chỉ: {{ defaultAddress.address }}</div>
-                  </div>
+                </div>
 
             </div>
-            <div class="col-4 btn-choose-address " (click)= "openAddressSelectionPopup()">
+            <div class="col-4 btn-choose-address " (click)="openAddressSelectionPopup()">
                 Chọn địa chỉ khác
             </div>
 
         </div>
         <hr class="col-12 gy-4 mb-3 ">
-        <div class="d-inline-flex button-add text-uppercase " id="open-popup-btn" (click)= "openDialog()">
+        <div class="d-inline-flex button-add text-uppercase " id="open-popup-btn" (click)="openDialog()">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle"
                 viewBox="0 0 16 16">
                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
@@ -88,3 +92,62 @@
             Thêm địa chỉ
         </div>
     </div>
+    <div class="payment-method-block mb-5">
+        <div class="block-header mb-5">Phương thức thanh toán</div>
+        <div class="payment-select-option">
+            <div class="d-flex gap-4 align-items-center ">
+                <svg xmlns="http://www.w3.org/2000/svg" width="42" height="30" viewBox="0 0 42 30" fill="none">
+                    <path
+                        d="M39.445 6.66584L5.74086 0.863375C4.70692 0.685372 3.72405 1.37952 3.54605 2.41347L0.32246 21.138C0.144457 22.172 0.838609 23.1548 1.87255 23.3328L35.5767 29.1353C36.6107 29.3133 37.5935 28.6191 37.7715 27.5852L40.9951 8.86065C41.1731 7.8267 40.479 6.84384 39.445 6.66584ZM3.29232 20.6853L3.93704 16.9404C6.00551 17.2965 7.39333 19.2616 7.03723 21.33L3.29232 20.6853ZM5.54883 7.57814L6.19355 3.83324L9.93846 4.47795C9.58235 6.54643 7.61731 7.93425 5.54883 7.57814ZM19.6917 20.6167C17.106 20.1715 15.4437 17.2953 15.9777 14.1934C16.5118 11.091 19.0407 8.93691 21.6259 9.38197C24.211 9.82702 25.874 12.7028 25.3399 15.8052C24.8057 18.9082 22.2763 21.0616 19.6917 20.6167ZM35.124 26.1654L31.3791 25.5207C31.7352 23.4522 33.7003 22.0644 35.7688 22.4205L35.124 26.1654ZM37.3806 13.0582C35.3121 12.7021 33.9243 10.7371 34.2804 8.66862L38.0253 9.31334L37.3806 13.0582Z"
+                        fill="#008D1A" />
+                </svg>
+                <p>COD <br> Thanh toán khi nhận hàng</p>
+            </div>
+            <div class="d-flex gap-2 align-items-center method-change" (click)="openMethodSelectionPopup()">
+                <p>thay đổi</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" viewBox="0 0 15 16" fill="none">
+                    <path d="M5.625 11.75L9.375 8L5.625 4.25" stroke="#9B3A23" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <div class="cart-footer mb-4">
+        <div class="payment-footer-row ">
+            <div class="total-product__title">Tổng sản phẩm</div>
+            <div class="total-product__value">1</div>
+        </div>
+        <div class="payment-footer-row ">
+            <div class="estimated-cost__title">Tạm tính</div>
+            <div class="estimated-cost__value">
+                <div class="total-after__discount">1.900.000</div>
+                <div class="total-discount">
+                    (Tiết kiệm <span class="total-discount__value">0</span>)
+                </div>
+            </div>
+        </div>
+        <div class="payment-footer-row ">
+            <div class="product-gift__title">Giảm giá</div>
+            <div class="product-gift__value red">0</div>
+        </div>
+        <div class="payment-footer-row ">
+            <div class="product-ship__title">Phí giao hàng</div>
+            <div class="product-ship__value">0</div>
+        </div>
+
+    </div>
+    <hr class="gy-4 mb-5 hr-custom">
+
+    <div class="total-final-block">
+        <div class="payment-footer-row ">
+            <div class="product-total__title">Tổng tiền</div>
+            <div>
+                <div class="product-total__value">1.990.000</div>
+                <div class="total-note">(đã giảm 237k trên giá gốc)</div>
+            </div>
+        </div>
+        <div class="button-buy">Mua ngay (3)</div>
+    </div>
+</div>
+

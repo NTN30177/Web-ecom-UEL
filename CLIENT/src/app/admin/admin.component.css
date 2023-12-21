@@ -1,3 +1,5 @@
+
+
 h1 {
     padding: 0 1rem;
 }
@@ -33,7 +35,7 @@ mat-sidenav-container {
 }
 
 mat-sidenav {
-    padding-top: 3.5rem;
+    /* padding-top: 3.5rem; */
     @media screen and (min-width: 600px) {
       padding-top: 4rem;
     }
@@ -44,6 +46,8 @@ mat-sidenav {
         gap: 1rem;
         padding:0.75rem;
     }
+
+    position: fixed;
   }
 
 mat-sidenav-content{
@@ -143,9 +147,13 @@ mat-form-field {
   letter-spacing: var(--mdc-list-list-item-label-text-tracking);
 }
 
-/* Đối với các nút mat-icon-button */
-button.mat-icon-button {
-  background-color: transparent; /* Đặt nền của nút là trong suốt */
-  border: none; /* Loại bỏ viền */
-  cursor: pointer; /* Biến con trỏ thành pointer khi rê chuột vào nút */
+/* ... (các quy tắc CSS khác) */
+
+.mat-list-item .entry i {
+  font-size: 18px; /* Điều chỉnh kích thước của icon trong mat-list-item */
 }
+
+.mat-expansion-panel-header i {
+  font-size: 18px; /* Điều chỉnh kích thước của icon trong mat-expansion-panel-header */
+}
+

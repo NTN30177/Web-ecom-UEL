@@ -1,13 +1,4 @@
-/* tbody {
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
-    letter-spacing: 0.84px;
-} */
-/* html,body{
-    font-family: Montserrat
-} */
+
 .order-header{
     font-size: 28px;
     /* padding-top: 20px; */
@@ -36,6 +27,19 @@
 
 }
 
+
+.btn-action-order{
+    display: flex;
+    padding: 8px 6px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 7px;
+    background: var(--Primary-02, #C54C3D);
+    color: white;
+    border: 0
+}
+
 .table {
     margin-top: 50px;
     font-size: 12px;
@@ -45,7 +49,14 @@
     letter-spacing: 0.84px;
 }
 
-table.dataTable tbody tr {
-    margin-top: 22px;
-  }
 
+#dataTable tbody tr {
+    vertical-align: middle;
+}
+#dataTable tbody tr td{
+    gap: 10px;
+    padding: 20px 0px;
+
+}
+  
+  

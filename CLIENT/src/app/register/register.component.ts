@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -8,15 +9,29 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+
+  @ViewChild('cusFirstname') cusFirstname!: ElementRef;
+  @ViewChild('cusLastname') cusLastname!: ElementRef;
+
   registerForm!: FormGroup;
   passwordMismatchError: string = '';
   showOptionZeroError: boolean = false;
+  infoResult: any;
+  errMessage: any;
+  districts: any;
+  provinces: any;
+  wards: any;
 
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(private fb: FormBuilder,
+     private router: Router,
+     private _authService: AuthService,
+     private renderer: Renderer2
+     ) { }
 
   ngOnInit() {
     this.initForm();
     this.setDefaultValues();
+    this.apiProvince()
   }
 
   initForm() {
@@ -37,8 +52,54 @@ export class RegisterComponent implements OnInit {
       validators: this.passwordMatchValidator.bind(this)
     });
   }
+  selectChangeP(event: any) {
+    const selectedValue = event.target.value;
+    console.log(selectedValue, 'district')
+    this.apiDistrict(selectedValue)
+    console.log(selectedValue, 'district')
 
-  // Getter for easy access to form controls
+  }
+  selectChangeD(event: any) {
+    const selectedValue = event.target.value;
+    this.apiWard(selectedValue)
+  }
+  apiProvince() {
+    console.log('1235')
+    this._authService.getProvince().subscribe({
+      next: (data: any) => {
+        this.provinces = data;
+        console.log(this.provinces, '123')
+      },
+      error: (err: any) => {
+        this.errMessage = err;
+      },
+    });
+  }
+  apiDistrict(id:any) {
+    console.log('1235')
+    this._authService.getDistrict(id).subscribe({
+      next: (data: any) => {
+        this.districts = data;
+        console.log(this.districts)
+      },
+      error: (err: any) => {
+        this.errMessage = err;
+      },
+    });
+  }
+  apiWard(id:any) {
+    console.log('ward')
+    this._authService.getWard(id).subscribe({
+      next: (data: any) => {
+        this.wards = data;
+        console.log(this.wards)
+      },
+      error: (err: any) => {
+        this.errMessage = err;
+      },
+    });
+  }
+
   get formControls() {
     return this.registerForm.controls;
   }
@@ -65,35 +126,35 @@ export class RegisterComponent implements OnInit {
   }
 
   clearSpecificErrorMessage(controlName: string) {
-    const errorElement = document.getElementById(`${controlName}_error`);
-    const inputElement = document.getElementById(controlName);
+    const errorElement = this.renderer.selectRootElement(`#${controlName}_error`);
+    const inputElement = this.renderer.selectRootElement(`#${controlName}`);
 
     if (errorElement) {
-      errorElement.innerHTML = '';
+      this.renderer.setProperty(errorElement, 'innerHTML', '');
     }
 
     if (inputElement) {
-      inputElement.classList.remove('error-input');
+      this.renderer.removeClass(inputElement, 'error-input');
     }
   }
 
   displayErrorMessage(controlName: string, errorMessage: string) {
-    const errorElement = document.getElementById(`${controlName}_error`);
-    const inputElement = document.getElementById(controlName);
+    const errorElement = this.renderer.selectRootElement(`#${controlName}_error`);
+    const inputElement = this.renderer.selectRootElement(`#${controlName}`);
 
     if (errorElement) {
-      errorElement.innerHTML = errorMessage;
+      this.renderer.setProperty(errorElement, 'innerHTML', errorMessage);
     }
 
     if (inputElement) {
-      inputElement.classList.add('error-input');
+      this.renderer.addClass(inputElement, 'error-input');
     }
   }
 
   validateAndClearError(controlName: string) {
     const control = this.registerForm.get(controlName);
-    const errorElement = document.getElementById(`${controlName}_error`);
-    const inputElement = document.getElementById(controlName);
+    const errorElement = this.renderer.selectRootElement(`#${controlName}_error`);
+    const inputElement = this.renderer.selectRootElement(`#${controlName}`);
 
     if (control && errorElement && inputElement) {
       if (control.valid) {
@@ -103,9 +164,9 @@ export class RegisterComponent implements OnInit {
         // Show error messages and apply red border for invalid controls
         this.displayErrorMessage(controlName, '* Vui lòng nhập/chọn giá trị.');
         if (controlName === 'cus_reenterpassword' && control.errors?.['passwordMismatch']) {
-        this.displayErrorMessage(controlName, 'Mật khẩu nhập lại không khớp.');
-      }
-        inputElement.classList.add('error-input');
+          this.displayErrorMessage(controlName, 'Mật khẩu nhập lại không khớp.');
+        }
+        this.renderer.addClass(inputElement, 'error-input');
       }
     }
   }
@@ -128,7 +189,6 @@ export class RegisterComponent implements OnInit {
       Object.keys(this.registerForm.controls).forEach(field => {
         this.clearSpecificErrorMessage(field);
       });
-
       this.router.navigate(['/login']);
     } else {
       // Show error messages and apply red border for each invalid field
@@ -136,7 +196,33 @@ export class RegisterComponent implements OnInit {
         this.validateAndClearError(field);
       });
     }
+    this.postRegister()
   }
+  postRegister(){
+    if (this.registerForm.invalid) {
+      alert('Vui lòng kiểm tra lại thông tin form');
+    } else {
+      this._authService.postInfoUser(this.registerForm.value).subscribe({
+        next: (data: any) => {
+          if(data){
+            this.infoResult ='Vui lòng xác thực địa chỉ gmail'
+            setTimeout(() => {
+              this.infoResult=''
+            }, 5000);
+          } else{
+            this.infoResult ='Hệ thống lỗi, vui lòng đăng ký lại'
+          }
+        },
+        error: (err: any) => {
+          this.errMessage = err;
+        },
+      });
+      console.log('save')
+
+      alert('Lưu dữ liệu thành công');
+    }
+  }
+  
 
   emailValidator() {
     return (control: any) => {
@@ -165,7 +251,7 @@ export class RegisterComponent implements OnInit {
       }
 
       // Check if it's a valid phone number starting with 0
-      const phonePattern = /^0\d{9}$/; // Adjust the pattern according to your needs
+      const phonePattern = /^0\d{9}$/;
       const isValidPhone = phonePattern.test(value);
 
       if (!isValidPhone) {
@@ -188,4 +274,5 @@ export class RegisterComponent implements OnInit {
       confirmPasswordControl.setErrors(null);
     }
   }
+
 }

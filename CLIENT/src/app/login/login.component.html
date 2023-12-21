@@ -6,6 +6,7 @@
           <div class="frame">
               <div class="row p-3">
                 <div class="text_head">ĐĂNG NHẬP</div>
+                {{infoResult}}
                 <div class="form-group mt-3">
                     <p>Đăng nhập để không bỏ lỡ quyền lợi tích luỹ và hoàn tiền cho bất kỳ đơn hàng nào.</p>
                 </div>
@@ -20,7 +21,7 @@
                             <input class="form-control input-primary" 
                             type="{{ showPassword ? 'text' : 'password' }}" 
                             name="cus_password" 
-                            id="cus_password_login" 
+                            id="cus_password" 
                             placeholder="Mật khẩu"
                             formControlName="cus_password" 
                             [ngClass]="{'error-input': loginForm.get('cus_password')?.errors?.['required']}">
@@ -58,4 +59,4 @@
       </div>
   </div>
 </div>
-<!-- {{ loginForm.value | json }} -->
+{{ loginForm.value | json }}

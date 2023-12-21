@@ -99,6 +99,7 @@ export class AddProduct2Component implements OnInit {
 
   onSubmit() {
     const data = this.onMultipleSubmit();
+    console.log(this.rfDataModal.value )
     this.checkTypeToValidate();
     if (this.rfDataModal.invalid || this.variant.invalid) {
       this.markFormGroupTouched(this.rfDataModal);
@@ -112,6 +113,8 @@ export class AddProduct2Component implements OnInit {
           this.errMessage = err;
         },
       });
+      console.log('save')
+
       alert('Lưu dữ liệu thành công');
     }
   }

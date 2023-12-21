@@ -16,7 +16,7 @@ export class CreateCampaignComponent implements OnInit {
   ngOnInit() {
     this.createcampaignForm = this.fb.group({
       campaign_name: ['', Validators.required], // Add validation if needed
-      campaign_type: ['', Validators.required],
+      // campaign_type: ['', Validators.required],
       campaign_start: ['', Validators.required],
       campaign_end: ['', Validators.required],
       campaign_script: [''],

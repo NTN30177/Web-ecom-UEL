@@ -190,7 +190,6 @@ const colorSchema = new mongoose.Schema({
     image: 
         {
             type: String,
-            // required: true, // You can add this validation if images are required
         },
     
 });

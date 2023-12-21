@@ -1,4 +1,5 @@
 const { Product, Type, Subtype, Color, CartItem } = require("../models/product");
+const { Province, District, Ward } = require("../models/address");
 
 const getColor = async (req, res, next) => {
     try {
@@ -14,6 +15,7 @@ const getColor = async (req, res, next) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   };
+
 
 
 const getType = async (req, res, next) => {
@@ -57,7 +59,40 @@ const collection = async (req, res, next) => {
     res.status(500).json({ error: "Lỗi máy chủ." });
   }
 };
-  module.exports = {
-    getColor, getType, getSubType,collection
+
+const getProvince = async (req, res, next) => {
+  try {
+    const province = await Province.find({}).lean();
+    console.log(province)
+    res.json(province);
+  } catch (err) {
+    console.log(err);
+  }
+};
+const getDistrict = async (req, res) => {
+  try { 
+    const id = req.params.provinceId;
+    const data = await District.find({ parent_code: id }).lean();
+    res.json(data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+const getWard = async (req, res) => {
+  try { 
+    const id = req.params.districtId;
+    const data = await Ward.find({ parent_code: id }).lean();
+    res.json(data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
+
+
+
+module.exports = {
+    getColor, getType, getSubType,collection, getProvince, getDistrict, getWard
   };
   

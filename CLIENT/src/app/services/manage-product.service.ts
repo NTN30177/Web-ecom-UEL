@@ -13,6 +13,7 @@ import { Observable, catchError, map, retry, throwError } from 'rxjs';
 export class ManageProductService {
   local='http://localhost:3000'
   cartData = new EventEmitter<IProduct[] | []>();
+  
   constructor(private _http: HttpClient) {}
 
   postProduct(product: any): Observable<any> {
@@ -26,13 +27,13 @@ export class ManageProductService {
     };
     return this._http
       .post<any>(
-        `${this.local}+/product/add-product`,
+        `${this.local}/product/add-product`,
         product
         // requestOptions
       )
       .pipe(
         map((res) => JSON.parse(res)),
-        retry(3),
+       
         catchError(this.handleError)
       );
   }

@@ -128,3 +128,12 @@ svg {
 #example tbody tr:hover {
   background-color: #f0f0f0; /* Màu nền khi hover */
 }
+
+.custom-datatable thead th {
+  background-color: #F9FCFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.84px;
+  padding: 20px;
+}
