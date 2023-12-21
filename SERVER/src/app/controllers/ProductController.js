@@ -6,6 +6,41 @@ const {
   CartItem,
 } = require("../models/product");
 
+// getProduct controller
+const getProduct = async (req, res) => {
+  try {
+    const products = await Product.find();
+    res.json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+softDeleteProduct = async (req, res) => {
+  const { productId } = req.params;
+
+  try {
+    // Tìm sản phẩm trong cơ sở dữ liệu
+    const product = await Product.findById(productId);
+
+    // Kiểm tra nếu sản phẩm không tồn tại
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    // Cập nhật trạng thái is_deleted
+    product.is_deleted = true;
+
+    // Lưu sản phẩm đã cập nhật vào cơ sở dữ liệu
+    await product.save();
+
+    return res.status(200).json({ message: 'Soft delete successful' });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
 const saveProduct2 = async (req, res) => {
   const { variant } = req.body;
 
@@ -29,7 +64,7 @@ const saveProduct = async (req, res) => {
     const author = "64ca103baeac1741e179f4c7";
     // const author = req.session.user_id||'64ca103baeac1741e179f4c7';
     const receivedFiles = req.files;
-    const imageList =  convertFilesToDesiredFormat(receivedFiles);
+    const imageList = convertFilesToDesiredFormat(receivedFiles);
     console.log(imageList);
     const variants = await createVariantsFromData(req, typeName, imageList);
     const product = createProduct(
@@ -40,7 +75,7 @@ const saveProduct = async (req, res) => {
       author,
       variants
     );
-    console.log(product,'p')
+    console.log(product, 'p')
     await product.save();
 
     const type = await findOrCreateType(typeName);
@@ -75,7 +110,7 @@ const convertFilesToDesiredFormat = (receivedFiles) => {
 };
 const createVariantsFromData = (req, typeName, imageList) => {
   const variantsString = req.body
-  console.log(variantsString,'5555')
+  console.log(variantsString, '5555')
   const variants = variantsString.variant.map((v, index) => {
     const colorFake = "64cb721d066ac7727d33ceda";
     const variant = {
@@ -114,7 +149,7 @@ const createProduct = (title, sku, price, description, author, variants) => {
     description,
     author,
     variants,
-    
+
 
   });
 };
@@ -205,5 +240,5 @@ const getTypeAndSubtypeData = async (req, res) => {
 };
 
 module.exports = {
-  saveProduct,
+  saveProduct, getProduct, softDeleteProduct
 };

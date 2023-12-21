@@ -55,10 +55,7 @@
     height: 35px;
 }
 
-.no-border {
-    border: none;
-    /* hoặc border: 0; */
-}
+
 
 .search {
     border-radius: 5px;
@@ -81,31 +78,19 @@
     color: rgb(255, 255, 255);
     font-weight: 700;
     font-size: 12px;
-    width: 110px;
+    width: auto;
     height: 35px;
 }
 
-ul {
-    list-style: none;
 
-    font-weight: 700;
-}
-
-.nav-link {
-    color: #797777;
-
-}
-
-/* table th{
-    border-top: none;
-} */
 .table-product {
     border-collapse: collapse;
     width: 100%;
-    
+
 }
 
-.table-product th, .table-product td {
+.table-product th,
+.table-product td {
     padding: 0.75rem;
     vertical-align: middle;
     background-color: #F9FCFF;
@@ -114,6 +99,7 @@ ul {
 .table-product th {
     border-bottom: 1px solid var(--semantic-03, #D9D9D9);
 }
+
 /* .table-product tbody tr {
     margin-top: 30px;
 } */
@@ -129,12 +115,13 @@ tbody img {
 }
 
 
-.product-name p{
+.product-name p {
     font-weight: 700;
     overflow-wrap: break-word;
 
 }
-.page-link{
+
+.page-link {
     color: #797777;
 
 }

@@ -45,7 +45,9 @@ router.post(
   productController.saveProduct
 );
 
+router.get("", productController.getProduct)
 
+router.patch("/:productId/soft-delete", productController.softDeleteProduct)
 
 
 module.exports = router;

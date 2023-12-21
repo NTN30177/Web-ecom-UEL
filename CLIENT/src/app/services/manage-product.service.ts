@@ -16,6 +16,11 @@ export class ManageProductService {
   
   constructor(private _http: HttpClient) {}
 
+  
+  getProducts(): Observable<any[]> {
+    return this._http.get<any[]>(`${this.local}/product`);
+  }
+
   postProduct(product: any): Observable<any> {
     const headers = new HttpHeaders().set(
       'Content-Type',
@@ -99,5 +104,11 @@ export class ManageProductService {
   }
   handleError(error: HttpErrorResponse) {
     return throwError(() => new Error(error.message));
+  }
+
+
+  softDeleteProduct(productId: string): Observable<any> {
+    const url = `${this.local}/product/${productId}/soft-delete`;
+    return this._http.patch(url, { is_deleted: true });
   }
 }

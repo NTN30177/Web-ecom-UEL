@@ -166,21 +166,8 @@ html, body{
 
 
 
-@media screen and (max-width: 768px) {
-    .sideMenu_menu {
-        display: none;
-        /* height: 20px; */
-    }
-    .sideMenu_menu.show {
-        display: block;
-    }
-    .sideMenu,
-    .dropdownbtn {
-        /* width: 100%; */
-        display: block;
-    }
-
-
+.is-invalid {
+    border: 1px solid red; /* or any other styling for highlighting */
 }
 
 

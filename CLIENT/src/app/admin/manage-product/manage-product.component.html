@@ -20,102 +20,214 @@
                             <option value="">2</option>
                         </select>
                     </div>
-                    <div class="search col-lg-4 col-md-6">
+                    <!-- <div class="search col-lg-4 col-md-6">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-search" viewBox="0 0 16 16">
                             <path
                                 d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                         </svg>
                         <input type="text" value="" placeholder="Search">
+                    </div> -->
+                    <div class="btn-create col-lg-2 col-md-3"><button routerLink="add-product" type="button"
+                            class="btn"><i class="bi bi-plus"></i>Tạo sản phẩm</button>
                     </div>
-                    <div class="btn-create col-lg-2 col-md-3"><button type="button" class="btn"><i
-                                class="bi bi-plus"></i>Tạo sản phẩm</button>
-                    </div>
                 </div>
+
                 <div>
-                    <ul class="nav ">
-                        <li class="nav-item ">
-                            <a class="nav-link " href="">Tất cả (5)</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="">Còn hàng (1)</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="">Hết hàng(3)</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="">Đã xóa (1)</a>
-                        </li>
-                    </ul>
+                    <mat-tab-group>
+                        <mat-tab label="Tất cả ({{allProducts.length}})">
+                            <div class="mt-4">
+                                <table class="table table-hover custom-datatable" datatable [dtOptions]="dtOptions"
+                                    [dtTrigger]="dtTrigger" id="custom">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th scope="col" colspan="2">Tên sản phẩm</th>
+                                            <th scope="col">SKU</th>
+                                            <th scope="col">Giá</th>
+                                            <th scope="col">Số lượng</th>
+                                            <th scope="col">Biến thể</th>
+                                            <th scope="col">Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let product of allProducts">
+                                            <td><input type="checkbox"></td>
+                                            <td><img [src]="product.images[0]" alt=""></td>
+                                            <td>{{ product.title }}</td>
+                                            <td>{{ product.sku }}</td>
+                                            <td>{{ product.price }}</td>
+                                            <td>{{ getTotalQuantity(product.variants) }}</td>
+                                            <td>{{ product.variants.length }}</td>
+                                            <td>
+                                                <div class="d-flex gap-4 justify-content-start  ">
+                                                    <div>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16"
+                                                            viewBox="0 0 512 512">
+                                                            <path
+                                                                d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
+                                                        </svg>
+                                                    </div>
+                                                    <div style="cursor: pointer;" (click)="softDeleteProduct(product.id)">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14"
+                                                            viewBox="0 0 448 512">
+                                                            <path
+                                                                d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z" />
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Còn hàng ({{getInstockProducts().length}})">
+                            <div class="mt-4">
+                                <table class="table table-hover custom-datatable" datatable [dtOptions]="dtOptions"
+                                    [dtTrigger]="dtTrigger" id="custom">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th scope="col" colspan="2">Tên sản phẩm</th>
+                                            <th scope="col">SKU</th>
+                                            <th scope="col">Giá</th>
+                                            <th scope="col">Số lượng</th>
+                                            <th scope="col">Biến thể</th>
+                                            <th scope="col">Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let product of getInstockProducts()">
+                                            <td><input type="checkbox"></td>
+                                            <td><img [src]="product.images[0]" alt=""></td>
+                                            <td>{{ product.title }}</td>
+                                            <td>{{ product.sku }}</td>
+                                            <td>{{ product.price }}</td>
+                                            <td>{{ getTotalQuantity(product.variants) }}</td>
+                                            <td>{{ product.variants.length }}</td>
+                                            <td>
+                                                <div class="d-flex gap-4 justify-content-start  ">
+                                                    <div>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16"
+                                                            viewBox="0 0 512 512">
+                                                            <path
+                                                                d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
+                                                        </svg>
+                                                    </div>
+                                                    <div>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14"
+                                                            viewBox="0 0 448 512">
+                                                            <path
+                                                                d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z" />
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Hết hàng ({{getOutofstockProducts().length}})">
+                            <div class="mt-4">
+                                <table class="table table-hover custom-datatable" datatable [dtOptions]="dtOptions"
+                                    [dtTrigger]="dtTrigger" id="custom">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th scope="col" colspan="2">Tên sản phẩm</th>
+                                            <th scope="col">SKU</th>
+                                            <th scope="col">Giá</th>
+                                            <th scope="col">Số lượng</th>
+                                            <th scope="col">Biến thể</th>
+                                            <th scope="col">Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let product of getOutofstockProducts()">
+                                            <td><input type="checkbox"></td>
+                                            <td><img [src]="product.images[0]" alt=""></td>
+                                            <td>{{ product.title }}</td>
+                                            <td>{{ product.sku }}</td>
+                                            <td>{{ product.price }}</td>
+                                            <td>{{ getTotalQuantity(product.variants) }}</td>
+                                            <td>{{ product.variants.length }}</td>
+                                            <td>
+                                                <div class="d-flex gap-4 justify-content-start  ">
+                                                    <div>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16"
+                                                            viewBox="0 0 512 512">
+                                                            <path
+                                                                d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
+                                                        </svg>
+                                                    </div>
+                                                    <div>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14"
+                                                            viewBox="0 0 448 512">
+                                                            <path
+                                                                d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z" />
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Đã xóa ({{getDeletedProducts().length}})">
+                            <div class="mt-4">
+                                <table class="table table-hover custom-datatable" datatable [dtOptions]="dtOptions"
+                                    [dtTrigger]="dtTrigger" id="custom">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th scope="col" colspan="2">Tên sản phẩm</th>
+                                            <th scope="col">SKU</th>
+                                            <th scope="col">Giá</th>
+                                            <th scope="col">Số lượng</th>
+                                            <th scope="col">Biến thể</th>
+                                            <th scope="col">Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let product of getDeletedProducts()">
+                                            <td><input type="checkbox"></td>
+                                            <td><img [src]="product.images[0]" alt=""></td>
+                                            <td>{{ product.title }}</td>
+                                            <td>{{ product.sku }}</td>
+                                            <td>{{ product.price }}</td>
+                                            <td>{{ getTotalQuantity(product.variants) }}</td>
+                                            <td>{{ product.variants.length }}</td>
+                                            <td>
+                                                <div class="d-flex gap-4 justify-content-start  ">
+                                                    <div>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16"
+                                                            viewBox="0 0 512 512">
+                                                            <path
+                                                                d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
+                                                        </svg>
+                                                    </div>
+                                                    <div>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14"
+                                                            viewBox="0 0 448 512">
+                                                            <path
+                                                                d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z" />
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </mat-tab>
+
+                    </mat-tab-group>
                 </div>
-                <div>
-                    <table class="table-product ">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th scope="col" colspan="2">Tên sản phẩm</th>
-                                <th scope="col">SKU</th>
-                                <th scope="col">Giá</th>
-                                <th scope="col">Số lượng</th>
-                                <th scope="col">Biến thể</th>
-                                <th scope="col">Hành động</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <input type="checkbox">
-                                </td>
-                                <td>
-                                    <img src="../img/coat.jpeg" alt="">
-                                </td>
-                                <td>Áo khoác oversize - Oversize trench coat</td>
-                                <td>71M850</td>
-                                <td>1.250.000</td>
-                                <td>125</td>
-                                <td>4</td>
-                                <td>
-                                    <div class="d-flex gap-4 justify-content-start  ">
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16"
-                                            viewBox="0 0 512 512">
-                                            <path
-                                                d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" />
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14"
-                                            viewBox="0 0 448 512">
-                                            <path
-                                                d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="block-footer">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-end ">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+
+
             </div>
         </div>
     </div>
-</div>
