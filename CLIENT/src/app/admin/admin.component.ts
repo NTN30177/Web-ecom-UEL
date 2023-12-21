@@ -58,7 +58,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
       name: 'Đơn hàng',
       icon: 'fas fa-shopping-cart',
       children: [
-        { name: 'Quản lý đơn hàng', icon: 'fas fa-list-alt', link: '#' },
+        { name: 'Quản lý đơn hàng', icon: 'fas fa-list-alt', link: 'manage-order' },
         { name: 'Thêm đơn hàng', icon: 'fas fa-plus-square', link: '#' },
       ],
     },

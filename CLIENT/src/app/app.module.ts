@@ -54,7 +54,9 @@ import { FeedbackOrderSuccessComponent } from './manage-account/account-order/fe
 import { OrderTrackingComponent } from './manage-account/order-tracking/order-tracking.component';
 import { TermPolicyComponent } from './term-policy/term-policy.component';
 import { DeliveryPolicyComponent } from './delivery-policy/delivery-policy.component';
-import { DatePipe } from '@angular/common';
+import { ManageOrderComponent } from './admin/manage-order/manage-order.component';
+import { DeliveryPolicyComponent } from './delivery-policy/delivery-policy.component';
+
 
 
 @NgModule({
@@ -94,6 +96,8 @@ import { DatePipe } from '@angular/common';
     OrderTrackingComponent,
     TermPolicyComponent,
     DeliveryPolicyComponent,
+    ManageOrderComponent,
+    DeliveryPolicyComponent
   ],
   imports: [
     BrowserModule,

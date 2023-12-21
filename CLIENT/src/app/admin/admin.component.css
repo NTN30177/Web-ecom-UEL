@@ -35,7 +35,7 @@ mat-sidenav-container {
 }
 
 mat-sidenav {
-    padding-top: 3.5rem;
+    /* padding-top: 3.5rem; */
     @media screen and (min-width: 600px) {
       padding-top: 4rem;
     }
@@ -46,6 +46,8 @@ mat-sidenav {
         gap: 1rem;
         padding:0.75rem;
     }
+
+    position: fixed;
   }
 
 mat-sidenav-content{

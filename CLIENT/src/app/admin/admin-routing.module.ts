@@ -1,19 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddProductComponent } from './add-product/add-product.component';
-import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
-import { HomePageComponent } from '../home-page/home-page.component';
 import { ViewColorComponent } from './view-color/view-color.component';
-import { ManageAccountComponent } from '../manage-account/manage-account.component';
-import { AccountInfoComponent } from '../manage-account/account-info/account-info.component';
-import { AccountAddressComponent } from '../manage-account/account-address/account-address.component';
-import { AccountOrderComponent } from '../manage-account/account-order/account-order.component';
 import { ManageProductComponent } from './manage-product/manage-product.component';
 import { AdminComponent } from './admin.component';
 import { AddProduct2Component } from './add-product-2/add-product-2.component';
 import { CreateCampaignComponent } from './create-campaign/create-campaign.component';
 import { ManageCampaignComponent } from './manage-campaign/manage-campaign.component';
 import { AddColorComponent } from './add-color/add-color.component';
+import { ManageOrderComponent } from './manage-order/manage-order.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: "/drink", pathMatch: 'full'},
@@ -30,6 +25,7 @@ const routes: Routes = [
       { path: 'manage-campaign', component: ManageCampaignComponent },
       { path: 'manage-product', component: ManageProductComponent },
       { path: 'add-color', component: AddColorComponent },
+      { path: 'manage-order', component: ManageOrderComponent },
     ],
   },
 ];
