@@ -60,6 +60,7 @@ const productSchema = new mongoose.Schema(
             },
         ],
         variants: [variantSchema],
+        is_deleted: { type: Boolean, default: false },
     },
     {
         timestamps: true,
