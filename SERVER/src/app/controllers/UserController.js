@@ -146,8 +146,8 @@ const verifyEmail = async (req, res) => {
           if (userData.is_verified === 0) {
             console.log(userData._id.toString())
             sendVerifyEmail(userData.name, userData.email, userData._id.toString());
-            res.send({ message: "Vui lòng xác minh emmail" });
-            console.log( "Vui lòng xác minh emmail")
+            res.send({ message: "Vui lòng xác minh email" });
+            console.log( "Vui lòng xác minh email")
           } else {
             console.log('Đăng nhập thành công')
             req.session.user_id = userData._id;
