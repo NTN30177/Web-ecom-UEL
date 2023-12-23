@@ -98,7 +98,7 @@ export class ManageProductComponent implements OnInit, OnDestroy {
 softDeleteProduct(productId: string): void {
   this.manageProductService.softDeleteProduct(productId).subscribe(() => {
     // Cập nhật is_deleted trong danh sách sản phẩm của bạn
-    const productIndex = this.allProducts.findIndex(product => product.id === productId);
+    const productIndex = this.allProducts.findIndex(product => product._id === productId);
     if (productIndex !== -1) {
       this.allProducts[productIndex].is_deleted = true;
     }

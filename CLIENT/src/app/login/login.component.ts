@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router'; // Import Router
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -133,11 +133,11 @@ export class LoginComponent implements OnInit {
       alert('Vui lòng kiểm tra lại thông tin form');
     } else {
       console.log('1235');
-      this._authService.verifiedInForUser(this.loginForm.value).subscribe({
+      this._authService.verifiedInForUserService(this.loginForm.value).subscribe({
         next: (data: any) => {
           this.infoResult = data.message;
         },
-        error: (err) => {
+        error: (err: any) => {
           this.errMessage = err;
           console.log(this.errMessage);
         },
