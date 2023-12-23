@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from '../../services/auth.service';
 import { AccountAddressService } from '../../services/account-address.service';
+import { AccountInfoService } from '../../services/account-info.service';
 
 @Component({
   selector: 'app-account-address-popup',
@@ -11,7 +12,6 @@ import { AccountAddressService } from '../../services/account-address.service';
 })
 export class AccountAddressPopupComponent implements OnInit {
 
-  userID = '65830fbb6e84f0388d3e7b6b';
 
   addressForm!: FormGroup;
 
@@ -20,14 +20,22 @@ export class AccountAddressPopupComponent implements OnInit {
   provinces: any;
   districts: any;
   wards: any;
+  userID: any;
 
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<AccountAddressPopupComponent>,
     private _authService: AuthService,
-    private addressService: AccountAddressService) { }
+    private addressService: AccountAddressService,
+    private accountInfoService: AccountInfoService,) { }
 
   ngOnInit(): void {
+
+    this.accountInfoService.userId$.subscribe(userId => {
+      this.userID = userId;
+      console.log('Address component: User ID:', this.userID);
+    });
+
     this.initForm();
     this.apiProvince()
   }
@@ -93,9 +101,9 @@ export class AccountAddressPopupComponent implements OnInit {
 
 
 
-
-
   addAddress() {
+    // Mark all form controls as touched to trigger error messages
+    this.addressForm.markAllAsTouched();
     if (this.addressForm.valid) {
       const newAddress = this.addressForm.value;
       console.log('Form Data:', newAddress);
@@ -120,14 +128,6 @@ export class AccountAddressPopupComponent implements OnInit {
   closePopup() {
     this.dialogRef.close()
   }
-  // closeDialog() {
-  //   // // Get the form values when the "Thêm" button is clicked
-  //   // const formData = this.addressForm.value;
-  //   // console.log('Form Data:', formData);
-
-  //   // Close the dialog and optionally send data back to the parent component
-  //   this.dialogRef.close(/* any data you want to pass back to the parent component */);
-  // }
 
 
 }

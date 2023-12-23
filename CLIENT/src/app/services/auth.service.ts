@@ -68,7 +68,7 @@ export class AuthService {
     };
     return this._http
       .post<any>(
-        `${local}/register`,
+        `${local}/user/register`,
         data
         // requestOptions
       )
@@ -116,6 +116,10 @@ export class AuthService {
       retry(3),
       catchError(this.handleError)
     );
+  }
+
+  isEmailVerified(email: string): Observable<boolean> {
+    return this._http.get<boolean>(`${local}/user/is-email-verified/${email}`);
   }
 
 

@@ -14,6 +14,8 @@ router.get('/id', userController.getUserID);
 router.post('/login', userController.verifyLogin);
 router.get('/product', userController.getProductHomePage);
 router.get('/forgot-pw/:email', userController.getForGotPW);
+router.get('/is-email-verified/:email', userController.isEmailVerified);
+
 
 
 router.get('/account/info', userController1.getAccountInfo)

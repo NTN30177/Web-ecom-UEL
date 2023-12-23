@@ -14,32 +14,39 @@ body {
 .custom {
     padding-left: 20px;
 } */
-html, body{
+html,
+body {
     line-height: 25px;
     color: #000;
     font-family: Montserrat;
     font-style: normal;
     line-height: normal;
 }
+
 :host {
     font-family: 'Montserrat', sans-serif;
-  }
-.info-header{
+}
+
+.info-header {
     font-size: 28px;
     /* padding-top: 20px; */
     font-weight: 700;
     letter-spacing: 1.92px;
 }
-.row{
+
+.row {
     margin-bottom: 10px;
 }
+
 .order-block {
     margin-top: 32px;
 }
-.col-input input{
+
+.col-input input {
     height: 47px;
     font-weight: 700;
 }
+
 .radio_label {
     font-size: 14px;
     line-height: 16px;
@@ -117,7 +124,7 @@ html, body{
     margin-right: 20px;
 }
 
-.btn:hover{
+.btn:hover {
     background-color: #000000;
     color: white;
 }
@@ -156,10 +163,11 @@ html, body{
 
 }
 
-.message{
+.message {
     font-style: italic;
 }
-.message span{
+
+.message span {
     color: var(--Primary-01, #9B3A23);
 }
 
@@ -167,7 +175,28 @@ html, body{
 
 
 .is-invalid {
-    border: 1px solid red; /* or any other styling for highlighting */
+    border: 1px solid red;
+    /* or any other styling for highlighting */
 }
 
 
+.notification {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+    z-index: 9999;
+}
+
+.notification.success {
+    background-color: #4caf50;
+    /* Green */
+}
+
+.notification.error {
+    background-color: #f44336;
+    /* Red */
+}

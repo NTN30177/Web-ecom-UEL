@@ -287,8 +287,19 @@ const resetPassword = async (req, res) => {
   }
 };
 
+const isEmailVerified = async (req, res) => {
+  try {
+    const email = req.params.email;
+    const userData = await User.findOne({ email: email });
+    res.send({ isVerified: userData.is_verified === 1 });
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
 
 
 module.exports = {
-  x,saveAccount, verifyEmail, verifyLogin, getProductHomePage, getForGotPW, resetPassword, getUserID
+  x,saveAccount, verifyEmail, verifyLogin, getProductHomePage, getForGotPW, resetPassword, getUserID,   isEmailVerified,
+
 };
