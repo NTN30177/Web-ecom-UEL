@@ -46,10 +46,18 @@
                         </form>
                         <hr>
                         <p>Đăng nhập bằng tài khoản của bạn trên:</p>
-                        <!-- Thêm thẻ i và class của Font Awesome cho biểu tượng Google -->
-                        <button class="btn btn-google" type="button" style="border: 1px solid black; padding: 15px;">
-                          <i class="fab fa-google" style="padding-right: 10px;"></i> Đăng nhập bằng Google
-                        </button>
+                        <div class="row">
+                          <div class="col-md-6 mt-2">
+                            <button class="btn btn-google" type="button" style="border: 1px solid black; padding: 15px; width: 100%;">
+                              <i class="fab fa-google" style="padding-right: 5px;"></i> Đăng nhập với Google
+                            </button>
+                          </div>
+                          <div class="col-md-6 mt-2">
+                            <button class="btn btn-google" type="button" style="border: 1px solid black; padding: 15px; width: 100%">
+                              <i class="fab fa-facebook" style="padding-right: 5px; font-size: 14px;"></i> Đăng nhập với Facebook
+                            </button>
+                          </div>
+                        </div>
                     </div>
                   
                     <div class="col pt-2">
@@ -65,3 +73,5 @@
 
 
 {{ loginForm.value | json }}
+
+

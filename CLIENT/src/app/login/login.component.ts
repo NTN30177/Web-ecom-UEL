@@ -160,6 +160,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  
+
   openForgotPasswordDialog(): void {
     // Open the modal when the "Quên mật khẩu?" link is clicked
     const dialogRef = this.dialog.open(ForgotPasswordModalComponent, {
@@ -178,5 +180,27 @@ export class LoginComponent implements OnInit {
   // Hàm để chuyển đổi giữa hiển thị và ẩn mật khẩu
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
+  }
+}
+
+//Popup hiển thị kết quả đăng nhập
+@Component({
+  selector: 'app-info-result-modal',
+  template: `
+    <div style="padding: 20px; text-align: center; font-size:20px; font-family: 'Montserrat', sans-serif;">
+      {{ data.infoResult }}
+    </div>
+  `,
+})
+export class InfoResultModalComponent implements OnInit {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { infoResult: string },
+    public dialogRef: MatDialogRef<InfoResultModalComponent>
+  ) {}
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.dialogRef.close(); // Tắt modal sau 5 giây
+    }, 5000);
   }
 }

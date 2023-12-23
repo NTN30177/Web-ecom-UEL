@@ -1,10 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  Renderer2,
-  ViewEncapsulation,
-  HostListener,
-} from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewEncapsulation, HostListener } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/auth.service';
 
@@ -22,12 +16,14 @@ interface CartItem {
   styleUrls: ['./styles.css', './header.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
   isSearchFormActive: boolean = false;
   isMainMenuOpen: boolean = false;
   submenuOpen: boolean = false;
   isSubActionVisible: boolean = false;
   quantityInputValue: number = 1;
+  userId=1;  // Sử dụng string hoặc null tùy thuộc vào loại dữ liệu của user ID
+
 
   cartNumberItem: number = 0;
   constructor(
@@ -70,6 +66,12 @@ export class HeaderComponent {
     { id: 1, name: 'Zuýp 2 lớp xếp ly bản lớn', quantity: 1, price: 595000 },
     // Thêm các sản phẩm khác nếu có
   ];
+
+  constructor(
+    private elRef: ElementRef,
+    private renderer: Renderer2,
+    private snackBar: MatSnackBar // Thêm MatSnackBar vào constructor
+  ) {}
 
   toggleSearchForm(): void {
     this.isSearchFormActive = !this.isSearchFormActive;
@@ -175,4 +177,7 @@ export class HeaderComponent {
       panelClass: ['custom-snackbar'], // Thêm class CSS tùy chỉnh
     });
   }
+
+
+
 }
