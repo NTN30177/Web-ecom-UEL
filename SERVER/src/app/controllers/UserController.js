@@ -106,7 +106,7 @@ const sendVerifyEmail = async (name, email, user_id) => {
       html:
         "<p> Hi " +
         name +
-        ',please click here to <a href="http://localhost:3000/verify?id=' +
+        ',please click here to <a href="http://localhost:3000/user/verify?id=' +
         user_id +
         '">Verify</a> your mail.</p>',
     };
@@ -121,7 +121,7 @@ const sendVerifyEmail = async (name, email, user_id) => {
     console.log(err.message);
   }
 };
-const verifyEmail = async (req, res) => {
+const DverifyEmail = async (req, res) => {
   try {
     const updateInfo = await User.updateOne(
       { _id: req.query.id },

@@ -68,7 +68,7 @@ export class AuthService {
     };
     return this._http
       .post<any>(
-        `${local}/register`,
+        `${local}/user/register`,
         data
         // requestOptions
       )
@@ -87,7 +87,7 @@ export class AuthService {
       responseType: 'text',
     };
     console.log('122')
-    
+
     return this._http
       .post<any>(
         `${local}/user/login`,
