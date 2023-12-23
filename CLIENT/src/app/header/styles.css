@@ -8,10 +8,7 @@
     box-sizing: inherit;
 
 }
-
 html{
-    font-size: 62.5%;
-    line-height: 1.6rem;
     -webkit-text-size-adjust: 100%;
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
@@ -21,6 +18,7 @@ html{
     display: flex !important;
     flex-wrap: wrap;
 }
+
 /* Responsive */
 .grid {
     width: 1200px; 

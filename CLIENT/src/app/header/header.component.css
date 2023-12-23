@@ -29,7 +29,6 @@ img {
   cursor: pointer;
 }
 #main #header {
-    font-size: 62.5%;
     background-color: #fff;
     position: fixed;
     top: 0;
@@ -41,7 +40,7 @@ img {
   width: 1380px;
 }
 .container.d-flex {
-  height: 80px;
+  height: 64px;
   justify-content: space-between;
   position: relative;
   align-items: center;
@@ -61,16 +60,16 @@ input[type="text"]::placeholder {
   display: none;
 }
 #nav > li {
-  margin-right: 2rem;
+  margin-right: 20px;
   display: inline-block;
 }
 #nav > li > a {
   text-transform: uppercase;
-  font-size: 1.2rem;
+  font-size: 12px;
   color: #221f20;
   font-weight: 500;
   word-spacing: 1px;
-  line-height: 80px;
+  line-height: 64px;
   font-weight: 600;
 }
 #nav li:hover > a {
@@ -115,7 +114,7 @@ input[type="text"]::placeholder {
   text-transform: uppercase;
   font-weight: 600;
   line-height: 16px;
-  font-size: 1.4rem;
+  font-size: 14px;
   display: block;
   margin: 0 0 16px 0;
 }
@@ -240,7 +239,7 @@ input[type="text"]::placeholder {
   content: "";
   display: block;
   width: 150%;
-  height: 8px;
+  height: 0px;
 }
 .search-form__btn {
   height: 40px;
@@ -392,10 +391,10 @@ input#search-form__input {
   color: #000000;
 }
 .header__icon {
-  font-size: 1.6rem;
+  font-size: 16px;
 }
 .header__icon.ti-menu {
-  font-size: 2.4rem;
+  font-size: 24px;
 }
 .item-shopping .icon .number-cart {
   width: 16px;
@@ -837,7 +836,7 @@ img {
   cursor: pointer;
 }
 .ti-heart {
-  font-size: 1.6rem;
+  font-size: 16px;
 }
 .favorite .ti-heart {
 }

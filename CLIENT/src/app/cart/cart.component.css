@@ -39,7 +39,7 @@ input[type="checkbox"] {
 }
 
 .cart-container {
-  margin: auto;
+  margin: 110px auto auto auto;
   max-width: 800px;
   border: 1px solid #ccc;
   border-radius: 15px;

@@ -1,12 +1,31 @@
-
 html {
     font-family: Montserrat;
-    margin-top: 40px;
+    margin-top: 32px;
+}
+ul {
+    padding-left: 0;
+    margin: 0;
+}
+ul li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    color: #373737;
+    background-color: transparent;
+    transition: all 0.3s ease-in-out 0s;
+}
+h3 {
+    margin-top: 0;
+}
+img {
+    border: none;
+    max-width: 100%;
+    height: auto;
 }
 .container {
     max-width: 1380px;
 }
-
 .bg-before {
     position: relative;
 }
@@ -263,6 +282,16 @@ html {
 .thumb-product{
     position: relative;
     cursor: pointer;
+    display: block;
+}
+.thumb-product::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: 100%;
 }
 .thumb-product img {
     border-radius: 20px;
@@ -293,7 +322,7 @@ html {
 /* Popup thêm sản phẩm vào giỏ hàng */
 .popup-container {
     position: fixed;
-    top: 20px;
+    top: 10px;
     right: 0;
     width: 300px;
     transition: all .2s;
@@ -303,7 +332,6 @@ html {
     box-shadow: 0 0 8px rgba(0,0,0,.15);
     border-radius: 16px;
     padding: 18px;
-    top: 0;
     z-index: 999;
 }
 .popup-container .tit___hed-pop-not {
