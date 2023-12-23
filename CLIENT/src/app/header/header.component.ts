@@ -1,5 +1,12 @@
-import { Component, ElementRef, Renderer2, ViewEncapsulation, HostListener } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Renderer2,
+  ViewEncapsulation,
+  HostListener,
+} from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../services/auth.service';
 
 interface CartItem {
   id: number;
@@ -13,7 +20,7 @@ interface CartItem {
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./styles.css', './header.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent {
   isSearchFormActive: boolean = false;
@@ -22,16 +29,47 @@ export class HeaderComponent {
   isSubActionVisible: boolean = false;
   quantityInputValue: number = 1;
 
+  cartNumberItem: number = 0;
+  constructor(
+    private elRef: ElementRef,
+    private renderer: Renderer2,
+    private snackBar: MatSnackBar, // Thêm MatSnackBar vào constructor
+    private _authServer: AuthService
+  ) {
+    this._authServer.cartSubject.subscribe((data) => {
+      this.cartNumberItem = data;
+    });
+    this._authServer.isLoginSubject.subscribe((data) => {
+      this.isLogin = data;
+    });
+  }
+  ngOnInit(): void {
+    this.cartItemFunc();
+  }
+  isLogin = false;
+  checkLogin() {
+    const localCartString = localStorage.getItem('userData');
+    if (localCartString) {
+      this.isLogin = true;
+    }
+  }
+  logout() {
+    window.localStorage.getItem('userData');
+    window.localStorage.removeItem('userData');
+    this.isLogin = false;
+  }
+  cartItemFunc() {
+    const localCartString = localStorage.getItem('localCart');
+
+    if (localCartString !== null) {
+      var cartCount = JSON.parse(localCartString);
+      this.cartNumberItem = cartCount.length;
+    }
+  }
   cartItems: CartItem[] = [
     { id: 1, name: 'Zuýp 2 lớp xếp ly bản lớn', quantity: 1, price: 595000 },
     // Thêm các sản phẩm khác nếu có
   ];
-
-  constructor(
-    private elRef: ElementRef,
-    private renderer: Renderer2,
-    private snackBar: MatSnackBar // Thêm MatSnackBar vào constructor
-  ) {}
 
   toggleSearchForm(): void {
     this.isSearchFormActive = !this.isSearchFormActive;
@@ -69,7 +107,10 @@ export class HeaderComponent {
   closeMainMenu(event: Event): void {
     const targetElement = event.target as HTMLElement;
 
-    if (targetElement.classList.contains('ti-close') || targetElement.closest('.ti-close')) {
+    if (
+      targetElement.classList.contains('ti-close') ||
+      targetElement.closest('.ti-close')
+    ) {
       event.stopPropagation();
       this.isMainMenuOpen = false;
       const mainMenu = this.elRef.nativeElement.querySelector('.main-menu');
@@ -92,7 +133,8 @@ export class HeaderComponent {
   toggleCart(): void {
     this.isSubActionVisible = !this.isSubActionVisible;
 
-    const subActionCart = this.elRef.nativeElement.querySelector('.sub-action-cart');
+    const subActionCart =
+      this.elRef.nativeElement.querySelector('.sub-action-cart');
 
     if (this.isSubActionVisible) {
       this.renderer.addClass(subActionCart, 'active');
@@ -102,7 +144,8 @@ export class HeaderComponent {
   }
 
   closeCart(event: Event): void {
-    const subActionCart = this.elRef.nativeElement.querySelector('.sub-action-cart');
+    const subActionCart =
+      this.elRef.nativeElement.querySelector('.sub-action-cart');
     this.renderer.removeClass(subActionCart, 'active');
   }
 
@@ -120,7 +163,7 @@ export class HeaderComponent {
 
   removeItemFromCart(): void {
     // Lọc ra những sản phẩm có quantity khác 0 và tạo mảng mới
-    this.cartItems = this.cartItems.filter(item => item.quantity !== 0);
+    this.cartItems = this.cartItems.filter((item) => item.quantity !== 0);
 
     // Hiển thị thông báo
     this.openSnackBar('Đã xoá sản phẩm!');

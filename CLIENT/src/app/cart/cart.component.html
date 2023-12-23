@@ -3,7 +3,7 @@
     <h3 class="row main-title">
       <div class="col">Giỏ hàng</div>
     </h3>
-    <div class="container">
+    <div class="container"*ngIf="!showNocart">
       <div class="row cart-title">
         <div class="col-1 d-flex align-items-center justify-content-center">
           <input type="checkbox" id="checkAll" onclick="checkAll(this);" />
@@ -15,8 +15,8 @@
       </div>
     </div>
   </div>
-  <hr class="col-12 gy-4" />
-  <div class="container cart-body">
+  <hr class="col-12 gy-4" *ngIf="!showNocart"/>
+  <div class="container cart-body" *ngIf="!showNocart">
     <div class="cart-list" *ngFor="let pCode of productsCart">
       <div class="cart-list__variant" *ngFor="let v of pCode.variants">
         <div class="cart-list__varriantColor" *ngFor="let vc of v.variantColor">
@@ -205,15 +205,15 @@
     <hr class="col-12" />
   </div>
 
-  <div class="container cart-footer">
+  <div class="container cart-footer" *ngIf="!showNocart">
     <div class="total-product">
       <div class="total-product__title">Tổng sản phẩm</div>
-      <div class="total-product__value">0</div>
+      <div class="total-product__value">{{formatMoneyVietNam(total_quantity)}}</div>
     </div>
     <div class="estimated-cost">
       <div class="estimated-cost__title">Tạm tính</div>
       <div class="estimated-cost__value">
-        <div class="total-after__discount">0</div>
+        <div class="total-after__discount">{{formatMoneyVietNam(total_payment)}}</div>
         <div class="total-discount">
           (Tiết kiệm <span class="total-discount__value">0</span>)
         </div>
@@ -225,17 +225,27 @@
     </div>
     <div class="product-ship">
       <div class="product-ship__title">Phí vận chuyển</div>
-      <div class="product-ship__value">0</div>
+      <div class="product-ship__value">{{formatMoneyVietNam(ship_code)}}</div>
     </div>
     <div class="row">
       <hr class="col-12 p-0 m-0" />
     </div>
     <div class="product-gift">
       <div class="product-total__title">Tổng</div>
-      <div class="product-total__value">0</div>
+      <div class="product-total__value">{{formatMoneyVietNam(total_payment-ship_code)}}</div>
     </div>
     <div class="btn-submit">
       <button>Mua ngay</button>
+    </div>
+  </div>
+  <div class="no-cart" *ngIf="showNocart">
+    <div class="no-cart__info">
+      <img src="http://localhost:3000/cart/img-no-cart.png" alt="">
+      <div>Giỏ hàng của bạn đang trống</div>
+      <div>Hãy chọn thêm sản phẩm để mua sắp nhé</div>
+    </div>
+    <div class="btn-submit btn-submit__returnHomepage ">
+      <button>Quay về trang chủ</button>
     </div>
   </div>
 </div>

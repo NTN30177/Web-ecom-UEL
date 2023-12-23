@@ -56,6 +56,7 @@ import { TermPolicyComponent } from './term-policy/term-policy.component';
 import { ManageOrderComponent } from './admin/manage-order/manage-order.component';
 import { DeliveryPolicyComponent } from './delivery-policy/delivery-policy.component';
 import { CommonModule, DatePipe } from '@angular/common';
+import { ForgetPwComponent } from './forget-pw/forget-pw.component';
 
 
 @NgModule({
@@ -95,7 +96,8 @@ import { CommonModule, DatePipe } from '@angular/common';
     TermPolicyComponent,
     DeliveryPolicyComponent,
     ManageOrderComponent,
-    DeliveryPolicyComponent
+    DeliveryPolicyComponent,
+    ForgetPwComponent
   ],
   imports: [
     BrowserModule,

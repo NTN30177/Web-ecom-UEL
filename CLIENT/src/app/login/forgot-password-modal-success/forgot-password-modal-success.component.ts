@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ForgotPasswordModalComponent } from '../forgot-password-modal/forgot-password-modal.component';
 
 @Component({
   selector: 'app-forgot-password-modal-success',
@@ -12,7 +13,9 @@ export class ForgotPasswordModalSuccessComponent {
   passwordMismatchError: string = '';
   formSubmitted: boolean = false;
 
-  constructor(public dialogRef: MatDialogRef<ForgotPasswordModalSuccessComponent>, private fb: FormBuilder) { 
+  constructor(public dialogRef: MatDialogRef<ForgotPasswordModalSuccessComponent>, 
+    private fb: FormBuilder,
+    private _emailmodule: ForgotPasswordModalComponent) { 
     this.forgotPasswordSuccessForm = this.fb.group({
       cus_new_pass: ['', [Validators.required]],
       re_cus_new_pass: ['', [Validators.required]]
@@ -20,6 +23,7 @@ export class ForgotPasswordModalSuccessComponent {
   }
 
   ngOnInit(): void {
+    // this._emailmodule.openSuccessModal()
   }
 
   closeDialog(): void {
