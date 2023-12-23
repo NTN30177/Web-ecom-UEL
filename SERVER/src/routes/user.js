@@ -10,6 +10,7 @@ router.post('/register',
     userController.saveAccount);//
 
 router.get('/verify', userController.verifyEmail);
+router.get('/id', userController.getUserID);
 router.post('/login', userController.verifyLogin);
 router.get('/product', userController.getProductHomePage);
 router.get('/forgot-pw/:email', userController.getForGotPW);
