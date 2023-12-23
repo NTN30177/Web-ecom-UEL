@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { ManageProductService } from '../../services/manage-product.service';
 import { DataTableDirective } from 'angular-datatables';
 import { IProduct, IVariant } from '../../interfaces/product';
+import { local } from '../../ENV/envi';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { IProduct, IVariant } from '../../interfaces/product';
 export class ManageProductComponent implements OnInit, OnDestroy {
 
 
-
+local=local
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
@@ -51,6 +52,7 @@ export class ManageProductComponent implements OnInit, OnDestroy {
   products(): void {
     this.manageProductService.getProducts().subscribe((response: IProduct[]) => {
       this.allProducts = response;
+      console.log(this.allProducts)
       this.dtTrigger.next(null);
     });
   }
@@ -95,16 +97,34 @@ export class ManageProductComponent implements OnInit, OnDestroy {
 //   return this.allProducts.filter(product => product.deleted);
 // }
 
-softDeleteProduct(productId: string): void {
-  this.manageProductService.softDeleteProduct(productId).subscribe(() => {
-    // Cập nhật is_deleted trong danh sách sản phẩm của bạn
-    const productIndex = this.allProducts.findIndex(product => product.id === productId);
-    if (productIndex !== -1) {
-      this.allProducts[productIndex].is_deleted = true;
-    }
+// softDeleteProduct(productId: string): void {
+//   console.log(productId)
+//   this.manageProductService.softDeleteProduct(productId).subscribe(() => {
+//     // Cập nhật is_deleted trong danh sách sản phẩm của bạn
+//     const productIndex = this.allProducts.findIndex(product => product._id === productId);
+//     if (productIndex !== -1) {
+//       if is_deleted = false :
+//       this.allProducts[productIndex].is_deleted = true;
+//       else: 
+//       this.allProducts[productIndex].is_deleted = false;
+//     }
 
+//     // Trigger DataTables rendering
+//     this.dtTrigger.next(null);
+//   });
+// }
+
+toggleIsDeleted(productId: string): void {
+ // Find the product in the array
+ const productIndex = this.allProducts.findIndex(product => product._id === productId);
+   // Toggle the value of is_deleted
+   this.allProducts[productIndex].is_deleted = !this.allProducts[productIndex].is_deleted;
+
+  // Call the service method to toggle is_deleted on the server
+  this.manageProductService.toggleIsDeleted(productId).subscribe(() => {
     // Trigger DataTables rendering
-    this.dtTrigger.next(null);
+    // this.dtTrigger.next(null);
   });
 }
+
 }

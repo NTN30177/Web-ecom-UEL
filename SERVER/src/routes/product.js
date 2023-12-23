@@ -47,7 +47,7 @@ router.post(
 
 router.get("", productController.getProduct)
 
-router.patch("/:productId/soft-delete", productController.softDeleteProduct)
+router.patch("/toggle-soft-deleted/:productId", productController.toggleSoftDeleted)
 
 
 module.exports = router;

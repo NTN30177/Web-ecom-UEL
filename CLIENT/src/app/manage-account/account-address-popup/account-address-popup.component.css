@@ -42,3 +42,13 @@ gap: 14px;
 /* .check-custom{
     color: rgba(155, 58, 35, 1);
 } */
+
+.has-error {
+    border: 1px solid red;
+}
+
+.error-message {
+    color: red;
+    font-weight: 250;
+    font-style: italic;
+}

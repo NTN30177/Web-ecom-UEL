@@ -56,7 +56,7 @@ const userSchema = new mongoose.Schema(
     addressList: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User_address",
+        ref: "UserAddress",
       },
     ],
     orderList: {
