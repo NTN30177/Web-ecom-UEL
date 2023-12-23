@@ -146,14 +146,15 @@ const verifyEmail = async (req, res) => {
           if (userData.is_verified === 0) {
             console.log(userData._id.toString())
             sendVerifyEmail(userData.name, userData.email, userData._id.toString());
-            res.send({ message: "Vui lòng xác minh emmail" });
-            console.log( "Vui lòng xác minh emmail")
+            res.send({ message: "Vui lòng xác minh email" });
+            console.log( "Vui lòng xác minh email")
           } else {
-            console.log('Đăng nhập thành công')
             req.session.user_id = userData._id;
-            console.log(req.session.user_id)
-
-            res.send({ message: "Đăng nhập thành công" });
+            res.locals.userDataSession = await User.findById(
+              req.session.user_id
+          ).lean();
+            console.log(req.session.user_id, '123')
+            res.send({ message: "Đăng nhập thành công",userData:userData, login:true});
           }
         } else {
           res.send({ message: "Đăng nhập thất bại" });
@@ -167,6 +168,93 @@ const verifyEmail = async (req, res) => {
   };
   
 
+  const getProductHomePage = async (req, res) => {
+    try {
+      let products = await Product.find({})
+      .populate({
+        path: "variants.color",
+        select: "imageColor",
+      })
+      .lean();
+      console.log('123')
+      console.log(products)
+      res.json({products });
+    } catch (err) {
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  };
+  const getForGotPW = async (req, res) => {
+  try {
+    console.log(123)
+    const email = req.params.email;
+    const userData = await User.findOne({ email: email });
+    if (userData) {
+      const randomString = randomstring.generate();
+      const updatedData = await User.updateOne(
+        { email: email },
+        { $set: { token: randomString } }
+      ).lean();
+      sendResetPassword(userData.name, userData.email, randomString);
+      res.send( {
+        message: "Please check your mail to reset password.", success:true
+      });
+    } else {
+      res.send({ message: "User email is incorrect", success:false });
+    }
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+//for reset password send mail
+
+const sendResetPassword = async (name, email, token) => {
+  try {
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false,
+      requireTLS: true,
+      auth: {
+        user: emailUser,
+        pass: emailPassword,
+      },
+    });
+    const mailOptions = {
+      from: emailUser,
+      to: email,
+      subject: "For Reset Password",
+      html: `<p> Hi ${name}, please click <a href="http://localhost:4200/forgot-pw?token=${token}&email=${email}">here</a> to reset your password.</p>`,
+    };
+    transporter.sendMail(mailOptions, function (err, info) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Email has been sent:-", info.response);
+      }
+    });
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+const resetPassword = async (req, res) => {
+  try {
+    const password = req.body.password;
+    console.log(password);
+    const email = req.body.email;
+    console.log(email)
+    const secure_Password = await securePassword(password);
+    const updatedData = await User.findOneAndUpdate(
+      { email: email.toString() },
+      { $set: { password: secure_Password, token: "" } }
+    ).lean();
+    res.send({message: 'Thay đổi mật khẩu thành công!'});
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+
+
 module.exports = {
-  x,saveAccount, verifyEmail, verifyLogin
+  x,saveAccount, verifyEmail, verifyLogin, getProductHomePage, getForGotPW, resetPassword
 };

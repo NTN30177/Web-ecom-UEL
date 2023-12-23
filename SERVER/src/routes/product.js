@@ -21,7 +21,7 @@ function convertFileName(fileName) {
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "../public/userImages"));
+    cb(null, path.join(__dirname, "../public/productImages"));
   },
   filename: function (req, file, cb) {
     const fileExtension = path.extname(file.originalname);
@@ -45,7 +45,9 @@ router.post(
   productController.saveProduct
 );
 
+router.get("", productController.getProduct)
 
+router.patch("/:productId/soft-delete", productController.softDeleteProduct)
 
 
 module.exports = router;

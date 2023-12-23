@@ -1,10 +1,17 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router'; // Import Router
 import { MatDialog } from '@angular/material/dialog';
 import { ForgotPasswordModalComponent } from './forgot-password-modal/forgot-password-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +21,7 @@ import { AuthService } from '../services/auth.service';
 export class LoginComponent implements OnInit {
   @ViewChild('cusAccount') cusAccountInput: ElementRef | undefined;
   @ViewChild('cusPassword') cusPasswordInput: ElementRef | undefined;
-  
+
   loginForm: FormGroup;
   infoResult: string | undefined;
   errMessage: any;
@@ -25,7 +32,6 @@ export class LoginComponent implements OnInit {
     public dialog: MatDialog,
     private _authService: AuthService,
     private renderer: Renderer2
-
   ) {
     this.loginForm = this.fb.group({
       cus_account: [
@@ -47,7 +53,7 @@ export class LoginComponent implements OnInit {
 
       // Check if it's a valid email or phone number
       const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-      const phonePattern = /^0\d{9}$/
+      const phonePattern = /^0\d{9}$/;
 
       const isValidEmail = emailPattern.test(value);
       const isValidPhone = phonePattern.test(value);
@@ -100,7 +106,11 @@ export class LoginComponent implements OnInit {
         if (control && control.errors) {
           if (control.errors['required']) {
             if (errorElement) {
-              this.renderer.setProperty(errorElement, 'innerHTML', '* Vui lòng nhập giá trị.');
+              this.renderer.setProperty(
+                errorElement,
+                'innerHTML',
+                '* Vui lòng nhập giá trị.'
+              );
             }
 
             if (inputElement) {
@@ -108,7 +118,11 @@ export class LoginComponent implements OnInit {
             }
           } else if (control.errors['invalidFormat']) {
             if (errorElement) {
-              this.renderer.setProperty(errorElement, 'innerHTML', '* Vui lòng nhập đúng định dạng Email/SĐT.');
+              this.renderer.setProperty(
+                errorElement,
+                'innerHTML',
+                '* Vui lòng nhập đúng định dạng Email/SĐT.'
+              );
             }
 
             if (inputElement) {
@@ -126,13 +140,20 @@ export class LoginComponent implements OnInit {
       alert('Vui lòng kiểm tra lại thông tin form');
     } else {
       console.log('1235');
-      this._authService.verifiedInForUser(this.loginForm.value).subscribe({
+      this._authService.verifiedInForUserService(this.loginForm.value).subscribe({
         next: (data: any) => {
           this.infoResult = data.message;
+          if (data.login) {
+            localStorage.setItem('userData', JSON.stringify(data.userData));
+            this._authService.isLoginSubject.next(data.login);
+            timer(3000).subscribe(() => {
+              this.router.navigate(['/']);
+            });
+          }
         },
         error: (err) => {
           this.errMessage = err;
-          console.log(this.errMessage)
+          console.log(this.errMessage);
         },
       });
       console.log('save');
