@@ -68,7 +68,7 @@ export class AuthService {
     };
     return this._http
       .post<any>(
-        `${local}/register`,
+        `${local}/user/register`,
         data
         // requestOptions
       )

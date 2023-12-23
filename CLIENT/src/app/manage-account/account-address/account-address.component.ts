@@ -4,25 +4,41 @@ import { MatDialog } from '@angular/material/dialog';
 import { AccountAddressPopupComponent } from '../account-address-popup/account-address-popup.component';
 import { IUserAddress } from '../../interfaces/user';
 import { AccountAddressService } from '../../services/account-address.service';
+import { AccountInfoService } from '../../services/account-info.service';
 
 @Component({
   selector: 'app-account-address',
   templateUrl: './account-address.component.html',
   styleUrl: './account-address.component.css',
 })
-export class AccountAddressComponent implements OnInit   {
+export class AccountAddressComponent implements OnInit {
   // @Input() userID: any;
-  userID = '65830fbb6e84f0388d3e7b6b';
+  userID : any;
   addressList: IUserAddress[] = [];
 
 
-  constructor(private dialogRef: MatDialog,private addressService: AccountAddressService) {}
+  constructor(
+    private dialogRef: MatDialog,
+    private addressService: AccountAddressService,
+    private accountInfoService: AccountInfoService,
+    ) {
+    // this.accountInfoService.userIDSubject.subscribe((data) => {
+    //   this.userID = data;
+    // });
+  }
+
   ngOnInit(): void {
-    // Call the service method to get the user's address list
+
+    this.accountInfoService.userId$.subscribe(userId => {
+      this.userID = userId;
+      console.log('Address component: User ID:', this.userID);
+    });
+
+
     this.addressService.getUserAddressList(this.userID).subscribe(
       (data) => {
         this.addressList = data;
-        console.log('addressService respond account address list:',this.addressList)
+        console.log('addressService respond account address list:', this.addressList)
       },
       (error) => {
         console.error('Error fetching user addresses:', error);

@@ -106,7 +106,7 @@ const sendVerifyEmail = async (name, email, user_id) => {
       html:
         "<p> Hi " +
         name +
-        ',please click here to <a href="http://localhost:3000/verify?id=' +
+        ',please click here to <a href="http://localhost:3000/user/verify?id=' +
         user_id +
         '">Verify</a> your mail.</p>',
     };
