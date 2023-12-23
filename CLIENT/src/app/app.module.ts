@@ -55,8 +55,8 @@ import { OrderTrackingComponent } from './manage-account/order-tracking/order-tr
 import { TermPolicyComponent } from './term-policy/term-policy.component';
 import { ManageOrderComponent } from './admin/manage-order/manage-order.component';
 import { DeliveryPolicyComponent } from './delivery-policy/delivery-policy.component';
-import { DatePipe } from '@angular/common';
-
+import { CommonModule, DatePipe } from '@angular/common';
+import { ForgetPwComponent } from './forget-pw/forget-pw.component';
 
 
 @NgModule({
@@ -92,12 +92,12 @@ import { DatePipe } from '@angular/common';
     AddColorComponent,
     FeedbackOrderComponent,
     FeedbackOrderSuccessComponent,
-
     OrderTrackingComponent,
     TermPolicyComponent,
     DeliveryPolicyComponent,
     ManageOrderComponent,
-    DeliveryPolicyComponent
+    DeliveryPolicyComponent,
+    ForgetPwComponent
   ],
   imports: [
     BrowserModule,
@@ -123,6 +123,7 @@ import { DatePipe } from '@angular/common';
     CarouselModule,
     MatButtonModule,
     NzFormModule,
+    CommonModule
 
 
 
