@@ -350,126 +350,71 @@
                     </form>
                     <div class="header-actions">
                         <div class="item item-headphone hide-on-mobile-tablet">
-                            <a href="" class="icon">
-                                <i class="header__icon ti-headphone"></i>
-                            </a>
+                          <a href="" class="icon">
+                            <i class="header__icon ti-headphone"></i>
+                          </a>
                         </div>
-                        <div class="item item-headphone hide-on-mobile-tablet" >
-                            <a href="javascript:void(0)" class="icon" (click)="toggleSubAction()">
-                                <i class="header__icon ti-user"></i>                                
-                            </a>
-                            <div class="sub-action" [style.display]="isSubActionVisible ? 'block' : 'none'">
-                                <div class="top-action">
-                                    <a href="javascript:void(0)" class="icon">
-                                        <div class="tit-top-action">Tài khoản của tôi</div>
-                                    </a>
-                                </div>
-                                <ul>
-                                    <li>
-                                        <a href="">
-                                            <i class="ti-id-badge"></i>
-                                            Thông tin tài khoản
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="">
-                                            <i class="ti-reload"></i>
-                                            Quản lý đơn hàng
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="">
-                                            <i class="ti-location-pin"></i>
-                                            Sổ địa chỉ
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="">
-                                            <i class="ti-heart"></i>
-                                            Sản phẩm yêu thích
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="">
-                                            <i class="ti-support"></i>
-                                            Yêu cầu hỗ trợ
-                                        </a>
-                                    </li><li>
-                                        <a href="">
-                                            <i class="ti-shift-left"></i>
-                                            Đăng xuất
-                                        </a>
-                                    </li>
-                                </ul>
+                        <div class="item item-headphone hide-on-mobile-tablet">
+                          <a href="javascript:void(0)" class="icon icon-account" (click)="toggleSubAction()">
+                            <i class="header__icon ti-user"></i>                                
+                          </a>
+                          <div class="sub-action">
+                            <div class="top-action">
+                              <a href="javascript:void(0)" class="icon">
+                                <div class="tit-top-action">Tài khoản của tôi</div>
+                              </a>
                             </div>
+                            <ul>
+                              <li><a href=""><i class="ti-id-badge"></i> Thông tin tài khoản</a></li>
+                              <li><a href=""><i class="ti-reload"></i> Quản lý đơn hàng</a></li>
+                              <li><a href=""><i class="ti-location-pin"></i> Sổ địa chỉ</a></li>
+                              <li><a href=""><i class="ti-heart"></i> Sản phẩm yêu thích</a></li>
+                              <li><a href=""><i class="ti-support"></i> Yêu cầu hỗ trợ</a></li>
+                              <li><a href=""><i class="ti-shift-left"></i> Đăng xuất</a></li>
+                            </ul>
+                          </div>
                         </div>
                         <div class="item item-shopping">
-                            <a href="javascript:void(0)" class="icon" onclick="toggleCart()">
-                                <i class="header__icon ti-shopping-cart"></i>
-                                <span class="number-cart">0</span>
-                            </a>
-                            <div class="sub-action-cart sub-action">
-                                <div class="top-action">
-                                    <h3>
-                                        Giỏ hàng
-                                        <span class="number-cart">0</span>
-                                    </h3>
-                                </div>
-                                <div class="main-action">
-                                    <div class="item-product-cart d-flex">
-                                        <div class="thumb-product-cart">
-                                            <img src="https://pubcdn.ivymoda.com/files/product/thumab/400/2023/08/16/eb36f523de15af6b9112db2aa322f0af.JPG" alt="">
-                                        </div>
-                                        <div class="info-product-cart">
-                                            <h3>
-                                                <a href="">Zuýp 2 lớp xếp ly bản lớn</a>
-                                            </h3>
-                                            <div class="info-overview d-flex">
-                                                <p class="overview-color">
-                                                    Màu sắc: 
-                                                    <strong>Be vàng</strong>
-                                                </p>
-                                                <p>
-                                                    Size: 
-                                                    <strong style="text-transform: uppercase">S</strong>
-                                                </p>
-                                            </div>
-                                            <div class="info-price d-flex">
-                                                <div class="info-price-quantity d-flex">
-                                                    <div class="price-quantity-minus price-quantity">
-                                                        <i class="ti-minus"></i>
-                                                    </div>
-                                                    <input id="quantityInput" type="number" value="1">
-                                                    <div class="price-quantity-plus price-quantity">
-                                                        <i class="ti-plus"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="info-price-cart">
-                                                    <ins>
-                                                        <span>
-                                                            595.000₫
-                                                        </span>
-                                                    </ins>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="bottom-action">
-                                    <input type="hidden">
-                                    <div class="total-price">
-                                        Tổng cộng: 
-                                        <strong>595.000₫</strong>
-                                    </div>
-                                    <div class="box-action">
-                                        <a href="" class="action-view-cart">Xem giỏ hàng</a>
-                                        <a href="" class="action-login">Đăng nhập</a>
-                                    </div>
-                                </div>
-
+                          <a href="javascript:void(0)" class="icon icon-shopping-cart" (click)="toggleCart()">
+                            <i class="header__icon ti-shopping-cart"></i>
+                            <span class="number-cart">0</span>
+                          </a>
+                          <div class="sub-action-cart sub-action">
+                            <div class="top-action">
+                              <h3>Giỏ hàng <span class="number-cart">0</span></h3>
                             </div>
+                            <div class="main-action">
+                              <div class="item-product-cart d-flex" *ngIf="quantityInputValue !== 0">
+                                <div class="thumb-product-cart">
+                                  <img src="https://pubcdn.ivymoda.com/files/product/thumab/400/2023/08/16/eb36f523de15af6b9112db2aa322f0af.JPG" alt="">
+                                </div>
+                                <div class="info-product-cart">
+                                  <h3><a href="">Zuýp 2 lớp xếp ly bản lớn</a></h3>
+                                  <div class="info-overview d-flex">
+                                    <p class="overview-color"><strong>Màu sắc:</strong> Be vàng</p>
+                                    <p><strong style="text-transform: uppercase">Size:</strong> S</p>
+                                  </div>
+                                  <div class="info-price-quantity d-flex">
+                                    <div class="price-quantity-minus price-quantity" (click)="updateQuantity('minus')"><i class="ti-minus"></i></div>
+                                    <input id="quantityInput" type="number" [(ngModel)]="quantityInputValue" (change)="updateQuantity('input')" />
+                                    <div class="price-quantity-plus price-quantity" (click)="updateQuantity('plus')"><i class="ti-plus"></i></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="bottom-action">
+                              <input type="hidden">
+                              <div class="total-price">Tổng cộng: <strong>595.000₫</strong></div>
+                              <div class="box-action">
+                                <a href="" class="action-view-cart">Xem giỏ hàng</a>
+                                <a href="" class="action-login">Đăng nhập</a>
+                              </div>
+                            </div>
+                            <div class="close-action" (click)="closeCart($event)"><i class="ti-close"></i></div>
+                          </div>
                         </div>
                     </div>
+                      
                 
                 </div>
             </div>
