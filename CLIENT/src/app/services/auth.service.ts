@@ -118,6 +118,10 @@ export class AuthService {
     );
   }
 
+  isEmailVerified(email: string): Observable<boolean> {
+    return this._http.get<boolean>(`${local}/user/is-email-verified/${email}`);
+  }
+
 
   handleError(error: HttpErrorResponse) {
     return throwError(() => new Error(error.message));

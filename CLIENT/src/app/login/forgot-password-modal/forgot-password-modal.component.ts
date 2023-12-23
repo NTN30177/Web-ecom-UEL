@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ForgotPasswordModalSuccessComponent } from '../forgot-password-modal-success/forgot-password-modal-success.component';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-password-modal',
@@ -13,13 +14,16 @@ import { AuthService } from '../../services/auth.service';
 export class ForgotPasswordModalComponent implements OnInit {
   forgotPasswordForm: FormGroup;
   canOpenModal: boolean = false;
-  infoResult: any;
+  infoResult: { message: string, success: boolean } | null = null;
+  emailFieldTouched: boolean = false;
+
 
   constructor(
     public dialogRef: MatDialogRef<ForgotPasswordModalComponent>,
     private fb: FormBuilder,
     private dialog: MatDialog,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private router: Router
   ) {
     this.forgotPasswordForm = this.fb.group({
       cus_email: [
@@ -39,29 +43,34 @@ export class ForgotPasswordModalComponent implements OnInit {
     this.dialogRef.close();
   }
 
+
   openSuccessModal(): void {
-    // Kiểm tra xem form có hợp lệ không
+    this.emailFieldTouched = true;
     if (this.forgotPasswordForm.valid) {
-      // Close the current modal
-      this.dialogRef.close();
-
-      // Open another modal (replace ForgotPasswordModalSuccessComponent with the actual component)
-      const successModalRef = this.dialog.open(
-        ForgotPasswordModalSuccessComponent,
-        {
-          width: '70%',
-          data: {}, // Pass any data needed to the new modal
-        }
-      );
-
-      successModalRef.afterClosed().subscribe((result: any) => {
-        console.log('The success modal was closed', result);
+      const email = this.forgotPasswordForm.get('cus_email')?.value;
+      this._authService.isEmailVerified(email).subscribe({
+        next: (data: any) => {
+          if (data.isVerified) {
+            this.infoResult = { message: 'Vui lòng truy cập email để xác thực', success: true };
+            setTimeout(() => {
+              this.dialogRef.close();
+              this.router.navigate(['/']);
+            }, 5000);
+          } else {
+            this.infoResult = { message: 'Email không được tìm thấy', success: false };
+          }
+        },
+        error: (err: any) => {
+          const errorMessage = err.error?.message || 'Email không được tìm thấy';
+          this.infoResult = { message: errorMessage, success: false };
+        },
       });
     } else {
-      // Đánh dấu các control đã touched để hiển thị thông báo lỗi nếu cần
       this.canOpenModal = true;
     }
   }
+  
+
 
   forGotPwProcess() {
     const email = this.forgotPasswordForm.get('cus_email')?.value
