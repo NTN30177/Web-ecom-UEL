@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer2, ViewEncapsulation, HostListener } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewEncapsulation, HostListener, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/auth.service';
 
@@ -67,11 +67,7 @@ export class HeaderComponent implements OnInit{
     // Thêm các sản phẩm khác nếu có
   ];
 
-  constructor(
-    private elRef: ElementRef,
-    private renderer: Renderer2,
-    private snackBar: MatSnackBar // Thêm MatSnackBar vào constructor
-  ) {}
+ 
 
   toggleSearchForm(): void {
     this.isSearchFormActive = !this.isSearchFormActive;

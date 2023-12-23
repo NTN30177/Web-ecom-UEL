@@ -68,7 +68,7 @@ export class AuthService {
     };
     return this._http
       .post<any>(
-        `${local}/user/register`,
+        `${local}/register`,
         data
         // requestOptions
       )
@@ -87,7 +87,6 @@ export class AuthService {
       responseType: 'text',
     };
     console.log('122')
-
     return this._http
       .post<any>(
         `${local}/user/login`,
@@ -100,8 +99,24 @@ export class AuthService {
       );
 
   }
-  
+  cartSubject = new Subject<any>();
+  isLoginSubject = new Subject<any>();
 
+  forGotPwProcessService(email: any): Observable<any> {
+    const headers = new HttpHeaders().set(
+      'Content-Type',
+      'text/plain;charset=utf-8'
+    );
+    const requestOptions: Object = {
+      headers: headers,
+      responseType: 'text',
+    };
+    return this._http.get<any>(`${local}/user/forgot-pw/${email}`,requestOptions).pipe(
+      map((res) => JSON.parse(res) as IWardDocument),
+      retry(3),
+      catchError(this.handleError)
+    );
+  }
 
 
   handleError(error: HttpErrorResponse) {

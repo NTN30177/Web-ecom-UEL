@@ -121,7 +121,7 @@ const sendVerifyEmail = async (name, email, user_id) => {
     console.log(err.message);
   }
 };
-const DverifyEmail = async (req, res) => {
+const verifyEmail = async (req, res) => {
   try {
     const updateInfo = await User.updateOne(
       { _id: req.query.id },
@@ -290,5 +290,5 @@ const resetPassword = async (req, res) => {
 
 
 module.exports = {
-  x,saveAccount, verifyEmail, verifyLogin, getProductHomePage, getForGotPW, resetPassword
+  x,saveAccount, verifyEmail, verifyLogin, getProductHomePage, getForGotPW, resetPassword, getUserID
 };
