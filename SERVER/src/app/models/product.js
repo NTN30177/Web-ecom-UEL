@@ -25,43 +25,44 @@ const variantSchema = new mongoose.Schema({
 });
 
 const productSchema = new mongoose.Schema(
-  {
-    title: {
-      type: String,
-      // unique: true,
-      trim: true,
-      // required: true,
+    {
+        title: {
+            type: String,
+            // unique: true,
+            trim: true,
+            // required: true,
+        },
+        slug: { type: String, maxLength: 255, slug: 'title', unique: true },
+        price: {
+            type: Number,
+        },
+        sku: {
+            type: String,
+        },
+        discount: {
+            type: Number,
+            default: 0,
+        },
+        description: {
+            type: String,
+            // required: true,
+        },
+        author: {
+            type: String,
+            // required: true,
+        },
+        images: [
+            {
+                type: String,
+                // required: true, // You can add this validation if images are required
+            },
+        ],
+        variants: [variantSchema],
+        is_deleted: { type: Boolean, default: false },
     },
-    slug: { type: String, maxLength: 255, slug: "title", unique: true },
-    price: {
-      type: Number,
+    {
+        timestamps: true,
     },
-    sku: {
-      type: String,
-    },
-    discount: {
-      type: Number,
-      default: 0,
-    },
-    description: {
-      type: String,
-      // required: true,
-    },
-    author: {
-      type: String,
-      // required: true,
-    },
-    images: [
-      {
-        type: String,
-        // required: true, // You can add this validation if images are required
-      },
-    ],
-    variants: [variantSchema],
-  },
-  {
-    timestamps: true,
-  }
 );
 
 const subtypeSchema = new mongoose.Schema(

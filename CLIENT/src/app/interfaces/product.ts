@@ -16,11 +16,13 @@ interface IVariantColor {
     title: string;
     slug: string;
     price: number;
+    sku:string;
     discount: number;
     description: string;
     author: string;
     images: string[];
     variants: IVariant[];
+    is_deleted: boolean;
   }
   
   interface ISubType {
