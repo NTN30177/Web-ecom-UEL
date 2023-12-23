@@ -71,6 +71,8 @@
                                         </ul>
                                     </div>
 
+                                
+            
                                 </div>
                             </ul>
                         </li>
@@ -361,35 +363,43 @@
                                 <i class="header__icon ti-headphone"></i>
                             </a>
                         </div>
-                        <div class="item item-headphone hide-on-mobile-tablet"  *ngIf="!userId">
-                            <a href="javascript:void(0)" class="icon icon-account" (click)="toggleSubAction()">
-                                <i class="header__icon ti-user"></i>
-                            </a>
-                            <div class="sub-action">
-                                <div class="top-action">
-                                    <a href="javascript:void(0)" class="icon">
-                                        <div class="tit-top-action">Tài khoản của tôi</div>
-                                    </a>
-                                </div>
-                                <ul>
-                                    <li><a href=""><i class="ti-id-badge"></i> Thông tin tài khoản</a></li>
-                                    <li><a href=""><i class="ti-reload"></i> Quản lý đơn hàng</a></li>
-                                    <li><a href=""><i class="ti-location-pin"></i> Sổ địa chỉ</a></li>
-                                    <li><a href=""><i class="ti-heart"></i> Sản phẩm yêu thích</a></li>
-                                    <li><a href=""><i class="ti-support"></i> Yêu cầu hỗ trợ</a></li>
-                                    <li><a href=""><i class="ti-shift-left"></i> Đăng xuất</a></li>
-                                </ul>
+                        <div *ngIf="!isLogin" routerLink="login">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></svg>
+                        </div>
+                        <div class="item item-headphone hide-on-mobile-tablet" *ngIf="isLogin">
+                          <a href="javascript:void(0)" class="icon icon-account" (click)="toggleSubAction()">
+                            <i class="header__icon ti-user"></i>                                
+                          </a>
+                          <div class="sub-action">
+                            <div class="top-action">
+                              <a href="javascript:void(0)" class="icon">
+                                <div class="tit-top-action">Tài khoản của tôi</div>
+                              </a>
                             </div>
+                            <ul>
+                              <li><a href=""><i class="ti-id-badge"></i> Thông tin tài khoản</a></li>
+                              <li><a href=""><i class="ti-reload"></i> Quản lý đơn hàng</a></li>
+                              <li><a href=""><i class="ti-location-pin"></i> Sổ địa chỉ</a></li>
+                              <li><a href=""><i class="ti-heart"></i> Sản phẩm yêu thích</a></li>
+                              <li><a href=""><i class="ti-support"></i> Yêu cầu hỗ trợ</a></li>
+                              <li><a href="" (click)="logout()"><i class="ti-shift-left" ></i> Đăng xuất</a></li>
+                            </ul>
+                          </div>
                         </div>
                         <div  *ngIf="userId">Đăng nhập</div>
                         <div class="item item-shopping">
-                            <a href="javascript:void(0)" class="icon icon-shopping-cart" (click)="toggleCart()">
-                                <i class="header__icon ti-shopping-cart"></i>
-                                <span class="number-cart">0</span>
-                            </a>
-                            <div class="sub-action-cart sub-action">
-                                <div class="top-action">
-                                    <h3>Giỏ hàng <span class="number-cart">0</span></h3>
+                          <a href="javascript:void(0)" class="icon icon-shopping-cart" (click)="toggleCart()">
+                            <i class="header__icon ti-shopping-cart"></i>
+                            <span class="number-cart">{{cartNumberItem}}</span>
+                          </a>
+                          <div class="sub-action-cart sub-action">
+                            <div class="top-action">
+                              <h3>Giỏ hàng <span class="number-cart">{{cartNumberItem}}</span></h3>
+                            </div>
+                            <div class="main-action">
+                              <div class="item-product-cart d-flex" *ngIf="quantityInputValue !== 0">
+                                <div class="thumb-product-cart">
+                                  <img src="https://pubcdn.ivymoda.com/files/product/thumab/400/2023/08/16/eb36f523de15af6b9112db2aa322f0af.JPG" alt="">
                                 </div>
                                 <div class="main-action">
                                     <div class="item-product-cart d-flex" *ngIf="quantityInputValue !== 0">

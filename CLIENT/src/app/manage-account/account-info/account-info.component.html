@@ -3,7 +3,7 @@
 </div>
 <div class="row order-block">
     <!-- INFO CONTAINER   -->
-    <form [formGroup]="userInfoForm" (ngSubmit)="submitForm()" class="col-lg-6 col-12 order-lg-1 order-sm-2 order-2">
+    <form [formGroup]="userInfoForm" (ngSubmit)="updateUserInfo()" class="col-lg-6 col-12 order-lg-1 order-sm-2 order-2">
         <div class="">
             <div class="form-group row">
                 <label for="first_name" class="col-sm-4 col-form-label">Họ</label>
@@ -55,11 +55,11 @@
                     <div class="row">
                         <div class="col-12 d-flex gap-5">
                             <label class="form-radio">
-                                <input formControlName="gender" class="form-radio__input" type="radio" value="0" [checked]="userInfo.gender === 0">
+                                <input formControlName="gender" class="form-radio__input" type="radio" value="0" [checked]="userInfo?.gender === 0">
                                 <span class="radio_label">Nam</span>
                             </label>
                             <label class="form-radio">
-                                <input formControlName="gender" class="form-radio__input" type="radio" value="1" [checked]="userInfo.gender === 1">
+                                <input formControlName="gender" class="form-radio__input" type="radio" value="1" [checked]="userInfo?.gender === 1">
                                 <span class="radio_label">Nữ</span>
                             </label>
                         </div>

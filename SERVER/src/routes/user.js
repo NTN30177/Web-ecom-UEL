@@ -12,7 +12,14 @@ router.post('/register',
 router.get('/verify', userController.verifyEmail);
 router.get('/id', userController.getUserID);
 router.post('/login', userController.verifyLogin);
+router.get('/product', userController.getProductHomePage);
+router.get('/forgot-pw/:email', userController.getForGotPW);
+
 
 router.get('/account/info', userController1.getAccountInfo)
+router.put('/account/info/update/:userID', userController1.updateAccountInfo);
+
+router.get('/account/address/:userId', userController1.getAccountAddresses)
+router.post('/account/address/add-address', userController1.postUserAddress)
 
 module.exports = router;

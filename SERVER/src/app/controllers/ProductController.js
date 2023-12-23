@@ -41,6 +41,30 @@ softDeleteProduct = async (req, res) => {
   }
 };
 
+
+toggleSoftDeleted = async (req, res) => {
+  const productId = req.params.productId;
+
+  try {
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+
+    // Toggle the is_deleted property
+    product.is_deleted = !product.is_deleted;
+
+    // Save the updated product
+    await product.save();
+
+    res.json({ message: 'Soft delete toggled successfully', product });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 const saveProduct2 = async (req, res) => {
   const { variant } = req.body;
 
@@ -240,5 +264,5 @@ const getTypeAndSubtypeData = async (req, res) => {
 };
 
 module.exports = {
-  saveProduct, getProduct, softDeleteProduct
+  saveProduct, getProduct,toggleSoftDeleted, softDeleteProduct
 };
