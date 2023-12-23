@@ -89,7 +89,7 @@ export class AuthService {
     console.log('122')
     return this._http
       .post<any>(
-        `${local}/login`,
+        `${local}/user/login`,
         data
         // requestOptions
       )
@@ -99,8 +99,23 @@ export class AuthService {
       );
 
   }
-  
 
+  getUserID(): Observable<any> {
+    const headers = new HttpHeaders().set(
+      'Content-Type',
+      'text/plain;charset=utf-8'
+    );
+    const requestOptions: Object = {
+      headers: headers,
+      responseType: 'text',
+    };
+    return this._http.get<any>(`${local}/user/id`,requestOptions).pipe(
+      map((res) => JSON.parse(res)),
+      retry(3),
+      catchError(this.handleError)
+    );
+  }
+  
 
 
   handleError(error: HttpErrorResponse) {

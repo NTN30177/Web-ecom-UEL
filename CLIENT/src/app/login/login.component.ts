@@ -152,7 +152,6 @@ export class LoginComponent implements OnInit {
   }
 
   
-
   openForgotPasswordDialog(): void {
     // Open the modal when the "Quên mật khẩu?" link is clicked
     const dialogRef = this.dialog.open(ForgotPasswordModalComponent, {
@@ -178,7 +177,7 @@ export class LoginComponent implements OnInit {
 @Component({
   selector: 'app-info-result-modal',
   template: `
-    <div style="padding: 20px; text-align: center; font-size:20px; font-family: 'Montserrat', sans-serif;">
+    <div style="padding: 20px; text-align: center; font-size:20px; font-family: 'Montserrat', sans-serif; padding-top: 80px; padding-bottom: 80px; color: black">
       {{ data.infoResult }}
     </div>
   `,

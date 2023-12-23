@@ -10,6 +10,7 @@ router.post('/register',
     userController.saveAccount);//
 
 router.get('/verify', userController.verifyEmail);
+router.get('/id', userController.getUserID);
 router.post('/login', userController.verifyLogin);
 
 router.get('/account/info', userController1.getAccountInfo)

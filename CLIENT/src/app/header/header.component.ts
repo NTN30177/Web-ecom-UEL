@@ -1,5 +1,6 @@
-import { Component, ElementRef, Renderer2, ViewEncapsulation, HostListener } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewEncapsulation, HostListener, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../services/auth.service';
 
 interface CartItem {
   id: number;
@@ -15,23 +16,45 @@ interface CartItem {
   styleUrls: ['./styles.css', './header.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
   isSearchFormActive: boolean = false;
   isMainMenuOpen: boolean = false;
   submenuOpen: boolean = false;
   isSubActionVisible: boolean = false;
   quantityInputValue: number = 1;
+  userId=1;  // Sử dụng string hoặc null tùy thuộc vào loại dữ liệu của user ID
+
 
   cartItems: CartItem[] = [
     { id: 1, name: 'Zuýp 2 lớp xếp ly bản lớn', quantity: 1, price: 595000 },
     // Thêm các sản phẩm khác nếu có
   ];
+  errMessage: any;
 
   constructor(
     private elRef: ElementRef,
     private renderer: Renderer2,
-    private snackBar: MatSnackBar // Thêm MatSnackBar vào constructor
+    private snackBar: MatSnackBar,
+    private userService: AuthService  // Thêm service của bạn vào constructor
   ) {}
+  ngOnInit(): void {
+// Kiểm tra xem có user ID trong localStorage hay không
+// this.userId = this.userService.getUserID();
+this.apiGetUID()  
+}
+
+apiGetUID() {
+  this.userService.getUserID().subscribe({
+    next: (data) => {
+      this.userId = data;
+      console.log(this.userId,'mmmm')
+      console.log('1235')
+    },
+    error: (err) => {
+      this.errMessage = err;
+    },
+  });
+}
 
   toggleSearchForm(): void {
     this.isSearchFormActive = !this.isSearchFormActive;
@@ -132,4 +155,7 @@ export class HeaderComponent {
       panelClass: ['custom-snackbar'], // Thêm class CSS tùy chỉnh
     });
   }
+
+
+
 }

@@ -149,11 +149,20 @@ const verifyEmail = async (req, res) => {
             res.send({ message: "Vui lòng xác minh email" });
             console.log( "Vui lòng xác minh email")
           } else {
-            console.log('Đăng nhập thành công')
+            
+            await req.session.save()
             req.session.user_id = userData._id;
             console.log(req.session.user_id)
-
+            console.log('Đăng nhập thành công')
             res.send({ message: "Đăng nhập thành công" });
+
+            // Kiểm tra xem session có được lưu hay không
+    if (req.session.user_id) {
+      console.log('Session đã được lưu:', req.session.user_id);
+    } else {
+      console.log('Session không được lưu');
+    }
+    
           }
         } else {
           res.send({ message: "Đăng nhập thất bại" });
@@ -165,8 +174,28 @@ const verifyEmail = async (req, res) => {
       console.log(err.message);
     }
   };
+
+  const getUserID = async (req, res) => {
+    try {
+      if (req.session.user_id) {
+        // Lấy thông tin người dùng từ cơ sở dữ liệu hoặc bất kỳ nguồn dữ liệu nào bạn đã lưu
+        const user_id = req.session.user_id;
+      console.log('Session đã được lưu:2', req.session.user_id);
+
+  
+        res.json({ user_id });
+      } else {
+        console.log('Session không được lưu..');
+        res.status(401).json({ message: 'Unauthorized' });
+      }
+    } catch (error) {
+      console.error('error');
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  };
+  
   
 
 module.exports = {
-  x,saveAccount, verifyEmail, verifyLogin
+  x,saveAccount, verifyEmail, verifyLogin,getUserID
 };
