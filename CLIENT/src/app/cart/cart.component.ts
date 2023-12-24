@@ -30,7 +30,7 @@ export class CartComponent implements OnInit {
   }
   async ngOnInit(): Promise<void> {
     try {
-      await this.apiCartProduct();
+      this.productsCart = await this.apiCartProduct();
       await this.cartDetails();
       await this.totalPayment();
     } catch (error) {
@@ -42,10 +42,12 @@ export class CartComponent implements OnInit {
   totalQuantity() {}
   async apiCartProduct(): Promise<void> {
     console.log('1235');
+    
     try {
       const data = await this._cartService.getProductCart().toPromise();
       console.log('test123');
-      this.productsCart = data.productItemUser;
+      // this.productsCart = data.productItemUser;
+      return data.productItemUser
       console.log(this.productsCart, '123');
     } catch (err) {
       this.errMessage = err;
@@ -80,7 +82,7 @@ export class CartComponent implements OnInit {
       size: sizeLIST,
       quantityAction: quantityACTION,
     };
-    console.log(data, '123');
+
     await this.apiChangeQuantityProductItem(data);
   }
   convertStringToNumbers(string: string) {
@@ -170,21 +172,13 @@ export class CartComponent implements OnInit {
     this.total_variantColor = 0;
     this.ship_code = 0;
 
-    // const localCartString = localStorage.getItem('localCart');
-    // if(localCartString){
-
-    //   this.getCartDetails =JSON.parse(localCartString)
-    //   this.total = this.getCartDetails.reduce(function(acc: number,val: { quantity: number; price: number; }){
-    //     return acc +(val.quantity*val.price)
-
-    //   })
     this.productsCart.forEach((product: any) => {
       console.log(product);
       product.variants.forEach((variant: any) => {
         variant.variantColor.forEach((variantColor: any) => {
           console.log(variantColor);
           this.total_variantColor++;
-          this._auth.cartSubject.next(this.total_variantColor);
+          this._auth.cartSubject.next(this.total_quantity);
           // Assuming there is a 'price' property for each variant
           this.total_payment += variantColor.quantity * product.productId.price;
           this.total_quantity += variantColor.quantity;
@@ -198,6 +192,7 @@ export class CartComponent implements OnInit {
     }
     console.log(this.ship_code);
   }
+
   removeProduct(){
     localStorage.removeItem('localCart')
     this.getCartDetails =[]

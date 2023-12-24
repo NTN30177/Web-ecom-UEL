@@ -1,6 +1,9 @@
 import { Component, ElementRef, Renderer2, ViewEncapsulation, HostListener, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/auth.service';
+import { IUser } from '../interfaces/user';
+import { CartComponent } from '../cart/cart.component';
+import { HomePageComponent } from '../home-page/home-page.component';
 
 interface CartItem {
   id: number;
@@ -30,7 +33,9 @@ export class HeaderComponent implements OnInit{
     private elRef: ElementRef,
     private renderer: Renderer2,
     private snackBar: MatSnackBar, // Thêm MatSnackBar vào constructor
-    private _authServer: AuthService
+    private _authServer: AuthService,
+    private _cartComponent:CartComponent,
+    private _homeComponent:HomePageComponent
   ) {
     this._authServer.cartSubject.subscribe((data) => {
       this.cartNumberItem = data;
@@ -41,12 +46,24 @@ export class HeaderComponent implements OnInit{
   }
   ngOnInit(): void {
     this.cartItemFunc();
+    this.checkLogin()
   }
   isLogin = false;
-  checkLogin() {
-    const localCartString = localStorage.getItem('userData');
-    if (localCartString) {
+  async checkLogin() {
+    const userData = localStorage.getItem('userData');
+    
+    if (userData) {
+      const parseUserData: IUser = JSON.parse(userData);
+      // Assuming idUserSubject is an Observable<number> or similar
+       this._authServer.idUserSubject.next(parseUserData._id);
+      const cartList = await this._cartComponent.apiCartProduct();
+      let total_quantity = await this._homeComponent.totalCartItem(cartList);
+      this.cartNumberItem =total_quantity
       this.isLogin = true;
+    } else {
+      // Ensure that idUserSubject is set to a default value or handle the case when there's no user data
+      this._authServer.idUserSubject.next(null);
+      this.isLogin = false;
     }
   }
   logout() {
@@ -56,12 +73,12 @@ export class HeaderComponent implements OnInit{
   }
   cartItemFunc() {
     const localCartString = localStorage.getItem('localCart');
-
     if (localCartString !== null) {
       var cartCount = JSON.parse(localCartString);
       this.cartNumberItem = cartCount.length;
     }
   }
+
   cartItems: CartItem[] = [
     { id: 1, name: 'Zuýp 2 lớp xếp ly bản lớn', quantity: 1, price: 595000 },
     // Thêm các sản phẩm khác nếu có

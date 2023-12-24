@@ -129,7 +129,7 @@ import { ForgetPwComponent } from './forget-pw/forget-pw.component';
 
 
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, CartComponent, HomePageComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

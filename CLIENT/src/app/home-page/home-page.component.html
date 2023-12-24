@@ -31,7 +31,7 @@
                     <ul>
                       <li *ngFor="let v of product.variants; index as colorI" [ngClass]="{'color': true}"
                         >
-                        <a href="javascript:void(0)" class="color-picked" data-id="{{ v._id }}" (click)="changeColor(product, v._id )">
+                        <a href="javascript:void(0)" class="color-picked" data-id="{{ v._id }}" (click)="changeColor(product, v.color._id )">
                           <img src="http://localhost:3000/colorImages/{{v.color.imageColor}}" alt="">
                         </a>
                       </li>
@@ -55,14 +55,16 @@
                   </div>
                 </div>
                 <div class="add-to-cart">
-                  <a href="javascript:void(0)#" class="js-cart-button" (click)="toggleSizeTable(i)" (click)="addToCart(product)">
+                  <a href="javascript:void(0)#" class="js-cart-button" (click)="toggleSizeTable(productIndex)" >
                     <i class="ti-shopping-cart"></i>
                   </a>
                 </div>
-                <div id="sizeTable{{i}}" class="sizeTable js-list-size">
+                <div id="sizeTable{{productIndex}}" class="sizeTable js-list-size">
                   <ul>
-                    <li *ngFor="let size of getSizeTable(i).sizes">
-                      <button class="btn bt-large" (click)="addToCart(product)">{{ size }}</button>
+                    <li *ngFor="let size of getSizeTable(productIndex).sizes">
+                      <button class="btn bt-large" (click)="addToCart(product.imgHomePage[0].colorID, product, size,1)">{{ size }}</button>
+
+                      <!-- <button class="btn bt-large" (click)="addToCart(product)">{{ size }}</button> -->
                     </li>
                   </ul>
                 </div>

@@ -1,5 +1,5 @@
 const { Address } = require("../models/address");
-const {User, UserAddress} = require("../models/user");
+const { User, UserAddress } = require("../models/user");
 const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
 const randomstring = require("randomstring");
@@ -13,43 +13,44 @@ const {
   CartItem,
 } = require("../models/product");
 
-
 const getProductCart = async (req, res) => {
   try {
-      // const userId = req.session.user_id || '650296d9b0f67d6e62bc49af';
-      const userId = req.session.user_id || '650296d9b0f67d6e62bc49af';
-      const user = await User.findOne({ _id: userId });
+    // const userId = req.session.user_id || '6580f3713804fc632783f4cf';
+    const userId = req.session.user_id || "6580f3713804fc632783f4cf";
+    const user = await User.findOne({ _id: userId });
 
-      if (!user || !user.cart) {
-        console.log(user)
-          res.status(404).json({ message: 'User or cart not found' });
-          return;
-      }
+    if (!user || !user.cart) {
+      console.log(user);
+      res.status(404).json({ message: "User or cart not found" });
+      return;
+    }
 
-      const cartUser = await CartItem.findOne({ _id: user.cart.toString() }).populate({
-          path: 'productItem.productId',
-          populate: {
-              path: 'variants.color',
-              model: 'Color',
-              select: 'nameColor image',
-          },
-      });
+    const cartUser = await CartItem.findOne({
+      _id: user.cart.toString(),
+    }).populate({
+      path: "productItem.productId",
+      populate: {
+        path: "variants.color",
+        model: "Color",
+        select: "nameColor image",
+      },
+    });
 
-      if (cartUser) {
-        console.log(cartUser)
-          const productItemUser = cartUser.productItem;
-          res.json({ productItemUser });
-      } else {
-        console.log(cartUser)
+    if (cartUser) {
+      console.log(cartUser);
+      const productItemUser = cartUser.productItem;
+      res.json({ productItemUser });
+    } else {
+      console.log(cartUser);
 
-          res.status(404).json({ message: 'Không tìm thấy sản phẩm trong giỏ hàng' });
-      }
+      res
+        .status(404)
+        .json({ message: "Không tìm thấy sản phẩm trong giỏ hàng" });
+    }
   } catch (err) {
-      console.error(err);
+    console.error(err);
   }
 };
-
-
 
 // const addOrPutProductToCart = async (req, res, next) => {
 //   try {
@@ -61,7 +62,6 @@ const getProductCart = async (req, res) => {
 //     console.log('s'+size2)
 //     console.log(size)
 
-
 //     const quantity = 1
 //     const quantityColorNew = parseInt(quantityAction)
 //     const p = await Product.findOne({_id:productId})
@@ -69,19 +69,18 @@ const getProductCart = async (req, res) => {
 //       path: "variants.color",
 //       select: "nameColor imageColor"})
 //     .lean();
-    
+
 //     const variant = p.variants.find(v => v.color._id.toString() === colorId);
 //     const imageCart = variant ? variant.images[0] : [];
-    
+
 //     const colorFind = await Color.findOne({ _id: colorId });
 //     const colorName = colorFind.nameColor;
 
-//     const userId = req.session.user_id || '650296d9b0f67d6e62bc49af'
+//     const userId = req.session.user_id || '6580f3713804fc632783f4cf'
 
 //     const userOri = await User.findOne({ _id: userId }).lean();
 //     const cartUser = await CartItem.findOne({ _id: userOri.cart.toString() });
 //     const userByCart = await User.findOne({ _id: userId }).populate('cart').lean();
-
 
 //     const variantColorData = [{ size2, quantity: parseInt(quantity) }];
 //     const variantData = { color: colorId, images: [imageCart], variantColor: variantColorData };
@@ -119,7 +118,6 @@ const getProductCart = async (req, res) => {
 //           }else{
 //           console.log('Nút giảm')
 
-
 //             existingColor.variantColor[existSizeIndex].quantity -= parseInt(quantity);
 //             await checkQuantity(cartUser, existingProduct, existingColor)
 //           }
@@ -143,17 +141,24 @@ const getProductCart = async (req, res) => {
 //     console.error(err);
 //   }
 // };
-const checkQuantity= async(cartUser, productItem, productColor )=> {
-  productColor.variantColor = productColor.variantColor.filter((vc) => vc.quantity > 0);
-  productItem.variants = productItem.variants.filter((variant) => variant.variantColor.length > 0);
-  cartUser.productItem = cartUser.productItem.filter((item) => item.variants.length > 0);
-  console.log('1')
-}
+const checkQuantity = async (cartUser, productItem, productColor) => {
+  productColor.variantColor = productColor.variantColor.filter(
+    (vc) => vc.quantity > 0
+  );
+  productItem.variants = productItem.variants.filter(
+    (variant) => variant.variantColor.length > 0
+  );
+  cartUser.productItem = cartUser.productItem.filter(
+    (item) => item.variants.length > 0
+  );
+  console.log("1");
+};
 
 const addOrPutProductToCart = async (req, res, next) => {
   try {
-    const { colorId, productId, size, quantityAction } = req.body;
-
+    const { colorId, productId, size, quantityAction, userId } = req.body;
+    console.log(colorId, productId, size, quantityAction);
+    // colorId = mongoose.Types.ObjectId(colorId);
     const size2 = size;
     const quantity = 1;
     const quantityColorNew = parseInt(quantityAction);
@@ -161,23 +166,37 @@ const addOrPutProductToCart = async (req, res, next) => {
     const p = await Product.findOne({ _id: productId })
       .populate({
         path: "variants.color",
-        select: "nameColor imageColor"
+        select: "nameColor imageColor",
       })
       .lean();
-
-    const variant = p.variants.find(v => v.color._id.toString() === colorId);
+      const variant = p.variants.find((v) => {
+        const variantColorId = v.color._id.toString();
+        const providedColorId = colorId.toString();
+        
+        console.log('Variant Color ID:', variantColorId);
+        console.log('Provided Color ID:', providedColorId);
+      
+        return variantColorId === providedColorId;
+      });
+      
     const imageCart = variant ? variant.images[0] : [];
 
     const colorFind = await Color.findOne({ _id: colorId });
     const colorName = colorFind.nameColor;
 
-    const userId = req.session.user_id || '650296d9b0f67d6e62bc49af';
+    // const userId = req.session.user_id || '6580f3713804fc632783f4cf';
     const userOri = await User.findOne({ _id: userId }).lean();
     const cartUser = await CartItem.findOne({ _id: userOri.cart.toString() });
-    const userByCart = await User.findOne({ _id: userId }).populate('cart').lean();
+    const userByCart = await User.findOne({ _id: userId })
+      .populate("cart")
+      .lean();
 
-    const variantColorData = [{ size2, quantity: parseInt(quantity) }];
-    const variantData = { color: colorId, images: [imageCart], variantColor: variantColorData };
+    const variantColorData = [{ size: size2, quantity: parseInt(quantity) }];
+    const variantData = {
+      color: colorId,
+      images: [imageCart],
+      variantColor: variantColorData,
+    };
     const newCartItem = { productId, variants: [variantData] };
 
     const existProductIndex = cartUser.productItem.findIndex(
@@ -200,27 +219,30 @@ const addOrPutProductToCart = async (req, res, next) => {
 
         if (existSizeIndex !== -1) {
           if (parseInt(quantityAction) > 0) {
-            existingColor.variantColor[existSizeIndex].quantity += parseInt(quantityAction);
+            existingColor.variantColor[existSizeIndex].quantity +=
+              parseInt(quantityAction);
           } else if (parseInt(quantityAction) === 0) {
             existingColor.variantColor[existSizeIndex].quantity = 0;
             await checkQuantity(cartUser, existingProduct, existingColor);
           } else {
-            existingColor.variantColor[existSizeIndex].quantity -= parseInt(quantity);
+            existingColor.variantColor[existSizeIndex].quantity -=
+              parseInt(quantity);
             await checkQuantity(cartUser, existingProduct, existingColor);
           }
         } else {
-          existingColor.variantColor.push({ size, quantity: parseInt(quantityAction) });
+          existingColor.variantColor.push({
+            size,
+            quantity: parseInt(quantityAction),
+          });
         }
       } else {
-        if(parseInt(quantityAction)>1){
-          
-        } else{
+        if (parseInt(quantityAction) > 1) {
+        } else {
           existingProduct.variants.push({
-            color: colorName,
+            color: colorId,
             images: [imageCart],
             variantColor: [{ size, quantity }],
           });
-
         }
       }
     }
@@ -228,18 +250,19 @@ const addOrPutProductToCart = async (req, res, next) => {
     // Check version before saving
     const currentCart = await CartItem.findById(userOri.cart);
     if (cartUser.__v !== currentCart.__v) {
-      res.status(409).json({ error: 'Version Conflict' });
+      res.status(409).json({ error: "Version Conflict" });
       return;
     }
 
     await cartUser.save();
     res.json(userByCart.cart);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Internal Server Error' });
+    console.error(err, "222");
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
-  module.exports = {
-    getProductCart,addOrPutProductToCart
-}
+module.exports = {
+  getProductCart,
+  addOrPutProductToCart,
+};
