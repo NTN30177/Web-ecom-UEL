@@ -6,12 +6,18 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 declare var $: any;
+import { take } from 'rxjs/operators';
+
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { HomeService } from '../services/home.service';
 import { localImg } from '../ENV/envi';
 import { ChangeDetectorRef } from '@angular/core';
 import { IProduct } from '../interfaces/product';
 import { AuthService } from '../services/auth.service';
+import { CartService } from '../services/cart.service';
+import { IUser } from '../interfaces/user';
+import { CartComponent } from '../cart/cart.component';
+import { formatMoneyVietNam } from '../utils/utils'
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -19,7 +25,6 @@ import { AuthService } from '../services/auth.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class HomePageComponent implements AfterViewInit {
-
   productStates: boolean[] = [];
   i: number = 0;
   showAddToCartPopup: boolean = false; // Thêm biến để kiểm soát hiển thị popup
@@ -29,14 +34,22 @@ export class HomePageComponent implements AfterViewInit {
   errMessage: any;
   currentColor = 0;
   // currentColor: any;
+  formatMoneyVietNam = formatMoneyVietNam;
 
   constructor(
     private el: ElementRef,
     private renderer: Renderer2,
     private _homeService: HomeService,
     private changeDetectorRef: ChangeDetectorRef,
-    private _auth:AuthService
-  ) {}
+    private _authServer: AuthService,
+    private _cartService: CartService,
+    private _cartComponent: CartComponent
+  ) {
+    this._authServer.idUserSubject.subscribe((data) => {
+      this.userIdFromHeader = data;
+      console.log(data, '1111');
+    });
+  }
 
   ngAfterViewInit(): void {
     this.initOwlCarousel();
@@ -80,7 +93,6 @@ export class HomePageComponent implements AfterViewInit {
     { id: 2, sizes: ['S', 'M', 'L', 'XL', 'XXL'] },
     // Thêm các size khác nếu cần
   ];
-
   getSizeTable(productIndex: number): any {
     return (
       this.sizeTableArray.find(
@@ -109,52 +121,6 @@ export class HomePageComponent implements AfterViewInit {
   }
 
   selectedColorId: number | null = null;
-
-  colorsArray: any = [
-    {
-      id: 33897,
-      imgSrc: 'https://pubcdn.ivymoda.com/ivy2/images/color/010.png',
-      alt: '010',
-    },
-    {
-      id: 33898,
-      imgSrc: 'https://pubcdn.ivymoda.com/ivy2/images/color/013.png',
-      alt: 'k50',
-    },
-    // Thêm các màu khác nếu cần
-  ];
-
-  imagesArray: any = [
-    // {
-    //   id: 33897,
-    //   linkMoi1:
-    //     'https://static.dchic.vn/uploads/media/2023/12/DTT_0674-640887878-576x768.JPG',
-    //   linkMoi2:
-    //     'https://static.dchic.vn/uploads/media/2023/12/DTT_1879-86230021-576x768.JPG',
-    // },
-    // {
-    //   id: 33898,
-    //   linkMoi1:
-    //     'https://static.dchic.vn/uploads/media/2023/12/DTT_0103-878967200-576x768.JPG',
-    //   linkMoi2:
-    //     'https://static.dchic.vn/uploads/media/2023/12/DTT_8824-393382702-576x768.JPG',
-    // },
-    // {
-    //   id: 33899,
-    //   linkMoi1:
-    //     'https://static.dchic.vn/uploads/media/2023/12/DTT_8073-101731660.JPG',
-    //   linkMoi2:
-    //     'https://static.dchic.vn/uploads/media/2023/12/DTT_0504-80096045-576x768.JPG',
-    // },
-    // {
-    //   id: 33900,
-    //   linkMoi1:
-    //     'https://static.dchic.vn/uploads/media/2023/12/DTT_0884-93723949-576x768.JPG',
-    //   linkMoi2:
-    //     'https://static.dchic.vn/uploads/media/2023/12/DTT_9394-175234358-576x768.JPG',
-    // },
-    // Thêm các màu khác nếu cần
-  ];
 
   bannersArray: any = [
     { imgName: '../assets/img/banner/banner-1.jpeg' },
@@ -208,27 +174,91 @@ export class HomePageComponent implements AfterViewInit {
 
   ngOnInit(): void {
     // Mặc định chọn màu đầu tiên
-    this.apiProductHomePage();
-    this.selectedColorId = this.colorsArray[0].id;
-    // Khởi tạo mảng productStates với giá trị false cho mỗi sản phẩm
-    this.productStates = Array(this.bannersArray.length).fill(false);
+    this.setupUserIdSubscription()
+      .then(() => {
+        console.log(this.userIdFromHeader, '123');
+        return this.apiProductHomePage();
+      })
+      .then(() => {
+        // Khởi tạo mảng productStates với giá trị false cho mỗi sản phẩm
+        this.productStates = Array(this.bannersArray.length).fill(false);
+      });
   }
+  
 
-  getLink(linkType: 'linkMoi1' | 'linkMoi2'): string {
-    console.log(this.selectedColorId, '23');
-    const selectedColor = this.imagesArray.find(
-      (color: { id: number | null }) => color.id === this.selectedColorId
-    );
-    return selectedColor ? selectedColor[linkType] : '';
-  }
+private async setupUserIdSubscription(): Promise<void> {
+  return new Promise<void>((resolve) => {
+    const subscription = this._authServer.idUserSubject.pipe(take(1)).subscribe((data) => {
+      this.userIdFromHeader = data;
+      console.log(data, 'UserIdFromHeader in CartComponent');
+      resolve();
+    });
+  });
+}
+
+  
 
   setHoveredState(isHovered: boolean): void {
     this.isHovered = isHovered;
   }
 
+  async apiChangeQuantityProductItem(data: object) {
+    console.log(data, '55555');
+    try {
+      const responseData = await this._cartService.putProductItemCart(data);
+      console.log(responseData, 'dataput');
+    } catch (err) {
+      this.errMessage = err;
+    }
+  }
+
+  total_quantity: number = 0;
+
+  totalCartItem(productsCart: any): number {
+    this.total_quantity = 0;
+    productsCart.forEach((product: any) => {
+      product.variants.forEach((variant: any) => {
+        variant.variantColor.forEach((variantColor: any) => {
+          this.total_quantity += variantColor.quantity;
+          console.log(variantColor.quantity,'qt')
+        });
+      });
+    });
+  
+    return this.total_quantity;
+  }
+  
+
   itemsCart: any = [];
-  addToCart(product: IProduct) {
-    // Thực hiện các thao tác khi thêm vào giỏ hàng
+  userIdFromHeader: any;
+
+  async addToCart(
+    colorID: any,
+    product: IProduct,
+    sizeLIST: any,
+    quantityACTION: number
+  ) {
+    if (this.userIdFromHeader) {
+      const data = {
+        colorId: colorID,
+        productId: product._id,
+        size: sizeLIST,
+        quantityAction: quantityACTION,
+        userId: this.userIdFromHeader,
+      };
+      this._cartService.putProductItemCart(data).subscribe(
+        (result) => {
+          console.log('API call successful', result);
+        },
+        (error) => {
+          console.error('API call failed', error);
+        }
+      );
+      const cartList = await this._cartComponent.apiCartProduct(this.userIdFromHeader);
+      let total_quantity = await this.totalCartItem(cartList);
+      this._authServer.cartSubject.next(total_quantity);
+    }
+
     let cartDataNull = localStorage.getItem('localCart');
     if (cartDataNull == null) {
       let storeDataGet: any = [];
@@ -237,27 +267,24 @@ export class HomePageComponent implements AfterViewInit {
     } else {
       var id = product._id;
       let index: number = -1;
-      
       const localCartString = localStorage.getItem('localCart');
-
       if (localCartString !== null) {
         this.itemsCart = JSON.parse(localCartString);
       }
       for (let i = 0; i < this.itemsCart.length; i++) {
         if (id == this.itemsCart[i]._id) {
-          this.itemsCart[i].quantity = 1
-          index =i;
+          this.itemsCart[i].quantity = 1;
+          index = i;
           break;
         }
       }
-      if(index ==-1){
+      if (index == -1) {
         this.itemsCart.push(product);
-        localStorage.setItem('localCart',JSON.stringify(this.itemsCart));
-      } else{
-        localStorage.setItem('localCart',JSON.stringify(this.itemsCart));
-
+        localStorage.setItem('localCart', JSON.stringify(this.itemsCart));
+      } else {
+        localStorage.setItem('localCart', JSON.stringify(this.itemsCart));
       }
-      this.cartNumberFunc()
+      this.cartNumberFunc();
     }
     // Hiển thị popup
     this.showAddToCartPopup = true;
@@ -267,14 +294,15 @@ export class HomePageComponent implements AfterViewInit {
       this.showAddToCartPopup = false;
     }, 2000);
   }
-  cartNumber:number =0;
-  cartNumberFunc(){
+
+  cartNumber: number = 0;
+  cartNumberFunc() {
     const localCartString = localStorage.getItem('localCart');
-      if (localCartString !== null) {
-        var cartValue = JSON.parse(localCartString);
-       this.cartNumber= cartValue.length 
-       this._auth.cartSubject.next(this.cartNumber)
-      }
+    if (localCartString !== null) {
+      var cartValue = JSON.parse(localCartString);
+      this.cartNumber = cartValue.length;
+      //  this._authServer.cartSubject.next(this.cartNumber)
+    }
   }
 
   closePopup() {
@@ -285,64 +313,38 @@ export class HomePageComponent implements AfterViewInit {
     this._homeService.getProductHomePage().subscribe({
       next: (data: any) => {
         this.products = data.products;
-        this.convertToimagesArray();
-        this.createArrSupportChangeImgFollowChangeColor()
+
+        this.createArrSupportChangeImgFollowChangeColor();
         console.log(this.products, '123');
-        console.log(this.imagesArray, '124443');
+
       },
       error: (err: any) => {
         this.errMessage = err;
       },
     });
   }
-  convertToimagesArray() {
-    this.products.forEach((productItem: any) => {
-      productItem.variants.forEach((v: any) => {
-        let a = {
-          id: v._id,
-          linkMoi1: `${localImg}/${v.images[0]}`, // Assuming you want the first image of the first variant
-          linkMoi2: `${localImg}/${v.images[1]}`, // Assuming you want the second image of the first variant
-        };
-        this.imagesArray.push(a); // Use push instead of append
-      });
-    });
-  }
-
-  // Lấy ra dữ liệu mong muốn từ mỗi product item
-  // changeColor(colorVariant: { idColor: string; slugproduct: string }) {
-  //   const { idColor, slugproduct } = colorVariant;
-  //   const thumbProduct = document.getElementById('thumbProduct'); // Assuming this element exists
-  //   this.fetchImageToColor(idColor, slugproduct, thumbProduct);
-  // }
-
-  // fetchImageToColor(colorId: string, productSlug: string, thumbProduct: HTMLElement) {
-  //   const apiUrl = `/product/api/ajaxImageToColor?productId=${colorId}&color=${productSlug}`;
-  //   this.http.get<string[]>(apiUrl).subscribe(data => {
-  //     thumbProduct.innerHTML = '';
-  //     thumbProduct.innerHTML += `
-  //       <a href="/product/product-detail/${productSlug}?color=${colorId}">
-  //         <img id="ao" src="userImages/${data[0]}" alt="" imageCart="${data[0]}" class="imgage static">
-  //         <img id="ao2" src="userImages/${data[1]}" alt="" class="imgage hover_img">
-  //       </a>
-  //     `;
-  //   }, error => {
-  //     console.error('Error fetching color data:', error);
-  //   });
-  // }
-
 
   changeColor(product: IProduct, colorId: string) {
-    console.log( product._id,colorId)
-    console.log(this.productsHaveModified)
-    this.moveImgHomePageToFront(this.productsHaveModified, product._id,colorId )
-    
+    console.log(product._id, colorId);
+    console.log(this.productsHaveModified);
+    this.moveImgHomePageToFront(
+      this.productsHaveModified,
+      product._id,
+      colorId
+    );
   }
 
-  moveImgHomePageToFront(productsHaveModified: any[], productId: string, variantId: string): any[] {
+  moveImgHomePageToFront(
+    productsHaveModified: any[],
+    productId: string,
+    colorId: string
+  ): any[] {
     for (const product of productsHaveModified) {
       if (product._id === productId) {
-        const imgHomePageIndex = product.imgHomePage.findIndex((img:any) => img.variantID === variantId);
-  
+        const imgHomePageIndex = product.imgHomePage.findIndex(
+          (img: any) => img.colorID === colorId
+        );
+
         if (imgHomePageIndex !== -1) {
           const movedItem = product.imgHomePage.splice(imgHomePageIndex, 1)[0];
           product.imgHomePage.unshift(movedItem);
@@ -350,24 +352,21 @@ export class HomePageComponent implements AfterViewInit {
         break; // Dừng vòng lặp sau khi xử lý sản phẩm
       }
     }
-  
+
     return productsHaveModified;
   }
-  
-  
-    createArrSupportChangeImgFollowChangeColor() {
-      this.productsHaveModified = this.products.map((product: any) => {
-        return {
-          ...product,
-          imgHomePage: product.variants.map((variant: any) => {
-            return {
-              variantID: variant._id,
-              images: variant.images.slice(0, 2)
-            };
-          }),
-        };
-      });
-    }
-    
-  
+
+  createArrSupportChangeImgFollowChangeColor() {
+    this.productsHaveModified = this.products.map((product: any) => {
+      return {
+        ...product,
+        imgHomePage: product.variants.map((variant: any) => {
+          return {
+            colorID: variant.color._id,
+            images: variant.images.slice(0, 2),
+          };
+        }),
+      };
+    });
+  }
 }

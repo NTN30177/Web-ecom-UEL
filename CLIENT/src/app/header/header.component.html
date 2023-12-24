@@ -329,7 +329,7 @@
                               </a>
                             </div>
                             <ul>
-                              <li><a href=""><i class="ti-id-badge"></i> Thông tin tài khoản</a></li>
+                              <li><a href=""><i class="ti-id-badge" routerLink="/account/info"></i> Thông tin tài khoản</a></li>
                               <li><a href=""><i class="ti-reload"></i> Quản lý đơn hàng</a></li>
                               <li><a href=""><i class="ti-location-pin"></i> Sổ địa chỉ</a></li>
                               <li><a href=""><i class="ti-heart"></i> Sản phẩm yêu thích</a></li>
@@ -370,8 +370,8 @@
                               <input type="hidden">
                               <div class="total-price">Tổng cộng: <strong>595.000₫</strong></div>
                               <div class="box-action">
-                                <a href="" class="action-view-cart">Xem giỏ hàng</a>
-                                <a href="" class="action-login">Đăng nhập</a>
+                                <a href="" class="action-view-cart" routerLink="/cart">Xem giỏ hàng</a>
+                                <a href="" class="action-login" *ngIf="!isLogin">Đăng nhập</a>
                               </div>
                             </div>
                             <div class="close-action" (click)="closeCart($event)"><i class="ti-close"></i></div>

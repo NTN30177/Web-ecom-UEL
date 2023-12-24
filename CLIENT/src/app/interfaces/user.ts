@@ -7,6 +7,7 @@ export interface IUser {
     gender: number;
     date_of_birth: Date;
     addressList: string[];
+    _id:string
     // image: string;
     // is_admin: number;
     // is_verified: number;

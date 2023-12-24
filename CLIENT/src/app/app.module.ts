@@ -133,7 +133,7 @@ import { Select2Module } from 'ng-select2-component';
 
 
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, CartComponent, HomePageComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
