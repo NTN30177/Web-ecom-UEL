@@ -16,7 +16,15 @@ import {
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private _http: HttpClient) {}
+  private isLoginObservable: Observable<boolean>;
+
+  constructor(private _http: HttpClient) {
+    this.isLoginObservable = this.isLoginSubject.asObservable();
+  }
+
+  getIsLoginObservable(): Observable<boolean> {
+    return this.isLoginObservable;
+  }
 
   getProvince(): Observable<any> {
     const headers = new HttpHeaders().set(
@@ -111,8 +119,10 @@ export class AuthService {
   }
   cartSubject = new Subject<any>();
 idUserSubject = new BehaviorSubject<any>(null);
+isLoginSubject = new BehaviorSubject<any>(null);
 
-  isLoginSubject = new Subject<any>();
+
+  // isLoginSubject = new Subject<any>();
 
   forGotPwProcessService(email: any): Observable<any> {
     const headers = new HttpHeaders().set(

@@ -21,7 +21,7 @@ export class CartComponent implements OnInit {
   constructor(
     private _cartService: CartService,
     private fb: FormBuilder,
-    private _auth: AuthService
+    private _authServer: AuthService
   ) {
     this.rfDataModal = this.fb.group({
       productName: ['', [Validators.required]],
@@ -30,7 +30,9 @@ export class CartComponent implements OnInit {
   }
   async ngOnInit(): Promise<void> {
     try {
-      this.productsCart = await this.apiCartProduct();
+      await this.setupUserIdSubscription()
+      this.productsCart = await this.apiCartProduct(this.userIdFromHeader);
+      console.log(this.productsCart,'pc')
       await this.cartDetails();
       await this.totalPayment();
     } catch (error) {
@@ -39,12 +41,19 @@ export class CartComponent implements OnInit {
     }
   }
 
+
+  userIdFromHeader:any
+  private setupUserIdSubscription() {
+    this._authServer.idUserSubject.subscribe((data) => {
+      this.userIdFromHeader = data;
+      console.log(data, 'UserIdFromHeader in CartComponent');
+    });
+  }
   totalQuantity() {}
-  async apiCartProduct(): Promise<void> {
-    console.log('1235');
-    
+
+  async apiCartProduct(userIdFromHeader:any): Promise<void> {
     try {
-      const data = await this._cartService.getProductCart().toPromise();
+      const data = await this._cartService.getProductCart(userIdFromHeader).toPromise();
       console.log('test123');
       // this.productsCart = data.productItemUser;
       return data.productItemUser
@@ -55,35 +64,48 @@ export class CartComponent implements OnInit {
     }
   }
 
-  async apiChangeQuantityProductItem(data: object) {
-    console.log(data, '55555');
+  // async apiChangeQuantityProductItem(data: object) {
+  //   console.log(data, '55555');
 
-    try {
-      const responseData = await this._cartService
-        .putProductItemCart(data)
-        .toPromise();
-      console.log(responseData, 'dataput');
-      await this.apiCartProduct();
-      await this.totalPayment();
-    } catch (err) {
-      this.errMessage = err;
-    }
-  }
+  //   try {
+  //     const responseData = await this._cartService
+  //       .putProductItemCart(data)
+  //       .toPromise();
+  //     console.log(responseData, 'dataput');
+  //     // await this.apiCartProduct(this.userIdFromHeader);
+  //     await this.totalPayment();
+  //   } catch (err) {
+  //     this.errMessage = err;
+  //   }
+  // }
 
   async changeQuantity(
     colorID: any,
     productID: any,
     sizeLIST: any,
-    quantityACTION: any
+    quantityACTION: any,
   ) {
     const data = {
       colorId: colorID,
       productId: productID,
       size: sizeLIST,
       quantityAction: quantityACTION,
+      userId:this.userIdFromHeader
     };
 
-    await this.apiChangeQuantityProductItem(data);
+    // await this.apiChangeQuantityProductItem(data);
+    this._cartService.putProductItemCart(data).subscribe({
+      next: async (data: any) => {
+        console.log(data.productItem,222)
+      this.productsCart = await this.apiCartProduct(this.userIdFromHeader);
+
+        console.log(this.productsCart,'555')
+        this.totalPayment();
+      },
+      error: (err: any) => {
+        this.errMessage = err;
+      },
+    });
   }
   convertStringToNumbers(string: string) {
     let valueNumber = string.replace(/[^\d]/g, '');
@@ -178,7 +200,7 @@ export class CartComponent implements OnInit {
         variant.variantColor.forEach((variantColor: any) => {
           console.log(variantColor);
           this.total_variantColor++;
-          this._auth.cartSubject.next(this.total_quantity);
+          this._authServer.cartSubject.next(this.total_quantity);
           // Assuming there is a 'price' property for each variant
           this.total_payment += variantColor.quantity * product.productId.price;
           this.total_quantity += variantColor.quantity;

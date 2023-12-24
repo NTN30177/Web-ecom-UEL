@@ -72,8 +72,8 @@
                 <div class="col-auto cart-item__price">
                   <input class="discount-hide" type="hidden" value="20" />
                   <input class="origin-price__hide" type="hidden" value="100" />
-                  <div class="sale-price">{{ (pCode.productId.price * vc.quantity) | number:'1.3-3' }}đ</div>
-                  <div class="origin-price">{{ (pCode.productId.price * vc.quantity) | number:'1.3-3' }}đ</div>
+                  <div class="sale-price">{{ formatMoneyVietNam(pCode.productId.price * vc.quantity)}}</div>
+                  <div class="origin-price">{{ formatMoneyVietNam(pCode.productId.price * vc.quantity)}}</div>
                 </div>
               </div>
               <!-- </div> -->
@@ -208,7 +208,7 @@
   <div class="container cart-footer" *ngIf="!showNocart">
     <div class="total-product">
       <div class="total-product__title">Tổng sản phẩm</div>
-      <div class="total-product__value">{{formatMoneyVietNam(total_quantity)}}</div>
+      <div class="total-product__value">{{total_quantity}}</div>
     </div>
     <div class="estimated-cost">
       <div class="estimated-cost__title">Tạm tính</div>

@@ -6,6 +6,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 declare var $: any;
+import { take } from 'rxjs/operators';
+
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { HomeService } from '../services/home.service';
 import { localImg } from '../ENV/envi';
@@ -170,18 +172,29 @@ export class HomePageComponent implements AfterViewInit {
 
   ngOnInit(): void {
     // Mặc định chọn màu đầu tiên
-    this.setupUserIdSubscription();
-    console.log(this.userIdFromHeader, '123');
-    this.apiProductHomePage();
-    // Khởi tạo mảng productStates với giá trị false cho mỗi sản phẩm
-    this.productStates = Array(this.bannersArray.length).fill(false);
+    this.setupUserIdSubscription()
+      .then(() => {
+        console.log(this.userIdFromHeader, '123');
+        return this.apiProductHomePage();
+      })
+      .then(() => {
+        // Khởi tạo mảng productStates với giá trị false cho mỗi sản phẩm
+        this.productStates = Array(this.bannersArray.length).fill(false);
+      });
   }
-  private setupUserIdSubscription() {
-    this._authServer.idUserSubject.subscribe((data) => {
+  
+
+private async setupUserIdSubscription(): Promise<void> {
+  return new Promise<void>((resolve) => {
+    const subscription = this._authServer.idUserSubject.pipe(take(1)).subscribe((data) => {
       this.userIdFromHeader = data;
       console.log(data, 'UserIdFromHeader in CartComponent');
+      resolve();
     });
-  }
+  });
+}
+
+  
 
   setHoveredState(isHovered: boolean): void {
     this.isHovered = isHovered;
@@ -201,11 +214,11 @@ export class HomePageComponent implements AfterViewInit {
 
   totalCartItem(productsCart: any): number {
     this.total_quantity = 0;
-  
     productsCart.forEach((product: any) => {
       product.variants.forEach((variant: any) => {
         variant.variantColor.forEach((variantColor: any) => {
           this.total_quantity += variantColor.quantity;
+          console.log(variantColor.quantity,'qt')
         });
       });
     });
@@ -239,7 +252,7 @@ export class HomePageComponent implements AfterViewInit {
           console.error('API call failed', error);
         }
       );
-      const cartList = await this._cartComponent.apiCartProduct();
+      const cartList = await this._cartComponent.apiCartProduct(this.userIdFromHeader);
       let total_quantity = await this.totalCartItem(cartList);
       this._authServer.cartSubject.next(total_quantity);
     }

@@ -370,8 +370,8 @@
                               <input type="hidden">
                               <div class="total-price">Tổng cộng: <strong>595.000₫</strong></div>
                               <div class="box-action">
-                                <a href="" class="action-view-cart">Xem giỏ hàng</a>
-                                <a href="" class="action-login">Đăng nhập</a>
+                                <a href="" class="action-view-cart" routerLink="/cart">Xem giỏ hàng</a>
+                                <a href="" class="action-login" *ngIf="!isLogin">Đăng nhập</a>
                               </div>
                             </div>
                             <div class="close-action" (click)="closeCart($event)"><i class="ti-close"></i></div>

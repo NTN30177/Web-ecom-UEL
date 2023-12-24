@@ -15,8 +15,9 @@ const {
 
 const getProductCart = async (req, res) => {
   try {
-    // const userId = req.session.user_id || '6580f3713804fc632783f4cf';
-    const userId = req.session.user_id || "6580f3713804fc632783f4cf";
+    const userId = req.params.userId
+    console.log(userId, 'UID')
+    // const userId = req.session.user_id || "6580f3713804fc632783f4cf";
     const user = await User.findOne({ _id: userId });
 
     if (!user || !user.cart) {
@@ -156,12 +157,14 @@ const checkQuantity = async (cartUser, productItem, productColor) => {
 
 const addOrPutProductToCart = async (req, res, next) => {
   try {
-    const { colorId, productId, size, quantityAction, userId } = req.body;
+    const { colorId, productId, size, quantityAction } = req.body;
     console.log(colorId, productId, size, quantityAction);
-    // colorId = mongoose.Types.ObjectId(colorId);
+
+    const userId = req.params.userId
+    console.log(userId, 'UID')
     const size2 = size;
     const quantity = 1;
-    const quantityColorNew = parseInt(quantityAction);
+    // const quantityColorNew = parseInt(quantityAction);
 
     const p = await Product.findOne({ _id: productId })
       .populate({
@@ -182,7 +185,7 @@ const addOrPutProductToCart = async (req, res, next) => {
     const imageCart = variant ? variant.images[0] : [];
 
     const colorFind = await Color.findOne({ _id: colorId });
-    const colorName = colorFind.nameColor;
+    // const colorName = colorFind.nameColor;
 
     // const userId = req.session.user_id || '6580f3713804fc632783f4cf';
     const userOri = await User.findOne({ _id: userId }).lean();
@@ -261,6 +264,36 @@ const addOrPutProductToCart = async (req, res, next) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+const checkStock = async (req, res, next) => {
+  try{
+    const { colorId, productId, size, quantity } = req.query;
+    const s = size.slice(0, 3).trim()
+    console.log('sssss'+s)
+    // const u = await User.findOne({_id:req.session.user_id || '64d600df4aa3bbbf4a81e6d2'})
+    // const cart = await CartItem.findOne({_id:u.cart.toString()})
+    // const pct = cart.productItem.find(p=>p.productId.toString()===productId)
+    // const vt = pct.variants.find(v=>v.color.toString()===colorId)
+    // const vct = pct.variants.find(v=>v.size=colorId)
+
+    // const vcct = vct.variantColor.forEach(vc=>{
+    //   vc.size===s,
+    //   quantityAll+=parseInt(vc.quantity)
+    // })      
+    const pData = await Product.findOne({_id: productId}).lean()
+    const variant = await pData.variants.find(v=>v.color.toString()===colorId)
+    const vco = await variant.variantColor.find(vc => vc.size = s);
+    const quantityInStore = vco.quantity
+    let checkStockResult
+    if(quantityInStore<quantity){
+      checkStockResult = 'Sản phẩm trong kho còn ít hơn nhu cầu của bạn, vui lòng thay đổi!'
+    } else{
+      checkStockResult =""
+    }
+    res.json(checkStockResult)
+  }catch(err){
+    console.log(err);
+  }
+}
 
 module.exports = {
   getProductCart,

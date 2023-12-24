@@ -33,36 +33,46 @@ export class HeaderComponent implements OnInit{
     private elRef: ElementRef,
     private renderer: Renderer2,
     private snackBar: MatSnackBar, // Thêm MatSnackBar vào constructor
-    private _authServer: AuthService,
+    private _authService: AuthService,
     private _cartComponent:CartComponent,
     private _homeComponent:HomePageComponent
   ) {
-    this._authServer.cartSubject.subscribe((data) => {
-      this.cartNumberItem = data;
-    });
-    this._authServer.isLoginSubject.subscribe((data) => {
+    // this._authService.cartSubject.subscribe((data) => {
+    //   this.cartNumberItem = data;
+    // });
+    this._authService.isLoginSubject.subscribe((data) => {
       this.isLogin = data;
+      console.log(this.isLogin, '...')
     });
   }
   ngOnInit(): void {
+    this._authService.getIsLoginObservable().subscribe((data) => {
+      this.isLogin = data;
+      if (this.isLogin) {
+        this.checkLogin()
+      }
+    });
     this.cartItemFunc();
     this.checkLogin()
   }
   isLogin = false;
   async checkLogin() {
     const userData = localStorage.getItem('userData');
-    
     if (userData) {
       const parseUserData: IUser = JSON.parse(userData);
       // Assuming idUserSubject is an Observable<number> or similar
-       this._authServer.idUserSubject.next(parseUserData._id);
-      const cartList = await this._cartComponent.apiCartProduct();
-      let total_quantity = await this._homeComponent.totalCartItem(cartList);
+       this._authService.idUserSubject.next(parseUserData._id);
+       console.log(parseUserData._id,'UID')
+      const cartList = await this._cartComponent.apiCartProduct(parseUserData._id);
+      console.log(cartList, 'cl')
+      let total_quantity = this._homeComponent.totalCartItem(cartList);
       this.cartNumberItem =total_quantity
+      console.log(total_quantity, 'ttq')
       this.isLogin = true;
+      console.log(this.isLogin, '...')
     } else {
       // Ensure that idUserSubject is set to a default value or handle the case when there's no user data
-      this._authServer.idUserSubject.next(null);
+      this._authService.idUserSubject.next(null);
       this.isLogin = false;
     }
   }
