@@ -33,7 +33,7 @@ const getSubType = async (req, res, next) => {
   try {
     const typeName = req.params.id;
     console.log(typeName)
-    const typePopulateSubType = await Type.findOne({ _id: typeName })
+    const typePopulateSubType = await Type.findOne({typeName})
       .populate("subtypes")
       .lean();
 

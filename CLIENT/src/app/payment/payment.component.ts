@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AccountAddressPopupComponent } from '../manage-account/account-address-popup/account-address-popup.component';
 import { AddressListPopupComponent } from './address-list-popup/address-list-popup.component';
 import { MethodListComponent } from './method-list/method-list.component';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-payment',
@@ -11,10 +12,15 @@ import { MethodListComponent } from './method-list/method-list.component';
 })
 export class PaymentComponent implements OnInit {
   defaultAddress: any;
-  constructor(private dialogRef: MatDialog) { }
+  cartItems: any[] = [];
+
+  constructor(private dialogRef: MatDialog,
+    private _cartService: CartService) { }
 
   ngOnInit(): void {
     this.setDefaultAddress();
+    this._cartService.cartItems$.subscribe(cartItems => {
+      this.cartItems = cartItems;})
   }
 
   addresses = [

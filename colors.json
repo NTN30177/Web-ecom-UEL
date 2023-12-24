@@ -1,0 +1,85 @@
+[{
+  "_id": {
+    "$oid": "64cb721d066ac7727d33ceda"
+  },
+  "nameColor": "Cam đỏ",
+  "__v": 0,
+  "imageColor": "cam-do.png"
+},{
+  "_id": {
+    "$oid": "64cb723b066ac7727d33d0d6"
+  },
+  "nameColor": "Hồng nhạt",
+  "__v": 0,
+  "imageColor": "hong-nhat.png"
+},{
+  "_id": {
+    "$oid": "64cb7247066ac7727d33d2d2"
+  },
+  "nameColor": "Hồng tím",
+  "__v": 0,
+  "imageColor": "hong-tim.png"
+},{
+  "_id": {
+    "$oid": "64cb7251066ac7727d33d4ce"
+  },
+  "nameColor": "Ngẫu nhiên",
+  "__v": 0,
+  "imageColor": "ngau-nhien.png"
+},{
+  "_id": {
+    "$oid": "64cb7260066ac7727d33d6ca"
+  },
+  "nameColor": "Tím cà",
+  "__v": 0,
+  "imageColor": "tim-ca.png"
+},{
+  "_id": {
+    "$oid": "64cb726b066ac7727d33d8c6"
+  },
+  "nameColor": "Tím khối",
+  "__v": 0,
+  "imageColor": "tim-khoi.png"
+},{
+  "_id": {
+    "$oid": "64cb7277066ac7727d33dac2"
+  },
+  "nameColor": "Tím thẫm",
+  "__v": 0,
+  "imageColor": "tim-tham.png"
+},{
+  "_id": {
+    "$oid": "64cb7285066ac7727d33dcbe"
+  },
+  "nameColor": "Trắng",
+  "__v": 0,
+  "imageColor": "trang.png"
+},{
+  "_id": {
+    "$oid": "64cb7297066ac7727d33deba"
+  },
+  "nameColor": "Vàng hoa cúc",
+  "__v": 0,
+  "imageColor": "vang-hoa-cuc.png"
+},{
+  "_id": {
+    "$oid": "64cb7318066ac7727d33e0b6"
+  },
+  "nameColor": "Vàng mustard",
+  "__v": 0,
+  "imageColor": "vang-mustard.png"
+},{
+  "_id": {
+    "$oid": "65851798fb0cdd158835bc99"
+  },
+  "nameColor": "Xanh matcha",
+  "__v": 0,
+  "imageColor": "xanh-max-cha.png"
+},{
+  "_id": {
+    "$oid": "65852347fb0cdd158835bcb5"
+  },
+  "nameColor": "Đen",
+  "__v": 0,
+  "imageColor": "den.png"
+}]

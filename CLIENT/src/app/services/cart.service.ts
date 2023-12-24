@@ -6,14 +6,19 @@ import {
 import { EventEmitter, Injectable } from '@angular/core';
 import {ICartItem, IColor, IProduct, ISubType, IType } from '../interfaces/product';
 
-import { Observable, catchError, map, retry, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, retry, throwError } from 'rxjs';
 import { local } from '../ENV/envi';
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
   constructor(private _http: HttpClient) {}
+  private cartItemsSource = new BehaviorSubject<any[]>([]);
+  cartItems$ = this.cartItemsSource.asObservable();
 
+  updateCartItems(cartItems: any[]) {
+    this.cartItemsSource.next(cartItems);
+  }
 
   getProductCart(userIdFromHeader:any): Observable<any> {
     const headers = new HttpHeaders().set(

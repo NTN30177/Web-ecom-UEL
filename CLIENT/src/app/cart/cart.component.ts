@@ -55,9 +55,8 @@ export class CartComponent implements OnInit {
     try {
       const data = await this._cartService.getProductCart(userIdFromHeader).toPromise();
       console.log('test123');
-      // this.productsCart = data.productItemUser;
+      this._cartService.updateCartItems(data.productItemUser);
       return data.productItemUser
-      console.log(this.productsCart, '123');
     } catch (err) {
       this.errMessage = err;
       this.showNocart=true
