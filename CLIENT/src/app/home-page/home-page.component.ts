@@ -17,6 +17,7 @@ import { AuthService } from '../services/auth.service';
 import { CartService } from '../services/cart.service';
 import { IUser } from '../interfaces/user';
 import { CartComponent } from '../cart/cart.component';
+import { formatMoneyVietNam } from '../utils/utils'
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -33,6 +34,7 @@ export class HomePageComponent implements AfterViewInit {
   errMessage: any;
   currentColor = 0;
   // currentColor: any;
+  formatMoneyVietNam = formatMoneyVietNam;
 
   constructor(
     private el: ElementRef,

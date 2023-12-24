@@ -4,42 +4,112 @@ import { AccountAddressPopupComponent } from '../manage-account/account-address-
 import { AddressListPopupComponent } from './address-list-popup/address-list-popup.component';
 import { MethodListComponent } from './method-list/method-list.component';
 import { CartService } from '../services/cart.service';
+import { formatMoneyVietNam, convertStringToNumbers } from '../utils/utils';
+import { AuthService } from '../services/auth.service';
+import { PaymentService } from '../services/payment.service';
 
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
-  styleUrl: './payment.component.css'
+  styleUrl: './payment.component.css',
 })
 export class PaymentComponent implements OnInit {
+  formatMoneyVietNam = formatMoneyVietNam;
   defaultAddress: any;
   cartItems: any[] = [];
+  infoResult: any;
+  errMessage: any;
+  userId: any;
 
-  constructor(private dialogRef: MatDialog,
-    private _cartService: CartService) { }
+  constructor(
+    private dialogRef: MatDialog,
+    private _cartService: CartService,
+    private _authService: AuthService,
+    private _paymentService: PaymentService
+  ) {}
 
-  ngOnInit(): void {
-    this.setDefaultAddress();
-    this._cartService.cartItems$.subscribe(cartItems => {
-      this.cartItems = cartItems;})
+  async ngOnInit(): Promise<void> {
+    this._cartService.cartItems$.subscribe(async (cartItems) => {
+      this.cartItems = cartItems;
+      await this.getUserId(); // Chờ hàm này chạy xong trước khi tiếp tục
+      await this.getAddressUser(); // Chờ hàm này chạy xong trước khi tiếp tục
+      await this.setDefaultAddress(); // Chờ hàm này chạy xong trước khi tiếp tục
+      this.totalPayment();
+    });
   }
 
-  addresses = [
-    {
-      name: 'Phương Nguyên',
-      phone: '0986428483',
-      address: 'Tô Vĩnh Diện, Đông Hoà, Dĩ An, Bình Dương',
-      isDefault: true,
-    },
-    {
-      name: 'Phương Nhi',
-      phone: '0986838999',
-      address: 'Tô Vĩnh Diện, Đông Hoà, Dĩ An, Bình Dương',
-      isDefault: false,
-    },
-  ];
+  getUserId() {
+    this._authService.idUserSubject.subscribe((data) => {
+      this.userId = data;
+      console.log(this.userId, 'uid');
+    });
+  }
+  total_payment: number = 0;
+  total_quantity: number = 0;
+  total_variantColor: number = 0;
+  ship_code: number = 0;
+  async totalPayment(): Promise<void> {
+    this.total_payment = 0;
+    this.total_quantity = 0;
+    this.total_variantColor = 0;
+    this.ship_code = 0;
+    this.cartItems.forEach((product: any) => {
+      console.log(product);
+      product.variants.forEach((variant: any) => {
+        variant.variantColor.forEach((variantColor: any) => {
+          console.log(variantColor);
+          this.total_variantColor++;
+          this._authService.cartSubject.next(this.total_quantity);
+          // Assuming there is a 'price' property for each variant
+          this.total_payment += variantColor.quantity * product.productId.price;
+          this.total_quantity += variantColor.quantity;
+        });
+      });
+    });
+    if (this.total_payment > 1000000) {
+      this.ship_code = 0;
+    } else {
+      this.ship_code = 35000;
+    }
+    console.log(this.ship_code);
+  }
+  getAddressUser() {
+    this._paymentService.getAddress(this.userId).subscribe({
+      next: (responseData: any) => {
+        this.addresses = responseData;
+        console.log(responseData,'rđ')
+      },
+      error: (err: any) => {
+        this.errMessage = err;
+        console.log(this.errMessage);
+      },
+    });
+  }
+
+  buy() {
+    const data = {
+      cartItems: this.cartItems,
+      addressId: this.addresses[0]._id,
+      userId: this.userId,
+    };
+
+    this._paymentService.saveOrder(data).subscribe({
+      next: (responseData: any) => {
+        this.infoResult = responseData.message;
+      },
+      error: (err: any) => {
+        this.errMessage = err;
+        console.log(this.errMessage);
+      },
+    });
+  }
+
+  addresses: any;
 
   setDefaultAddress() {
-    this.defaultAddress = this.addresses.find((address) => address.isDefault);
+    this.defaultAddress = this.addresses.find(
+      (address: any) => address.isDefault
+    );
   }
 
   openDialog() {
@@ -59,11 +129,13 @@ export class PaymentComponent implements OnInit {
       hasBackdrop: true,
     });
 
-    dialogRef.componentInstance.addressSelected.subscribe((selectedAddress: any) => {
-      console.log('Selected Address:', selectedAddress);
-      // Update the default address in the parent component
-      this.defaultAddress = selectedAddress;
-    });
+    dialogRef.componentInstance.addressSelected.subscribe(
+      (selectedAddress: any) => {
+        console.log('Selected Address:', selectedAddress);
+        // Update the default address in the parent component
+        this.defaultAddress = selectedAddress;
+      }
+    );
   }
 
   openMethodSelectionPopup() {

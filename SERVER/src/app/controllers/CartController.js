@@ -15,8 +15,8 @@ const {
 
 const getProductCart = async (req, res) => {
   try {
-    const userId = req.params.userId
-    console.log(userId, 'UID')
+    const userId = req.params.userId;
+    console.log(userId, "UID");
     // const userId = req.session.user_id || "6580f3713804fc632783f4cf";
     const user = await User.findOne({ _id: userId });
 
@@ -28,14 +28,20 @@ const getProductCart = async (req, res) => {
 
     const cartUser = await CartItem.findOne({
       _id: user.cart.toString(),
-    }).populate({
-      path: "productItem.productId",
-      populate: {
-        path: "variants.color",
+    })
+      .populate({
+        path: "productItem.productId",
+        populate: {
+          path: "variants.color",
+          model: "Color",
+          select: "nameColor imageColor",
+        },
+      })
+      .populate({
+        path: "productItem.variants.color",
         model: "Color",
-        select: "nameColor image",
-      },
-    });
+        select: "nameColor imageColor",
+      });
 
     if (cartUser) {
       console.log(cartUser);
@@ -160,8 +166,8 @@ const addOrPutProductToCart = async (req, res, next) => {
     const { colorId, productId, size, quantityAction } = req.body;
     console.log(colorId, productId, size, quantityAction);
 
-    const userId = req.params.userId
-    console.log(userId, 'UID')
+    const userId = req.params.userId;
+    console.log(userId, "UID");
     const size2 = size;
     const quantity = 1;
     // const quantityColorNew = parseInt(quantityAction);
@@ -172,16 +178,16 @@ const addOrPutProductToCart = async (req, res, next) => {
         select: "nameColor imageColor",
       })
       .lean();
-      const variant = p.variants.find((v) => {
-        const variantColorId = v.color._id.toString();
-        const providedColorId = colorId.toString();
-        
-        console.log('Variant Color ID:', variantColorId);
-        console.log('Provided Color ID:', providedColorId);
-      
-        return variantColorId === providedColorId;
-      });
-      
+    const variant = p.variants.find((v) => {
+      const variantColorId = v.color._id.toString();
+      const providedColorId = colorId.toString();
+
+      console.log("Variant Color ID:", variantColorId);
+      console.log("Provided Color ID:", providedColorId);
+
+      return variantColorId === providedColorId;
+    });
+
     const imageCart = variant ? variant.images[0] : [];
 
     const colorFind = await Color.findOne({ _id: colorId });
@@ -265,10 +271,10 @@ const addOrPutProductToCart = async (req, res, next) => {
   }
 };
 const checkStock = async (req, res, next) => {
-  try{
+  try {
     const { colorId, productId, size, quantity } = req.query;
-    const s = size.slice(0, 3).trim()
-    console.log('sssss'+s)
+    const s = size.slice(0, 3).trim();
+    console.log("sssss" + s);
     // const u = await User.findOne({_id:req.session.user_id || '64d600df4aa3bbbf4a81e6d2'})
     // const cart = await CartItem.findOne({_id:u.cart.toString()})
     // const pct = cart.productItem.find(p=>p.productId.toString()===productId)
@@ -278,22 +284,25 @@ const checkStock = async (req, res, next) => {
     // const vcct = vct.variantColor.forEach(vc=>{
     //   vc.size===s,
     //   quantityAll+=parseInt(vc.quantity)
-    // })      
-    const pData = await Product.findOne({_id: productId}).lean()
-    const variant = await pData.variants.find(v=>v.color.toString()===colorId)
-    const vco = await variant.variantColor.find(vc => vc.size = s);
-    const quantityInStore = vco.quantity
-    let checkStockResult
-    if(quantityInStore<quantity){
-      checkStockResult = 'Sản phẩm trong kho còn ít hơn nhu cầu của bạn, vui lòng thay đổi!'
-    } else{
-      checkStockResult =""
+    // })
+    const pData = await Product.findOne({ _id: productId }).lean();
+    const variant = await pData.variants.find(
+      (v) => v.color.toString() === colorId
+    );
+    const vco = await variant.variantColor.find((vc) => (vc.size = s));
+    const quantityInStore = vco.quantity;
+    let checkStockResult;
+    if (quantityInStore < quantity) {
+      checkStockResult =
+        "Sản phẩm trong kho còn ít hơn nhu cầu của bạn, vui lòng thay đổi!";
+    } else {
+      checkStockResult = "";
     }
-    res.json(checkStockResult)
-  }catch(err){
+    res.json(checkStockResult);
+  } catch (err) {
     console.log(err);
   }
-}
+};
 
 module.exports = {
   getProductCart,
