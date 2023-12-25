@@ -1,13 +1,10 @@
-import {
-  Component,
-  ElementRef,
-  Renderer2,
-  ViewEncapsulation,
-  HostListener,
-} from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewEncapsulation, HostListener, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/auth.service';
-
+import { IUser } from '../interfaces/user';
+import { CartComponent } from '../cart/cart.component';
+import { HomePageComponent } from '../home-page/home-page.component';
+// import{formatMoneyVietNam} from '../home-page/home-page.component';
 interface CartItem {
   id: number;
   name: string;
@@ -22,36 +19,63 @@ interface CartItem {
   styleUrls: ['./styles.css', './header.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class HeaderComponent {
-  isMobileMenuOpen: boolean = false;
+
+export class HeaderComponent implements OnInit{
   isSearchFormActive: boolean = false;
   isMainMenuOpen: boolean = false;
   submenuOpen: boolean = false;
   isSubActionVisible: boolean = false;
   quantityInputValue: number = 1;
+  userId=1;  // Sử dụng string hoặc null tùy thuộc vào loại dữ liệu của user ID
+
 
   cartNumberItem: number = 0;
+  isMobileMenuOpen: boolean | undefined;
   constructor(
     private elRef: ElementRef,
     private renderer: Renderer2,
     private snackBar: MatSnackBar, // Thêm MatSnackBar vào constructor
-    private _authServer: AuthService
+    private _authService: AuthService,
+    private _cartComponent:CartComponent,
+    private _homeComponent:HomePageComponent
   ) {
-    this._authServer.cartSubject.subscribe((data) => {
-      this.cartNumberItem = data;
-    });
-    this._authServer.isLoginSubject.subscribe((data) => {
+    // this._authService.cartSubject.subscribe((data) => {
+    //   this.cartNumberItem = data;
+    // });
+    this._authService.isLoginSubject.subscribe((data) => {
       this.isLogin = data;
+      console.log(this.isLogin, '...')
     });
   }
   ngOnInit(): void {
+    this._authService.getIsLoginObservable().subscribe((data) => {
+      this.isLogin = data;
+      if (this.isLogin) {
+        this.checkLogin()
+      }
+    });
     this.cartItemFunc();
+    this.checkLogin()
   }
   isLogin = false;
-  checkLogin() {
-    const localCartString = localStorage.getItem('userData');
-    if (localCartString) {
+  async checkLogin() {
+    const userData = localStorage.getItem('userData');
+    if (userData) {
+      const parseUserData: IUser = JSON.parse(userData);
+      // Assuming idUserSubject is an Observable<number> or similar
+       this._authService.idUserSubject.next(parseUserData._id);
+       console.log(parseUserData._id,'UID')
+      const cartList = await this._cartComponent.apiCartProduct(parseUserData._id);
+      console.log(cartList, 'cl')
+      let total_quantity = this._homeComponent.totalCartItem(cartList);
+      this.cartNumberItem =total_quantity
+      console.log(total_quantity, 'ttq')
       this.isLogin = true;
+      console.log(this.isLogin, '...')
+    } else {
+      // Ensure that idUserSubject is set to a default value or handle the case when there's no user data
+      this._authService.idUserSubject.next(null);
+      this.isLogin = false;
     }
   }
   logout() {
@@ -182,16 +206,18 @@ export class HeaderComponent {
 
   cartItemFunc() {
     const localCartString = localStorage.getItem('localCart');
-
     if (localCartString !== null) {
       var cartCount = JSON.parse(localCartString);
       this.cartNumberItem = cartCount.length;
     }
   }
+
   cartItems: CartItem[] = [
     { id: 1, name: 'Zuýp 2 lớp xếp ly bản lớn', quantity: 1, price: 595000 },
     // Thêm các sản phẩm khác nếu có
   ];
+
+ 
 
   toggleSearchForm(): void {
     this.isSearchFormActive = !this.isSearchFormActive;
@@ -267,4 +293,7 @@ export class HeaderComponent {
       panelClass: ['custom-snackbar'], // Thêm class CSS tùy chỉnh
     });
   }
+
+
+
 }

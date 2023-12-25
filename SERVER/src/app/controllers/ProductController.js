@@ -41,6 +41,30 @@ softDeleteProduct = async (req, res) => {
   }
 };
 
+
+toggleSoftDeleted = async (req, res) => {
+  const productId = req.params.productId;
+
+  try {
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+
+    // Toggle the is_deleted property
+    product.is_deleted = !product.is_deleted;
+
+    // Save the updated product
+    await product.save();
+
+    res.json({ message: 'Soft delete toggled successfully', product });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 const saveProduct2 = async (req, res) => {
   const { variant } = req.body;
 
@@ -56,6 +80,7 @@ const saveProduct = async (req, res) => {
       productName,
       productSku,
       price,
+      cost,
       description,
       typeName,
       subTypeName,
@@ -70,13 +95,14 @@ const saveProduct = async (req, res) => {
     const product = createProduct(
       productName,
       productSku,
-      price,
+      convertStringToNumbers(price),
+      convertStringToNumbers(cost),
       description,
       author,
       variants
     );
-    console.log(product, 'p')
     await product.save();
+    console.log(product, 'p')
 
     const type = await findOrCreateType(typeName);
     await findOrCreateSubType(type, subTypeName, product);
@@ -111,19 +137,31 @@ const convertFilesToDesiredFormat = (receivedFiles) => {
 const createVariantsFromData = (req, typeName, imageList) => {
   const variantsString = req.body
   console.log(variantsString, '5555')
+  console.log(variantsString.variant, '5555')
   const variants = variantsString.variant.map((v, index) => {
-    const colorFake = "64cb721d066ac7727d33ceda";
-    const variant = {
-      color: colorFake,
-      images: imageList[index],
-      variantColor: [],
-    };
-    if (typeName === "Phụ kiện") {
+    console.log(v.color, 'c5555')
+    // const colorFake = "64cb721d066ac7727d33ceda";
+    accessoryId='64c4c7621539b1bd9c0fae5b'
+    if (typeName === 'Phụ kiện') {
+      const variant = {
+        color: v.colorFreeSize,
+        images: imageList[index],
+        variantColor: [],
+      };
       variant.variantColor.push({
         size: "FreeSize",
         quantity: parseInt(req.body.variant[index].freeSize),
       });
+    return variant;
+
+      console.log(parseInt(req.body.variant[index].freeSize))
     } else {
+      
+      const variant = {
+        color: v.color,
+        images: imageList[index],
+        variantColor: [],
+      };
       const sizes = ["S", "M", "L", "XL", "XXL"];
       for (const size of sizes) {
         const sizePropertyName = `size${size}`;
@@ -132,20 +170,25 @@ const createVariantsFromData = (req, typeName, imageList) => {
           quantity: parseInt(req.body.variant[index][sizePropertyName]),
         });
       }
+      return variant;
     }
 
-    return variant;
   });
 
   return variants;
 };
 
+const convertStringToNumbers= (string) =>{
+  let valueNumber = string.replace(/[^\d]/g, '');
+  return parseInt(valueNumber);
+}
 
-const createProduct = (title, sku, price, description, author, variants) => {
+const createProduct = (title, sku, price,cost, description, author, variants) => {
   return new Product({
     title,
     sku,
     price,
+    cost,
     description,
     author,
     variants,
@@ -240,5 +283,5 @@ const getTypeAndSubtypeData = async (req, res) => {
 };
 
 module.exports = {
-  saveProduct, getProduct, softDeleteProduct
+  saveProduct, getProduct,toggleSoftDeleted, softDeleteProduct
 };

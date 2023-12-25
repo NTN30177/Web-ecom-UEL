@@ -57,6 +57,13 @@ import { ManageOrderComponent } from './admin/manage-order/manage-order.componen
 import { DeliveryPolicyComponent } from './delivery-policy/delivery-policy.component';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ForgetPwComponent } from './forget-pw/forget-pw.component';
+import { Select2Module } from 'ng-select2-component';
+import { KeyValuePipe } from '@angular/common';
+
+
+
+
+
 
 
 @NgModule({
@@ -97,7 +104,7 @@ import { ForgetPwComponent } from './forget-pw/forget-pw.component';
     DeliveryPolicyComponent,
     ManageOrderComponent,
     DeliveryPolicyComponent,
-    ForgetPwComponent
+    ForgetPwComponent,
   ],
   imports: [
     BrowserModule,
@@ -123,13 +130,14 @@ import { ForgetPwComponent } from './forget-pw/forget-pw.component';
     CarouselModule,
     MatButtonModule,
     NzFormModule,
-    CommonModule
-
+    CommonModule,
+    Select2Module,
+    
 
 
 
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, CartComponent, HomePageComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

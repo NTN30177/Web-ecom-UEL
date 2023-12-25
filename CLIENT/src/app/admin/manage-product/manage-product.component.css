@@ -125,3 +125,9 @@ tbody img {
     color: #797777;
 
 }
+
+.deleted_message{
+    color: red;
+    font-size: 12px;
+    font-style:italic;
+}

@@ -11,6 +11,7 @@ import { OrderTrackingComponent } from '../manage-account/order-tracking/order-t
 import { TermPolicyComponent } from '../term-policy/term-policy.component';
 import { DeliveryPolicyComponent } from '../delivery-policy/delivery-policy.component';
 import { ForgotPasswordModalSuccessComponent } from '../login/forgot-password-modal-success/forgot-password-modal-success.component';
+import { ForgetPwComponent } from '../forget-pw/forget-pw.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,9 @@ const routes: Routes = [
       },
       {
         path: 'delivery-policy', component: DeliveryPolicyComponent,
+      },
+      {
+        path: 'forgetpw', component: ForgetPwComponent,
       },
       {
         path: '',

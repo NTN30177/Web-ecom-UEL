@@ -3,7 +3,8 @@
 </div>
 <div class="row order-block">
     <!-- INFO CONTAINER   -->
-    <form [formGroup]="userInfoForm" (ngSubmit)="submitForm()" class="col-lg-6 col-12 order-lg-1 order-sm-2 order-2">
+    <form [formGroup]="userInfoForm" (ngSubmit)="updateUserInfo()"
+        class="col-lg-6 col-12 order-lg-1 order-sm-2 order-2">
         <div class="">
             <div class="form-group row">
                 <label for="first_name" class="col-sm-4 col-form-label">Họ</label>
@@ -20,7 +21,7 @@
                 <label for="last_name" class="col-sm-4 col-form-label">Tên</label>
                 <div class="col-sm-8 col-input">
                     <input formControlName="last_name" class="form-control" id="last_name" type="text"
-                    [class.is-invalid]="userInfoForm.get('last_name')?.invalid && userInfoForm.get('last_name')?.touched">
+                        [class.is-invalid]="userInfoForm.get('last_name')?.invalid && userInfoForm.get('last_name')?.touched">
                     <div *ngIf="userInfoForm.get('last_name')?.invalid  && userInfoForm.get('last_name')?.touched"
                         class="invalid-feedback">
                         Tên không được trống
@@ -31,7 +32,7 @@
                 <label for="customer_phone" class="col-sm-4 col-form-label">Số điện thoại</label>
                 <div class="col-sm-8 col-input">
                     <input formControlName="phone" class="form-control" id="customer_phone" type="text"
-                    [class.is-invalid]="userInfoForm.get('phone')?.invalid && userInfoForm.get('phone')?.touched">
+                        [class.is-invalid]="userInfoForm.get('phone')?.invalid && userInfoForm.get('phone')?.touched">
                     <div *ngIf="userInfoForm.get('phone')?.invalid && userInfoForm.get('phone')?.touched"
                         class="invalid-feedback">
                         Số điện thoại không được trống
@@ -42,7 +43,7 @@
                 <label for="customer_email" class="col-sm-4 col-form-label">Email</label>
                 <div class="col-sm-8 col-input">
                     <input formControlName="email" class="form-control" id="customer_email" type="text"
-                    [class.is-invalid]="userInfoForm.get('email')?.invalid && userInfoForm.get('email')?.touched">
+                        [class.is-invalid]="userInfoForm.get('email')?.invalid && userInfoForm.get('email')?.touched">
                     <div *ngIf="userInfoForm.get('email')?.invalid && userInfoForm.get('email')?.touched"
                         class="invalid-feedback">
                         Email không hợp lệ
@@ -55,11 +56,13 @@
                     <div class="row">
                         <div class="col-12 d-flex gap-5">
                             <label class="form-radio">
-                                <input formControlName="gender" class="form-radio__input" type="radio" value="0" [checked]="userInfo.gender === 0">
+                                <input formControlName="gender" class="form-radio__input" type="radio" value="0"
+                                    [checked]="userInfo?.gender === 0">
                                 <span class="radio_label">Nam</span>
                             </label>
                             <label class="form-radio">
-                                <input formControlName="gender" class="form-radio__input" type="radio" value="1" [checked]="userInfo.gender === 1">
+                                <input formControlName="gender" class="form-radio__input" type="radio" value="1"
+                                    [checked]="userInfo?.gender === 1">
                                 <span class="radio_label">Nữ</span>
                             </label>
                         </div>
@@ -73,7 +76,8 @@
             <div class="form-group row">
                 <label for="date_of_birth" class="col-sm-4 col-form-label">Ngày sinh</label>
                 <div class="col-sm-8 col-input">
-                    <input formControlName="date_of_birth" class="form-control" id="date_of_birth" type="date" [class.is-invalid]="userInfoForm.get('date_of_birth')?.invalid && userInfoForm.get('date_of_birth')?.touched">
+                    <input formControlName="date_of_birth" class="form-control" id="date_of_birth" type="date"
+                        [class.is-invalid]="userInfoForm.get('date_of_birth')?.invalid && userInfoForm.get('date_of_birth')?.touched">
                     <div *ngIf="userInfoForm.get('date_of_birth')?.invalid && userInfoForm.get('date_of_birth')?.touched"
                         class="invalid-feedback">
                         Ngày sinh không hợp lệ
@@ -85,6 +89,11 @@
                 <button class="btn">Đổi mật khẩu</button>
             </div>
         </div>
+        <!--  display the notification -->
+        <div *ngIf="notification" class="notification {{ notification.type }}">
+            {{ notification.message }}
+        </div>
+
     </form>
 
 

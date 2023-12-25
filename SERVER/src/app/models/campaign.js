@@ -1,6 +1,36 @@
-// campaignModel.js
 const mongoose = require('mongoose');
 
+// const campaignSchema = new mongoose.Schema({
+//     campaign_name: {
+//         type: String,
+//         required: true,
+//     },
+//     campaign_start: {
+//         type: Date,
+//         required: true,
+//     },
+//     campaign_end: {
+//         type: Date,
+//         required: true,
+//     },
+//     campaign_script: String,
+//     product_quantity_campaign_method: {
+//         type: String,
+//         required: true,
+//     },
+//     product_quantity_campaign_value: {
+//         type: Number,
+//         required: true,
+//     },
+//     product_name: {
+//         type: String,
+//         required: true,
+//     },
+//     product_quantity_campaign: {
+//         type: Number,
+//         required: true,
+//     },
+// });
 
 
 const campaignSchema = new mongoose.Schema({
@@ -25,6 +55,7 @@ const campaignSchema = new mongoose.Schema({
 
 });
 
+
 const Campaign = mongoose.model('Campaign', campaignSchema);
 
-module.exports = {Campaign};
+module.exports = { Campaign };
