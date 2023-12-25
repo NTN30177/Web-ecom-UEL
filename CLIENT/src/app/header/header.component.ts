@@ -4,7 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { IUser } from '../interfaces/user';
 import { CartComponent } from '../cart/cart.component';
 import { HomePageComponent } from '../home-page/home-page.component';
-
+// import{formatMoneyVietNam} from '../home-page/home-page.component';
 interface CartItem {
   id: number;
   name: string;

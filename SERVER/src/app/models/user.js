@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema(
     },
     gender: {
       type: Number,
-      enum: [0, 1]
+      enum: [1, 2]
     },
     date_of_birth: {
       type: Date,
@@ -84,7 +84,6 @@ const addressSchema = new mongoose.Schema(
     specific_address: {
       type: String,
     },
-
     ward: {
       type: String,
     },

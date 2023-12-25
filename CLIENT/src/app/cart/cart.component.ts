@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CartService } from '../services/cart.service';
 import { AuthService } from '../services/auth.service';
+import { formatMoneyVietNam, convertStringToNumbers } from '../utils/utils';
 
 @Component({
   selector: 'app-cart',
@@ -9,6 +10,9 @@ import { AuthService } from '../services/auth.service';
   styleUrl: './cart.component.css',
 })
 export class CartComponent implements OnInit {
+  formatMoneyVietNam = formatMoneyVietNam;
+  convertStringToNumbers = convertStringToNumbers;
+
   rfDataModal: FormGroup;
   errFlag: boolean | undefined;
   showNocart = false;
@@ -30,9 +34,9 @@ export class CartComponent implements OnInit {
   }
   async ngOnInit(): Promise<void> {
     try {
-      await this.setupUserIdSubscription()
+      await this.setupUserIdSubscription();
       this.productsCart = await this.apiCartProduct(this.userIdFromHeader);
-      console.log(this.productsCart,'pc')
+      console.log(this.productsCart, 'pc');
       await this.cartDetails();
       await this.totalPayment();
     } catch (error) {
@@ -41,8 +45,7 @@ export class CartComponent implements OnInit {
     }
   }
 
-
-  userIdFromHeader:any
+  userIdFromHeader: any;
   private setupUserIdSubscription() {
     this._authServer.idUserSubject.subscribe((data) => {
       this.userIdFromHeader = data;
@@ -51,15 +54,17 @@ export class CartComponent implements OnInit {
   }
   totalQuantity() {}
 
-  async apiCartProduct(userIdFromHeader:any): Promise<void> {
+  async apiCartProduct(userIdFromHeader: any): Promise<void> {
     try {
-      const data = await this._cartService.getProductCart(userIdFromHeader).toPromise();
-      console.log('test123');
+      const data = await this._cartService
+        .getProductCart(userIdFromHeader)
+        .toPromise();
+
       this._cartService.updateCartItems(data.productItemUser);
-      return data.productItemUser
+      return data.productItemUser;
     } catch (err) {
       this.errMessage = err;
-      this.showNocart=true
+      this.showNocart = true;
     }
   }
 
@@ -82,23 +87,23 @@ export class CartComponent implements OnInit {
     colorID: any,
     productID: any,
     sizeLIST: any,
-    quantityACTION: any,
+    quantityACTION: any
   ) {
     const data = {
       colorId: colorID,
       productId: productID,
       size: sizeLIST,
       quantityAction: quantityACTION,
-      userId:this.userIdFromHeader
+      userId: this.userIdFromHeader,
     };
 
     // await this.apiChangeQuantityProductItem(data);
     this._cartService.putProductItemCart(data).subscribe({
       next: async (data: any) => {
-        console.log(data.productItem,222)
-      this.productsCart = await this.apiCartProduct(this.userIdFromHeader);
+        console.log(data.productItem, 222);
+        this.productsCart = await this.apiCartProduct(this.userIdFromHeader);
 
-        console.log(this.productsCart,'555')
+        console.log(this.productsCart, '555');
         this.totalPayment();
       },
       error: (err: any) => {
@@ -106,17 +111,7 @@ export class CartComponent implements OnInit {
       },
     });
   }
-  convertStringToNumbers(string: string) {
-    let valueNumber = string.replace(/[^\d]/g, '');
-    return parseInt(valueNumber);
-  }
-  formatMoneyVietNam(so: number | bigint) {
-    const valueString = new Intl.NumberFormat('vi-VN', {
-      style: 'currency',
-      currency: 'VND',
-    }).format(so);
-    return valueString;
-  }
+
   async onColorChange(
     event: any,
     currentColor: string,
@@ -214,8 +209,8 @@ export class CartComponent implements OnInit {
     console.log(this.ship_code);
   }
 
-  removeProduct(){
-    localStorage.removeItem('localCart')
-    this.getCartDetails =[]
+  removeProduct() {
+    localStorage.removeItem('localCart');
+    this.getCartDetails = [];
   }
 }

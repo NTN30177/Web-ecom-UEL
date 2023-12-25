@@ -62,7 +62,7 @@ const saveAccount = async (req, res, next) => {
     });
     const userData = await user.save();
     if (userData) {
-      sendVerifyEmail(cus_lastname, req.body.cus_email, userData._id);
+      sendVerifyEmail(req.body.cus_lastname, req.body.cus_email, userData._id);
       res.status(200).send({
         message:
           "Your registration has been succesSsfully. Please verify your email",

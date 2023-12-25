@@ -10,76 +10,8 @@
       </div>
     </section>
 
+    
     <!--  -->
-    <owl-carousel-o [options]="newprodOptions">
-      <ng-template carouselSlide  *ngFor="let product of productsHaveModified, index as productIndex" id="thumbProduct">
-        <div class="owl-stage">
-          <div class="owl-item">
-            <div class="item-new-prod">
-              <div class="product">
-                <div class="info-tag best-seller">Best Seller</div>
-                <span class="percent percent_02">-50%
-                </span>
-                <div class="thumb-product" >
-                  <a href="/product/product-detail/{{product.slug}}" >
-                    <img id="ao" src="http://localhost:3000/productImages/{{product.imgHomePage[0].images[0]}}" alt="" class=" static">
-                    <img id="ao2" src="http://localhost:3000/productImages/{{product.imgHomePage[0].images[1]}}" alt="" class=" hover_img">
-                  </a>
-                </div>
-                <div class="info-product">
-                  <div class="list-color">
-                    <ul>
-                      <li *ngFor="let v of product.variants; index as colorI" [ngClass]="{'color': true}"
-                        >
-                        <a href="javascript:void(0)" class="color-picked" data-id="{{ v._id }}" (click)="changeColor(product, v.color._id )">
-                          <img src="http://localhost:3000/colorImages/{{v.color.imageColor}}" alt="">
-                        </a>
-                      </li>
-                    </ul>
-
-                    <div class="favorite">
-                      <i class="ti-heart">
-                      </i>
-                    </div>
-                  </div>
-                  <div class="title-product">
-                    <a href="">{{product.title}}</a>
-                  </div>
-                  <div class="price-product">
-                    <ins>
-                      <h4>{{product.price}}</h4>
-                    </ins>
-                    <del>
-                      <span>1.790.000đ</span>
-                    </del>
-                  </div>
-                </div>
-                <div class="add-to-cart">
-                  <a href="javascript:void(0)#" class="js-cart-button" (click)="toggleSizeTable(productIndex)" >
-                    <i class="ti-shopping-cart"></i>
-                  </a>
-                </div>
-                <div id="sizeTable{{productIndex}}" class="sizeTable js-list-size">
-                  <ul>
-                    <li *ngFor="let size of getSizeTable(productIndex).sizes">
-                      <button class="btn bt-large" (click)="addToCart(product.imgHomePage[0].colorID, product, size,1)">{{ size }}</button>
-
-                      <!-- <button class="btn bt-large" (click)="addToCart(product)">{{ size }}</button> -->
-                    </li>
-                  </ul>
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </ng-template>
-    </owl-carousel-o>
-
-    <!--  -->
-
-
     <section class="home-new-prod">
       <div class="exclusive-tabs">
         <div class="exclusive-head">
@@ -90,34 +22,32 @@
         </div>
         <div class="exclusive-content">
           <div class="exclusive-inner active">
-            <div class="owl-carousel owl-theme owl-loaded">
-              <div class="owl-stage-outer" style="margin: 0 -7px;
-              padding: 0 7px;">
-                <div class="owl-stage">
-                  <!-- <div class="owl-item" *ngFor="let product of products">
+            <owl-carousel-o [options]="newprodOptions">
+              <ng-template carouselSlide  *ngFor="let product of productsHaveModified, index as productIndex" id="thumbProduct">
+                <div class="owl-stage stage-detail">
+                  <div class="owl-item">
                     <div class="item-new-prod">
                       <div class="product">
                         <div class="info-tag best-seller">Best Seller</div>
                         <span class="percent percent_02">-50%
                         </span>
-                        <div class="thumb-product" *ngFor="let v of product.variants; index as i">
-                          <a href="/product/product-detail/{{product.slug}}" *ngIf="i === currentVariant">
-                            <img id="ao" src="http://localhost:3000/productImages/{{v.images[0]}}" alt="" class=" static">
-                            <img id="ao2" src="http://localhost:3000/productImages/{{v.images[1]}}" alt=""
-                              class=" hover_img">
+                        <div class="thumb-product" >
+                          <a href="/product/product-detail/{{product.slug}}" >
+                            <img id="ao" src="http://localhost:3000/productImages/{{product.imgHomePage[0].images[0]}}" alt="" class=" static">
+                            <img id="ao2" src="http://localhost:3000/productImages/{{product.imgHomePage[0].images[1]}}" alt="" class=" hover_img">
                           </a>
                         </div>
                         <div class="info-product">
                           <div class="list-color">
                             <ul>
-                              <li *ngFor="let v of product.variants; index as y" [ngClass]="{'color': true}"
-                                (click)="changeColor(y)">
-                                <a href="javascript:void(0)" class="color-picked" data-id="{{ v._id }}">
-                                  <img src="http://localhost:3000/productImages/{{v.color.imageColor}}" alt="">
-                                </a>
-                              </li>
+                              <li *ngFor="let v of product.variants; index as colorI" [ngClass]="{'color': true}"
+                        >
+                        <a href="javascript:void(0)" class="color-picked" data-id="{{ v._id }}" (click)="changeColor(product, v.color._id )">
+                          <img src="http://localhost:3000/colorImages/{{v.color.imageColor}}" alt="">
+                        </a>
+                      </li>
                             </ul>
-
+        
                             <div class="favorite">
                               <i class="ti-heart">
                               </i>
@@ -128,7 +58,7 @@
                           </div>
                           <div class="price-product">
                             <ins>
-                              <h4>{{product.price}}</h4>
+                              <h4>{{formatMoneyVietNam(product.price)}}</h4>
                             </ins>
                             <del>
                               <span>1.790.000đ</span>
@@ -136,37 +66,27 @@
                           </div>
                         </div>
                         <div class="add-to-cart">
-                          <a href="javascript:void(0)#" class="js-cart-button" (click)="toggleSizeTable(i)">
+                          <a href="javascript:void(0)#" class="js-cart-button" (click)="toggleSizeTable(productIndex)">
                             <i class="ti-shopping-cart"></i>
                           </a>
                         </div>
-                        <div id="sizeTable{{i}}" class="sizeTable js-list-size">
+                        <div id="sizeTable{{productIndex}}" class="sizeTable js-list-size">
                           <ul>
-                            <li *ngFor="let size of getSizeTable(i).sizes">
-                              <button class="btn bt-large" (click)="addToCart()">{{ size }}</button>
+                            <li *ngFor="let size of getSizeTable(productIndex).sizes">
+                              <button class="btn bt-large" (click)="addToCart(product.imgHomePage[0].colorID, product, size,1)">{{ size }}</button>
                             </li>
                           </ul>
                         </div>
-
                       </div>
                     </div>
-                  </div> -->
+                  </div>
                 </div>
-              </div>
-              <div class="owl-nav">
-                <div class="owl-prev">prev</div>
-                <div class="owl-next">next</div>
-              </div>
-              <div class="owl-dots">
-                <div class="owl-dot active"><span></span></div>
-                <div class="owl-dot"><span></span></div>
-                <div class="owl-dot"><span></span></div>
-              </div>
-            </div>
+              </ng-template>
+            </owl-carousel-o>
           </div>
         </div>
       </div>
-      <div class="popup-container" *ngIf="showAddToCartPopup">
+            <div class="popup-container" *ngIf="showAddToCartPopup">
         <div class="popup">
           <div class="hed-pop-not">
             <div class="tit___hed-pop-not">Đã thêm vào giỏ hàng!</div>
@@ -194,5 +114,18 @@
         </div>
       </div>
     </section>
+
+
+    <!--  -->
+
+
+
+
+
+
+
+
+
+
   </div>
 </main>

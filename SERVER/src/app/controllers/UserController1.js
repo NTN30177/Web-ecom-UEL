@@ -40,7 +40,8 @@ const { ObjectId } = require('mongoose').Types;
 
 const getAccountAddresses = async (req, res) => {
   try {
-    const userId = req.params.userId;
+    const {userId} = req.params;
+    // const userId = '65887ee5fe959ab7b5696168'
     console.log('Received userId:', userId);
 
     // Fetch the user with the given userId

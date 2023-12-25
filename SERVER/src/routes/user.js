@@ -20,8 +20,7 @@ router.get('/is-email-verified/:email', userController.isEmailVerified);
 
 router.get('/account/info', userController1.getAccountInfo)
 router.put('/account/info/update/:userID', userController1.updateAccountInfo);
-
-router.get('/account/address/:userId', userController1.getAccountAddresses)
 router.post('/account/address/add-address', userController1.postUserAddress)
+router.get('/account/address/:userId', userController1.getAccountAddresses)
 
 module.exports = router;
