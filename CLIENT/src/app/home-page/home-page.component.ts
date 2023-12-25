@@ -162,10 +162,19 @@ export class HomePageComponent implements AfterViewInit {
       '<i class="ti-arrow-right"></i>',
     ],
     responsive: {
-      0: { items: 1 },
-      400: { items: 2 },
-      740: { items: 1 },
-      940: { items: 5 },
+      0:{
+        items:2,
+        margin: 20,
+        nav: false
+    },
+    740:{
+        items:3,
+        margin: 30,
+    },
+    1025:{
+        items:5,
+        margin: 30,
+    }
     },
     nav: true,
   };
