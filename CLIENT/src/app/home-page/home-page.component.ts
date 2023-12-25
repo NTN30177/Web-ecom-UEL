@@ -14,6 +14,7 @@ import { IProduct } from '../interfaces/product';
 import { AuthService } from '../services/auth.service';
 import { CartComponent } from '../cart/cart.component';
 import { CartService } from '../services/cart.service';
+import { formatMoneyVietNam } from '../utils/utils'
 import { take } from 'rxjs';
 @Component({
   selector: 'app-home-page',
@@ -22,7 +23,7 @@ import { take } from 'rxjs';
   encapsulation: ViewEncapsulation.None,
 })
 export class HomePageComponent implements AfterViewInit {
-
+  formatMoneyVietNam=formatMoneyVietNam
   productStates: boolean[] = [];
   i: number = 0;
   showAddToCartPopup: boolean = false; // Thêm biến để kiểm soát hiển thị popup
@@ -352,183 +353,6 @@ apiProductHomePage() {
   });
 }
 
-<<<<<<< HEAD
-  
-
-  setHoveredState(isHovered: boolean): void {
-    this.isHovered = isHovered;
-  }
-
-  async apiChangeQuantityProductItem(data: object) {
-    console.log(data, '55555');
-    try {
-      const responseData = await this._cartService.putProductItemCart(data);
-      console.log(responseData, 'dataput');
-    } catch (err) {
-      this.errMessage = err;
-    }
-  }
-
-  total_quantity: number = 0;
-
-  
-  
-  totalCartItem(productsCart: any): number {
-    this.total_quantity = 0;
-    productsCart.forEach((product: any) => {
-      product.variants.forEach((variant: any) => {
-        variant.variantColor.forEach((variantColor: any) => {
-          this.total_quantity += variantColor.quantity;
-          console.log(variantColor.quantity,'qt')
-        });
-      });
-    });
-  
-    return this.total_quantity;
-  }
-  
-
-  itemsCart: any = [];
-  userIdFromHeader: any;
-
-  async addToCart(
-    colorID: any,
-    product: IProduct,
-    sizeLIST: any,
-    quantityACTION: number
-  ) {
-    if (this.userIdFromHeader) {
-      const data = {
-        colorId: colorID,
-        productId: product._id,
-        size: sizeLIST,
-        quantityAction: quantityACTION,
-        userId: this.userIdFromHeader,
-      };
-      this._cartService.putProductItemCart(data).subscribe(
-        (result) => {
-          console.log('API call successful', result);
-        },
-        (error) => {
-          console.error('API call failed', error);
-        }
-      );
-      const cartList = await this._cartComponent.apiCartProduct(this.userIdFromHeader);
-      let total_quantity = await this.totalCartItem(cartList);
-      this._authServer.cartSubject.next(total_quantity);
-    }
-
-    let cartDataNull = localStorage.getItem('localCart');
-    if (cartDataNull == null) {
-      let storeDataGet: any = [];
-      storeDataGet.push(product);
-      localStorage.setItem('localCart', JSON.stringify(storeDataGet));
-    } else {
-      var id = product._id;
-      let index: number = -1;
-      const localCartString = localStorage.getItem('localCart');
-      if (localCartString !== null) {
-        this.itemsCart = JSON.parse(localCartString);
-      }
-      for (let i = 0; i < this.itemsCart.length; i++) {
-        if (id == this.itemsCart[i]._id) {
-          this.itemsCart[i].quantity = 1;
-          index = i;
-          break;
-        }
-      }
-      if (index == -1) {
-        this.itemsCart.push(product);
-        localStorage.setItem('localCart', JSON.stringify(this.itemsCart));
-      } else {
-        localStorage.setItem('localCart', JSON.stringify(this.itemsCart));
-      }
-      this.cartNumberFunc();
-    }
-    // Hiển thị popup
-    this.showAddToCartPopup = true;
-
-    // Tự động ẩn popup sau 2 giây
-    setTimeout(() => {
-      this.showAddToCartPopup = false;
-    }, 2000);
-  }
-
-  cartNumber: number = 0;
-  cartNumberFunc() {
-    const localCartString = localStorage.getItem('localCart');
-    if (localCartString !== null) {
-      var cartValue = JSON.parse(localCartString);
-      this.cartNumber = cartValue.length;
-      //  this._authServer.cartSubject.next(this.cartNumber)
-    }
-  }
-
-  closePopup() {
-    this.showAddToCartPopup = false;
-  }
-  apiProductHomePage() {
-    console.log('1235');
-    this._homeService.getProductHomePage().subscribe({
-      next: (data: any) => {
-        this.products = data.products;
-
-        this.createArrSupportChangeImgFollowChangeColor();
-        console.log(this.products, '123');
-
-      },
-      error: (err: any) => {
-        this.errMessage = err;
-      },
-    });
-  }
-
-  changeColor(product: IProduct, colorId: string) {
-    console.log(product._id, colorId);
-    console.log(this.productsHaveModified);
-    this.moveImgHomePageToFront(
-      this.productsHaveModified,
-      product._id,
-      colorId
-    );
-  }
-
-  moveImgHomePageToFront(
-    productsHaveModified: any[],
-    productId: string,
-    colorId: string
-  ): any[] {
-    for (const product of productsHaveModified) {
-      if (product._id === productId) {
-        const imgHomePageIndex = product.imgHomePage.findIndex(
-          (img: any) => img.colorID === colorId
-        );
-
-        if (imgHomePageIndex !== -1) {
-          const movedItem = product.imgHomePage.splice(imgHomePageIndex, 1)[0];
-          product.imgHomePage.unshift(movedItem);
-        }
-        break; // Dừng vòng lặp sau khi xử lý sản phẩm
-      }
-    }
-
-    return productsHaveModified;
-  }
-
-  createArrSupportChangeImgFollowChangeColor() {
-    this.productsHaveModified = this.products.map((product: any) => {
-      return {
-        ...product,
-        imgHomePage: product.variants.map((variant: any) => {
-          return {
-            colorID: variant.color._id,
-            images: variant.images.slice(0, 2),
-          };
-        }),
-      };
-    });
-  }
-=======
 changeColor(product: IProduct, colorId: string) {
   console.log(product._id, colorId);
   console.log(this.productsHaveModified);
@@ -537,7 +361,6 @@ changeColor(product: IProduct, colorId: string) {
     product._id,
     colorId
   );
->>>>>>> 0f25fcffcfeb8a4188be9e7b3740e7ecdfd1c7cd
 }
 
 moveImgHomePageToFront(

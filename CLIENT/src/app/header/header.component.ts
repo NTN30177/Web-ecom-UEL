@@ -29,7 +29,6 @@ export class HeaderComponent implements OnInit{
 
 
   cartNumberItem: number = 0;
-  isMobileMenuOpen: boolean | undefined;
   constructor(
     private elRef: ElementRef,
     private renderer: Renderer2,
@@ -82,127 +81,6 @@ export class HeaderComponent implements OnInit{
     window.localStorage.removeItem('userData');
     this.isLogin = false;
   }
-
-  // sub-menu-mobile
-  // Thêm open vào main-menu
-  toggleMobileMenu(): void {
-    this.isMobileMenuOpen = !this.isMobileMenuOpen;
-
-    const mainMenu = this.elRef.nativeElement.querySelector('.main-menu');
-
-    if (this.isMobileMenuOpen) {
-      this.renderer.addClass(mainMenu, 'open');
-    } else {
-      this.renderer.removeClass(mainMenu, 'open');
-    }
-  }
-  // Xoá open ra main-menu
-  closeMobileMenu(): void {
-    this.isMobileMenuOpen = false;
-    const mainMenu = this.elRef.nativeElement.querySelector('.main-menu');
-    this.renderer.removeClass(mainMenu, 'open');
-  }
-
-  // Data sub-menu
-  menuItems = [
-    {
-      label: 'áo',
-      subItems: [
-        { label: 'Áo sơ mi' },
-        { label: 'Áo kiểu' },
-        { label: 'Áo len' },
-      ],
-    },
-    {
-      label: 'áo khoác',
-      subItems: [
-        { label: 'Áo sơ mi' },
-        { label: 'Áo kiểu' },
-        { label: 'Áo len' },
-      ],
-    },
-    {
-      label: 'quần & Jumpsuit',
-      subItems: [
-        { label: 'Áo sơ mi' },
-        { label: 'Áo kiểu' },
-        { label: 'Áo len' },
-      ],
-    },
-    {
-      label: 'phụ kiện',
-      subItems: [
-        { label: 'Áo sơ mi' },
-        { label: 'Áo kiểu' },
-        { label: 'Áo len' },
-      ],
-    },
-    {
-      label: 'chân váy',
-      subItems: [
-        { label: 'Áo sơ mi' },
-        { label: 'Áo kiểu' },
-        { label: 'Áo len' },
-      ],
-    },
-    {
-      label: 'đầm',
-      subItems: [
-        { label: 'Áo sơ mi' },
-        { label: 'Áo kiểu' },
-        { label: 'Áo len' },
-      ],
-    },
-  ];
-
-  toggleSubMenuChild(event: Event, index: number): void {
-    event.stopPropagation();
-
-    // Đóng tất cả các submenu khác
-    const allSubChildElements = this.elRef.nativeElement.querySelectorAll('.child-sub');
-    allSubChildElements.forEach((element: {
-      previousElementSibling: any; style: { display: string; }; classList: { remove: (arg0: string) => void; add: (arg0: string) => void; }; 
-}, i: number) => {
-      element.style.display = 'none';
-      element.classList.remove('open');
-  
-      // Đóng tất cả các mũi tên trong sub-menu-mb khác
-      const allArrows = this.elRef.nativeElement.querySelectorAll('.sub-menu-mb .arrows');
-      allArrows.forEach((arrowElement: { classList: { remove: (arg0: string) => void; add: (arg0: string) => void; }; }) => {
-        arrowElement.classList.remove('open');
-      });
-  
-      // Nếu index của submenu trùng với index của thẻ được click, thì mở nó
-      if (i === index) {
-        const arrowsElement = element.previousElementSibling.querySelector('.arrows');
-        arrowsElement.classList.add('open');
-        element.style.display = 'block';
-        element.classList.add('open');
-      }
-    });
-  }
-
-
-
-
-
-
-  toggleSubMenu(): void {
-    this.submenuOpen = !this.submenuOpen;
-
-    const subMenuMb = this.elRef.nativeElement.querySelector('.sub-menu-mb');
-
-    if (this.submenuOpen) {
-      this.renderer.setStyle(subMenuMb, 'display', 'block');
-    } else {
-      this.renderer.setStyle(subMenuMb, 'display', 'none');
-    }
-  }
-
-
-
-
-
   cartItemFunc() {
     const localCartString = localStorage.getItem('localCart');
     if (localCartString !== null) {
@@ -226,14 +104,44 @@ export class HeaderComponent implements OnInit{
     event.stopPropagation();
   }
 
+  toggleMainMenu(): void {
+    this.isMainMenuOpen = !this.isMainMenuOpen;
+    const mainMenu = this.elRef.nativeElement.querySelector('.main-menu');
 
+    if (this.isMainMenuOpen) {
+      this.renderer.addClass(mainMenu, 'open');
+    } else {
+      this.renderer.removeClass(mainMenu, 'open');
+    }
+  }
 
-
+  isClickInsideMenu(event: Event): boolean {
+    const mainMenu = this.elRef.nativeElement.querySelector('.main-menu');
+    return mainMenu.contains(event.target);
+  }
 
   @HostListener('document:click', ['$event'])
+  handleDocumentClick(event: Event): void {
+    if (!this.isClickInsideMenu(event)) {
+      this.isMainMenuOpen = false;
+      const mainMenu = this.elRef.nativeElement.querySelector('.main-menu');
+      this.renderer.removeClass(mainMenu, 'open');
+    }
+  }
 
+  closeMainMenu(event: Event): void {
+    const targetElement = event.target as HTMLElement;
 
-
+    if (
+      targetElement.classList.contains('ti-close') ||
+      targetElement.closest('.ti-close')
+    ) {
+      event.stopPropagation();
+      this.isMainMenuOpen = false;
+      const mainMenu = this.elRef.nativeElement.querySelector('.main-menu');
+      this.renderer.removeClass(mainMenu, 'open');
+    }
+  }
 
   toggleSubAction(): void {
     this.isSubActionVisible = !this.isSubActionVisible;
