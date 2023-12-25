@@ -45,6 +45,7 @@ interface IVariantColor {
   }
   
   interface IOrder {
+    // private _id(arg0: string, _id: any): unknown;
     orderItems: string[]; // Assuming order item IDs are stored as strings, modify accordingly
     shippingAddress: string;
     ward: string;

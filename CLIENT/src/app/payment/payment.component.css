@@ -15,6 +15,7 @@ body {
     font-size: 14px;
     margin: auto;
     margin-top: 100px;
+    margin-bottom: 200px;
     max-width: 800px;
     border: 1px solid #ccc;
     border-radius: 15px;
@@ -275,5 +276,6 @@ img {
     background: var(--Primary-01, #9B3A23);
     font-weight: 700;
     font-size: 16px;
-    color: rgba(255, 255, 255, 1)
+    color: rgba(255, 255, 255, 1);
+    cursor: pointer;
 }
