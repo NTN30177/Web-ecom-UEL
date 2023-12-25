@@ -371,12 +371,17 @@ img {
     opacity: 1;
     visibility: visible;
 }
-
+/* Not click li */
+.not-click-li {
+    pointer-events: none;
+    cursor: none;
+    background-color: #d5d5d5;
+}
 /* Popup thêm sản phẩm vào giỏ hàng */
 .popup-container {
     position: fixed;
     top: 10px;
-    right: 0;
+    right: -300px;
     width: 300px;
     transition: all .2s;
     box-sizing: border-box;
@@ -386,6 +391,9 @@ img {
     border-radius: 16px;
     padding: 18px;
     z-index: 999;
+}
+.popup-container.active-cartpopup {
+    right: 24px;
 }
 .popup-container .tit___hed-pop-not {
     font-weight: 600;
@@ -515,6 +523,7 @@ img {
     .home-new-prod .exclusive-head .exclusive-tab {
         font-size: 13px;
     }
+    
     .sizeTable ul li button {
         padding: 10px 20px;
     }

@@ -88,11 +88,11 @@
                     </a>
                 </div>
                 <div class="right-header">
-                    <form (click)="toggleSearchForm()" [ngClass]="{'active': isSearchFormActive}" class="search-form hide-on-mobile-tablet">
+                    <form (click)="toggleSearchForm($event)" class="search-form hide-on-mobile-tablet">
                         <button class="search-form__btn">
-                            <i class="eadher__icon ti-search icon"></i>
+                          <i class="eadher__icon ti-search icon"></i>
                         </button>
-                        <input type="text" id="search-form__input" placeholder="TÌM KIẾM SẢN PHẨM">
+                        <input type="text" id="search-form__input" placeholder="TÌM KIẾM SẢN PHẨM" (focus)="toggleSearchForm($event)">
                         <div class="search-form__quick-search" (click)="handleQuickSearchClick($event)">
                             <div class="search-items search-history">
                                 <h4 class="">Vừa tìm kiếm</h4>
@@ -263,7 +263,7 @@
                               <input type="hidden">
                               <div class="total-price">Tổng cộng: <strong>595.000₫</strong></div>
                               <div class="box-action">
-                                <a href="" class="action-view-cart" routerLink="/cart">Xem giỏ hàng</a>
+                                <a href="" class="action-view-cart" routerLink="/cart" (click)="closeCart($event)">Xem giỏ hàng</a>
                                 <a href="" class="action-login" *ngIf="!isLogin">Đăng nhập</a>
                               </div>
                             </div>

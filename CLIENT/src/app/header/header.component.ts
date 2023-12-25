@@ -184,9 +184,6 @@ export class HeaderComponent implements OnInit{
 
 
 
-
-
-
   toggleSubMenu(): void {
     this.submenuOpen = !this.submenuOpen;
 
@@ -218,23 +215,85 @@ export class HeaderComponent implements OnInit{
 
  
 
-  toggleSearchForm(): void {
-    this.isSearchFormActive = !this.isSearchFormActive;
-  }
+  // toggleSearchForm(): void {
+  //   this.isSearchFormActive = !this.isSearchFormActive;
+  // }
 
   handleQuickSearchClick(event: Event): void {
     event.stopPropagation();
   }
 
+  toggleMainMenu(): void {
+    this.isMainMenuOpen = !this.isMainMenuOpen;
+    const mainMenu = this.elRef.nativeElement.querySelector('.main-menu');
 
+    if (this.isMainMenuOpen) {
+      this.renderer.addClass(mainMenu, 'open');
+    } else {
+      this.renderer.removeClass(mainMenu, 'open');
+    }
+  }
 
+  isClickInsideMenu(event: Event): boolean {
+    const mainMenu = this.elRef.nativeElement.querySelector('.main-menu');
+    return mainMenu.contains(event.target);
+  }
 
-
+  // đóng mở quick-search
+  toggleSearchForm(event: Event): void {
+    
+    // Kiểm tra xem sự kiện là focus hay không
+    const isFocusEvent = event instanceof FocusEvent;
+  
+    // Nếu là focus event và form đã được kích hoạt, không thực hiện toggle nữa
+    if (isFocusEvent && this.isSearchFormActive) {
+      return;
+    }
+  
+    this.isSearchFormActive = !this.isSearchFormActive;
+    const searchForm = this.elRef.nativeElement.querySelector('.search-form');
+  
+    if (this.isSearchFormActive) {
+      this.renderer.addClass(searchForm, 'active');
+    } else {
+      this.renderer.removeClass(searchForm, 'active');
+    }
+  }
+  isSearchInputActive: boolean = false;
   @HostListener('document:click', ['$event'])
+  handleClickOutside(event: Event) {
+    const searchForm = this.elRef.nativeElement.querySelector('.search-form');
+  
+    // Nếu không phải là sự kiện focus, thực hiện việc đóng form
+    if (!(event instanceof FocusEvent) && searchForm && !searchForm.contains(event.target as Node)) {
+      this.isSearchFormActive = false;
+      this.renderer.removeClass(searchForm, 'active');
+    }
+  }
+  
+  isClickInsideQuickSearch(event: Event): boolean {
+    const quickSearch = this.elRef.nativeElement.querySelector('.search-form__quick-search');
+    return quickSearch.contains(event.target);
+  }
+  
+  
+  // 
 
+  closeMainMenu(event: Event): void {
+    const targetElement = event.target as HTMLElement;
 
+    if (
+      targetElement.classList.contains('ti-close') ||
+      targetElement.closest('.ti-close')
+    ) {
+      event.stopPropagation();
+      this.isMainMenuOpen = false;
+      const mainMenu = this.elRef.nativeElement.querySelector('.main-menu');
+      this.renderer.removeClass(mainMenu, 'open');
+    }
+  }
 
-
+  // đóng mở account
   toggleSubAction(): void {
     this.isSubActionVisible = !this.isSubActionVisible;
 
@@ -247,6 +306,8 @@ export class HeaderComponent implements OnInit{
     }
   }
 
+  
+  // Đóng mở giỏ hàng
   toggleCart(): void {
     this.isSubActionVisible = !this.isSubActionVisible;
 
@@ -265,7 +326,7 @@ export class HeaderComponent implements OnInit{
       this.elRef.nativeElement.querySelector('.sub-action-cart');
     this.renderer.removeClass(subActionCart, 'active');
   }
-
+  // 
   updateQuantity(action: string): void {
     if (action === 'minus' && this.quantityInputValue > 0) {
       this.quantityInputValue -= 1;
