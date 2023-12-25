@@ -19,7 +19,6 @@ interface CartItem {
   styleUrls: ['./styles.css', './header.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-
 export class HeaderComponent implements OnInit{
   isSearchFormActive: boolean = false;
   isMainMenuOpen: boolean = false;

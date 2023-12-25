@@ -33,7 +33,7 @@ export class PaymentComponent implements OnInit {
       this.cartItems = cartItems;
       await this.getUserId(); // Chờ hàm này chạy xong trước khi tiếp tục
       await this.getAddressUser(); // Chờ hàm này chạy xong trước khi tiếp tục
-      await this.setDefaultAddress(); // Chờ hàm này chạy xong trước khi tiếp tục
+      // Chờ hàm này chạy xong trước khi tiếp tục
       this.totalPayment();
     });
   }
@@ -77,7 +77,9 @@ export class PaymentComponent implements OnInit {
     this._paymentService.getAddress(this.userId).subscribe({
       next: (responseData: any) => {
         this.addresses = responseData;
-        console.log(responseData,'rđ')
+        this.setDefaultAddress();
+        this._paymentService.addressSubject.next(responseData);
+        console.log(responseData, 'rđ');
       },
       error: (err: any) => {
         this.errMessage = err;
@@ -92,7 +94,7 @@ export class PaymentComponent implements OnInit {
       addressId: this.addresses[0]._id,
       userId: this.userId,
     };
-
+    
     this._paymentService.saveOrder(data).subscribe({
       next: (responseData: any) => {
         this.infoResult = responseData.message;
@@ -107,11 +109,12 @@ export class PaymentComponent implements OnInit {
   addresses: any;
 
   setDefaultAddress() {
-    this.defaultAddress = this.addresses.find(
-      (address: any) => address.isDefault
-    );
+    this.defaultAddress = this.addresses.find((address: any) => {
+      return address.is_default; // Return the value
+    });
   }
-
+  
+  
   openDialog() {
     // Check if there are open dialogs before opening a new one
     if (this.dialogRef.openDialogs.length === 0) {

@@ -58,10 +58,6 @@ import { DeliveryPolicyComponent } from './delivery-policy/delivery-policy.compo
 import { CommonModule, DatePipe } from '@angular/common';
 import { ForgetPwComponent } from './forget-pw/forget-pw.component';
 import { Select2Module } from 'ng-select2-component';
-import { KeyValuePipe } from '@angular/common';
-
-
-
 
 
 
