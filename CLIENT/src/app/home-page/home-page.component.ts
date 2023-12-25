@@ -24,7 +24,7 @@ export class HomePageComponent implements AfterViewInit {
   i: number = 0;
   showAddToCartPopup: boolean = false; // Thêm biến để kiểm soát hiển thị popup
 
-  products: any;
+  // products: any;
   productsHaveModified: any;
   errMessage: any;
   currentColor = 0;
@@ -125,35 +125,6 @@ export class HomePageComponent implements AfterViewInit {
   ];
 
   imagesArray: any = [
-    // {
-    //   id: 33897,
-    //   linkMoi1:
-    //     'https://static.dchic.vn/uploads/media/2023/12/DTT_0674-640887878-576x768.JPG',
-    //   linkMoi2:
-    //     'https://static.dchic.vn/uploads/media/2023/12/DTT_1879-86230021-576x768.JPG',
-    // },
-    // {
-    //   id: 33898,
-    //   linkMoi1:
-    //     'https://static.dchic.vn/uploads/media/2023/12/DTT_0103-878967200-576x768.JPG',
-    //   linkMoi2:
-    //     'https://static.dchic.vn/uploads/media/2023/12/DTT_8824-393382702-576x768.JPG',
-    // },
-    // {
-    //   id: 33899,
-    //   linkMoi1:
-    //     'https://static.dchic.vn/uploads/media/2023/12/DTT_8073-101731660.JPG',
-    //   linkMoi2:
-    //     'https://static.dchic.vn/uploads/media/2023/12/DTT_0504-80096045-576x768.JPG',
-    // },
-    // {
-    //   id: 33900,
-    //   linkMoi1:
-    //     'https://static.dchic.vn/uploads/media/2023/12/DTT_0884-93723949-576x768.JPG',
-    //   linkMoi2:
-    //     'https://static.dchic.vn/uploads/media/2023/12/DTT_9394-175234358-576x768.JPG',
-    // },
-    // Thêm các màu khác nếu cần
   ];
 
   bannersArray: any = [
@@ -175,8 +146,8 @@ export class HomePageComponent implements AfterViewInit {
       '<i class="ti-arrow-right"></i>',
     ],
     responsive: {
-      0: { items: 1 },
-      400: { items: 2 },
+      0: { items: 0 },
+      400: { items: 1 },
       740: { items: 1 },
       940: { items: 1 },
     },
@@ -189,26 +160,909 @@ export class HomePageComponent implements AfterViewInit {
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
-    dots: true,
+    dots: false,
     navSpeed: 700,
     navText: [
       '<i class="ti-arrow-left"></i>',
       '<i class="ti-arrow-right"></i>',
     ],
     responsive: {
-      0: { items: 1 },
-      400: { items: 2 },
-      740: { items: 1 },
-      940: { items: 5 },
+        0:{
+            items:2,
+            margin: 20,
+            nav: false
+        },
+        740:{
+            items:3,
+            margin: 30
+        },
+        1025:{
+            items:5,
+            margin: 30
+        }
     },
     nav: true,
   };
 
   isHovered: boolean | undefined;
+  products= [
+    {
+        "_id": "65851f85229a4e7e738a8cc6",
+        "title": "ÁO LEN LÔNG CỪU ĐỤC LỖ",
+        "price": 1190000,
+        "sku": "17B9508",
+        "discount": 0,
+        "description": "- Áo sơ mi cổ đức, dáng suông, độ dài thường, có xẻ nhẹ hai bên sườn. \r\n\r\n- Viền áo được thêu chỉ khác màu, cổ tay áo xếp ly và đính khuy bạc. \r\n\r\n- Áo lựa chọn chất liệu Tuysi dày dặn, bề mặt mịn, thoáng mát.\r\n\r\n- Nàng có thể mix cùng quần âu, zuýp bút chì đều rất phù hợp. \r\n\r\nThông tin mẫu:\r\n\r\nChiều cao: 167 cm\r\n\r\nCân nặng: 50 kg\r\n\r\nSố đo 3 vòng: 83-65-93 cm\r\n\r\nMẫu mặc size M Lưu ý: Màu sắc sản phẩm thực tế sẽ có sự chênh lệch nhỏ so với ảnh do điều kiện ánh sáng khi chụp và màu sắc hiển thị qua màn hình máy tính/ điện thoại.",
+        "author": "64ca103baeac1741e179f4c7",
+        "images": [],
+        "variants": [
+            {
+                "color": {
+                    "_id": "64cb721d066ac7727d33ceda",
+                    "imageColor": "cam-do.png"
+                },
+                "images": [
+                    "1703223173705-AO-LEN-LANG-CaU-AaC-La-2.jpg",
+                    "1703223173710-AO-LEN-LANG-CaU-AaC-La-3.jpg",
+                    "1703223173713-AO-LEN-LANG-CaU-AaC-La-4.jpg",
+                    "1703223173718-AO-LEN-LANG-CaU-AaC-La-MAu-1.jpg"
+                ],
+                "variantColor": [
+                    {
+                        "size": "S",
+                        "quantity": 20,
+                        "_id": "65851f85229a4e7e738a8cc8"
+                    },
+                    {
+                        "size": "M",
+                        "quantity": 20,
+                        "_id": "65851f85229a4e7e738a8cc9"
+                    },
+                    {
+                        "size": "L",
+                        "quantity": 20,
+                        "_id": "65851f85229a4e7e738a8cca"
+                    },
+                    {
+                        "size": "XL",
+                        "quantity": 20,
+                        "_id": "65851f85229a4e7e738a8ccb"
+                    },
+                    {
+                        "size": "XXL",
+                        "quantity": 20,
+                        "_id": "65851f85229a4e7e738a8ccc"
+                    }
+                ],
+                "_id": "65851f85229a4e7e738a8cc7"
+            },
+            {
+                "color": {
+                    "_id": "64cb7285066ac7727d33dcbe",
+                    "imageColor": "trang.png"
+                },
+                "images": [
+                    "1703223173725-AO-LEN-LANG-CaU-AaC-La-MAu-1.jpg",
+                    "1703223173729-AO-LEN-LANG-CaU-AaC-La-NAu-2.jpg",
+                    "1703223173731-AO-LEN-LANG-CaU-AaC-La-NAu-3.jpg",
+                    "1703223173732-AO-LEN-LANG-CaU-AaC-La-NAu-4.jpg"
+                ],
+                "variantColor": [
+                    {
+                        "size": "S",
+                        "quantity": 20,
+                        "_id": "65851f85229a4e7e738a8cce"
+                    },
+                    {
+                        "size": "M",
+                        "quantity": 20,
+                        "_id": "65851f85229a4e7e738a8ccf"
+                    },
+                    {
+                        "size": "L",
+                        "quantity": 20,
+                        "_id": "65851f85229a4e7e738a8cd0"
+                    },
+                    {
+                        "size": "XL",
+                        "quantity": 20,
+                        "_id": "65851f85229a4e7e738a8cd1"
+                    },
+                    {
+                        "size": "XXL",
+                        "quantity": 20,
+                        "_id": "65851f85229a4e7e738a8cd2"
+                    }
+                ],
+                "_id": "65851f85229a4e7e738a8ccd"
+            }
+        ],
+        "createdAt": "2023-12-22T05:32:53.771Z",
+        "updatedAt": "2023-12-22T05:32:53.771Z",
+        "slug": "ao-len-long-cuu-duc-lo",
+        "__v": 0
+    },
+    {
+        "_id": "658521b7229a4e7e738a8ce4",
+        "title": "ÁO SƠ MI LỤA MAY VIỀN NỔI",
+        "price": 1290000,
+        "sku": "17M8125",
+        "discount": 0,
+        "description": "Áo sơ mi dáng suông, cài bằng hàng khuy ẩn phía trước. Điểm nhấn là chi tiết may viền vải tuysi khác màu độc đáo. Chất liệu vải lụa dày dặn có độ rủ, mềm mịn, nhăn nhẹ.\r\n\r\nVới mẫu thiết kế này, nàng sơ vin cùng chân váy hoặc quần vải ống suông là đã hoàn thiện trang phục đi làm chỉn chu, lịch sự mà vẫn rất trẻ trung, nữ tính. \r\n\r\nThông tin mẫu:\r\n\r\nChiều cao: 167 cm\r\n\r\nCân nặng: 50 kg\r\n\r\nSố đo 3 vòng: 83-65-93 cm\r\n\r\nMẫu mặc size M\r\n\r\nLưu ý: Màu sắc sản phẩm thực tế sẽ có sự chênh lệch nhỏ so với ảnh do điều kiện ánh sáng khi chụp và màu sắc hiển thị qua màn hình máy tính/ điện thoại.",
+        "author": "64ca103baeac1741e179f4c7",
+        "images": [],
+        "variants": [
+            {
+                "color": {
+                    "_id": "64cb721d066ac7727d33ceda",
+                    "imageColor": "cam-do.png"
+                },
+                "images": [
+                    "1703223735930-AO-S-MI-LaA-MAY-VIaN-NaI-1.jpg",
+                    "1703223735933-AO-S-MI-LaA-MAY-VIaN-NaI-2.jpg",
+                    "1703223735938-AO-S-MI-LaA-MAY-VIaN-NaI-3.jpg",
+                    "1703223735941-AO-S-MI-LaA-MAY-VIaN-NaI-4.jpg"
+                ],
+                "variantColor": [
+                    {
+                        "size": "S",
+                        "quantity": 20,
+                        "_id": "658521b7229a4e7e738a8ce6"
+                    },
+                    {
+                        "size": "M",
+                        "quantity": 20,
+                        "_id": "658521b7229a4e7e738a8ce7"
+                    },
+                    {
+                        "size": "L",
+                        "quantity": 20,
+                        "_id": "658521b7229a4e7e738a8ce8"
+                    },
+                    {
+                        "size": "XL",
+                        "quantity": 20,
+                        "_id": "658521b7229a4e7e738a8ce9"
+                    },
+                    {
+                        "size": "XXL",
+                        "quantity": 20,
+                        "_id": "658521b7229a4e7e738a8cea"
+                    }
+                ],
+                "_id": "658521b7229a4e7e738a8ce5"
+            },
+            {
+                "color": {
+                    "_id": "65852347fb0cdd158835bcb5",
+                    "imageColor": "den.png"
+                },
+                "images": [
+                    "1703223735946-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-1.jpg",
+                    "1703223735948-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-2.jpg",
+                    "1703223735950-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-3.jpg",
+                    "1703223735953-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-4.jpg",
+                    "1703223735954-AO-S-MI-PHaI-VIaN-MAU-1.jpg"
+                ],
+                "variantColor": [
+                    {
+                        "size": "S",
+                        "quantity": 20,
+                        "_id": "658521b7229a4e7e738a8cec"
+                    },
+                    {
+                        "size": "M",
+                        "quantity": 20,
+                        "_id": "658521b7229a4e7e738a8ced"
+                    },
+                    {
+                        "size": "L",
+                        "quantity": 20,
+                        "_id": "658521b7229a4e7e738a8cee"
+                    },
+                    {
+                        "size": "XL",
+                        "quantity": 20,
+                        "_id": "658521b7229a4e7e738a8cef"
+                    },
+                    {
+                        "size": "XXL",
+                        "quantity": 20,
+                        "_id": "658521b7229a4e7e738a8cf0"
+                    }
+                ],
+                "_id": "658521b7229a4e7e738a8ceb"
+            }
+        ],
+        "createdAt": "2023-12-22T05:42:15.970Z",
+        "updatedAt": "2023-12-22T05:42:15.970Z",
+        "slug": "ao-so-mi-lua-may-vien-noi",
+        "__v": 0
+    },
+    {
+      "_id": "658521b7229a4e7e738a8ce4",
+      "title": "ÁO SƠ MI LỤA MAY VIỀN NỔI",
+      "price": 1290000,
+      "sku": "17M8125",
+      "discount": 0,
+      "description": "Áo sơ mi dáng suông, cài bằng hàng khuy ẩn phía trước. Điểm nhấn là chi tiết may viền vải tuysi khác màu độc đáo. Chất liệu vải lụa dày dặn có độ rủ, mềm mịn, nhăn nhẹ.\r\n\r\nVới mẫu thiết kế này, nàng sơ vin cùng chân váy hoặc quần vải ống suông là đã hoàn thiện trang phục đi làm chỉn chu, lịch sự mà vẫn rất trẻ trung, nữ tính. \r\n\r\nThông tin mẫu:\r\n\r\nChiều cao: 167 cm\r\n\r\nCân nặng: 50 kg\r\n\r\nSố đo 3 vòng: 83-65-93 cm\r\n\r\nMẫu mặc size M\r\n\r\nLưu ý: Màu sắc sản phẩm thực tế sẽ có sự chênh lệch nhỏ so với ảnh do điều kiện ánh sáng khi chụp và màu sắc hiển thị qua màn hình máy tính/ điện thoại.",
+      "author": "64ca103baeac1741e179f4c7",
+      "images": [],
+      "variants": [
+          {
+              "color": {
+                  "_id": "64cb721d066ac7727d33ceda",
+                  "imageColor": "cam-do.png"
+              },
+              "images": [
+                  "1703223735930-AO-S-MI-LaA-MAY-VIaN-NaI-1.jpg",
+                  "1703223735933-AO-S-MI-LaA-MAY-VIaN-NaI-2.jpg",
+                  "1703223735938-AO-S-MI-LaA-MAY-VIaN-NaI-3.jpg",
+                  "1703223735941-AO-S-MI-LaA-MAY-VIaN-NaI-4.jpg"
+              ],
+              "variantColor": [
+                  {
+                      "size": "S",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce6"
+                  },
+                  {
+                      "size": "M",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce7"
+                  },
+                  {
+                      "size": "L",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce8"
+                  },
+                  {
+                      "size": "XL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce9"
+                  },
+                  {
+                      "size": "XXL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cea"
+                  }
+              ],
+              "_id": "658521b7229a4e7e738a8ce5"
+          },
+          {
+              "color": {
+                  "_id": "65852347fb0cdd158835bcb5",
+                  "imageColor": "den.png"
+              },
+              "images": [
+                  "1703223735946-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-1.jpg",
+                  "1703223735948-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-2.jpg",
+                  "1703223735950-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-3.jpg",
+                  "1703223735953-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-4.jpg",
+                  "1703223735954-AO-S-MI-PHaI-VIaN-MAU-1.jpg"
+              ],
+              "variantColor": [
+                  {
+                      "size": "S",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cec"
+                  },
+                  {
+                      "size": "M",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ced"
+                  },
+                  {
+                      "size": "L",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cee"
+                  },
+                  {
+                      "size": "XL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cef"
+                  },
+                  {
+                      "size": "XXL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cf0"
+                  }
+              ],
+              "_id": "658521b7229a4e7e738a8ceb"
+          }
+      ],
+      "createdAt": "2023-12-22T05:42:15.970Z",
+      "updatedAt": "2023-12-22T05:42:15.970Z",
+      "slug": "ao-so-mi-lua-may-vien-noi",
+      "__v": 0
+    },
+    {
+      "_id": "658521b7229a4e7e738a8ce4",
+      "title": "ÁO SƠ MI LỤA MAY VIỀN NỔI",
+      "price": 1290000,
+      "sku": "17M8125",
+      "discount": 0,
+      "description": "Áo sơ mi dáng suông, cài bằng hàng khuy ẩn phía trước. Điểm nhấn là chi tiết may viền vải tuysi khác màu độc đáo. Chất liệu vải lụa dày dặn có độ rủ, mềm mịn, nhăn nhẹ.\r\n\r\nVới mẫu thiết kế này, nàng sơ vin cùng chân váy hoặc quần vải ống suông là đã hoàn thiện trang phục đi làm chỉn chu, lịch sự mà vẫn rất trẻ trung, nữ tính. \r\n\r\nThông tin mẫu:\r\n\r\nChiều cao: 167 cm\r\n\r\nCân nặng: 50 kg\r\n\r\nSố đo 3 vòng: 83-65-93 cm\r\n\r\nMẫu mặc size M\r\n\r\nLưu ý: Màu sắc sản phẩm thực tế sẽ có sự chênh lệch nhỏ so với ảnh do điều kiện ánh sáng khi chụp và màu sắc hiển thị qua màn hình máy tính/ điện thoại.",
+      "author": "64ca103baeac1741e179f4c7",
+      "images": [],
+      "variants": [
+          {
+              "color": {
+                  "_id": "64cb721d066ac7727d33ceda",
+                  "imageColor": "cam-do.png"
+              },
+              "images": [
+                  "1703223735930-AO-S-MI-LaA-MAY-VIaN-NaI-1.jpg",
+                  "1703223735933-AO-S-MI-LaA-MAY-VIaN-NaI-2.jpg",
+                  "1703223735938-AO-S-MI-LaA-MAY-VIaN-NaI-3.jpg",
+                  "1703223735941-AO-S-MI-LaA-MAY-VIaN-NaI-4.jpg"
+              ],
+              "variantColor": [
+                  {
+                      "size": "S",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce6"
+                  },
+                  {
+                      "size": "M",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce7"
+                  },
+                  {
+                      "size": "L",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce8"
+                  },
+                  {
+                      "size": "XL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce9"
+                  },
+                  {
+                      "size": "XXL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cea"
+                  }
+              ],
+              "_id": "658521b7229a4e7e738a8ce5"
+          },
+          {
+              "color": {
+                  "_id": "65852347fb0cdd158835bcb5",
+                  "imageColor": "den.png"
+              },
+              "images": [
+                  "1703223735946-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-1.jpg",
+                  "1703223735948-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-2.jpg",
+                  "1703223735950-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-3.jpg",
+                  "1703223735953-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-4.jpg",
+                  "1703223735954-AO-S-MI-PHaI-VIaN-MAU-1.jpg"
+              ],
+              "variantColor": [
+                  {
+                      "size": "S",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cec"
+                  },
+                  {
+                      "size": "M",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ced"
+                  },
+                  {
+                      "size": "L",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cee"
+                  },
+                  {
+                      "size": "XL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cef"
+                  },
+                  {
+                      "size": "XXL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cf0"
+                  }
+              ],
+              "_id": "658521b7229a4e7e738a8ceb"
+          }
+      ],
+      "createdAt": "2023-12-22T05:42:15.970Z",
+      "updatedAt": "2023-12-22T05:42:15.970Z",
+      "slug": "ao-so-mi-lua-may-vien-noi",
+      "__v": 0
+    },    {
+      "_id": "658521b7229a4e7e738a8ce4",
+      "title": "ÁO SƠ MI LỤA MAY VIỀN NỔI",
+      "price": 1290000,
+      "sku": "17M8125",
+      "discount": 0,
+      "description": "Áo sơ mi dáng suông, cài bằng hàng khuy ẩn phía trước. Điểm nhấn là chi tiết may viền vải tuysi khác màu độc đáo. Chất liệu vải lụa dày dặn có độ rủ, mềm mịn, nhăn nhẹ.\r\n\r\nVới mẫu thiết kế này, nàng sơ vin cùng chân váy hoặc quần vải ống suông là đã hoàn thiện trang phục đi làm chỉn chu, lịch sự mà vẫn rất trẻ trung, nữ tính. \r\n\r\nThông tin mẫu:\r\n\r\nChiều cao: 167 cm\r\n\r\nCân nặng: 50 kg\r\n\r\nSố đo 3 vòng: 83-65-93 cm\r\n\r\nMẫu mặc size M\r\n\r\nLưu ý: Màu sắc sản phẩm thực tế sẽ có sự chênh lệch nhỏ so với ảnh do điều kiện ánh sáng khi chụp và màu sắc hiển thị qua màn hình máy tính/ điện thoại.",
+      "author": "64ca103baeac1741e179f4c7",
+      "images": [],
+      "variants": [
+          {
+              "color": {
+                  "_id": "64cb721d066ac7727d33ceda",
+                  "imageColor": "cam-do.png"
+              },
+              "images": [
+                  "1703223735930-AO-S-MI-LaA-MAY-VIaN-NaI-1.jpg",
+                  "1703223735933-AO-S-MI-LaA-MAY-VIaN-NaI-2.jpg",
+                  "1703223735938-AO-S-MI-LaA-MAY-VIaN-NaI-3.jpg",
+                  "1703223735941-AO-S-MI-LaA-MAY-VIaN-NaI-4.jpg"
+              ],
+              "variantColor": [
+                  {
+                      "size": "S",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce6"
+                  },
+                  {
+                      "size": "M",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce7"
+                  },
+                  {
+                      "size": "L",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce8"
+                  },
+                  {
+                      "size": "XL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce9"
+                  },
+                  {
+                      "size": "XXL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cea"
+                  }
+              ],
+              "_id": "658521b7229a4e7e738a8ce5"
+          },
+          {
+              "color": {
+                  "_id": "65852347fb0cdd158835bcb5",
+                  "imageColor": "den.png"
+              },
+              "images": [
+                  "1703223735946-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-1.jpg",
+                  "1703223735948-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-2.jpg",
+                  "1703223735950-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-3.jpg",
+                  "1703223735953-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-4.jpg",
+                  "1703223735954-AO-S-MI-PHaI-VIaN-MAU-1.jpg"
+              ],
+              "variantColor": [
+                  {
+                      "size": "S",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cec"
+                  },
+                  {
+                      "size": "M",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ced"
+                  },
+                  {
+                      "size": "L",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cee"
+                  },
+                  {
+                      "size": "XL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cef"
+                  },
+                  {
+                      "size": "XXL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cf0"
+                  }
+              ],
+              "_id": "658521b7229a4e7e738a8ceb"
+          }
+      ],
+      "createdAt": "2023-12-22T05:42:15.970Z",
+      "updatedAt": "2023-12-22T05:42:15.970Z",
+      "slug": "ao-so-mi-lua-may-vien-noi",
+      "__v": 0
+    },    {
+      "_id": "658521b7229a4e7e738a8ce4",
+      "title": "ÁO SƠ MI LỤA MAY VIỀN NỔI",
+      "price": 1290000,
+      "sku": "17M8125",
+      "discount": 0,
+      "description": "Áo sơ mi dáng suông, cài bằng hàng khuy ẩn phía trước. Điểm nhấn là chi tiết may viền vải tuysi khác màu độc đáo. Chất liệu vải lụa dày dặn có độ rủ, mềm mịn, nhăn nhẹ.\r\n\r\nVới mẫu thiết kế này, nàng sơ vin cùng chân váy hoặc quần vải ống suông là đã hoàn thiện trang phục đi làm chỉn chu, lịch sự mà vẫn rất trẻ trung, nữ tính. \r\n\r\nThông tin mẫu:\r\n\r\nChiều cao: 167 cm\r\n\r\nCân nặng: 50 kg\r\n\r\nSố đo 3 vòng: 83-65-93 cm\r\n\r\nMẫu mặc size M\r\n\r\nLưu ý: Màu sắc sản phẩm thực tế sẽ có sự chênh lệch nhỏ so với ảnh do điều kiện ánh sáng khi chụp và màu sắc hiển thị qua màn hình máy tính/ điện thoại.",
+      "author": "64ca103baeac1741e179f4c7",
+      "images": [],
+      "variants": [
+          {
+              "color": {
+                  "_id": "64cb721d066ac7727d33ceda",
+                  "imageColor": "cam-do.png"
+              },
+              "images": [
+                  "1703223735930-AO-S-MI-LaA-MAY-VIaN-NaI-1.jpg",
+                  "1703223735933-AO-S-MI-LaA-MAY-VIaN-NaI-2.jpg",
+                  "1703223735938-AO-S-MI-LaA-MAY-VIaN-NaI-3.jpg",
+                  "1703223735941-AO-S-MI-LaA-MAY-VIaN-NaI-4.jpg"
+              ],
+              "variantColor": [
+                  {
+                      "size": "S",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce6"
+                  },
+                  {
+                      "size": "M",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce7"
+                  },
+                  {
+                      "size": "L",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce8"
+                  },
+                  {
+                      "size": "XL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce9"
+                  },
+                  {
+                      "size": "XXL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cea"
+                  }
+              ],
+              "_id": "658521b7229a4e7e738a8ce5"
+          },
+          {
+              "color": {
+                  "_id": "65852347fb0cdd158835bcb5",
+                  "imageColor": "den.png"
+              },
+              "images": [
+                  "1703223735946-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-1.jpg",
+                  "1703223735948-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-2.jpg",
+                  "1703223735950-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-3.jpg",
+                  "1703223735953-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-4.jpg",
+                  "1703223735954-AO-S-MI-PHaI-VIaN-MAU-1.jpg"
+              ],
+              "variantColor": [
+                  {
+                      "size": "S",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cec"
+                  },
+                  {
+                      "size": "M",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ced"
+                  },
+                  {
+                      "size": "L",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cee"
+                  },
+                  {
+                      "size": "XL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cef"
+                  },
+                  {
+                      "size": "XXL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cf0"
+                  }
+              ],
+              "_id": "658521b7229a4e7e738a8ceb"
+          }
+      ],
+      "createdAt": "2023-12-22T05:42:15.970Z",
+      "updatedAt": "2023-12-22T05:42:15.970Z",
+      "slug": "ao-so-mi-lua-may-vien-noi",
+      "__v": 0
+    },    {
+      "_id": "658521b7229a4e7e738a8ce4",
+      "title": "ÁO SƠ MI LỤA MAY VIỀN NỔI",
+      "price": 1290000,
+      "sku": "17M8125",
+      "discount": 0,
+      "description": "Áo sơ mi dáng suông, cài bằng hàng khuy ẩn phía trước. Điểm nhấn là chi tiết may viền vải tuysi khác màu độc đáo. Chất liệu vải lụa dày dặn có độ rủ, mềm mịn, nhăn nhẹ.\r\n\r\nVới mẫu thiết kế này, nàng sơ vin cùng chân váy hoặc quần vải ống suông là đã hoàn thiện trang phục đi làm chỉn chu, lịch sự mà vẫn rất trẻ trung, nữ tính. \r\n\r\nThông tin mẫu:\r\n\r\nChiều cao: 167 cm\r\n\r\nCân nặng: 50 kg\r\n\r\nSố đo 3 vòng: 83-65-93 cm\r\n\r\nMẫu mặc size M\r\n\r\nLưu ý: Màu sắc sản phẩm thực tế sẽ có sự chênh lệch nhỏ so với ảnh do điều kiện ánh sáng khi chụp và màu sắc hiển thị qua màn hình máy tính/ điện thoại.",
+      "author": "64ca103baeac1741e179f4c7",
+      "images": [],
+      "variants": [
+          {
+              "color": {
+                  "_id": "64cb721d066ac7727d33ceda",
+                  "imageColor": "cam-do.png"
+              },
+              "images": [
+                  "1703223735930-AO-S-MI-LaA-MAY-VIaN-NaI-1.jpg",
+                  "1703223735933-AO-S-MI-LaA-MAY-VIaN-NaI-2.jpg",
+                  "1703223735938-AO-S-MI-LaA-MAY-VIaN-NaI-3.jpg",
+                  "1703223735941-AO-S-MI-LaA-MAY-VIaN-NaI-4.jpg"
+              ],
+              "variantColor": [
+                  {
+                      "size": "S",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce6"
+                  },
+                  {
+                      "size": "M",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce7"
+                  },
+                  {
+                      "size": "L",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce8"
+                  },
+                  {
+                      "size": "XL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce9"
+                  },
+                  {
+                      "size": "XXL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cea"
+                  }
+              ],
+              "_id": "658521b7229a4e7e738a8ce5"
+          },
+          {
+              "color": {
+                  "_id": "65852347fb0cdd158835bcb5",
+                  "imageColor": "den.png"
+              },
+              "images": [
+                  "1703223735946-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-1.jpg",
+                  "1703223735948-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-2.jpg",
+                  "1703223735950-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-3.jpg",
+                  "1703223735953-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-4.jpg",
+                  "1703223735954-AO-S-MI-PHaI-VIaN-MAU-1.jpg"
+              ],
+              "variantColor": [
+                  {
+                      "size": "S",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cec"
+                  },
+                  {
+                      "size": "M",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ced"
+                  },
+                  {
+                      "size": "L",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cee"
+                  },
+                  {
+                      "size": "XL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cef"
+                  },
+                  {
+                      "size": "XXL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cf0"
+                  }
+              ],
+              "_id": "658521b7229a4e7e738a8ceb"
+          }
+      ],
+      "createdAt": "2023-12-22T05:42:15.970Z",
+      "updatedAt": "2023-12-22T05:42:15.970Z",
+      "slug": "ao-so-mi-lua-may-vien-noi",
+      "__v": 0
+    },    {
+      "_id": "658521b7229a4e7e738a8ce4",
+      "title": "ÁO SƠ MI LỤA MAY VIỀN NỔI",
+      "price": 1290000,
+      "sku": "17M8125",
+      "discount": 0,
+      "description": "Áo sơ mi dáng suông, cài bằng hàng khuy ẩn phía trước. Điểm nhấn là chi tiết may viền vải tuysi khác màu độc đáo. Chất liệu vải lụa dày dặn có độ rủ, mềm mịn, nhăn nhẹ.\r\n\r\nVới mẫu thiết kế này, nàng sơ vin cùng chân váy hoặc quần vải ống suông là đã hoàn thiện trang phục đi làm chỉn chu, lịch sự mà vẫn rất trẻ trung, nữ tính. \r\n\r\nThông tin mẫu:\r\n\r\nChiều cao: 167 cm\r\n\r\nCân nặng: 50 kg\r\n\r\nSố đo 3 vòng: 83-65-93 cm\r\n\r\nMẫu mặc size M\r\n\r\nLưu ý: Màu sắc sản phẩm thực tế sẽ có sự chênh lệch nhỏ so với ảnh do điều kiện ánh sáng khi chụp và màu sắc hiển thị qua màn hình máy tính/ điện thoại.",
+      "author": "64ca103baeac1741e179f4c7",
+      "images": [],
+      "variants": [
+          {
+              "color": {
+                  "_id": "64cb721d066ac7727d33ceda",
+                  "imageColor": "cam-do.png"
+              },
+              "images": [
+                  "1703223735930-AO-S-MI-LaA-MAY-VIaN-NaI-1.jpg",
+                  "1703223735933-AO-S-MI-LaA-MAY-VIaN-NaI-2.jpg",
+                  "1703223735938-AO-S-MI-LaA-MAY-VIaN-NaI-3.jpg",
+                  "1703223735941-AO-S-MI-LaA-MAY-VIaN-NaI-4.jpg"
+              ],
+              "variantColor": [
+                  {
+                      "size": "S",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce6"
+                  },
+                  {
+                      "size": "M",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce7"
+                  },
+                  {
+                      "size": "L",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce8"
+                  },
+                  {
+                      "size": "XL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce9"
+                  },
+                  {
+                      "size": "XXL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cea"
+                  }
+              ],
+              "_id": "658521b7229a4e7e738a8ce5"
+          },
+          {
+              "color": {
+                  "_id": "65852347fb0cdd158835bcb5",
+                  "imageColor": "den.png"
+              },
+              "images": [
+                  "1703223735946-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-1.jpg",
+                  "1703223735948-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-2.jpg",
+                  "1703223735950-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-3.jpg",
+                  "1703223735953-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-4.jpg",
+                  "1703223735954-AO-S-MI-PHaI-VIaN-MAU-1.jpg"
+              ],
+              "variantColor": [
+                  {
+                      "size": "S",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cec"
+                  },
+                  {
+                      "size": "M",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ced"
+                  },
+                  {
+                      "size": "L",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cee"
+                  },
+                  {
+                      "size": "XL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cef"
+                  },
+                  {
+                      "size": "XXL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cf0"
+                  }
+              ],
+              "_id": "658521b7229a4e7e738a8ceb"
+          }
+      ],
+      "createdAt": "2023-12-22T05:42:15.970Z",
+      "updatedAt": "2023-12-22T05:42:15.970Z",
+      "slug": "ao-so-mi-lua-may-vien-noi",
+      "__v": 0
+    },    {
+      "_id": "658521b7229a4e7e738a8ce4",
+      "title": "ÁO SƠ MI LỤA MAY VIỀN NỔI",
+      "price": 1290000,
+      "sku": "17M8125",
+      "discount": 0,
+      "description": "Áo sơ mi dáng suông, cài bằng hàng khuy ẩn phía trước. Điểm nhấn là chi tiết may viền vải tuysi khác màu độc đáo. Chất liệu vải lụa dày dặn có độ rủ, mềm mịn, nhăn nhẹ.\r\n\r\nVới mẫu thiết kế này, nàng sơ vin cùng chân váy hoặc quần vải ống suông là đã hoàn thiện trang phục đi làm chỉn chu, lịch sự mà vẫn rất trẻ trung, nữ tính. \r\n\r\nThông tin mẫu:\r\n\r\nChiều cao: 167 cm\r\n\r\nCân nặng: 50 kg\r\n\r\nSố đo 3 vòng: 83-65-93 cm\r\n\r\nMẫu mặc size M\r\n\r\nLưu ý: Màu sắc sản phẩm thực tế sẽ có sự chênh lệch nhỏ so với ảnh do điều kiện ánh sáng khi chụp và màu sắc hiển thị qua màn hình máy tính/ điện thoại.",
+      "author": "64ca103baeac1741e179f4c7",
+      "images": [],
+      "variants": [
+          {
+              "color": {
+                  "_id": "64cb721d066ac7727d33ceda",
+                  "imageColor": "cam-do.png"
+              },
+              "images": [
+                  "1703223735930-AO-S-MI-LaA-MAY-VIaN-NaI-1.jpg",
+                  "1703223735933-AO-S-MI-LaA-MAY-VIaN-NaI-2.jpg",
+                  "1703223735938-AO-S-MI-LaA-MAY-VIaN-NaI-3.jpg",
+                  "1703223735941-AO-S-MI-LaA-MAY-VIaN-NaI-4.jpg"
+              ],
+              "variantColor": [
+                  {
+                      "size": "S",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce6"
+                  },
+                  {
+                      "size": "M",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce7"
+                  },
+                  {
+                      "size": "L",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce8"
+                  },
+                  {
+                      "size": "XL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ce9"
+                  },
+                  {
+                      "size": "XXL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cea"
+                  }
+              ],
+              "_id": "658521b7229a4e7e738a8ce5"
+          },
+          {
+              "color": {
+                  "_id": "65852347fb0cdd158835bcb5",
+                  "imageColor": "den.png"
+              },
+              "images": [
+                  "1703223735946-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-1.jpg",
+                  "1703223735948-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-2.jpg",
+                  "1703223735950-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-3.jpg",
+                  "1703223735953-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-4.jpg",
+                  "1703223735954-AO-S-MI-PHaI-VIaN-MAU-1.jpg"
+              ],
+              "variantColor": [
+                  {
+                      "size": "S",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cec"
+                  },
+                  {
+                      "size": "M",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8ced"
+                  },
+                  {
+                      "size": "L",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cee"
+                  },
+                  {
+                      "size": "XL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cef"
+                  },
+                  {
+                      "size": "XXL",
+                      "quantity": 20,
+                      "_id": "658521b7229a4e7e738a8cf0"
+                  }
+              ],
+              "_id": "658521b7229a4e7e738a8ceb"
+          }
+      ],
+      "createdAt": "2023-12-22T05:42:15.970Z",
+      "updatedAt": "2023-12-22T05:42:15.970Z",
+      "slug": "ao-so-mi-lua-may-vien-noi",
+      "__v": 0
+    },    
+    
+]
+
+
+
 
   ngOnInit(): void {
     // Mặc định chọn màu đầu tiên
-    this.apiProductHomePage();
+    // this.apiProductHomePage();
+    this.createArrSupportChangeImgFollowChangeColor()
     this.selectedColorId = this.colorsArray[0].id;
     // Khởi tạo mảng productStates với giá trị false cho mỗi sản phẩm
     this.productStates = Array(this.bannersArray.length).fill(false);
@@ -335,6 +1189,8 @@ export class HomePageComponent implements AfterViewInit {
     console.log( product._id,colorId)
     console.log(this.productsHaveModified)
     this.moveImgHomePageToFront(this.productsHaveModified, product._id,colorId )
+
+    
     
   }
 
