@@ -59,4 +59,8 @@ export class AccountAddressComponent implements OnInit {
       });
     }
   }
+
+  setDefaultAddress(){
+
+  }
 }

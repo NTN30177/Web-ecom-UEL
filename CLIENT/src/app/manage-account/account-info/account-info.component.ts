@@ -17,7 +17,8 @@ export class AccountInfoComponent implements OnInit {
   userID: any
   userInfoForm!: FormGroup;
   userInfo: IUser | undefined;// Use the IUser interface
-  notification: { message: string, type: 'success' | 'error' } | null = null;
+  errMessage: string = '';
+  successMessage: string = '';
 
   constructor(private accountInfoService: AccountInfoService, private datePipe: DatePipe, private formBuilder: FormBuilder) { }
 
@@ -88,9 +89,16 @@ export class AccountInfoComponent implements OnInit {
       this.accountInfoService.updateUserAccountInfo(this.userID, updatedInfo)
         .subscribe(
           (response) => {
+            this.successMessage = 'Cập nhật thông tin thành công!';
+            this.errMessage = ''; // Clear any previous error message
+            // You don't need to reset the form here
+            setTimeout(() => {
+              this.successMessage = ''; // Clear success message after a few seconds
+            }, 3000);
             console.log('User information updated successfully:', response);
             // Cập nhật lại dữ liệu hiển thị 
             // 1. Update local data
+            this.userInfoForm.reset();
             this.userInfo = { ...this.userInfo, ...updatedInfo };
 
             // 2. Update the form with new values
@@ -102,17 +110,11 @@ export class AccountInfoComponent implements OnInit {
               gender: this.userInfo?.gender,
               date_of_birth: this.formatDateOfBirthForInput(this.userInfo?.date_of_birth)
             });
-            this.showNotification('Update successful', 'success');
-
-            // Auto-dismiss the notification after 3 seconds
-            setTimeout(() => {
-              this.notification = null;
-            }, 3000);
 
           },
           (error) => {
             console.error('Error updating user information:', error);
-            // Xử lý lỗi nếu cần
+            this.errMessage = 'Cập nhật thông tin không thành công. Vui lòng thử lại!';
           }
         );
     } else {
@@ -120,9 +122,6 @@ export class AccountInfoComponent implements OnInit {
     }
   }
 
-  showNotification(message: string, type: 'success' | 'error') {
-    this.notification = { message, type };
-  }
 
   submitForm() {
     if (this.userInfoForm.valid) {

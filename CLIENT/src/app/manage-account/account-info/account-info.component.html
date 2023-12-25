@@ -90,9 +90,8 @@
             </div>
         </div>
         <!--  display the notification -->
-        <div *ngIf="notification" class="notification {{ notification.type }}">
-            {{ notification.message }}
-        </div>
+        <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
+        <div *ngIf="errMessage" class="alert alert-danger mt-3">{{ errMessage }}</div>
 
     </form>
 
