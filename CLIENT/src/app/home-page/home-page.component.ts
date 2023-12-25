@@ -223,6 +223,8 @@ private async setupUserIdSubscription(): Promise<void> {
 
   total_quantity: number = 0;
 
+  
+  
   totalCartItem(productsCart: any): number {
     this.total_quantity = 0;
     productsCart.forEach((product: any) => {
