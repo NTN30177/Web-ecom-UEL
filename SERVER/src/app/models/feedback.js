@@ -8,6 +8,10 @@ const FeedbackSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    idOrder: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
     content:{
       type:string
     }

@@ -52,10 +52,10 @@ const productSchema = new mongoose.Schema(
             // required: true,
         },
 
-        feedbackList: {
+        feedbackList: [{
           type: mongoose.Schema.Types.ObjectId,
           ref: "Feedback",
-        },
+        }],
         images: [
             {
                 type: String,
