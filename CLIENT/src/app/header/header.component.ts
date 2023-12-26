@@ -39,13 +39,15 @@ export class HeaderComponent implements OnInit {
   submenuOpen: boolean = false;
   isSubActionVisible: boolean = false;
   quantityInputValue: number = 1;
-  userId = 1; // Sử dụng string hoặc null tùy thuộc vào loại dữ liệu của user ID
+  userId=1;  // Sử dụng string hoặc null tùy thuộc vào loại dữ liệu của user ID
+
 
   cartNumberItem: number = 0;
   isMobileMenuOpen: boolean | undefined;
   types: any;
   @ViewChild('searchInput') searchInput: ElementRef | undefined;
   dataLiveSearch: any;
+  currentSubMenuIndex: null | undefined;
   constructor(
     private elRef: ElementRef,
     private renderer: Renderer2,
@@ -200,61 +202,52 @@ export class HeaderComponent implements OnInit {
     event.stopPropagation();
 
     // Đóng tất cả các submenu khác
-    const allSubChildElements =
-      this.elRef.nativeElement.querySelectorAll('.child-sub');
-    allSubChildElements.forEach(
-      (
-        element: {
-          previousElementSibling: any;
-          style: { display: string };
-          classList: {
-            remove: (arg0: string) => void;
-            add: (arg0: string) => void;
-          };
-        },
-        i: number
-      ) => {
-        element.style.display = 'none';
-        element.classList.remove('open');
-
-        // Đóng tất cả các mũi tên trong sub-menu-mb khác
-        const allArrows = this.elRef.nativeElement.querySelectorAll(
-          '.sub-menu-mb .arrows'
-        );
-        allArrows.forEach(
-          (arrowElement: {
-            classList: {
-              remove: (arg0: string) => void;
-              add: (arg0: string) => void;
-            };
-          }) => {
-            arrowElement.classList.remove('open');
-          }
-        );
-
-        // Nếu index của submenu trùng với index của thẻ được click, thì mở nó
-        if (i === index) {
-          const arrowsElement =
-            element.previousElementSibling.querySelector('.arrows');
-          arrowsElement.classList.add('open');
-          element.style.display = 'block';
-          element.classList.add('open');
-        }
+    const allSubChildElements = this.elRef.nativeElement.querySelectorAll('.child-sub');
+    allSubChildElements.forEach((element: {
+      previousElementSibling: any; style: { display: string; }; classList: { remove: (arg0: string) => void; add: (arg0: string) => void; }; 
+}, i: number) => {
+      element.style.display = 'none';
+      element.classList.remove('open');
+  
+      // Đóng tất cả các mũi tên trong sub-menu-mb khác
+      const allArrows = this.elRef.nativeElement.querySelectorAll('.sub-menu-mb .arrows');
+      allArrows.forEach((arrowElement: { classList: { remove: (arg0: string) => void; add: (arg0: string) => void; }; }) => {
+        arrowElement.classList.remove('open');
+      });
+  
+      // Nếu index của submenu trùng với index của thẻ được click, thì mở nó
+      if (i === index) {
+        const arrowsElement = element.previousElementSibling.querySelector('.arrows');
+        arrowsElement.classList.add('open');
+        element.style.display = 'block';
+        element.classList.add('open');
       }
-    );
+    });
   }
+
+
 
   toggleSubMenu(): void {
-    this.submenuOpen = !this.submenuOpen;
-
     const subMenuMb = this.elRef.nativeElement.querySelector('.sub-menu-mb');
-
-    if (this.submenuOpen) {
+    const mainMenu = this.elRef.nativeElement.querySelector('.main-menu');
+  
+    if (!this.submenuOpen) {
+      // Nếu submenu chưa mở, thì thêm class "open" vào cả sub-menu và main-menu
       this.renderer.setStyle(subMenuMb, 'display', 'block');
+      this.renderer.addClass(subMenuMb, 'open');
+      this.renderer.addClass(mainMenu, 'open');
     } else {
+      // Nếu submenu đã mở, thì chỉ đóng sub-menu, không xoá class "open" của main-menu
       this.renderer.setStyle(subMenuMb, 'display', 'none');
+      this.renderer.removeClass(subMenuMb, 'open');
     }
+  
+    this.submenuOpen = !this.submenuOpen;
   }
+
+
+
+
 
   cartItemFunc() {
     const localCartString = localStorage.getItem('localCart');
@@ -315,6 +308,23 @@ export class HeaderComponent implements OnInit {
 
   isSearchInputActive: boolean = false;
   @HostListener('document:click', ['$event'])
+  //đóng mở submenu
+  handleClickOutsideSubMenu(event: Event): void {
+    const allSubChildElements = this.elRef.nativeElement.querySelectorAll('.child-sub');
+    allSubChildElements.forEach((element: {
+      style: { display: string; };
+      classList: { remove: (arg0: string) => void; };
+    }) => {
+      element.style.display = 'none';
+      element.classList.remove('open');
+    });
+  
+    this.currentSubMenuIndex = null;
+  }
+  closeSubMenu(): void {
+    this.currentSubMenuIndex = null;
+  }
+
   handleClickOutside(event: Event) {
     const searchForm = this.elRef.nativeElement.querySelector('.search-form');
 

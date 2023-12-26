@@ -9,9 +9,9 @@
     <div id="main">
         <header id="header">
             <div class="container d-flex">
-                <div class="main-menu" (click)="toggleMainMenu()">
+                <div class="main-menu">
                     <div class="mobile-menu">
-                        <a href="javascript:void(0)" class="icon">
+                        <a href="javascript:void(0)" class="icon" (click)="toggleMainMenu()">
                             <i class="header__icon ti-menu"></i>
                         </a>
                     </div>
@@ -41,134 +41,28 @@
                         </div>
                         <ul class="menu-mb">
                             <li class="has-child">
-                                <a href="javascript:void(0)">
+                                <a href="javascript:void(0)" (click)="toggleSubMenu()">
                                     Sản phẩm
-                                    <span class="arrows">
+                                    <span class="arrows" [class.open]="submenuOpen">
                                         <i class="ti-plus"></i>
                                         <i class="ti-minus"></i>
                                     </span>
                                 </a>
-                                <ul class="sub-menu-mb" [style.display]="submenuOpen ? 'block' : 'none'">
-                                    <li class="has-sub-child">
-                                        <a href="javascript:void(0)">
-                                            áo
-                                            <span class="arrows">
-                                                <i class="ti-plus"></i>
-                                                <i class="ti-minus"></i>
-                                            </span>
+                                <ul class="sub-menu-mb">
+                                    <li class="has-sub-child" *ngFor="let item of menuItems; let i = index" (click)="closeSubMenu()">
+                                        <a href="javascript:void(0)" (click)="toggleSubMenuChild($event, i)">
+                                          {{ item.label }}
+                                          <span class="arrows child">
+                                            <i class="ti-plus"></i>
+                                            <i class="ti-minus"></i>
+                                          </span>
                                         </a>
-                                        <ul class="child-sub" style="display:none">
-                                            <li>
-                                                <a href="">Áo sơ mi</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Áo kiểu</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Áo len</a>
-                                            </li>
+                                        <ul class="child-sub" #childSubmenu style="display:none">
+                                          <li *ngFor="let subItem of item.subItems">
+                                            <a href="">{{ subItem.label }}</a>
+                                          </li>
                                         </ul>
-                                    </li>
-                                    <li class="has-sub-child">
-                                        <a href="javascript:void(0)">
-                                            áo khoác
-                                            <span class="arrows">
-                                                <i class="ti-plus"></i>
-                                                <i class="ti-minus"></i>
-                                            </span>
-                                        </a>
-                                        <ul class="child-sub" style="display:none">
-                                            <li>
-                                                <a href="">Áo sơ mi</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Áo kiểu</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Áo len</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="has-sub-child">
-                                        <a href="javascript:void(0)">
-                                            quần & Jumpsuit
-                                            <span class="arrows">
-                                                <i class="ti-plus"></i>
-                                                <i class="ti-minus"></i>
-                                            </span>
-                                        </a>
-                                        <ul class="child-sub" style="display:none">
-                                            <li>
-                                                <a href="">Áo sơ mi</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Áo kiểu</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Áo len</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="has-sub-child">
-                                        <a href="javascript:void(0)">
-                                            phụ kiện
-                                            <span class="arrows">
-                                                <i class="ti-plus"></i>
-                                                <i class="ti-minus"></i>
-                                            </span>
-                                        </a>
-                                        <ul class="child-sub" style="display:none">
-                                            <li>
-                                                <a href="">Áo sơ mi</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Áo kiểu</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Áo len</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="has-sub-child">
-                                        <a href="javascript:void(0)">
-                                            chân váy
-                                            <span class="arrows">
-                                                <i class="ti-plus"></i>
-                                                <i class="ti-minus"></i>
-                                            </span>
-                                        </a>
-                                        <ul class="child-sub" style="display:none">
-                                            <li>
-                                                <a href="">Áo sơ mi</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Áo kiểu</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Áo len</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="has-sub-child">
-                                        <a href="javascript:void(0)">
-                                            đầm
-                                            <span class="arrows">
-                                                <i class="ti-plus"></i>
-                                                <i class="ti-minus"></i>
-                                            </span>
-                                        </a>
-                                        <ul class="child-sub" style="display:none">
-                                            <li>
-                                                <a href="">Áo sơ mi</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Áo kiểu</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Áo len</a>
-                                            </li>
-                                        </ul>
-                                    </li>
+                                      </li>
                                 </ul>
                             </li>
                             <li>
@@ -181,8 +75,8 @@
                                 <a href="javascript:void(0)">Về chúng tôi</a>
                             </li>
                         </ul>
-                        <div class="close-menu">
-                            <i class="ti-close" (click)="closeMainMenu($event)"></i>
+                        <div class="close-menu" (click)="closeMobileMenu()">
+                            <i class="ti-close"></i>
                         </div>
                     </div>
                 </div>
@@ -334,6 +228,109 @@
                     </div>
                       
                 
+                </div>
+            </div>
+            <div class="container">
+                <div class="nav-bottom-mb">
+                    <div class="item-nav-bot">
+                        <div class="item-nav" onclick="toggleSubItemNav(this)">
+                            <i class="icon-tab-mb ti-search"></i>
+                            <a href="#" class="link-nav-bot">Tìm kiếm</a>
+                        </div>
+                        <div class="sub-item-nav sub-item-nav-search">
+                            <form action="" class="search-form">
+                                <button class="search-form__btn">
+                                    <i class="eadher__icon ti-search icon"></i>
+                                </button>
+                                <input type="text" id="search-form__input" placeholder="TÌM KIẾM SẢN PHẨM">
+                                <div class="search-form__quick-search">
+                                    <div class="search-items">
+                                        <h4 class="">Tìm kiếm nhiều nhất</h4>
+                                        <div class="search-item__hot">
+                                            <label for="" class="search-item__hot-child">
+                                                <a href="" class="search-item__hot-child-link">Đầm</a>
+                                            </label>
+                                            <label for="" class="search-item__hot-child">
+                                                <a href="" class="search-item__hot-child-link">trễ vai</a>
+                                            </label>
+                                            <label for="" class="search-item__hot-child">
+                                                <a href="" class="search-item__hot-child-link">Áo khoác</a>
+                                            </label>
+                                            <label for="" class="search-item__hot-child">
+                                                <a href="" class="search-item__hot-child-link">Quần</a>
+                                            </label>
+                                            <label for="" class="search-item__hot-child">
+                                                <a href="" class="search-item__hot-child-link">Áo sơ mi</a>
+                                            </label> 
+                                            <label for="" class="search-item__hot-child">
+                                                <a href="" class="search-item__hot-child-link">Vest</a>
+                                            </label>
+                                            <label for="" class="search-item__hot-child">
+                                                <a href="" class="search-item__hot-child-link">parka</a>
+                                            </label> 
+                                            <label for="" class="search-item__hot-child">
+                                                <a href="" class="search-item__hot-child-link">tweed</a>
+                                            </label> 
+                                            <label for="" class="search-item__hot-child">
+                                                <a href="" class="search-item__hot-child-link">croptop</a>
+                                            </label> 
+                                            <label for="" class="search-item__hot-child">
+                                                <a href="" class="search-item__hot-child-link">Chân váy</a>
+                                            </label> 
+                                            <label for="" class="search-item__hot-child">
+                                                <a href="" class="search-item__hot-child-link">Lông cừu</a>
+                                            </label>    
+                                        </div>
+                                    </div>
+                                    <div class="search-items">
+                                        <h4>Vừa tìm kiếm</h4>
+                                        <ul class="search-item__hot d-flex history_list">
+                                            <li class="search-item__hot-child">
+                                                <a href="" class="search-item__hot-child-link">parka</a>
+                                            </li>
+                                            <li class="search-item__hot-child">
+                                                <a href="" class="search-item__hot-child-link">narsu</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="item-nav-bot">
+                        <div class="item-nav">
+                            <i class="icon-tab-mb ti-user"></i>
+                            <a href="#" class="link-nav-bot">Đăng nhập</a>
+                        </div>
+                    </div>
+                    <div class="item-nav-bot">
+                        <div class="item-nav">
+                            <i class="icon-tab-mb ti-headphone"></i>
+                            <a href="#" class="link-nav-bot">Trợ giúp</a>
+                        </div>
+                    </div>
+                    <div class="item-nav-bot">
+                        <div class="item item-headphone item-nav" *ngIf="isLogin">
+                            <a href="javascript:void(0)" class="icon icon-account" (click)="toggleSubAction()">
+                              <i class="header__icon ti-user"></i>                                
+                            </a>
+                            <div class="sub-action">
+                              <div class="top-action">
+                                <a href="javascript:void(0)" class="icon">
+                                  <div class="tit-top-action">Tài khoản của tôi</div>
+                                </a>
+                              </div>
+                              <ul>
+                                <li><a href=""><i class="ti-id-badge" routerLink="/account/info"></i> Thông tin tài khoản</a></li>
+                                <li><a href=""><i class="ti-reload"></i> Quản lý đơn hàng</a></li>
+                                <li><a href=""><i class="ti-location-pin"></i> Sổ địa chỉ</a></li>
+                                <li><a href=""><i class="ti-heart"></i> Sản phẩm yêu thích</a></li>
+                                <li><a href=""><i class="ti-support"></i> Yêu cầu hỗ trợ</a></li>
+                                <li><a href="" (click)="logout()"><i class="ti-shift-left" ></i> Đăng xuất</a></li>
+                              </ul>
+                            </div>
+                          </div>
+                    </div>
                 </div>
             </div>
         </header>
