@@ -20,12 +20,10 @@
                             <a href="">Sản phẩm</a>
                             <ul class="sub-menu">
                                 <div class="list-submenu">
-                                    <div class="list-submenu__item">
-                                        <h3>Áo</h3>
-                                        <ul>
-                                            <li><a href="">Áo sơ mi</a></li>
-                                            <li><a href="">Áo kiểu</a></li>
-                                            <li><a href="">Áo len</a></li>
+                                    <div class="list-submenu__item" *ngFor="let type of types">
+                                        <h3>{{type.typeName}}</h3>
+                                        <ul *ngFor="let subtype of type.subtypes">
+                                            <li><a href="">{{subtype.subTypeName}}</a></li>
                                         </ul>
                                     </div>
                                 

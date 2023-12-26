@@ -28,6 +28,13 @@ import { IUserAddress } from '../interfaces/user';
 export class PaymentService {
   constructor(private _http: HttpClient) {}
   addressSubject = new BehaviorSubject<any>(null);
+  paymentSuccessSubject = new BehaviorSubject<any>(null);
+
+  private resultPaymentSource = new BehaviorSubject<any[]>([]);
+  resultPayment$ = this.resultPaymentSource.asObservable();
+  updateResultPayment(resultPayment: any[]) {
+    this.resultPaymentSource.next(resultPayment);
+  }
 
   saveOrder(data: any): Observable<any> {
     const headers = new HttpHeaders().set(
@@ -41,7 +48,7 @@ export class PaymentService {
 
     console.log(data, '444');
     return this._http
-      .post<any>(`${local}/cart/saveOrder`, JSON.stringify(data), requestOptions)
+      .post<any>(`${local}/order/saveOrder`, JSON.stringify(data), requestOptions)
       .pipe(
         map((res) => res),
         catchError(this.handleError)

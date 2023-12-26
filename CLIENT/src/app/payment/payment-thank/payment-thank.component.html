@@ -9,7 +9,7 @@
                 </svg>
             </div>
             <div class="thank-title">Cảm ơn bạn đã đặt hàng</div>
-            <div>Một email xác nhận sẽ được gửi tới #####</div>
+            <div>Một email xác nhận sẽ được gửi tới <a href="">{{emailUser}}</a> </div>
             <div>Xin vui lòng kiểm tra email của bạn.</div>
 
         </div>
@@ -18,11 +18,11 @@
         <div class="order-info">
             <div class="payment-footer-row">
                 <div class="total-product__title">Tổng sản phẩm</div>
-                <div class="total-product__value">000</div>
+                <div class="total-product__value">{{orderInfo.total_quantity}}</div>
             </div>
             <div class="payment-footer-row">
                 <div class="estimated-cost__title">Tạm tính</div>
-                <div class="total-after__discount">1.900.000</div>
+                <div class="total-after__discount">{{formatMoneyVietNam(orderInfo.total_payment)}}</div>
             </div>
             <div class="payment-footer-row">
                 <div class="product-gift__title">Giảm giá</div>
@@ -30,14 +30,14 @@
             </div>
             <div class="payment-footer-row">
                 <div class="product-ship__title">Phí giao hàng</div>
-                <div class="product-ship__value">0</div>
+                <div class="product-ship__value">{{orderInfo.ship_code}}</div>
             </div>
         </div>
 
         <hr class="">
         <div class="payment-footer-row">
             <div class="product-total__title">Tổng tiền</div>
-            <div class="product-total__value">0000000</div>
+            <div class="product-total__value">{{formatMoneyVietNam(orderInfo.total_payment-orderInfo.ship_code)}}</div>
         </div>
     </div>
     <div class="thank-foot">

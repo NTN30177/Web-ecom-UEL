@@ -39,7 +39,8 @@ export class OrderService {
   // }
 
   getOrderDetails(orderId: string): Observable<any> {
-    return this.http.get<any>(`${local}/order-details/${orderId}`);
+    console.log(orderId,'oiddd')
+    return this.http.get<any>(`${local}/order/order-details/${orderId}`);
   }
 
   handleError(error: HttpErrorResponse) {

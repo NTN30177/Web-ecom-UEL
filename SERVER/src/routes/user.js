@@ -23,5 +23,7 @@ router.put('/account/info/update/:userID', userController1.updateAccountInfo);
 router.post('/account/address/add-address', userController1.postUserAddress)
 router.get('/account/address/:userId', userController1.getAccountAddresses)
 router.get('/account/order/:userId', userController1.getAccountOrder)
+router.get('/types-populate-subtypes', userController.subTypeApi)
+
 
 module.exports = router;

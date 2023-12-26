@@ -24,7 +24,7 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'order-tracking',
+        path: 'order-tracking/:orderId',
         loadChildren: () =>
           import('./order-tracking/order-tracking.module').then(
             (m) => m.OrderTrackingModule

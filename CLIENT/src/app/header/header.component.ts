@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { IUser } from '../interfaces/user';
 import { CartComponent } from '../cart/cart.component';
 import { HomePageComponent } from '../home-page/home-page.component';
+import { HomeService } from '../services/home.service';
 // import{formatMoneyVietNam} from '../home-page/home-page.component';
 interface CartItem {
   id: number;
@@ -30,17 +31,19 @@ export class HeaderComponent implements OnInit{
   currentSubMenuIndex: number | null = null;
   cartNumberItem: number = 0;
   isMobileMenuOpen: boolean | undefined;
+  types: any;
   constructor(
     private elRef: ElementRef,
     private renderer: Renderer2,
     private snackBar: MatSnackBar, // Thêm MatSnackBar vào constructor
     private _authService: AuthService,
     private _cartComponent:CartComponent,
-    private _homeComponent:HomePageComponent
+    private _homeComponent:HomePageComponent,
+    private _homeService: HomeService
   ) {
-    // this._authService.cartSubject.subscribe((data) => {
-    //   this.cartNumberItem = data;
-    // });
+    this._authService.cartSubject.subscribe((data) => {
+      this.cartNumberItem = data;
+    });
     this._authService.isLoginSubject.subscribe((data) => {
       this.isLogin = data;
       console.log(this.isLogin, '...')
@@ -55,7 +58,15 @@ export class HeaderComponent implements OnInit{
     });
     this.cartItemFunc();
     this.checkLogin()
+    this._homeService.getTypesPopulateSubtypes().subscribe((data)=>{
+      console.log(data)
+      this.types = data.typePopulateSubType;
+    })
+    console.log(this.types,'types')
+
   }
+
+
   isLogin = false;
   async checkLogin() {
     const userData = localStorage.getItem('userData');
@@ -379,7 +390,8 @@ export class HeaderComponent implements OnInit{
       panelClass: ['custom-snackbar'], // Thêm class CSS tùy chỉnh
     });
   }
-
+  getTypesPopulateSubtypes(){
+  }
 
 
 }
