@@ -301,6 +301,21 @@ const isEmailVerified = async (req, res) => {
   }
 };
 
+const subTypeApi = async (req, res, next) => {
+  try {
+    const typePopulateSubType = await Type.find({})
+      .populate("subtypes")
+      .lean();
+
+    console.log(typePopulateSubType); // Log the actual data, not the promise object
+    res.json({ typePopulateSubType });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Lỗi máy chủ." });
+  }
+};
+
+
 module.exports = {
   x,
   saveAccount,
@@ -310,5 +325,5 @@ module.exports = {
   getForGotPW,
   resetPassword,
   getUserID,
-  isEmailVerified,
+  isEmailVerified,subTypeApi
 };
