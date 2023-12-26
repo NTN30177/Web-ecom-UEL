@@ -31,21 +31,7 @@ export class HomeService {
     );
   }
   
-  getTypesPopulateSubtypes(): Observable<any> {
-    const headers = new HttpHeaders().set(
-      'Content-Type',
-      'text/plain;charset=utf-8'
-    );
-    const requestOptions: Object = {
-      headers: headers,
-      responseType: 'json',
-    };
-    return this._http.get<any>(`${local}/user/types-populate-subtypes`,requestOptions).pipe(
-      map((res) => res ),
-      retry(3),
-      catchError(this.handleError)
-    );
-  }
+
   
   handleError(error: HttpErrorResponse) {
     return throwError(() => new Error(error.message));

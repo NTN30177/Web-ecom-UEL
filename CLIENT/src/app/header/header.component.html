@@ -197,7 +197,7 @@
                         <button class="search-form__btn">
                           <i class="eadher__icon ti-search icon"></i>
                         </button>
-                        <input type="text" id="search-form__input" placeholder="TÌM KIẾM SẢN PHẨM" (focus)="toggleSearchForm($event)">
+                        <input type="text" id="search-form__input" placeholder="TÌM KIẾM SẢN PHẨM" (focus)="toggleSearchForm($event)" #searchInput >
                         <div class="search-form__quick-search" (click)="handleQuickSearchClick($event)">
                             <div class="search-items search-history">
                                 <h4 class="">Vừa tìm kiếm</h4>
@@ -241,15 +241,15 @@
                             </div>
                             <div class="search-items search-suggest">
                                 <h4>Sản phẩm gợi ý</h4>
-                                <div class="search-item__hot history_list">                                    
+                                <div class="search-item__hot history_list" *ngFor="let product of dataLiveSearch">                                    
                                     <a class="product-suggest" href="">
                                             <div class="sg-item-img">
-                                                <img src="https://pubcdn.ivymoda.com/files/product/thumab/400/2023/08/16/193646644a4ecec344b5fd32c438f2d1.JPG" alt="">
+                                                <img src="http://localhost:3000/productImages/{{product.variants[0].images[0]}}" alt="">
                                             </div>
                                             <div class="sg-item-info">
-                                                <title>Đầm chữ A dạo phố</title>
+                                                <title>{{product.title}}</title>
                                                 <div class="item-info">
-                                                    <div class="sg-item-price">2.390.000₫</div>
+                                                    <div class="sg-item-price">{{formatMoneyVietNam(product.price)}}</div>
                                                     <div class="box-p">
                                                         <p class="price-old">2.790.000₫</p>
                                                         <span class="percent">-14%</span>
@@ -258,51 +258,7 @@
 
                                             </div>
                                     </a>
-                                    <a class="product-suggest">
-                                            <div class="sg-item-img">
-                                                <img src="https://pubcdn.ivymoda.com/files/product/thumab/400/2022/08/26/936d51ecf81bbb23ea0ce27ec599d931.jpg" alt="">
-                                            </div>
-                                            <div class="sg-item-info">
-                                                <title>Đầm thiết kế Balloon</title>
-                                                <div class="item-info">
-                                                    <div class="sg-item-price">537.000₫</div>
-                                                    <div class="box-p">
-                                                        <p class="price-old">1.790.000đ</p>
-                                                        <span class="percent">-70%</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                    </a>
-                                    <a class="product-suggest">
-                                            <div class="sg-item-img">
-                                                <img src="https://pubcdn.ivymoda.com/files/product/thumab/400/2023/07/06/9949c6f5d084cae37f3ce1d667d98272.jpg" alt="">
-                                            </div>
-                                            <div class="sg-item-info">
-                                                <title>Chân Váy Dài Phối Túi Xẻ Tà</title>
-                                                <div class="item-info">
-                                                    <div class="sg-item-price">937.000₫</div>
-                                                    <div class="box-p">
-                                                        <p class="price-old">2.190.000đ</p>
-                                                        <span class="percent">-70%</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                    </a>
-                                    <li class="product-suggest">
-                                            <div class="sg-item-img">
-                                                <img src="https://pubcdn.ivymoda.com/files/product/thumab/400/2023/04/03/09c34ccc8754f937233800f2d143a5aa.jpg" alt="">
-                                            </div>
-                                            <div class="sg-item-info">
-                                                <title>Chân Váy Xếp Ly Dáng Suông</title>
-                                                <div class="item-info">
-                                                    <div class="sg-item-price">857.000₫</div>
-                                                    <div class="box-p">
-                                                        <p class="price-old">1.790.000đ</p>
-                                                        <span class="percent">-30%</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                    </li>
+                                   
                                 </div>
                             </div>
                         </div>
