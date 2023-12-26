@@ -5,6 +5,7 @@ import {
   Renderer2,
   ViewEncapsulation,
   ViewChild,
+
 } from '@angular/core';
 declare var $: any;
 import { OwlOptions } from 'ngx-owl-carousel-o';
@@ -96,6 +97,8 @@ export class HomePageComponent implements AfterViewInit {
           this.renderer.removeClass(otherSizeTable, 'open');
         }
       }
+
+    // 
 
     // 
     const sizeTableId = `sizeTable${productIndex}`;
@@ -417,3 +420,6 @@ selectedColorIndex: number[] = []; // Sử dụng một mảng để lưu trữ 
         this.selectedColorIndex[productIndex] = colorI;
       }
 }
+
+
+
