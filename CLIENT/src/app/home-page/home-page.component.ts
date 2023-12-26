@@ -4,6 +4,7 @@ import {
   ElementRef,
   Renderer2,
   ViewEncapsulation,
+  ViewChild,
 } from '@angular/core';
 declare var $: any;
 import { OwlOptions } from 'ngx-owl-carousel-o';
@@ -26,7 +27,6 @@ export class HomePageComponent implements AfterViewInit {
   formatMoneyVietNam=formatMoneyVietNam
   productStates: boolean[] = [];
   i: number = 0;
-  showAddToCartPopup: boolean = false; // Thêm biến để kiểm soát hiển thị popup
 
   // products: any;
   productsHaveModified: any;
@@ -86,24 +86,20 @@ export class HomePageComponent implements AfterViewInit {
   }
 
   // Size table homepage
-  sizeTableArray: any = [
-    { id: 1, sizes: ['S', 'M', 'L', 'XL'] },
-    { id: 2, sizes: ['S', 'M', 'L', 'XL', 'XXL'] },
-    // Thêm các size khác nếu cần
-  ];
-
-  getSizeTable(productIndex: number): any {
-    return (
-      this.sizeTableArray.find(
-        (item: { id: number }) => item.id === productIndex + 1
-      ) || { sizes: [] }
-    );
-  }
-
+  
   toggleSizeTable(productIndex: number): void {
+    // đóng mở các sizetable khác
+    for (let i = 0; i < this.productStates.length; i++) {
+        const otherSizeTableId = `sizeTable${i}`;
+        const otherSizeTable = this.el.nativeElement.querySelector(`#${otherSizeTableId}`);
+        if (otherSizeTable) {
+          this.renderer.removeClass(otherSizeTable, 'open');
+        }
+      }
+
+    // 
     const sizeTableId = `sizeTable${productIndex}`;
     const sizeTable = this.el.nativeElement.querySelector(`#${sizeTableId}`);
-
     if (
       sizeTable &&
       this.productStates &&
@@ -212,6 +208,8 @@ ngOnInit(): void {
       // Khởi tạo mảng productStates với giá trị false cho mỗi sản phẩm
       this.productStates = Array(this.bannersArray.length).fill(false);
     });
+    // Khởi tạo mảng selectedColorIndex cho tất cả sản phẩm
+    this.initializeSelectedColorIndex();
 }
 
 
@@ -315,13 +313,7 @@ async addToCart(
     }
     this.cartNumberFunc();
   }
-  // Hiển thị popup
-  this.showAddToCartPopup = true;
-
-  // Tự động ẩn popup sau 2 giây
-  setTimeout(() => {
-    this.showAddToCartPopup = false;
-  }, 2000);
+  
 }
 
 cartNumber: number = 0;
@@ -334,9 +326,7 @@ cartNumberFunc() {
   }
 }
 
-closePopup() {
-  this.showAddToCartPopup = false;
-}
+
 apiProductHomePage() {
   console.log('1235');
   this._homeService.getProductHomePage().subscribe({
@@ -398,4 +388,32 @@ createArrSupportChangeImgFollowChangeColor() {
     };
   });
 }
+
+// Đóng mở popup thêm thành công sản phẩm vào giỏ hàng
+@ViewChild('popupContainer') popupContainer: ElementRef | undefined;
+addActiveCartPopupClass() {
+    if (this.popupContainer) {
+      const popupContainerElement = this.popupContainer.nativeElement;
+      if (popupContainerElement) {
+        this.renderer.addClass(popupContainerElement, 'active-cartpopup');
+  
+        // Sau 2 giây, xoá class "active-cartpopup"
+        setTimeout(() => {
+          this.renderer.removeClass(popupContainerElement, 'active-cartpopup');
+        }, 2000);
+      }
+    }
+  }
+// thêm xo color-active
+selectedColorIndex: number[] = []; // Sử dụng một mảng để lưu trữ index cho từng sản phẩm
+
+    
+    // Hàm để cập nhật index của màu sắc được chọn cho từng sản phẩm
+    initializeSelectedColorIndex(): void {
+        this.selectedColorIndex = new Array(this.productsHaveModified.length).fill(0);
+      }
+      
+      updateSelectedColorIndex(productIndex: number, colorI: number): void {
+        this.selectedColorIndex[productIndex] = colorI;
+      }
 }

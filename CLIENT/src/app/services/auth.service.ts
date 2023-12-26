@@ -17,10 +17,16 @@ import {
 })
 export class AuthService {
   private isLoginObservable: Observable<boolean>;
+  private userEmailSource = new BehaviorSubject<any[]>([]);
+  userEmail$ = this.userEmailSource.asObservable();
 
   constructor(private _http: HttpClient) {
     this.isLoginObservable = this.isLoginSubject.asObservable();
   }
+  cartSubject = new Subject<any>();
+  idUserSubject = new BehaviorSubject<any>(null);
+  isLoginSubject = new BehaviorSubject<any>(null);
+  emailUserSubject = new BehaviorSubject<any>(null);
 
   getIsLoginObservable(): Observable<boolean> {
     return this.isLoginObservable;
@@ -117,9 +123,7 @@ export class AuthService {
         catchError(this.handleError)
       );
   }
-  cartSubject = new Subject<any>();
-idUserSubject = new BehaviorSubject<any>(null);
-isLoginSubject = new BehaviorSubject<any>(null);
+
 
 
   // isLoginSubject = new Subject<any>();

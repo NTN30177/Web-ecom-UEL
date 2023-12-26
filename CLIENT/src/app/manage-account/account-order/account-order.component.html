@@ -46,7 +46,7 @@
         <td>{{ order.status }}</td>
         <td><strong>{{ order.totalPrice }} ({{ order.totalQuantity }} sản phẩm)</strong></td>
         <td><button (click)="openFeedbackOrderDialog()" class="btn-action-order">Đánh giá</button></td>
-        <td style="color: #2DA5F3;"><a [routerLink]="'order-tracking' + order._id" style="color: #2DA5F3">Xem chi tiết</a><i
+        <td style="color: #2DA5F3;"><a [routerLink]="'/account/order-tracking/' + order._id" style="color: #2DA5F3">Xem chi tiết</a><i
             class="fas fa-regular fa-arrow-right-long ms-3"></i></td>
       </tr>
     </tbody>

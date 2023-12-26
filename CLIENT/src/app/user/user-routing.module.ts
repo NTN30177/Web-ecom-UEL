@@ -55,6 +55,8 @@ const routes: Routes = [
       },
       {
         path: 'forgetpw', component: ForgetPwComponent,
+      },{
+        path: 'order-tracking/:orderId', component: OrderTrackingComponent,
       },
       {
         path: '',

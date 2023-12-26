@@ -39,13 +39,14 @@
                         </div>
                         <div class="info-product">
                           <div class="list-color">
-                            <ul>
-                              <li *ngFor="let v of product.variants; index as colorI" [ngClass]="{'color': true}"
-                        >
-                        <a href="javascript:void(0)" class="color-picked" data-id="{{ v._id }}" (click)="changeColor(product, v.color._id )">
-                          <img src="http://localhost:3000/colorImages/{{v.color.imageColor}}" alt="">
-                        </a>
-                      </li>
+                            <ul class="colors">
+                              <li *ngFor="let v of product.variants; index as colorI" 
+                                  [ngClass]="{'color': true, 'color-active': colorI === selectedColorIndex[productIndex]}">
+                                <a href="javascript:void(0)" class="color-picked" data-id="{{ v._id }}" 
+                                   (click)="changeColor(product, v.color._id); updateSelectedColorIndex(productIndex, colorI)">
+                                  <img src="http://localhost:3000/colorImages/{{v.color.imageColor}}" alt="">
+                                </a>
+                              </li>
                             </ul>
         
                             <div class="favorite">
@@ -72,8 +73,8 @@
                         </div>
                         <div id="sizeTable{{productIndex}}" class="sizeTable js-list-size">
                           <ul>
-                            <li *ngFor="let size of getSizeTable(productIndex).sizes">
-                              <button class="btn bt-large" (click)="addToCart(product.imgHomePage[0].colorID, product, size,1)">{{ size }}</button>
+                            <li *ngFor="let vc of product.variants[0].variantColor" class="" (click)="popupContainer && addActiveCartPopupClass()">
+                              <button class="btn bt-large" (click)="addToCart(product.imgHomePage[0].colorID, product._id, vc.size,1)">{{ vc.size }}</button>
                             </li>
                           </ul>
                         </div>
@@ -86,11 +87,11 @@
           </div>
         </div>
       </div>
-            <div class="popup-container" *ngIf="showAddToCartPopup">
+      <div class="popup-container" #popupContainer>
         <div class="popup">
           <div class="hed-pop-not">
             <div class="tit___hed-pop-not">Đã thêm vào giỏ hàng!</div>
-            <i class="close-icon ti-close" (click)="closePopup()"></i>
+            <i class="close-icon ti-close" ></i>
           </div>
           <div class="notify_wrapper">
             <div class="notify__content">

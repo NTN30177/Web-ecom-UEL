@@ -95,6 +95,7 @@ const getAccountAddresses = async (req, res) => {
 const getAccountOrder = async (req, res) => {
   try {
     const userId = req.params.userId;
+    console.log(userId, 'uiiiiiid')
     const user = await User.findById(userId).exec();
 
     if (!user) {
@@ -152,7 +153,6 @@ const postUserAddress = async (req, res) => {
     console.error('Error adding address:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
-
 }
 
 module.exports = {

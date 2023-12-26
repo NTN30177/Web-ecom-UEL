@@ -38,7 +38,7 @@ const saveAccount = async (req, res, next) => {
     });
     const address = new UserAddress({
       is_default: true,
-      name: req.body.cus_lastname,
+      name: req.body.cus_firstname + req.body.cus_lastname,
       phone: req.body.cus_phonenumber,
       specific_address: req.body.cus_address_id,
       ward: req.body.cus_ward_id,
@@ -69,6 +69,7 @@ const saveAccount = async (req, res, next) => {
         link: "1",
       });
     } else {
+      
       res.send({
         message: "Your registeration has been failed.",
       });

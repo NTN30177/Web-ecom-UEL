@@ -48,13 +48,13 @@
             <div class="media">
                 <div class="media-body">
                     <h4 class="title">THÔNG TIN KHÁCH HÀNG</h4>
-                    <h4 class="text-1">Họ tên: Nguyễn Trọng Nghĩa</h4>
-                    <h4 class="text-1">Điện thoại: 0765907752</h4>
-                    <h4 class="text-1">Email: nghiant21406&#64;st.uel.edu.vn</h4>
-                    <h4 class="text-1">Địa chỉ: Ký túc xá khu B Đường Mạc Đĩnh Chi, Khu phố Tân Hòa</h4>
-                    <h4 class="text-1">Phường/xã: Phường Đông Hòa</h4>
-                    <h4 class="text-1">Quận/Huyện: Thành phố Dĩ An</h4>
-                    <h4 class="text-1">Thành phố/Tỉnh: Bình Dương</h4>
+                    <h4 class="text-1">Họ tên: {{orderDetails.dataOrderDetail[0].userId.last_name}}</h4>
+                    <h4 class="text-1">Điện thoại: {{orderDetails.dataOrderDetail[0].userId.mobile}}</h4>
+                    <h4 class="text-1">Email: {{orderDetails.dataOrderDetail[0].userId.email}}</h4>
+                    <h4 class="text-1">Địa chỉ: {{orderDetails.dataAddressDetail.wardDetailAccount}}</h4>
+                    <h4 class="text-1">Phường/xã: {{orderDetails.dataAddressDetail.wardAccount}}</h4>
+                    <h4 class="text-1">Quận/Huyện: {{orderDetails.dataAddressDetail.districtAccount}}</h4>
+                    <h4 class="text-1">Thành phố/Tỉnh: {{orderDetails.dataAddressDetail.provinceAccount}}</h4>
                 </div>
             </div>
         </div>
@@ -62,13 +62,13 @@
             <div class="media">
                 <div class="media-body">
                     <h4 class="title">THÔNG TIN GIAO NHẬN</h4>
-                    <h4 class="text-1">Họ tên: Nguyễn Trọng Nghĩa</h4>
-                    <h4 class="text-1">Điện thoại: 0765907752</h4>
+                    <h4 class="text-1">Họ tên: {{orderDetails.dataOrderDetail[0].address.name}}</h4>
+                    <h4 class="text-1">Điện thoại: {{orderDetails.dataOrderDetail[0].address.phone}}</h4>
                     <h4 class="text-1">Email: nghiant21406&#64;st.uel.edu.vn</h4>
-                    <h4 class="text-1">Địa chỉ: Ký túc xá khu B Đường Mạc Đĩnh Chi, Khu phố Tân Hòa</h4>
-                    <h4 class="text-1">Phường/xã: Phường Đông Hòa</h4>
-                    <h4 class="text-1">Quận/Huyện: Thành phố Dĩ An</h4>
-                    <h4 class="text-1">Thành phố/Tỉnh: Bình Dương</h4>
+                    <h4 class="text-1">Địa chỉ:{{orderDetails.dataAddressDetail.wardDetail}}</h4>
+                    <h4 class="text-1">Phường/xã: {{orderDetails.dataAddressDetail.ward}}</h4>
+                    <h4 class="text-1">Quận/Huyện: {{orderDetails.dataAddressDetail.district}}</h4>
+                    <h4 class="text-1">Thành phố/Tỉnh:{{orderDetails.dataAddressDetail.province}}</h4>
                 </div>
             </div>
         </div>
@@ -76,10 +76,11 @@
             <ul class="list-group">
                 <li class="list-group-item title">DANH SÁCH SẢN PHẨM</li>
                 <li class="list-group-item divider"></li>
-                <li class="list-group-item items">
-                    <div class="media">
+                <li class="list-group-item items" *ngFor="let product of orderDetails.dataOrderDetail[0].orderItems">
+                        <div class="cart-list__variant" *ngFor="let v of product.variants">
+                    <div class="media" *ngFor="let vc of v.variantColor">
                         <div class="media-left">
-                            <a href="#"><img class="media-object" src="https://pubcdn.ivymoda.com/files/product/thumab/1400/2023/10/23/1d6bd56cd138f6d93caac04f0cf27398.jpg" data-holder-rendered="true"></a>
+                            <a href="#"><img class="media-object" src="http://localhost:3000/productImages/{{ v.images[0] }}" data-holder-rendered="true"></a>
                         </div>
                         <div class="media-body">
                             <div class="voucher-icon">
@@ -88,15 +89,17 @@
                                 </span>
                                 Mua 1 tặng 1
                             </div>
-                            <h4 class="media-heading" style="margin-top: 20px">Piece Suits - Set áo vest dáng oversize</h4>
-                            <h5><span class="size">Ghi khói / M </span><span class="quantity">Số lượng: </span><span class="value">1</span></h5>
+                            <h4 class="media-heading" style="margin-top: 20px">{{ product.product.title }}</h4>
+                            <h5><span class="size">{{v.color.nameColor}}/ {{vc.size}} </span><span class="quantity">Số lượng: </span><span class="value"> {{vc.quantity}}</span></h5>
                             <h5>
-                                <span class="price">484.000 đ</span>
-                                <span class="del">598.000 đ</span>
+                                <span class="price">{{formatMoneyVietNam(product.product.price)}}</span>
+                                <span class="del">{{formatMoneyVietNam(product.product.price)}}</span>
                             </h5>
                         </div>
                     </div>
+                    </div>
                     <div class="divider"></div>
+
                     <div class="media">
                         <div class="media-left">
                             <a href="#"><img class="media-object" src="https://pubcdn.ivymoda.com/files/product/thumab/1400/2023/10/23/1d6bd56cd138f6d93caac04f0cf27398.jpg" data-holder-rendered="true"></a>
