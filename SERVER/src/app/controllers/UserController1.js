@@ -23,13 +23,14 @@ const updateAccountInfo = async (req, res) => {
   console.log(userID)
   const { first_name, last_name, phone, email, gender, date_of_birth } = req.body;
   try {
-    const updateResult = await User.updateOne({ _id: userID }, { $set: { first_name, last_name, phone, email, gender, date_of_birth } });
+    // const updateResult = await User.updateOne({ _id: userID }, { $set: { first_name, last_name, phone, email, gender, date_of_birth } });
+    const updateResult = await User.findByIdAndUpdate(userID, { $set: { first_name, last_name, phone, email, gender, date_of_birth } }, { new: true });
 
-    if (updateResult.nModified > 0) {
+    // if (updateResult.nModified > 0) {
       res.status(200).json({ message: 'Cập nhật thành công.' });
-    } else {
-      res.status(404).json({ message: 'Không tìm thấy tài nguyên để cập nhật.' });
-    }
+    // } else {
+    //   res.status(404).json({ message: 'Không tìm thấy tài nguyên để cập nhật.' });
+    // }
   } catch (error) {
     res.status(500).json({ message: 'Lỗi server.' });
   }

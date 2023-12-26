@@ -15,6 +15,9 @@ const FeedbackSchema = new mongoose.Schema({
     content:{
       type:string
     }
+  },
+  {
+    timestamps: true,
   });
   
 
