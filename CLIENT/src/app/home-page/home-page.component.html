@@ -41,12 +41,15 @@
                           <div class="list-color">
                             <ul class="colors">
                               <li *ngFor="let v of product.variants; index as colorI" 
-                                  [ngClass]="{'color': true, 'color-active': colorI === selectedColorIndex[productIndex]}">
-                                <a href="javascript:void(0)" class="color-picked" data-id="{{ v._id }}" 
-                                   (click)="changeColor(product, v.color._id); updateSelectedColorIndex(productIndex, colorI)">
-                                  <img src="http://localhost:3000/colorImages/{{v.color.imageColor}}" alt="">
-                                </a>
-                              </li>
+    [ngClass]="{'color': true, 'color-active': colorI === selectedColorIndex[productIndex]}">
+    <a href="javascript:void(0)" class="color-picked" data-id="{{ v._id }}" 
+        (click)="changeColor(product, v.color._id); updateSelectedColorIndex(productIndex, colorI)"
+        [ngClass]="{'active-color': colorI === 0}">
+        <img src="http://localhost:3000/colorImages/{{v.color.imageColor}}" alt="">
+    </a>
+</li>
+
+
                             </ul>
         
                             <div class="favorite">
@@ -73,9 +76,17 @@
                         </div>
                         <div id="sizeTable{{productIndex}}" class="sizeTable js-list-size">
                           <ul>
-                            <li *ngFor="let vc of product.variants[0].variantColor" class="" (click)="popupContainer && addActiveCartPopupClass()">
-                              <button class="btn bt-large" (click)="addToCart(product.imgHomePage[0].colorID, product._id, vc.size,1)">{{ vc.size }}</button>
-                            </li>
+                            <li *ngFor="let vc of product.imgHomePage[0].variantColor" 
+    [class.disabled]="vc.quantity === 0"
+    (click)="vc.quantity !== 0 && popupContainer && addActiveCartPopupClass()">
+    <button class="btn bt-large" 
+            [disabled]="vc.quantity === 0"
+            (click)="vc.quantity !== 0 && addToCart(product.imgHomePage[0].colorID, product._id, vc.size, 1)">
+        <ng-container *ngIf="vc.quantity !== 0; else noQuantity">{{ vc.size }}</ng-container>
+        <ng-template #noQuantity><del>{{ vc.size }}</del></ng-template>
+    </button>
+</li>
+
                           </ul>
                         </div>
                       </div>
