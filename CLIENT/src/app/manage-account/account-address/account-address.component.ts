@@ -5,6 +5,7 @@ import { AccountAddressPopupComponent } from '../account-address-popup/account-a
 import { IUserAddress } from '../../interfaces/user';
 import { AccountAddressService } from '../../services/account-address.service';
 import { AccountInfoService } from '../../services/account-info.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-account-address',
@@ -13,15 +14,15 @@ import { AccountInfoService } from '../../services/account-info.service';
 })
 export class AccountAddressComponent implements OnInit {
   // @Input() userID: any;
-  userID : any;
+  userID: any;
   addressList: IUserAddress[] = [];
 
 
   constructor(
     private dialogRef: MatDialog,
     private addressService: AccountAddressService,
-    private accountInfoService: AccountInfoService,
-    ) {
+    private _authService: AuthService
+  ) {
     // this.accountInfoService.userIDSubject.subscribe((data) => {
     //   this.userID = data;
     // });
@@ -29,12 +30,10 @@ export class AccountAddressComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.accountInfoService.userId$.subscribe(userId => {
-      this.userID = userId;
-      console.log('Address component: User ID:', this.userID);
+    this._authService.idUserSubject.subscribe((data) => {
+      this.userID = data;
+      console.log(this.userID, 'user id:::')
     });
-
-
     this.addressService.getUserAddressList(this.userID).subscribe(
       (data) => {
         this.addressList = data;
@@ -60,7 +59,7 @@ export class AccountAddressComponent implements OnInit {
     }
   }
 
-  setDefaultAddress(){
+  setDefaultAddress() {
 
   }
 }

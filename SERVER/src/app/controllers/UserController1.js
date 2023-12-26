@@ -1,5 +1,6 @@
 const { Address } = require("../models/address");
 const { User, UserAddress } = require("../models/user");
+const { Order } = require("../models/order");
 const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
 const randomstring = require("randomstring");
@@ -27,7 +28,7 @@ const updateAccountInfo = async (req, res) => {
     const updateResult = await User.findByIdAndUpdate(userID, { $set: { first_name, last_name, phone, email, gender, date_of_birth } }, { new: true });
 
     // if (updateResult.nModified > 0) {
-      res.status(200).json({ message: 'Cập nhật thành công.' });
+    res.status(200).json({ message: 'Cập nhật thành công.' });
     // } else {
     //   res.status(404).json({ message: 'Không tìm thấy tài nguyên để cập nhật.' });
     // }
@@ -40,7 +41,7 @@ const { ObjectId } = require('mongoose').Types;
 
 const getAccountAddresses = async (req, res) => {
   try {
-    const {userId} = req.params;
+    const { userId } = req.params;
     // const userId = '65887ee5fe959ab7b5696168'
     console.log('Received userId:', userId);
 
@@ -91,9 +92,22 @@ const getAccountAddresses = async (req, res) => {
   }
 };
 
+const getAccountOrder = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const user = await User.findById(userId).exec();
 
-
-
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    const orders = await Order.find({ _id: { $in: user.orderList } }).exec();
+    console.log('user orders:', orders);
+    res.json(orders);
+  } catch (error) {
+    console.error('Error fetching user orders:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
 
 
 const postUserAddress = async (req, res) => {
@@ -146,4 +160,6 @@ module.exports = {
   updateAccountInfo,
   getAccountAddresses,
   postUserAddress,
+  getAccountOrder,
+
 };

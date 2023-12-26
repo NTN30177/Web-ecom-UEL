@@ -51,6 +51,13 @@ const routes: Routes = [
             (m) => m.AccountFavoriteRoutingModule
           ),
       },
+      {
+        path: 'order-tracking:orderId',
+        loadChildren: () =>
+          import('./order-tracking/order-tracking.module').then(
+            (m) => m.OrderTrackingModule
+          ),
+      },
       { path: '', redirectTo: 'info', pathMatch: 'full' },
     ],
   },

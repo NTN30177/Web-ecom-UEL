@@ -27,13 +27,13 @@ export class AccountAddressPopupComponent implements OnInit {
     public dialogRef: MatDialogRef<AccountAddressPopupComponent>,
     private _authService: AuthService,
     private addressService: AccountAddressService,
-    private accountInfoService: AccountInfoService,) { }
+ ) { }
 
   ngOnInit(): void {
 
-    this.accountInfoService.userId$.subscribe(userId => {
-      this.userID = userId;
-      console.log('Address component: User ID:', this.userID);
+    this._authService.idUserSubject.subscribe((data) => {
+      this.userID = data;
+      console.log(this.userID, 'user id:::')
     });
 
     this.initForm();
