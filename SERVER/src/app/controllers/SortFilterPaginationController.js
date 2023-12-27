@@ -12,9 +12,6 @@ const getCategoryProductsPagination = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const pageSize = 10; // Số lượng sản phẩm trên mỗi trang
   const keySearch = req.query.keySearch;
-  // console.log(req.session.user_id);
-  // console.log(req.query.minPrice);
-  console.log(keySearch, "ks");
   try {
     let products;
     if (slug !== "search") {
@@ -24,11 +21,17 @@ const getCategoryProductsPagination = async (req, res) => {
         path: "variants.color",
         model: "Color",
         select: "nameColor",
-      }); 
-      if (keySearch && req.query.user_id) {
-        const userData = await User.findById(req.query.user_id);
-        userData.historySearch.unshift(keySearch);
-        await userData.save();
+      });
+
+      if (keySearch && req.query.userId) {
+        const userData = await User.findById(req.query.userId);
+        const isKeyExist = userData.historySearch.some(
+          (existingKey) => existingKey === keySearch
+        );
+        if (!isKeyExist) {
+          userData.historySearch.unshift(keySearch);
+          await userData.save();
+        }
       } else {
         console.log("err");
       }
@@ -49,7 +52,7 @@ const getCategoryProductsPagination = async (req, res) => {
       productsByCategory: paginatedProducts,
       slug,
       totalPage,
-      totalProducts
+      totalProducts,
     });
   } catch (err) {
     console.error(err);
@@ -100,12 +103,13 @@ const filterProducts = (
       (product) =>
         product.title.toLowerCase().includes(keySearch.toLowerCase()) ||
         product.variants.some((variant) =>
-          variant.color.nameColor.toLowerCase().includes(keySearch.toLowerCase())
+          variant.color.nameColor
+            .toLowerCase()
+            .includes(keySearch.toLowerCase())
         )
     );
   }
 
-  // Assuming "color" and "size" are arrays containing colors and sizes respectively
   if (color && color.length > 0) {
     filteredProducts = filteredProducts.filter((product) =>
       product.variants.some(
@@ -139,7 +143,6 @@ const filterProducts = (
   }
 
   totalProducts = filteredProducts.length;
-  console.log("totalproduct:" + totalProducts);
   return { filteredProducts, totalProducts };
 };
 
@@ -168,7 +171,7 @@ const paginateProducts = (products, page, pageSize) => {
   const endIndex = startIndex + pageSize;
   const totalPage = Math.ceil(products.length / pageSize);
   const paginatedProducts = products.slice(startIndex, endIndex);
-  console.log('totalpage',totalPage);
+  console.log("totalpage", totalPage);
   return { paginatedProducts, totalPage };
 };
 

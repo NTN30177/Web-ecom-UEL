@@ -13,9 +13,10 @@ import { IUser } from '../interfaces/user';
 import { CartComponent } from '../cart/cart.component';
 import { HomePageComponent } from '../home-page/home-page.component';
 import { HomeService } from '../services/home.service';
-import { debounceTime, fromEvent, map } from 'rxjs';
+import { Subscription, debounceTime, fromEvent, map } from 'rxjs';
 import { HeaderService } from '../services/header.service';
 import { formatMoneyVietNam, convertStringToNumbers } from '../utils/utils';
+import { AccountInfoService } from '../services/account-info.service';
 
 interface CartItem {
   id: number;
@@ -39,32 +40,25 @@ export class HeaderComponent implements OnInit {
   submenuOpen: boolean = false;
   isSubActionVisible: boolean = false;
   quantityInputValue: number = 1;
-  userId=1;  // Sử dụng string hoặc null tùy thuộc vào loại dữ liệu của user ID
-
-
+  userId: any = 1;
   cartNumberItem: number = 0;
   isMobileMenuOpen: boolean | undefined;
   types: any;
-  @ViewChild('searchInput') searchInput: ElementRef | undefined;
   dataLiveSearch: any;
   currentSubMenuIndex: null | undefined;
+  @ViewChild('searchInput') searchInput: ElementRef | undefined;
+  accountInfo: any;
   constructor(
     private elRef: ElementRef,
     private renderer: Renderer2,
-    private snackBar: MatSnackBar, // Thêm MatSnackBar vào constructor
+    private snackBar: MatSnackBar,
     private _authService: AuthService,
     private _cartComponent: CartComponent,
     private _homeComponent: HomePageComponent,
-    private _homeService: HomeService,
-    private _headerService: HeaderService
+    private _headerService: HeaderService,
+    private _accountInfoService: AccountInfoService
   ) {
-    this._authService.cartSubject.subscribe((data) => {
-      this.cartNumberItem = data;
-    });
-    this._authService.isLoginSubject.subscribe((data) => {
-      this.isLogin = data;
-      console.log(this.isLogin, '...');
-    });
+
   }
   ngAfterViewInit() {
     fromEvent(this.searchInput?.nativeElement, 'input')
@@ -73,28 +67,57 @@ export class HeaderComponent implements OnInit {
         map((event: any) => event.target.value)
       )
       .subscribe((inputValue: string) => {
-        this._headerService.liveSearch(inputValue).subscribe((data)=>{
-          this.dataLiveSearch = data.productsByCategory
-          console.log(data.productsByCategory)
-          console.log(this.dataLiveSearch)
-        })
+        this._headerService
+          .liveSearch(inputValue, this.userId)
+          .subscribe((data) => {
+            this.dataLiveSearch = data.productsByCategory;
+            this.getKeySearch();
+            console.log(data.productsByCategory);
+            console.log(this.dataLiveSearch);
+          });
         console.log('Giá trị nhập liệu sau mỗi 1s:', inputValue);
       });
   }
-  ngOnInit(): void {
+  ngOnInit(): void  {
+    this.getDataFromService()
+    this.getIsLogin();
+    this.cartItemFunc();
+    this.checkLogin();
+    this.getKeySearch();
+    this.getCategory();
+  }
+  getKeySearch() {
+    this._accountInfoService
+      .getUserAccountInfo(this.userId)
+      .subscribe((data) => {
+        this.accountInfo = data;
+        console.log(this.accountInfo.historySearch)
+        console.log(data, 'datausser');
+      });
+  }
+  getIsLogin() {
     this._authService.getIsLoginObservable().subscribe((data) => {
       this.isLogin = data;
       if (this.isLogin) {
         this.checkLogin();
       }
     });
-    this.cartItemFunc();
-    this.checkLogin();
+  }
+  getCategory() {
     this._headerService.getTypesPopulateSubtypes().subscribe((data) => {
-      console.log(data);
       this.types = data.typePopulateSubType;
     });
-    console.log(this.types, 'types');
+  }
+  getDataFromService(){
+    this._authService.cartSubject.subscribe((data) => {
+      this.cartNumberItem = data;
+    });
+    this._authService.isLoginSubject.subscribe((data) => {
+      this.isLogin = data;
+    });
+    this._authService.idUserSubject.subscribe((data) => {
+      this.userId = data;
+    });
   }
 
   isLogin = false;
@@ -102,20 +125,14 @@ export class HeaderComponent implements OnInit {
     const userData = localStorage.getItem('userData');
     if (userData) {
       const parseUserData: IUser = JSON.parse(userData);
-      // Assuming idUserSubject is an Observable<number> or similar
       this._authService.idUserSubject.next(parseUserData._id);
-      console.log(parseUserData._id, 'UID');
       const cartList = await this._cartComponent.apiCartProduct(
         parseUserData._id
       );
-      console.log(cartList, 'cl');
       let total_quantity = this._homeComponent.totalCartItem(cartList);
       this.cartNumberItem = total_quantity;
-      console.log(total_quantity, 'ttq');
       this.isLogin = true;
-      console.log(this.isLogin, '...');
     } else {
-      // Ensure that idUserSubject is set to a default value or handle the case when there's no user data
       this._authService.idUserSubject.next(null);
       this.isLogin = false;
     }
@@ -202,35 +219,54 @@ export class HeaderComponent implements OnInit {
     event.stopPropagation();
 
     // Đóng tất cả các submenu khác
-    const allSubChildElements = this.elRef.nativeElement.querySelectorAll('.child-sub');
-    allSubChildElements.forEach((element: {
-      previousElementSibling: any; style: { display: string; }; classList: { remove: (arg0: string) => void; add: (arg0: string) => void; }; 
-}, i: number) => {
-      element.style.display = 'none';
-      element.classList.remove('open');
-  
-      // Đóng tất cả các mũi tên trong sub-menu-mb khác
-      const allArrows = this.elRef.nativeElement.querySelectorAll('.sub-menu-mb .arrows');
-      allArrows.forEach((arrowElement: { classList: { remove: (arg0: string) => void; add: (arg0: string) => void; }; }) => {
-        arrowElement.classList.remove('open');
-      });
-  
-      // Nếu index của submenu trùng với index của thẻ được click, thì mở nó
-      if (i === index) {
-        const arrowsElement = element.previousElementSibling.querySelector('.arrows');
-        arrowsElement.classList.add('open');
-        element.style.display = 'block';
-        element.classList.add('open');
+    const allSubChildElements =
+      this.elRef.nativeElement.querySelectorAll('.child-sub');
+    allSubChildElements.forEach(
+      (
+        element: {
+          previousElementSibling: any;
+          style: { display: string };
+          classList: {
+            remove: (arg0: string) => void;
+            add: (arg0: string) => void;
+          };
+        },
+        i: number
+      ) => {
+        element.style.display = 'none';
+        element.classList.remove('open');
+
+        // Đóng tất cả các mũi tên trong sub-menu-mb khác
+        const allArrows = this.elRef.nativeElement.querySelectorAll(
+          '.sub-menu-mb .arrows'
+        );
+        allArrows.forEach(
+          (arrowElement: {
+            classList: {
+              remove: (arg0: string) => void;
+              add: (arg0: string) => void;
+            };
+          }) => {
+            arrowElement.classList.remove('open');
+          }
+        );
+
+        // Nếu index của submenu trùng với index của thẻ được click, thì mở nó
+        if (i === index) {
+          const arrowsElement =
+            element.previousElementSibling.querySelector('.arrows');
+          arrowsElement.classList.add('open');
+          element.style.display = 'block';
+          element.classList.add('open');
+        }
       }
-    });
+    );
   }
-
-
 
   toggleSubMenu(): void {
     const subMenuMb = this.elRef.nativeElement.querySelector('.sub-menu-mb');
     const mainMenu = this.elRef.nativeElement.querySelector('.main-menu');
-  
+
     if (!this.submenuOpen) {
       // Nếu submenu chưa mở, thì thêm class "open" vào cả sub-menu và main-menu
       this.renderer.setStyle(subMenuMb, 'display', 'block');
@@ -241,13 +277,9 @@ export class HeaderComponent implements OnInit {
       this.renderer.setStyle(subMenuMb, 'display', 'none');
       this.renderer.removeClass(subMenuMb, 'open');
     }
-  
+
     this.submenuOpen = !this.submenuOpen;
   }
-
-
-
-
 
   cartItemFunc() {
     const localCartString = localStorage.getItem('localCart');
@@ -310,15 +342,18 @@ export class HeaderComponent implements OnInit {
   @HostListener('document:click', ['$event'])
   //đóng mở submenu
   handleClickOutsideSubMenu(event: Event): void {
-    const allSubChildElements = this.elRef.nativeElement.querySelectorAll('.child-sub');
-    allSubChildElements.forEach((element: {
-      style: { display: string; };
-      classList: { remove: (arg0: string) => void; };
-    }) => {
-      element.style.display = 'none';
-      element.classList.remove('open');
-    });
-  
+    const allSubChildElements =
+      this.elRef.nativeElement.querySelectorAll('.child-sub');
+    allSubChildElements.forEach(
+      (element: {
+        style: { display: string };
+        classList: { remove: (arg0: string) => void };
+      }) => {
+        element.style.display = 'none';
+        element.classList.remove('open');
+      }
+    );
+
     this.currentSubMenuIndex = null;
   }
   closeSubMenu(): void {
@@ -421,7 +456,4 @@ export class HeaderComponent implements OnInit {
       panelClass: ['custom-snackbar'], // Thêm class CSS tùy chỉnh
     });
   }
-
-
-
 }

@@ -33,7 +33,7 @@ export class HeaderService {
       );
   }
 
-  liveSearch(inputValue: any): Observable<any> {
+  liveSearch(inputValue: any, userId:any): Observable<any> {
     const productsPerPage = 10;
     const slug = 'search';
     const sortType = '';
@@ -43,7 +43,7 @@ export class HeaderService {
     const maxPrice = '';
     let currentPage = 1;
     const startIndex = (currentPage - 1) * productsPerPage;
-    const apiUrl = `${local}/api/searchSortPagination/${slug}?start=${startIndex}&limit=${productsPerPage}&page=${currentPage}&minPrice=${minPrice}&maxPrice=${maxPrice}&color=${colors}&size=${sizes}&keySearch=${inputValue}&sort=${sortType}`;
+    const apiUrl = `${local}/api/searchSortPagination/${slug}?start=${startIndex}&limit=${productsPerPage}&page=${currentPage}&minPrice=${minPrice}&maxPrice=${maxPrice}&color=${colors}&size=${sizes}&keySearch=${inputValue}&sort=${sortType}&userId=${userId}`;
     const headers = new HttpHeaders().set(
       'Content-Type',
       'text/plain;charset=utf-8'

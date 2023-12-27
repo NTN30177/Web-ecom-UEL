@@ -123,9 +123,6 @@ export class HomePageComponent implements AfterViewInit {
       }
     }
 
-    //
-
-    //
     const sizeTableId = `sizeTable${productIndex}`;
     const sizeTable = this.el.nativeElement.querySelector(`#${sizeTableId}`);
     if (
@@ -145,21 +142,21 @@ export class HomePageComponent implements AfterViewInit {
 
   selectedColorId: number | null = null;
 
-  colorsArray: any = [
-    {
-      id: 33897,
-      imgSrc: 'https://pubcdn.ivymoda.com/ivy2/images/color/010.png',
-      alt: '010',
-    },
-    {
-      id: 33898,
-      imgSrc: 'https://pubcdn.ivymoda.com/ivy2/images/color/013.png',
-      alt: 'k50',
-    },
-    // Thêm các màu khác nếu cần
-  ];
+  // colorsArray: any = [
+  //   {
+  //     id: 33897,
+  //     imgSrc: 'https://pubcdn.ivymoda.com/ivy2/images/color/010.png',
+  //     alt: '010',
+  //   },
+  //   {
+  //     id: 33898,
+  //     imgSrc: 'https://pubcdn.ivymoda.com/ivy2/images/color/013.png',
+  //     alt: 'k50',
+  //   },
+  //   // Thêm các màu khác nếu cần
+  // ];
 
-  imagesArray: any = [];
+  // imagesArray: any = [];
 
   bannersArray: any = [
     { imgName: '../assets/img/banner/banner-1.jpeg' },
@@ -222,13 +219,9 @@ export class HomePageComponent implements AfterViewInit {
   products: any;
 
   async ngOnInit(): Promise<void> {
-    // Mặc định chọn màu đầu tiên
     await this.setupUserIdSubscription();
-    console.log(this.userIdFromHeader, '123');
     await this.apiProductHomePage();
-    console.log(this.productsHaveModified,'2222222222222')
    
-  
     // Khởi tạo mảng productStates với giá trị false cho mỗi sản phẩm
     this.productStates = Array(this.bannersArray.length).fill(false);
   }
@@ -261,6 +254,7 @@ export class HomePageComponent implements AfterViewInit {
       this.errMessage = err;
     }
   }
+
 
   total_quantity: number = 0;
 
@@ -307,7 +301,11 @@ export class HomePageComponent implements AfterViewInit {
         this.userIdFromHeader
       );
       let total_quantity = await this.totalCartItem(cartList);
-      this._authServer.cartSubject.next(total_quantity);
+      // this._authServer.cartSubject.next(total_quantity);
+    this._authServer.updateCart(total_quantity);
+
+
+
     }
 
     // let cartDataNull = localStorage.getItem('localCart');
@@ -338,6 +336,7 @@ export class HomePageComponent implements AfterViewInit {
     //   this.cartNumberFunc();
     // }
   }
+
 
   cartNumber: number = 0;
   cartNumberFunc() {
@@ -397,19 +396,6 @@ export class HomePageComponent implements AfterViewInit {
     return productsHaveModified;
   }
 
-  // createArrSupportChangeImgFollowChangeColor() {
-  //   this.productsHaveModified = this.products.map((product: any) => {
-  //     return {
-  //       ...product,
-  //       imgHomePage: product.variants.map((variant: any) => {
-  //         return {
-  //           colorID: variant.color._id,
-  //           images: variant.images.slice(0, 2),
-  //         };
-  //       }),
-  //     };
-  //   });
-  // }
 
   productsHaveModified: any;
 

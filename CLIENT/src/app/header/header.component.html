@@ -95,40 +95,11 @@
                         <div class="search-form__quick-search" (click)="handleQuickSearchClick($event)">
                             <div class="search-items search-history">
                                 <h4 class="">Vừa tìm kiếm</h4>
-                                <div class="search-item__hot">
-                                    <label for="" class="search-item__hot-child">
-                                        <a href="" class="search-item__hot-child-link">Đầm</a>
+                                <div class="search-item__hot" >
+                                    <label for="" class="search-item__hot-child" *ngFor="let key of accountInfo.historySearch">
+                                        <a href="" class="search-item__hot-child-link">{{key}}</a>
                                     </label>
-                                    <label for="" class="search-item__hot-child">
-                                        <a href="" class="search-item__hot-child-link">trễ vai</a>
-                                    </label>
-                                    <label for="" class="search-item__hot-child">
-                                        <a href="" class="search-item__hot-child-link">Áo khoác</a>
-                                    </label>
-                                    <label for="" class="search-item__hot-child">
-                                        <a href="" class="search-item__hot-child-link">Quần</a>
-                                    </label>
-                                    <label for="" class="search-item__hot-child">
-                                        <a href="" class="search-item__hot-child-link">Áo sơ mi</a>
-                                    </label> 
-                                    <label for="" class="search-item__hot-child">
-                                        <a href="" class="search-item__hot-child-link">Vest</a>
-                                    </label>
-                                    <label for="" class="search-item__hot-child">
-                                        <a href="" class="search-item__hot-child-link">parka</a>
-                                    </label> 
-                                    <label for="" class="search-item__hot-child">
-                                        <a href="" class="search-item__hot-child-link">tweed</a>
-                                    </label> 
-                                    <label for="" class="search-item__hot-child">
-                                        <a href="" class="search-item__hot-child-link">croptop</a>
-                                    </label> 
-                                    <label for="" class="search-item__hot-child">
-                                        <a href="" class="search-item__hot-child-link">Chân váy</a>
-                                    </label> 
-                                    <label for="" class="search-item__hot-child">
-                                        <a href="" class="search-item__hot-child-link">Lông cừu</a>
-                                    </label>    
+                                    
 
                                     
                                 </div>
@@ -246,40 +217,11 @@
                                 <div class="search-form__quick-search">
                                     <div class="search-items">
                                         <h4 class="">Tìm kiếm nhiều nhất</h4>
-                                        <div class="search-item__hot">
+                                        <div class="search-item__hot" *ngFor="let key of accountInfo.historySearch">
                                             <label for="" class="search-item__hot-child">
-                                                <a href="" class="search-item__hot-child-link">Đầm</a>
+                                                <a href="" class="search-item__hot-child-link">{{key}}</a>
                                             </label>
-                                            <label for="" class="search-item__hot-child">
-                                                <a href="" class="search-item__hot-child-link">trễ vai</a>
-                                            </label>
-                                            <label for="" class="search-item__hot-child">
-                                                <a href="" class="search-item__hot-child-link">Áo khoác</a>
-                                            </label>
-                                            <label for="" class="search-item__hot-child">
-                                                <a href="" class="search-item__hot-child-link">Quần</a>
-                                            </label>
-                                            <label for="" class="search-item__hot-child">
-                                                <a href="" class="search-item__hot-child-link">Áo sơ mi</a>
-                                            </label> 
-                                            <label for="" class="search-item__hot-child">
-                                                <a href="" class="search-item__hot-child-link">Vest</a>
-                                            </label>
-                                            <label for="" class="search-item__hot-child">
-                                                <a href="" class="search-item__hot-child-link">parka</a>
-                                            </label> 
-                                            <label for="" class="search-item__hot-child">
-                                                <a href="" class="search-item__hot-child-link">tweed</a>
-                                            </label> 
-                                            <label for="" class="search-item__hot-child">
-                                                <a href="" class="search-item__hot-child-link">croptop</a>
-                                            </label> 
-                                            <label for="" class="search-item__hot-child">
-                                                <a href="" class="search-item__hot-child-link">Chân váy</a>
-                                            </label> 
-                                            <label for="" class="search-item__hot-child">
-                                                <a href="" class="search-item__hot-child-link">Lông cừu</a>
-                                            </label>    
+                                          
                                         </div>
                                     </div>
                                     <div class="search-items">
