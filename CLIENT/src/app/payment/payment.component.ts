@@ -34,7 +34,8 @@ export class PaymentComponent implements OnInit {
       await this.getUserId(); // Chờ hàm này chạy xong trước khi tiếp tục
       await this.getAddressUser(); // Chờ hàm này chạy xong trước khi tiếp tục
       // Chờ hàm này chạy xong trước khi tiếp tục
-      this.totalPayment();
+      await this.totalPayment();
+
     });
   }
 
@@ -94,10 +95,27 @@ export class PaymentComponent implements OnInit {
       addressId: this.addresses[0]._id,
       userId: this.userId,
     };
+    const paymentSuccess ={ total_payment:this.total_payment ,
+      total_quantity: this.total_quantity,
+      total_variantColor: this.total_variantColor ,
+      ship_code: this.ship_code 
+    }
     
     this._paymentService.saveOrder(data).subscribe({
       next: (responseData: any) => {
         this.infoResult = responseData.message;
+        const paymentSuccess ={ total_payment:this.total_payment ,
+          total_quantity: this.total_quantity,
+          total_variantColor: this.total_variantColor ,
+          ship_code: this.ship_code ,
+          orderId:responseData.orderId
+        }
+        console.log(paymentSuccess)
+        console.log(responseData)
+        this._paymentService.updateResultPayment([paymentSuccess]);
+
+        // this._paymentService.paymentSuccessSubject.next(paymentSuccess);
+
       },
       error: (err: any) => {
         this.errMessage = err;

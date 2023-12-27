@@ -12,6 +12,7 @@ import { TermPolicyComponent } from '../term-policy/term-policy.component';
 import { DeliveryPolicyComponent } from '../delivery-policy/delivery-policy.component';
 import { ForgotPasswordModalSuccessComponent } from '../login/forgot-password-modal-success/forgot-password-modal-success.component';
 import { ForgetPwComponent } from '../forget-pw/forget-pw.component';
+import { PaymentThankComponent } from '../payment/payment-thank/payment-thank.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,9 @@ const routes: Routes = [
       },
       {
         path:'payment', component: PaymentComponent,
+      },
+      {
+        path:'payment-success', component: PaymentThankComponent,
       },
       {
         path:'forgot-pw', component: ForgotPasswordModalSuccessComponent,
@@ -51,6 +55,8 @@ const routes: Routes = [
       },
       {
         path: 'forgetpw', component: ForgetPwComponent,
+      },{
+        path: 'order-tracking/:orderId', component: OrderTrackingComponent,
       },
       {
         path: '',
