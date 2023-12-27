@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit {
   submenuOpen: boolean = false;
   isSubActionVisible: boolean = false;
   quantityInputValue: number = 1;
-  userId: any = 1;
+  userId: any = false;
   cartNumberItem: number = 0;
   isMobileMenuOpen: boolean | undefined;
   types: any;
@@ -57,10 +57,47 @@ export class HeaderComponent implements OnInit {
     private _homeComponent: HomePageComponent,
     private _headerService: HeaderService,
     private _accountInfoService: AccountInfoService
-  ) {
-
-  }
+  ) {}
   ngAfterViewInit() {
+    // fromEvent(this.searchInput?.nativeElement, 'input')
+    //   .pipe(
+    //     debounceTime(1000),
+    //     map((event: any) => event.target.value)
+    //   )
+    //   .subscribe((inputValue: string) => {
+    //     this._headerService
+    //       .liveSearch(inputValue, this.userId)
+    //       .subscribe((data) => {
+    //         this.dataLiveSearch = data.productsByCategory;
+    //         this.getKeySearch();
+    //         console.log(data.productsByCategory);
+    //         console.log(this.dataLiveSearch);
+    //       });
+    //     console.log('Giá trị nhập liệu sau mỗi 1s:', inputValue);
+    //   });
+  }
+  ngOnInit(): void {
+    this.getDataFromService();
+    this.getIsLogin();
+    this.cartItemFunc();
+    this.checkLogin();
+    this.getKeySearch();
+    this.getCategory();
+  }
+  getKeySearch() {
+    if (this.userId) {
+      this._accountInfoService
+        .getUserAccountInfo(this.userId)
+        .subscribe((data) => {
+          this.accountInfo = data;
+          this.keyDown()
+          console.log(this.accountInfo.historySearch);
+          console.log(data, 'datausser');
+        });
+    } else {
+    }
+  }
+  keyDown(){
     fromEvent(this.searchInput?.nativeElement, 'input')
       .pipe(
         debounceTime(1000),
@@ -78,23 +115,8 @@ export class HeaderComponent implements OnInit {
         console.log('Giá trị nhập liệu sau mỗi 1s:', inputValue);
       });
   }
-  ngOnInit(): void  {
-    this.getDataFromService()
-    this.getIsLogin();
-    this.cartItemFunc();
-    this.checkLogin();
-    this.getKeySearch();
-    this.getCategory();
-  }
-  getKeySearch() {
-    this._accountInfoService
-      .getUserAccountInfo(this.userId)
-      .subscribe((data) => {
-        this.accountInfo = data;
-        console.log(this.accountInfo.historySearch)
-        console.log(data, 'datausser');
-      });
-  }
+
+
   getIsLogin() {
     this._authService.getIsLoginObservable().subscribe((data) => {
       this.isLogin = data;
@@ -108,7 +130,7 @@ export class HeaderComponent implements OnInit {
       this.types = data.typePopulateSubType;
     });
   }
-  getDataFromService(){
+  getDataFromService() {
     this._authService.cartSubject.subscribe((data) => {
       this.cartNumberItem = data;
     });
@@ -126,6 +148,7 @@ export class HeaderComponent implements OnInit {
     if (userData) {
       const parseUserData: IUser = JSON.parse(userData);
       this._authService.idUserSubject.next(parseUserData._id);
+      this.userId = parseUserData._id;
       const cartList = await this._cartComponent.apiCartProduct(
         parseUserData._id
       );

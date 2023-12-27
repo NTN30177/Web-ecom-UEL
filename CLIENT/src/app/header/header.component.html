@@ -95,7 +95,7 @@
                         <div class="search-form__quick-search" (click)="handleQuickSearchClick($event)">
                             <div class="search-items search-history">
                                 <h4 class="">Vừa tìm kiếm</h4>
-                                <div class="search-item__hot" >
+                                <div class="search-item__hot" *ngIf="userId" >
                                     <label for="" class="search-item__hot-child" *ngFor="let key of accountInfo.historySearch">
                                         <a href="" class="search-item__hot-child-link">{{key}}</a>
                                     </label>
@@ -215,15 +215,15 @@
                                 </button>
                                 <input type="text" id="search-form__input" placeholder="TÌM KIẾM SẢN PHẨM">
                                 <div class="search-form__quick-search">
-                                    <div class="search-items">
+                                    <!-- <div class="search-items">
                                         <h4 class="">Tìm kiếm nhiều nhất</h4>
-                                        <div class="search-item__hot" *ngFor="let key of accountInfo.historySearch">
+                                        <div class="search-item__hot" *ngFor="let key of accountInfo.?historySearch">
                                             <label for="" class="search-item__hot-child">
                                                 <a href="" class="search-item__hot-child-link">{{key}}</a>
                                             </label>
                                           
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="search-items">
                                         <h4>Vừa tìm kiếm</h4>
                                         <ul class="search-item__hot d-flex history_list">

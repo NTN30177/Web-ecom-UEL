@@ -148,7 +148,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('userData', JSON.stringify(data.userData));
             this._authService.isLoginSubject.next(data.login);
             this._authService.emailUserSubject.next(data.userData.email);
-            timer(3000).subscribe(() => {
+            timer(1000).subscribe(() => {
               this.router.navigate(['/']);
             });
           }
