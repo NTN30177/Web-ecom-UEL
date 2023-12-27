@@ -86,7 +86,8 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "second-web:build"
+            "buildTarget": "second-web:build",
+            "proxyConfig": "src/proxy.conf.json"
           }
         },
         "test": {

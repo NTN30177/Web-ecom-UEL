@@ -3,8 +3,10 @@ const {
   Type,
   Subtype,
   Color,
-  CartItem,
+  CartItem, 
 } = require("../models/product");
+const { Feedback } = require("../models/feedback");
+
 
 // getProduct controller
 const getProduct = async (req, res) => {
@@ -282,6 +284,38 @@ const getTypeAndSubtypeData = async (req, res) => {
   }
 };
 
+const submitFeedback = async (req, res) => {
+  try {
+    const { content } = req.body;
+    const productId = '6587ea63026f8360883d3917'; // Default product ID
+    const orderId = '6589c44703ad145b56e9e68d'; // Default order ID
+
+    const feedback = new Feedback({
+      idUser: req.session.user_id,
+      idOrder: orderId,
+      content: content,
+    });
+
+    await feedback.save();
+
+    // Update the product with the feedback ID
+    const product = await Product.findOneAndUpdate(
+      { _id: productId },
+      { $push: { feedbackList: feedback._id } },
+      { new: true }
+    );
+
+    // Add logic to handle the updated product
+    console.log('Feedback submitted successfully');
+    res.sendStatus(200);
+  } catch (error) {
+    console.error("Error submitting feedback:", error);
+    res.sendStatus(500);
+  }
+};
+
+
 module.exports = {
-  saveProduct, getProduct,toggleSoftDeleted, softDeleteProduct
+  saveProduct, getProduct,toggleSoftDeleted, softDeleteProduct,
+  submitFeedback
 };
