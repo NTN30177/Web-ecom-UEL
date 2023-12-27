@@ -28,7 +28,7 @@ export class HeaderService {
       .get<any>(`${local}/user/types-populate-subtypes`, requestOptions)
       .pipe(
         map((res) => res),
-        retry(3),
+        // retry(3),
         catchError(this.handleError)
       );
   }
