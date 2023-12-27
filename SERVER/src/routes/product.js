@@ -37,6 +37,8 @@ const storage = multer.diskStorage({
   },
 });
 
+
+
 const upload = multer({ storage: storage });
 
 router.post(
@@ -48,6 +50,9 @@ router.post(
 router.get("", productController.getProduct)
 
 router.patch("/toggle-soft-deleted/:productId", productController.toggleSoftDeleted)
+
+router.post("/submit-feedback", upload.array("images"), productController.submitFeedback);
+
 
 
 module.exports = router;

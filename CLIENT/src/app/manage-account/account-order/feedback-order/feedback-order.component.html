@@ -1,30 +1,32 @@
+<!-- feedback-order.component.html -->
+
 <div class="modal-header">
     <span class="close" (click)="closeDialog()" style="margin-left: auto; width: 40px; font-size: 30px; padding-top: 20px">&times;</span>
-</div>
-<p class="text_head">Đánh giá sản phẩm</p>
-<form action="">
+  </div>
+  <p class="text_head">Đánh giá sản phẩm</p>
+  <form (ngSubmit)="openFeedbackOrderSuccessDialog()" [formGroup]="feedbackForm">
     <mat-dialog-content class="modal-content">
-        <div class="row pb-5">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <div class="frame_feedback">
-                        <button class="btn_fb_detail" id="btn_fb_add_img" name="btn_fb_add_img">Thêm hình ảnh</button>
-                        <button class="btn_fb_detail" id="btn_fb_add_video" name="btn_fb_add_video">Thêm video</button>
-                    </div>
-                </div>
+      <div class="row pb-5">
+        <div class="col-md-12">
+          <div class="form-group">
+            <div class="frame_feedback">
+              <button class="btn_fb_detail" name="btn_fb_add_img" (change)="onFileChange($event)">Thêm hình ảnh</button>
+              <button class="btn_fb_detail" id="btn_fb_add_video" name="btn_fb_add_video">Thêm video</button>
             </div>
+          </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <textarea class="frame_textarea" name="content_fb" id="content_fb" cols="30" rows="10" placeholder="Hãy chia sẻ những điều bạn thích về sản phẩm này nhé."></textarea>
-                </div>
-                <p style="text-align: left; font-size: 10.5px; font-family: Montserrat">Thêm 50 ký tự và 1 video để nhận 200 xu</p>
-            </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <textarea class="frame_textarea" formControlName="content_fb" cols="30" rows="10" placeholder="Hãy chia sẻ những điều bạn thích về sản phẩm này nhé."></textarea>
+          </div>
+          <p style="text-align: left; font-size: 10.5px; font-family: Montserrat">Thêm 50 ký tự và 1 video để nhận 200 xu</p>
         </div>
+      </div>
     </mat-dialog-content>
     <mat-dialog-actions style="padding-right: 30px;">
-        <button mat-button class="btn-send" (click)="openFeedbackOrderSuccessDialog()" cdkFocusInitial>Gửi</button>
+      <button mat-button class="btn-send" type="submit" cdkFocusInitial>Gửi</button>
     </mat-dialog-actions>
-
-</form>
+  </form>
+  
