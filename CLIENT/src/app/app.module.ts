@@ -59,6 +59,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { ForgetPwComponent } from './forget-pw/forget-pw.component';
 import { Select2Module } from 'ng-select2-component';
 import { PaymentThankComponent } from './payment/payment-thank/payment-thank.component';
+import { ManageUserComponent } from './admin/manage-user/manage-user.component';
 
 
 
@@ -103,6 +104,7 @@ import { PaymentThankComponent } from './payment/payment-thank/payment-thank.com
     DeliveryPolicyComponent,
     ForgetPwComponent,
     PaymentThankComponent,
+    ManageUserComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,7 @@ import { CreateCampaignComponent } from './create-campaign/create-campaign.compo
 import { ManageCampaignComponent } from './manage-campaign/manage-campaign.component';
 import { AddColorComponent } from './add-color/add-color.component';
 import { ManageOrderComponent } from './manage-order/manage-order.component';
+import { ManageUserComponent } from './manage-user/manage-user.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: "/drink", pathMatch: 'full'},
@@ -26,6 +27,7 @@ const routes: Routes = [
       { path: 'manage-product', component: ManageProductComponent },
       { path: 'add-color', component: AddColorComponent },
       { path: 'manage-order', component: ManageOrderComponent },
+      { path: 'manage-user', component: ManageUserComponent },
     ],
   },
 ];

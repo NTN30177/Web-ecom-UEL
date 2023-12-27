@@ -8,14 +8,12 @@ export interface IUser {
     date_of_birth: Date;
     addressList: string[];
     _id:string
-    // image: string;
-    // is_admin: number;
-    // is_verified: number;
-    // token: string;
-    // historySearch?: string[];
-    // cart?: string; 
-
-    // orderList?: string[];
+    image: string;
+    is_admin: number;
+    orderList: string[];
+    latestPurchase: Date;
+    totalRevenue:number //all totalpay of 1 user
+    selectedRole?: string; 
   }
 
   export interface IUserAddress {
