@@ -1,6 +1,7 @@
 html {
     font-family: Montserrat;
     margin-top: 32px;
+    box-sizing: border-box;
 }
 ul {
     padding-left: 0;
@@ -25,6 +26,9 @@ img {
 }
 .container {
     max-width: 1380px;
+}
+section {
+    margin-bottom: 30px;
 }
 .bg-before {
     position: relative;
@@ -97,6 +101,12 @@ img {
     gap: 15px;
     align-self: stretch;
 }
+.exclusive-head .new-coll {
+    font-size: 28px;
+    font-weight: 700;
+    color: #000;
+    text-transform: uppercase;
+}
 .home-new-prod .exclusive-head .exclusive-tab {
     display: flex;
     padding: 8px 24px;
@@ -142,7 +152,6 @@ img {
     letter-spacing: 1.08px;
 }
 .exclusive-content {
-    margin-bottom: 24px;
     position: relative;
     min-height: 100px;
 }
@@ -371,12 +380,17 @@ img {
     opacity: 1;
     visibility: visible;
 }
-
+/* Not click li */
+.not-click-li {
+    pointer-events: none;
+    cursor: none;
+    background-color: #d5d5d5;
+}
 /* Popup thêm sản phẩm vào giỏ hàng */
 .popup-container {
     position: fixed;
     top: 10px;
-    right: 0;
+    right: -300px;
     width: 300px;
     transition: all .2s;
     box-sizing: border-box;
@@ -386,6 +400,9 @@ img {
     border-radius: 16px;
     padding: 18px;
     z-index: 999;
+}
+.popup-container.active-cartpopup {
+    right: 24px;
 }
 .popup-container .tit___hed-pop-not {
     font-weight: 600;
@@ -435,6 +452,120 @@ img {
 .notify-product__prices ins {
     text-decoration: none;
 }
+.bg-before.mid-home-page:before {
+    border: none;
+}
+.social-benefit a  {
+    max-height: 450px;
+    width: 100%;
+}
+.list-collection {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    flex-wrap: wrap;
+    gap: 22px;
+
+}
+.img-collection::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    border-radius: 8px;
+}
+.list-collection .collection {
+    position: relative;
+    border-radius: 8px;
+    flex: 1;
+}
+
+.list-collection .collection img {
+    width: 100%;
+    max-height: 437px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.list-collection .content__collection {
+    position: absolute;
+    z-index: 5;
+}
+.content__collection {
+    position: absolute;
+    top: -20%;
+    left: 54px;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-end;
+}
+.content__collection .subtit__content__collection {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 15px;
+}
+.content__collection .tit__content__collection {
+    font-size: 44px;
+    font-weight: 700;
+    color: #fff;
+    font: 700 44px/56px Montserrat, sans-serif;
+}
+.button_content__collection {
+    border-radius: 20px;
+    border: 1px solid var(--Semantic-04, #F1F1F1);
+    background: var(--Base-On-Background, #FFF);
+    display: inline-flex;
+    width: max-content;
+    justify-content: center;
+}
+.button_content__collection a {
+    border-radius: 20px;
+    padding: 8px 24px;
+    font-size: 18px;
+    font-weight: 700;
+    transition: all .2s;
+}
+.button_content__collection a:hover {
+    background-color: #d9d9d9;
+
+}
+.catagory {
+    display: flex;
+    justify-content: space-between;
+    gap: 22px;
+    box-sizing: border-box;
+}
+.catagory__item {
+    transition: all .2s;
+    width: 100%;
+    height: auto;
+    width: 25%;
+}
+.catagory__item:hover {
+    filter: brightness(80%);
+    cursor: pointer;
+}
+.catagory__item img {
+    /* width: 320px; */
+    border-radius: 8px;
+}
+.sale-up .sale-up__item {
+    cursor: pointer;
+}
+.sale-up img {
+    border-radius: 8px;
+    width: 100%;
+}
+
+
+
+
 
 /*  */
 
@@ -494,6 +625,20 @@ img {
     .home-new-prod .exclusive-head .exclusive-tab {
         font-size: 16px;
     }
+    .list-collection {
+        flex-direction: column;
+    }
+    .catagory {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 24px;
+        margin: 0 -8px;
+    }
+    .catagory__item {
+        width: 48.3%;
+        padding: 8px;
+        overflow: hidden;
+    }
 
 }
 
@@ -515,6 +660,7 @@ img {
     .home-new-prod .exclusive-head .exclusive-tab {
         font-size: 13px;
     }
+    
     .sizeTable ul li button {
         padding: 10px 20px;
     }
@@ -534,6 +680,30 @@ img {
     .item-new-prod .percent_02 {
         font-size: 10px
     }
+    .add-to-cart a {
+        width: 20px;
+        height: 20px;
+    }
+    .content__collection .subtit__content__collection {
+        font-size: 14px;
+    }
+    .content__collection {
+        left: 32px;
+    }
+    .content__collection .tit__content__collection {
+        font: 700 28px/33px Montserrat, sans-serif
+    }
+    .button_content__collection a {
+        font-size: 14px;
+        padding: 4px 12px;
+    }
+    .catagory {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        
+    }
+
 
 
 }
+

@@ -17,8 +17,8 @@
   </div>
   <hr class="col-12 gy-4" *ngIf="!showNocart"/>
   <div class="container cart-body" *ngIf="!showNocart">
-    <div class="cart-list" *ngFor="let pCode of productsCart">
-      <div class="cart-list__variant" *ngFor="let v of pCode.variants">
+    <div class="cart-list" *ngFor="let product of productsCart">
+      <div class="cart-list__variant" *ngFor="let v of product.variants">
         <div class="cart-list__varriantColor" *ngFor="let vc of v.variantColor">
           <div class="row cart-item__all">
             <div class="col-1 d-flex align-items-center justify-content-center">
@@ -38,12 +38,12 @@
                 </div>
               </div>
               <div class="cart-item__title text-start">
-                <div class="col">{{ pCode.productId.title }}</div>
+                <div class="col">{{ product.productId.title }}</div>
               </div>
               <div class="row cart-item__action pt-2 row-gap-2 ms-0">
                 <div class="col-5 col-sm-auto select-color">
-                  <select name="color" (change)="onColorChange($event,v.color._id, pCode.productId._id, vc.size, vc.quantity)" >
-                    <option *ngFor="let v_default of pCode.productId.variants" [value]="v_default.color._id"
+                  <select name="color" (change)="onColorChange($event,v.color._id, product.productId._id, vc.size, vc.quantity)" >
+                    <option *ngFor="let v_default of product.productId.variants" [value]="v_default.color._id"
                       [attr.selected]="v_default.color._id === v.color._id ? true : null">
                       {{ v_default.color.nameColor }}
                     </option>
@@ -51,9 +51,9 @@
                 </div>
 
                 <div class="col-auto select-size">
-                  <select name="size" (change)="onSizeChange($event,v.color._id, pCode.productId._id, vc.size, vc.quantity)">
+                  <select name="size" (change)="onSizeChange($event,v.color._id, product.productId._id, vc.size, vc.quantity)">
                     <option *ngFor="
-                          let vc_default of pCode.productId.variants[0].variantColor
+                          let vc_default of product.productId.variants[0].variantColor
                         " [value]="vc_default.size" [attr.selected]="vc_default.size === vc.size ? true : null">
                       {{ vc_default.size }}
                     </option>
@@ -61,19 +61,19 @@
                 </div>
                 <div class="col-auto cart-item__action--quantity">
                   <input class="stockP" type="hidden" value="10" />
-                  <button class="col dec" (click)="changeQuantity(v.color._id, pCode.productId._id, vc.size, -1)">
+                  <button class="col dec" (click)="changeQuantity(v.color._id, product.productId._id, vc.size, -1)">
                     -
                   </button>
                   <input type=" col text" value="{{ vc.quantity }}" class="qtyItem" readonly />
-                  <button class="col inc" (click)="changeQuantity(v.color._id, pCode.productId._id, vc.size, 1)">
+                  <button class="col inc" (click)="changeQuantity(v.color._id, product.productId._id, vc.size, 1)">
                     +
                   </button>
                 </div>
                 <div class="col-auto cart-item__price">
                   <input class="discount-hide" type="hidden" value="20" />
                   <input class="origin-price__hide" type="hidden" value="100" />
-                  <div class="sale-price">{{ formatMoneyVietNam(pCode.productId.price * vc.quantity)}}</div>
-                  <div class="origin-price">{{ formatMoneyVietNam(pCode.productId.price * vc.quantity)}}</div>
+                  <div class="sale-price">{{ formatMoneyVietNam(product.productId.price * vc.quantity)}}</div>
+                  <div class="origin-price">{{ formatMoneyVietNam(product.productId.price * vc.quantity)}}</div>
                 </div>
               </div>
               <!-- </div> -->
@@ -86,7 +86,7 @@
                 </div>
                 <!-- Cột 2 trong dòng 3 -->
                 <div class="col-sm-3 col-2 text-end undesired-deleteP">
-                  <i class="far fa-trash-alt" (click)="changeQuantity(v.color._id, pCode.productId._id, vc.size, 0)"></i>
+                  <i class="far fa-trash-alt" (click)="changeQuantity(v.color._id, product.productId._id, vc.size, 0)"></i>
                 </div>
               </div>
             </div>

@@ -17,9 +17,20 @@ import {
 })
 export class AuthService {
   private isLoginObservable: Observable<boolean>;
+  private userEmailSource = new BehaviorSubject<any[]>([]);
+  userEmail$ = this.userEmailSource.asObservable();
 
   constructor(private _http: HttpClient) {
     this.isLoginObservable = this.isLoginSubject.asObservable();
+  }
+  // cartSubject = new Subject<any>();
+  idUserSubject = new BehaviorSubject<any>(null);
+  isLoginSubject = new BehaviorSubject<any>(null);
+  emailUserSubject = new BehaviorSubject<any>(null);
+  
+  cartSubject = new BehaviorSubject<any>(null);
+  updateCart(total_quantity: any) {
+    this.cartSubject.next(total_quantity);
   }
 
   getIsLoginObservable(): Observable<boolean> {
@@ -76,6 +87,8 @@ export class AuthService {
         catchError(this.handleError)
       );
   }
+
+  
   postInfoUser(data: any): Observable<any> {
     const headers = new HttpHeaders().set(
       'Content-Type',
@@ -117,9 +130,7 @@ export class AuthService {
         catchError(this.handleError)
       );
   }
-  cartSubject = new Subject<any>();
-idUserSubject = new BehaviorSubject<any>(null);
-isLoginSubject = new BehaviorSubject<any>(null);
+
 
 
   // isLoginSubject = new Subject<any>();

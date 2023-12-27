@@ -26,20 +26,11 @@ export class OrderService {
   }
   
 
-  // getFashions(): Observable<any> {
-  //   const headers = new HttpHeaders().set("Content-Type", "text/plain;charset=utf-8")
-  //   const requestOptions: Object = {
-  //     headers: headers,
-  //     responseType: "text"
-  //   }
-  //   return this._http.get<any>(`${this.url}/fashions`, requestOptions).pipe(
-  //     map(res => JSON.parse(res) as Array<Fashion>),
-  //     retry(3),
-  //     catchError(this.handleError))
-  // }
+
 
   getOrderDetails(orderId: string): Observable<any> {
-    return this.http.get<any>(`${local}/order-details/${orderId}`);
+    console.log(orderId,'oiddd')
+    return this.http.get<any>(`${local}/order/order-details/${orderId}`);
   }
 
   handleError(error: HttpErrorResponse) {

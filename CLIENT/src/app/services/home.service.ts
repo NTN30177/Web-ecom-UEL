@@ -29,7 +29,11 @@ export class HomeService {
       retry(3),
       catchError(this.handleError)
     );
-  }handleError(error: HttpErrorResponse) {
+  }
+  
+
+  
+  handleError(error: HttpErrorResponse) {
     return throwError(() => new Error(error.message));
   }
 }
