@@ -119,5 +119,16 @@ export class ManageProductService {
     return this._http.patch(url, {});
   }
 
+
+  submitFeedback(formData: FormData): Observable<any> {
+    const headers = new HttpHeaders().set('enctype', 'multipart/form-data');
+    return this._http
+      .post<any>(`${this.local}/product/submit-feedback`, formData, { headers })
+      .pipe(
+        map((res) => res),
+        catchError(this.handleError)
+      );
+  }
+
 }
 

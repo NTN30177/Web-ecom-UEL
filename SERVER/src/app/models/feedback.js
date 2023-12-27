@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
-const slug = require("mongoose-slug-updater");
-mongoose.plugin(slug);
 
-  
 const FeedbackSchema = new mongoose.Schema({
     idUser: {
       type: mongoose.Schema.Types.ObjectId,
@@ -12,17 +9,18 @@ const FeedbackSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    content:{
-      type:string
-    }
-  },
-  {
+    content: {
+      type: String
+    },
+    images: [
+      {
+          type: String,
+      },
+  ],
+}, {
     timestamps: true,
-  });
-  
-
+});
 
 const Feedback = mongoose.model("Feedback", FeedbackSchema);
-module.exports = {
-    Feedback,
-}  
+
+module.exports = {Feedback};

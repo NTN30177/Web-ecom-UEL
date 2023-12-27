@@ -7,9 +7,13 @@ const cors = require("cors");
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser');
 const session = require('express-session');//
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+
 // app.use(express.json());
+
 const User = require('./app/models/user');
 const { Product, Type, Subtype, Color } = require('./app/models/product');
 
