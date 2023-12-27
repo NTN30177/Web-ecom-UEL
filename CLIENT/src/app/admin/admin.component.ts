@@ -50,7 +50,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
       name: 'Người dùng',
       icon: 'fas fa-user',
       children: [
-        { name: 'Quản lý người dùng', icon: 'fas fa-list-alt', link: '#' },
+        { name: 'Quản lý người dùng', icon: 'fas fa-list-alt', link: 'manage-user' },
         { name: 'Thêm người dùng', icon: 'fas fa-plus-square', link: '#' },
       ],
     },
