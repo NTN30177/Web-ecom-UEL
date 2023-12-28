@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { PaymentService } from '../../services/payment.service';
 
 @Component({
   selector: 'app-address-list-popup',
@@ -9,23 +10,28 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class AddressListPopupComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,
-    private dialogRef: MatDialogRef<AddressListPopupComponent>
-  ) { }
+    private dialogRef: MatDialogRef<AddressListPopupComponent>,
+    private _paymentService: PaymentService
+  ) {this._paymentService.addressSubject.subscribe((data) => {
+    this.addresses = data;
+    console.log(this.data, 'dataadd')
+  }); }
 
-  addresses = [
-    {
-      name: 'Phương Nguyên',
-      phone: '0986428483',
-      address: 'Tô Vĩnh Diện, Đông Hoà, Dĩ An, Bình Dương',
-      isDefault: false,
-    },
-    {
-      name: 'Phương Nhi',
-      phone: '0986838999',
-      address: 'Tô Vĩnh Diện, Đông Hoà, Dĩ An, Bình Dương',
-      isDefault: false,
-    },
-  ];
+  // addresses = [
+  //   {
+  //     name: 'Phương Nguyên',
+  //     phone: '0986428483',
+  //     address: 'Tô Vĩnh Diện, Đông Hoà, Dĩ An, Bình Dương',
+  //     isDefault: false,
+  //   },
+  //   {
+  //     name: 'Phương Nhi',
+  //     phone: '0986838999',
+  //     address: 'Tô Vĩnh Diện, Đông Hoà, Dĩ An, Bình Dương',
+  //     isDefault: false,
+  //   },
+  // ];
+  addresses:any
 
 
   @Output() addressSelected = new EventEmitter<any>();

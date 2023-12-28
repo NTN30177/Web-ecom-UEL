@@ -2,8 +2,24 @@ const express =require('express')//
 const app = express()//
 const port =3000
 const path = require('path');
-const route = require('./routes');
 const cors = require("cors");
+app.use(cors());
+
+
+const corsOptions = {
+    origin: 'http://localhost:4200',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
+
+
+
+
+
+const route = require('./routes');
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser');
 const session = require('express-session');//
@@ -38,11 +54,13 @@ app.use(async (req, res, next) => {
 
 ///API
 app.use((req, res, next) => {
-    res.append('Access-Control-Allow-Origin', ['*']);
-    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.append('Access-Control-Allow-Headers', 'Content-Type');
+    res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    res.header('Access-Control-Allow-Credentials', 'true');
     next();
 });
+
 
 
 app.use(methodOverride('_method'));
@@ -56,6 +74,8 @@ const db = require('./config/db');
 db.connect();
 
 route(app);
-app.use(cors());
-// app.use('/static', express.static(path.join(__dirname, 'public')))
+app.options('*', (req, res) => {
+    res.status(204).end();
+});
+
 app.use(express.static(path.join(__dirname, 'public')));

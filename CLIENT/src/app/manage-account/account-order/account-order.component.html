@@ -1,36 +1,34 @@
-
-    <div class="row mb-2 ">
-        <div class="col-sm-8 col order-header text-uppercase align-self-center mb-2 text-xs">
-            quản lý đơn hàng
-        </div>
-        <div class="col-sm-4 col status">
-            <div class="mb-1 "> <label for="">Trạng thái đơn hàng</label></div>
-            <div>
-                <select class="selection" name="" id="">
-                    <option value="">Tất cả</option>
-                    <option value="">Đang chờ xử lý</option>
-                    <option value=""></option>
-                    <option value=""></option>
-                    <option value=""></option>
-                </select>
-            </div>
-        </div>
+<div class="row mb-2 ">
+  <div class="col-sm-8 col order-header text-uppercase align-self-center mb-2 text-xs">
+    quản lý đơn hàng
+  </div>
+  <div class="col-sm-4 col status">
+    <div class="mb-1 "> <label for="">Trạng thái đơn hàng</label></div>
+    <div>
+      <select class="selection" name="" id="">
+        <option value="">Tất cả</option>
+        <option value="">Đang chờ xử lý</option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+      </select>
     </div>
-    <hr style="background: #CCC;">
-    <div class="table-responsive table-responsive-sm">
-      <table class="table responsive table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="dataTable">
+  </div>
+</div>
+<hr style="background: #CCC;">
+<div class="table-responsive table-responsive-sm">
+  <table class="table responsive table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="dataTable">
 
-        <thead>
-          <tr>
-            <th scope="col">Mã đơn hàng</th>
-            <th scope="col">Ngày</th>
-            <th scope="col">Trạng thái</th>
-            <th scope="col">Tổng tiền</th>
-            <th scope="col">Hành động </th>
-            <th scope="col">Chi tiết đơn hàng </th>
-          </tr>
-        </thead>
-        <tbody>
+    <thead>
+      <tr>
+        <th scope="col">Mã đơn hàng</th>
+        <th scope="col">Ngày</th>
+        <th scope="col">Trạng thái</th>
+        <th scope="col">Tổng tiền</th>
+        <th scope="col">Chi tiết đơn hàng </th>
+      </tr>
+    </thead>
+    <!-- <tbody>
           <tr *ngFor="let order of orders">
             <th scope="row">{{ order.id }}</th>
             <td>{{ order.date }}</td>
@@ -39,6 +37,17 @@
             <td><button (click)="openFeedbackOrderDialog()" class="btn-action-order">Đánh giá</button></td>
             <td style="color: #2DA5F3;"><a href="" style="color: #2DA5F3">Xem chi tiết</a><i class="fas fa-regular fa-arrow-right-long ms-3"></i></td>
           </tr>
-        </tbody>
-      </table>
-    </div>
+        </tbody> -->
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <th scope="row">{{ order._id }}</th>
+        <td>{{ order.createdAt | date: 'yyyy-MM-dd' }}</td>
+        <td>{{ order.status }}</td>
+        <td><strong>{{ order.totalPrice }} ({{ order.totalQuantity }} sản phẩm)</strong></td>
+        <td style="color: #2DA5F3;"><a [routerLink]="'/account/order-tracking/' + order._id" style="color: #2DA5F3">Xem chi tiết</a><i
+            class="fas fa-regular fa-arrow-right-long ms-3"></i></td>
+      </tr>
+    </tbody>
+
+  </table>
+</div>

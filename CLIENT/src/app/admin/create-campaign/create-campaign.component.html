@@ -1,26 +1,42 @@
-
+<pre>
+    {{ createcampaignForm.value | json }}
+  </pre
+>
 
 <div class="container_content">
-    <div class="frame_header">
-        <p style="gap: 5px;">Chiến dịch / Thêm chiến dịch</p>
-        <p class="text_head">Thêm chiến dịch</p>
-    </div>
-    <hr>
-    <form action="" name="page_createcampaign" method="post" [formGroup]="createcampaignForm">
-        <div class="col-md-12">
-            <div class="frame_title">
-                <p><strong>Thông tin chiến dịch</strong></p>
+  <div class="frame_header">
+    <p style="gap: 5px">Chiến dịch / Thêm chiến dịch</p>
+    <p class="text_head">Thêm chiến dịch</p>
+  </div>
+  <hr />
+  <form
+    action=""
+    name="page_createcampaign"
+    method="post"
+    [formGroup]="createcampaignForm"
+  >
+    <div class="col-md-12">
+      <div class="frame_title">
+        <p><strong>Thông tin chiến dịch</strong></p>
+      </div>
+      <div class="frame_body">
+        <div class="row pb-4">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="campaign_name" class="form-label"
+                >Tên chiến dịch</label
+              >
+              <input
+                type="text"
+                name="campaign_name"
+                id="campaign_name"
+                class="form-control"
+                formControlName="campaign_name"
+              />
             </div>
-            <div class="frame_body">
-                <div class="row pb-4">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="campaign_name" class="form-label">Tên chiến dịch</label>
-                            <input type="text" name="campaign_name" id="campaign_name" class="form-control" formControlName="campaign_name">
-                        </div>
-                    </div>
-                </div>
-                <!-- <div class="row pb-4">
+          </div>
+        </div>
+        <!-- <div class="row pb-4">
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="campaign_type" class="form-label">Loại chiến dịch</label>
@@ -30,99 +46,147 @@
                         </div>
                     </div>
                 </div> -->
-                <div class="row pb-4">
-                    <div class="col-md-6 col-sm-6">
-                        <div class="form-group">
-                            <label for="campaign_start" class="form-label">Thời gian bắt đầu</label>
-                            <input class="form-control" type="datetime-local" name="campaign_start" id="campaign_start" formControlName="campaign_start">
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <div class="form-group">
-                            <label for="campaign_end" class="form-label">Thời gian kết thúc</label>
-                            <input class="form-control" type="datetime-local" name="campaign_end" id="campaign_end" formControlName="campaign_end">
-                        </div>
-                    </div>
-                </div>
-                <div class="row pb-4">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="campaign_script" class="form-label">Mô tả chiến dịch (không bắt buộc)</label>
-                            <textarea style="height: 70px;border-radius: 7px;" name="campaign_script" id="campaign_script" class="form-control" placeholder="Mô tả ở đây..." formControlName="campaign_script"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="row pb-4">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-label" for="campaign_poster">Poster chiến dịch</label>
-                            <div class="frame_poster">
-                                <p>Hình ảnh chưa được chọn</p>
-                                <button class="btn_choose_poster" id="btn_choose_poster" name="btn_choose_poster">Chọn tệp</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="row pb-4">
+          <div class="col-md-6 col-sm-6">
+            <div class="form-group">
+              <label for="campaign_start" class="form-label"
+                >Thời gian bắt đầu</label
+              >
+              <input
+                class="form-control"
+                type="datetime-local"
+                name="campaign_start"
+                id="campaign_start"
+                formControlName="campaign_start"
+              />
             </div>
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <div class="form-group">
+              <label for="campaign_end" class="form-label"
+                >Thời gian kết thúc</label
+              >
+              <input
+                class="form-control"
+                type="datetime-local"
+                name="campaign_end"
+                id="campaign_end"
+                formControlName="campaign_end"
+              />
+            </div>
+          </div>
         </div>
-        <div class="col-md-12 mt-5">
-            <div class="frame_title">
-                <p><strong>Sản phẩm áp dụng</strong></p>
+        <div class="row pb-4">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="campaign_script" class="form-label"
+                >Mô tả chiến dịch (không bắt buộc)</label
+              >
+              <textarea
+                style="height: 70px; border-radius: 7px"
+                name="campaign_script"
+                id="campaign_script"
+                class="form-control"
+                placeholder="Mô tả ở đây..."
+                formControlName="campaign_script"
+              ></textarea>
             </div>
-            <div class="frame_body">
-                <div class="row pb-4">
-                    <div class="col-md-2 col-sm-2">
-                        <div class="form-group">
-                            <label for="product_quantity_campaign_method" class="form-label">Giảm theo</label>
-                            <select class="form-select" name="product_quantity_campaign_method" id="product_quantity_campaign_method" formControlName="product_quantity_campaign_method">
-                                <option selected>Chọn phương thức...</option>
-                                <option value="1">Giảm theo %</option>
-                                <option value="2">Giảm giá chiết</option>
-                                <option value="3">Giảm toàn sàn</option>
-                                <option value="4">Giảm khác</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-2">
-                        <div class="form-group">
-                            <label for="product_quantity_campaign_value" class="form-label">Giá trị</label>
-                            <div class="input-group">
-                                <input class="form-control" type="number" min="0" name="product_quantity_campaign_value" id="product_quantity_campaign_value" placeholder="..." formControlName="product_quantity_campaign_value">
-                                <span class="input-group-text" id="vnd">VNĐ</span>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <div class="form-group">
-                            <label for="product_name" class="form-label">Tên sản phẩm</label>
-                            <select class="form-select" name="product_name" id="product_name" formControlName="product_name">
-                                <option selected>Nhập sản phẩm...</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-2">
-                        <div class="form-group">
-                            <label for="product_quantity_campaign" class="form-label">Số lượng</label>
-                            <input class="form-control" type="number" min="0" name="product_quantity_campaign" id="product_quantity_campaign" placeholder="Nhập số lượng..." formControlName="product_quantity_campaign">
-                        </div>
-                    </div>
-                </div>
-                <a href="">+ Thêm loại chiến dịch</a>
-            </div>
+          </div>
         </div>
-        <div class="frame_btn_footer mt-5">
-            <div class="row">
-                <div class="form-group col-md-6 col-sm-6 ps-4">
-                    <button class="btn_delete" id="btn_delete" name="btn_delete">Xóa</button>
-                </div>
-                <div class="col-md-6 col-sm-6 pe-4">
-                    <div class="form-group btn_group_footer text-end">
-                        <button class="btn_cancel" id="btn_cancel" name="btn_cancel">Hủy</button>
-                        <button class="btn_create" id="btn_create" name="btn_create">Tạo chiến dịch</button>
-                    </div>
-                </div>
+        <div class="row pb-4">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="form-label" for="campaign_poster"
+                >Poster chiến dịch</label>
+              <div class="frame_poster">
+                <p>Hình ảnh chưa được chọn</p>
+                <button
+                  class="btn_choose_poster"
+                  id="btn_choose_poster"
+                  name="btn_choose_poster">
+                  Chọn tệp
+                </button>
+              </div>
             </div>
+          </div>
         </div>
-    </form>
+      </div>
+    </div>
+    <div class="col-md-12 mt-5">
+      <div class="frame_title">
+        <p><strong>Sản phẩm áp dụng</strong></p>
+      </div>
+      <div class="frame_body">
+        <div formArrayName="campaignProducts">
+          <div class="row pb-4" *ngFor="let product of campaignProductsFormArray; let i = index" [formGroupName]="i">
+            <div class="col-md-2 col-sm-2">
+              <div class="form-group">
+                <label for="product_quantity_campaign_method{{ i }}" class="form-label">Giảm theo</label>
+                <select class="form-select" name="product_quantity_campaign_method{{ i }}"
+                        id="product_quantity_campaign_method{{ i }}" formControlName="product_quantity_campaign_method">
+                  <option selected>Chọn phương thức...</option>
+                  <option value="1">Giảm theo %</option>
+                  <option value="2">Giảm giá chiết</option>
+                  <option value="3">Giảm toàn sàn</option>
+                  <option value="4">Giảm khác</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-2">
+              <div class="form-group">
+                <label for="product_quantity_campaign_value{{ i }}" class="form-label">Giá trị</label>
+                <div class="input-group">
+                  <input class="form-control" type="number" min="0" name="product_quantity_campaign_value{{ i }}"
+                         id="product_quantity_campaign_value{{ i }}" placeholder="..."
+                         formControlName="product_quantity_campaign_value" />
+                  <span class="input-group-text" id="vnd">VNĐ</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <div class="form-group">
+                <label for="product_name{{ i }}" class="form-label">Tên sản phẩm</label>
+                <select2 class="js-example-basic-multiple form-control" id="product_name{{ i }}"
+                         formControlName="product_name" [data]="productTitles" multiple="multiple"></select2>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-2">
+              <div class="form-group">
+                <label for="product_quantity_campaign{{ i }}" class="form-label">Số lượng</label>
+                <input class="form-control" type="number" min="0" name="product_quantity_campaign{{ i }}"
+                       id="product_quantity_campaign{{ i }}" placeholder="Nhập số lượng..."
+                       formControlName="product_quantity_campaign" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div (click)="addCampaignProduct()">
+          + Thêm loại chiến dịch
+        </div>
+      </div>
+    </div>
+    <div class="frame_btn_footer mt-5">
+      <div class="row">
+        <div class="form-group col-md-6 col-sm-6 ps-4">
+          <button class="btn_delete" id="btn_delete" name="btn_delete">
+            Xóa
+          </button>
+        </div>
+        <div class="col-md-6 col-sm-6 pe-4">
+          <div class="form-group btn_group_footer text-end">
+            <button class="btn_cancel" id="btn_cancel" name="btn_cancel">
+              Hủy
+            </button>
+            <button
+              class="btn_create"
+              id="btn_create"
+              name="btn_create"
+              (click)="onSubmit()">
+              Tạo chiến dịch
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
 </div>

@@ -6,3 +6,9 @@
                             <path d="M12.4521 28.1738C12.5197 28.1738 12.5872 28.1738 12.6568 28.1738C12.6231 28.2751 12.5893 28.3765 12.5545 28.4809C12.5207 28.3795 12.4869 28.2782 12.4521 28.1738Z" fill="black"/>
                             <path d="M10.7129 30.2207C10.8142 30.2714 10.8142 30.2714 10.9176 30.323C10.8163 30.3737 10.8163 30.3737 10.7129 30.4254C10.7129 30.3578 10.7129 30.2903 10.7129 30.2207Z" fill="black"/>
                         </svg>
+
+
+thẻ li size thêm class không click được --> class="not-click-li"
+click giỏ hàng này thì ẩn giỏ hàng kia --> xong
+click vào thẻ li hiện popup thêm thành công  --> xong
+nhấn nút Xem giỏ hàng --> giỏ hàng ẩn đi

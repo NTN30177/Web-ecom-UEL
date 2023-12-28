@@ -24,11 +24,11 @@
 
 </div>
 <!-- Loop qua danh sách địa chỉ và hiển thị thông tin -->
-<div *ngFor="let address of addresses; let i = index" class="row address-block">
+<div *ngFor="let address of addressList; let i = index" class="row address-block">
     <div class="col-md-8 col-sm-12 address-info">
         <div class="name">
             <div>{{ address.name }}</div>
-            <div *ngIf="address.isDefault" class="default-tag">Mặc định
+            <div  *ngIf="address.is_default"class="default-tag">Mặc định
                 <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-star"
                     viewBox="0 0 16 16">
                     <path
@@ -37,7 +37,7 @@
             </div>
         </div>
         <div>Điện thoại: {{ address.phone }}</div>
-        <div>Địa chỉ: {{ address.address }}</div>
+        <div>Địa chỉ: {{ address.specific_address }}, {{ address.wardData }}</div>
     </div>
 
     <div class="col-md-4 col-sm-12 col-address-action">
@@ -46,8 +46,8 @@
             <button class="button-delete">Xóa</button>
         </div>
         <div class="button-set">
-            <button (click)="setDefaultAddress(i)">Đặt làm mặc định</button>
-        </div>
+            <button (click)="setDefaultAddress()">Đặt làm mặc định</button>
+        </div> 
 
     </div>
 </div>

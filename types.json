@@ -1,0 +1,152 @@
+[{
+  "_id": {
+    "$oid": "64c4c7621539b1bd9c0fae5b"
+  },
+  "typeName": "Phụ kiện",
+  "subtypes": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1690617698301"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1690894691255"
+    }
+  },
+  "slug": "phu-kien",
+  "__v": 3
+},{
+  "_id": {
+    "$oid": "64c4c7f4e2a184d32cff6540"
+  },
+  "typeName": "Bộ sưu tập",
+  "subtypes": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1690617698301"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1702828992314"
+    }
+  },
+  "slug": "bts",
+  "__v": 10
+},{
+  "_id": {
+    "$oid": "65851939fb0cdd158835bc9d"
+  },
+  "typeName": "Áo khoác",
+  "subtypes": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1690617698301"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1690894691255"
+    }
+  },
+  "slug": "ao-khoac",
+  "__v": 3
+},{
+  "_id": {
+    "$oid": "6585194cfb0cdd158835bc9e"
+  },
+  "typeName": "Chân váy",
+  "subtypes": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1690617698301"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1690894691255"
+    }
+  },
+  "slug": "chan-vay",
+  "__v": 3
+},{
+  "_id": {
+    "$oid": "65851977fb0cdd158835bc9f"
+  },
+  "typeName": "Set bộ",
+  "subtypes": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1690617698301"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1702828992314"
+    }
+  },
+  "slug": "set-bo",
+  "__v": 10
+},{
+  "_id": {
+    "$oid": "658519b6fb0cdd158835bca0"
+  },
+  "typeName": "Đầm/ Áo dài",
+  "subtypes": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1690617698301"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1690894691255"
+    }
+  },
+  "slug": "dam-ao-dai",
+  "__v": 3
+},{
+  "_id": {
+    "$oid": "65851f85229a4e7e738a8cd6"
+  },
+  "typeName": "Áo",
+  "subtypes": [
+    {
+      "$oid": "65851f85229a4e7e738a8cda"
+    },
+    {
+      "$oid": "658521b7229a4e7e738a8cf5"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703223173808"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703223736001"
+    }
+  },
+  "slug": "6585190efb0cdd158835bc9c",
+  "__v": 2
+},{
+  "_id": {
+    "$oid": "6587160f9eccac2351ebff97"
+  },
+  "typeName": "Quần & JUMPSUIT",
+  "subtypes": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1690617698301"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1702828992314"
+    }
+  },
+  "slug": "quan-jump-suit",
+  "__v": 10
+}]

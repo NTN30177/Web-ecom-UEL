@@ -1,0 +1,85 @@
+:host {
+    font-family: 'Montserrat', sans-serif;
+    
+  }
+
+.container-forgotpw {
+    margin-top: 100px;
+    color: #000;
+    font-family: Montserrat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertical centering */
+    align-items: center; /* Horizontal centering */
+  }
+  .btn-reset {
+    background-color: black;
+    color: #fff;
+    border-radius: 35px;
+    border: 1px solid black;
+    font-size: 16px;
+    letter-spacing: 0.96px;
+    font-weight: 700;
+    height: 50px;
+    width: 50%;
+    margin: auto;
+    cursor: pointer; /* Add pointer cursor on hoverable elements */
+  }
+  
+  .btn-reset:hover {
+    background-color: white;
+    color: black;
+  }
+  
+  .text_header {
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: 1.44px;
+    color: black;
+    text-align: center; /* Center the text */
+  }
+  
+  p {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.80px;
+  }
+  
+  .input-pri {
+    border-radius: 35px;
+    border: 1px solid var(--neutral-04, #88817F);
+    text-indent: 20px;
+    width: 100%;
+    align-self: stretch;
+    padding: 18px 16px;
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+  }
+  
+  .input-pri::placeholder {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.8px;
+  }
+  
+  /* Trong file CSS của bạn */
+  .error-field {
+    border: 1px solid red !important; /* Nổi viền đỏ */
+  }
+  
+  .error-message {
+    color: red;
+    text-align: left;
+  }
+  
+  .frame {
+    border-radius: 23px;
+    background: #fff;
+    box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.25);
+    padding: 15px;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    width: 70%; margin: auto; margin-top: 50px;
+    
+  }
+  

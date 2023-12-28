@@ -143,7 +143,6 @@
           <div class="form-group col-12 img">
             <label for="img ">Hình ảnh cho màu ne</label>
             <input type="file" name="images" multiple (change)="selectMultipleImage($event,i)"  />
-
           </div>
         </div>
       </div>
@@ -213,7 +212,7 @@
             [class.is-invalid]="errFlag && productType.touched"  (blur)="validateCourse(productType.value)" (change)="validateCourse(productType.value)"
             >
               <option value="">Chọn type</option>
-              <option *ngFor="let type of types" [value]="type._id">
+              <option *ngFor="let type of types" [value]="type.typeName">
                 {{ type.typeName }}
               </option>
             </select>
@@ -234,7 +233,7 @@
             <label for="color ">Subtype :</label>
             <select class="col-12" formControlName="subTypeName">
               <option value="">Chọn Subtype</option>
-              <option *ngFor="let subType of subTypes" [value]="subType._id">
+              <option *ngFor="let subType of subTypes" [value]="subType.subTypeName">
                 {{ subType.subTypeName }}
               </option>
             </select>
@@ -258,7 +257,7 @@
             <label for="color ">Collection :</label>
             <select class="col-12" formControlName="collectionName">
               <option value="">Chọn BST</option>
-              <option *ngFor="let collection of collections" [value]="collection._id">
+              <option *ngFor="let collection of collections" [value]="collection.subTypeName">
                 {{ collection.subTypeName}}
               </option>
             </select>

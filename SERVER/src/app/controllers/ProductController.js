@@ -5,8 +5,9 @@ const {
   Color,
   CartItem,
 } = require("../models/product");
+const { Feedback } = require("../models/feedback");
 
-// getProduct controller
+
 const getProduct = async (req, res) => {
   try {
     const products = await Product.find();
@@ -41,6 +42,30 @@ softDeleteProduct = async (req, res) => {
   }
 };
 
+
+toggleSoftDeleted = async (req, res) => {
+  const productId = req.params.productId;
+
+  try {
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+
+    // Toggle the is_deleted property
+    product.is_deleted = !product.is_deleted;
+
+    // Save the updated product
+    await product.save();
+
+    res.json({ message: 'Soft delete toggled successfully', product });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 const saveProduct2 = async (req, res) => {
   const { variant } = req.body;
 
@@ -56,6 +81,7 @@ const saveProduct = async (req, res) => {
       productName,
       productSku,
       price,
+      cost,
       description,
       typeName,
       subTypeName,
@@ -70,13 +96,14 @@ const saveProduct = async (req, res) => {
     const product = createProduct(
       productName,
       productSku,
-      price,
+      convertStringToNumbers(price),
+      convertStringToNumbers(cost),
       description,
       author,
       variants
     );
-    console.log(product, 'p')
     await product.save();
+    console.log(product, 'p')
 
     const type = await findOrCreateType(typeName);
     await findOrCreateSubType(type, subTypeName, product);
@@ -111,19 +138,31 @@ const convertFilesToDesiredFormat = (receivedFiles) => {
 const createVariantsFromData = (req, typeName, imageList) => {
   const variantsString = req.body
   console.log(variantsString, '5555')
+  console.log(variantsString.variant, '5555')
   const variants = variantsString.variant.map((v, index) => {
-    const colorFake = "64cb721d066ac7727d33ceda";
-    const variant = {
-      color: colorFake,
-      images: imageList[index],
-      variantColor: [],
-    };
-    if (typeName === "Phụ kiện") {
+    console.log(v.color, 'c5555')
+    // const colorFake = "64cb721d066ac7727d33ceda";
+    accessoryId='64c4c7621539b1bd9c0fae5b'
+    if (typeName === 'Phụ kiện') {
+      const variant = {
+        color: v.colorFreeSize,
+        images: imageList[index],
+        variantColor: [],
+      };
       variant.variantColor.push({
         size: "FreeSize",
         quantity: parseInt(req.body.variant[index].freeSize),
       });
+    return variant;
+
+      console.log(parseInt(req.body.variant[index].freeSize))
     } else {
+      
+      const variant = {
+        color: v.color,
+        images: imageList[index],
+        variantColor: [],
+      };
       const sizes = ["S", "M", "L", "XL", "XXL"];
       for (const size of sizes) {
         const sizePropertyName = `size${size}`;
@@ -132,20 +171,25 @@ const createVariantsFromData = (req, typeName, imageList) => {
           quantity: parseInt(req.body.variant[index][sizePropertyName]),
         });
       }
+      return variant;
     }
 
-    return variant;
   });
 
   return variants;
 };
 
+const convertStringToNumbers= (string) =>{
+  let valueNumber = string.replace(/[^\d]/g, '');
+  return parseInt(valueNumber);
+}
 
-const createProduct = (title, sku, price, description, author, variants) => {
+const createProduct = (title, sku, price,cost, description, author, variants) => {
   return new Product({
     title,
     sku,
     price,
+    cost,
     description,
     author,
     variants,
@@ -239,6 +283,63 @@ const getTypeAndSubtypeData = async (req, res) => {
   }
 };
 
+const addFeedback = async (req, res) => {
+  try {
+    const { content_fb, images } = req.body;
+    const { productId, orderId, userId } = req.query;
+
+    console.log(content_fb, images, productId, orderId)
+
+    const feedback = new Feedback({
+      idUser: userId,
+      idOrder: orderId,
+      content: content_fb,
+      images: images,
+    });
+    
+    console.log(req.session.user_id)
+    await feedback.save();
+
+    const product = await Product.findOneAndUpdate(
+      { _id: productId },
+      { $push: { feedbackList: feedback._id } },
+      { new: true }
+    );
+
+    res.status(200).json({ message: 'Feedback added successfully', feedback });
+    console.log('Feedback submitted successfully');
+  } catch (error) {
+    console.error('Error submitting feedback:', error);
+    res.sendStatus(500);
+  }
+};
+
+// const addFeedback = async (req, res) => {
+//   try {
+//     const newFeedback = new Feedback({
+//       orderId: req.body.orderId,
+//       productId: req.body.productId,
+//       content: req.body.content,
+//       images: req.body.images || [],
+//     });
+
+//     console.log(newFeedback); // Log để kiểm tra dữ liệu trước khi lưu
+//     await newFeedback.save();
+
+//         const product = await Product.findOneAndUpdate(
+//       { _id: productId },
+//       { $push: { feedbackList: feedback._id } },
+//       { new: true }
+//     );
+
+//     res.status(200).json({ message: 'Phản hồi đã được lưu thành công' });
+//   } catch (error) {
+//     console.error('Lỗi khi lưu phản hồi:', error);
+//     res.status(500).json({ message: 'Lỗi khi lưu phản hồi', error: error.message });
+//   }
+// };
+
+
 module.exports = {
-  saveProduct, getProduct, softDeleteProduct
+  saveProduct, getProduct,toggleSoftDeleted, softDeleteProduct, addFeedback
 };

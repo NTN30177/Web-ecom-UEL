@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
 <body>
     <div id="main">
         <header id="header">
             <div class="container d-flex">
-                <div class="main-menu" (click)="toggleMainMenu()">
+                <div class="main-menu">
                     <div class="mobile-menu">
-                        <a href="javascript:void(0)" class="icon">
+                        <a href="javascript:void(0)" class="icon" (click)="toggleMainMenu()">
                             <i class="header__icon ti-menu"></i>
                         </a>
                     </div>
@@ -22,55 +20,14 @@
                             <a href="">Sản phẩm</a>
                             <ul class="sub-menu">
                                 <div class="list-submenu">
-                                    <div class="list-submenu__item">
-                                        <h3>Áo</h3>
-                                        <ul>
-                                            <li><a href="">Áo sơ mi</a></li>
-                                            <li><a href="">Áo kiểu</a></li>
-                                            <li><a href="">Áo len</a></li>
+                                    <div class="list-submenu__item" *ngFor="let type of types">
+                                        <h3>{{type.typeName}}</h3>
+                                        <ul *ngFor="let subtype of type.subtypes">
+                                            <li><a href="">{{subtype.subTypeName}}</a></li>
                                         </ul>
                                     </div>
-                                    <div class="list-submenu__item">
-                                        <h3>Áo khoác</h3>
-                                        <ul>
-                                            <li><a href="">Áo sơ mi</a></li>
-                                            <li><a href="">Áo kiểu</a></li>
-                                            <li><a href="">Áo len</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="list-submenu__item">
-                                        <h3>Quần & Jumpsuit</h3>
-                                        <ul>
-                                            <li><a href="">Áo sơ mi</a></li>
-                                            <li><a href="">Áo kiểu</a></li>
-                                            <li><a href="">Áo len</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="list-submenu__item">
-                                        <h3>Phụ kiện</h3>
-                                        <ul>
-                                            <li><a href="">Áo sơ mi</a></li>
-                                            <li><a href="">Áo kiểu</a></li>
-                                            <li><a href="">Áo len</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="list-submenu__item">
-                                        <h3>Chân váy</h3>
-                                        <ul>
-                                            <li><a href="">Áo sơ mi</a></li>
-                                            <li><a href="">Áo kiểu</a></li>
-                                            <li><a href="">Áo len</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="list-submenu__item">
-                                        <h3>Đầm</h3>
-                                        <ul>
-                                            <li><a href="">Áo sơ mi</a></li>
-                                            <li><a href="">Áo kiểu</a></li>
-                                            <li><a href="">Áo len</a></li>
-                                        </ul>
-                                    </div>
-
+                                
+            
                                 </div>
                             </ul>
                         </li>
@@ -84,134 +41,28 @@
                         </div>
                         <ul class="menu-mb">
                             <li class="has-child">
-                                <a href="javascript:void(0)">
+                                <a href="javascript:void(0)" (click)="toggleSubMenu()">
                                     Sản phẩm
-                                    <span class="arrows">
+                                    <span class="arrows" [class.open]="submenuOpen">
                                         <i class="ti-plus"></i>
                                         <i class="ti-minus"></i>
                                     </span>
                                 </a>
-                                <ul class="sub-menu-mb" [style.display]="submenuOpen ? 'block' : 'none'">
-                                    <li class="has-sub-child">
-                                        <a href="javascript:void(0)">
-                                            áo
-                                            <span class="arrows">
-                                                <i class="ti-plus"></i>
-                                                <i class="ti-minus"></i>
-                                            </span>
+                                <ul class="sub-menu-mb">
+                                    <li class="has-sub-child" *ngFor="let item of menuItems; let i = index" (click)="closeSubMenu()">
+                                        <a href="javascript:void(0)" (click)="toggleSubMenuChild($event, i)">
+                                          {{ item.label }}
+                                          <span class="arrows child">
+                                            <i class="ti-plus"></i>
+                                            <i class="ti-minus"></i>
+                                          </span>
                                         </a>
-                                        <ul class="child-sub" style="display:none">
-                                            <li>
-                                                <a href="">Áo sơ mi</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Áo kiểu</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Áo len</a>
-                                            </li>
+                                        <ul class="child-sub" #childSubmenu style="display:none">
+                                          <li *ngFor="let subItem of item.subItems">
+                                            <a href="">{{ subItem.label }}</a>
+                                          </li>
                                         </ul>
-                                    </li>
-                                    <li class="has-sub-child">
-                                        <a href="javascript:void(0)">
-                                            áo khoác
-                                            <span class="arrows">
-                                                <i class="ti-plus"></i>
-                                                <i class="ti-minus"></i>
-                                            </span>
-                                        </a>
-                                        <ul class="child-sub" style="display:none">
-                                            <li>
-                                                <a href="">Áo sơ mi</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Áo kiểu</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Áo len</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="has-sub-child">
-                                        <a href="javascript:void(0)">
-                                            quần & Jumpsuit
-                                            <span class="arrows">
-                                                <i class="ti-plus"></i>
-                                                <i class="ti-minus"></i>
-                                            </span>
-                                        </a>
-                                        <ul class="child-sub" style="display:none">
-                                            <li>
-                                                <a href="">Áo sơ mi</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Áo kiểu</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Áo len</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="has-sub-child">
-                                        <a href="javascript:void(0)">
-                                            phụ kiện
-                                            <span class="arrows">
-                                                <i class="ti-plus"></i>
-                                                <i class="ti-minus"></i>
-                                            </span>
-                                        </a>
-                                        <ul class="child-sub" style="display:none">
-                                            <li>
-                                                <a href="">Áo sơ mi</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Áo kiểu</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Áo len</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="has-sub-child">
-                                        <a href="javascript:void(0)">
-                                            chân váy
-                                            <span class="arrows">
-                                                <i class="ti-plus"></i>
-                                                <i class="ti-minus"></i>
-                                            </span>
-                                        </a>
-                                        <ul class="child-sub" style="display:none">
-                                            <li>
-                                                <a href="">Áo sơ mi</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Áo kiểu</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Áo len</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="has-sub-child">
-                                        <a href="javascript:void(0)">
-                                            đầm
-                                            <span class="arrows">
-                                                <i class="ti-plus"></i>
-                                                <i class="ti-minus"></i>
-                                            </span>
-                                        </a>
-                                        <ul class="child-sub" style="display:none">
-                                            <li>
-                                                <a href="">Áo sơ mi</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Áo kiểu</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Áo len</a>
-                                            </li>
-                                        </ul>
-                                    </li>
+                                      </li>
                                 </ul>
                             </li>
                             <li>
@@ -224,214 +75,207 @@
                                 <a href="javascript:void(0)">Về chúng tôi</a>
                             </li>
                         </ul>
-                        <div class="close-menu">
-                            <i class="ti-close" (click)="closeMainMenu($event)"></i>
+                        <div class="close-menu" (click)="closeMobileMenu()">
+                            <i class="ti-close"></i>
                         </div>
                     </div>
                 </div>
                 <!-- main menu -->
                 <div class="site-brand">
                     <a href="">
-
+                        
                     </a>
                 </div>
                 <div class="right-header">
-                    <form (click)="toggleSearchForm()" [ngClass]="{'active': isSearchFormActive}"
-                        class="search-form hide-on-mobile-tablet">
+                    <form (click)="toggleSearchForm($event)" class="search-form hide-on-mobile-tablet">
                         <button class="search-form__btn">
-                            <i class="eadher__icon ti-search icon"></i>
+                          <i class="eadher__icon ti-search icon"></i>
                         </button>
-                        <input type="text" id="search-form__input" placeholder="TÌM KIẾM SẢN PHẨM">
+                        <input type="text" id="search-form__input" placeholder="TÌM KIẾM SẢN PHẨM" (focus)="toggleSearchForm($event)" #searchInput >
                         <div class="search-form__quick-search" (click)="handleQuickSearchClick($event)">
                             <div class="search-items search-history">
                                 <h4 class="">Vừa tìm kiếm</h4>
-                                <div class="search-item__hot">
-                                    <label for="" class="search-item__hot-child">
-                                        <a href="" class="search-item__hot-child-link">Đầm</a>
+                                <div class="search-item__hot" >
+                                    <label for="" class="search-item__hot-child" *ngFor="let key of accountInfo.historySearch">
+                                        <a href="" class="search-item__hot-child-link">{{key}}</a>
                                     </label>
-                                    <label for="" class="search-item__hot-child">
-                                        <a href="" class="search-item__hot-child-link">trễ vai</a>
-                                    </label>
-                                    <label for="" class="search-item__hot-child">
-                                        <a href="" class="search-item__hot-child-link">Áo khoác</a>
-                                    </label>
-                                    <label for="" class="search-item__hot-child">
-                                        <a href="" class="search-item__hot-child-link">Quần</a>
-                                    </label>
-                                    <label for="" class="search-item__hot-child">
-                                        <a href="" class="search-item__hot-child-link">Áo sơ mi</a>
-                                    </label>
-                                    <label for="" class="search-item__hot-child">
-                                        <a href="" class="search-item__hot-child-link">Vest</a>
-                                    </label>
-                                    <label for="" class="search-item__hot-child">
-                                        <a href="" class="search-item__hot-child-link">parka</a>
-                                    </label>
-                                    <label for="" class="search-item__hot-child">
-                                        <a href="" class="search-item__hot-child-link">tweed</a>
-                                    </label>
-                                    <label for="" class="search-item__hot-child">
-                                        <a href="" class="search-item__hot-child-link">croptop</a>
-                                    </label>
-                                    <label for="" class="search-item__hot-child">
-                                        <a href="" class="search-item__hot-child-link">Chân váy</a>
-                                    </label>
-                                    <label for="" class="search-item__hot-child">
-                                        <a href="" class="search-item__hot-child-link">Lông cừu</a>
-                                    </label>
+                                    
 
-
+                                    
                                 </div>
                             </div>
                             <div class="search-items search-suggest">
                                 <h4>Sản phẩm gợi ý</h4>
-                                <div class="search-item__hot history_list">
+                                <div class="search-item__hot history_list" *ngFor="let product of dataLiveSearch">                                    
                                     <a class="product-suggest" href="">
-                                        <div class="sg-item-img">
-                                            <img src="https://pubcdn.ivymoda.com/files/product/thumab/400/2023/08/16/193646644a4ecec344b5fd32c438f2d1.JPG"
-                                                alt="">
-                                        </div>
-                                        <div class="sg-item-info">
-                                            <title>Đầm chữ A dạo phố</title>
-                                            <div class="item-info">
-                                                <div class="sg-item-price">2.390.000₫</div>
-                                                <div class="box-p">
-                                                    <p class="price-old">2.790.000₫</p>
-                                                    <span class="percent">-14%</span>
-                                                </div>
+                                            <div class="sg-item-img">
+                                                <img src="http://localhost:3000/productImages/{{product.variants[0].images[0]}}" alt="">
                                             </div>
+                                            <div class="sg-item-info">
+                                                <title>{{product.title}}</title>
+                                                <div class="item-info">
+                                                    <div class="sg-item-price">{{formatMoneyVietNam(product.price)}}</div>
+                                                    <div class="box-p">
+                                                        <p class="price-old">2.790.000₫</p>
+                                                        <span class="percent">-14%</span>
+                                                    </div>
+                                                </div>
 
-                                        </div>
-                                    </a>
-                                    <a class="product-suggest">
-                                        <div class="sg-item-img">
-                                            <img src="https://pubcdn.ivymoda.com/files/product/thumab/400/2022/08/26/936d51ecf81bbb23ea0ce27ec599d931.jpg"
-                                                alt="">
-                                        </div>
-                                        <div class="sg-item-info">
-                                            <title>Đầm thiết kế Balloon</title>
-                                            <div class="item-info">
-                                                <div class="sg-item-price">537.000₫</div>
-                                                <div class="box-p">
-                                                    <p class="price-old">1.790.000đ</p>
-                                                    <span class="percent">-70%</span>
-                                                </div>
                                             </div>
-                                        </div>
                                     </a>
-                                    <a class="product-suggest">
-                                        <div class="sg-item-img">
-                                            <img src="https://pubcdn.ivymoda.com/files/product/thumab/400/2023/07/06/9949c6f5d084cae37f3ce1d667d98272.jpg"
-                                                alt="">
-                                        </div>
-                                        <div class="sg-item-info">
-                                            <title>Chân Váy Dài Phối Túi Xẻ Tà</title>
-                                            <div class="item-info">
-                                                <div class="sg-item-price">937.000₫</div>
-                                                <div class="box-p">
-                                                    <p class="price-old">2.190.000đ</p>
-                                                    <span class="percent">-70%</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <li class="product-suggest">
-                                        <div class="sg-item-img">
-                                            <img src="https://pubcdn.ivymoda.com/files/product/thumab/400/2023/04/03/09c34ccc8754f937233800f2d143a5aa.jpg"
-                                                alt="">
-                                        </div>
-                                        <div class="sg-item-info">
-                                            <title>Chân Váy Xếp Ly Dáng Suông</title>
-                                            <div class="item-info">
-                                                <div class="sg-item-price">857.000₫</div>
-                                                <div class="box-p">
-                                                    <p class="price-old">1.790.000đ</p>
-                                                    <span class="percent">-30%</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+                                   
                                 </div>
                             </div>
                         </div>
                     </form>
                     <div class="header-actions">
                         <div class="item item-headphone hide-on-mobile-tablet">
-                            <a href="" class="icon">
-                                <i class="header__icon ti-headphone"></i>
-                            </a>
+                          <a href="" class="icon">
+                            <i class="header__icon ti-headphone"></i>
+                          </a>
                         </div>
-                        <div class="item item-headphone hide-on-mobile-tablet"  *ngIf="!userId">
-                            <a href="javascript:void(0)" class="icon icon-account" (click)="toggleSubAction()">
-                                <i class="header__icon ti-user"></i>
-                            </a>
-                            <div class="sub-action">
-                                <div class="top-action">
-                                    <a href="javascript:void(0)" class="icon">
-                                        <div class="tit-top-action">Tài khoản của tôi</div>
-                                    </a>
-                                </div>
-                                <ul>
-                                    <li><a href=""><i class="ti-id-badge"></i> Thông tin tài khoản</a></li>
-                                    <li><a href=""><i class="ti-reload"></i> Quản lý đơn hàng</a></li>
-                                    <li><a href=""><i class="ti-location-pin"></i> Sổ địa chỉ</a></li>
-                                    <li><a href=""><i class="ti-heart"></i> Sản phẩm yêu thích</a></li>
-                                    <li><a href=""><i class="ti-support"></i> Yêu cầu hỗ trợ</a></li>
-                                    <li><a href=""><i class="ti-shift-left"></i> Đăng xuất</a></li>
-                                </ul>
+                        <div *ngIf="!isLogin" routerLink="login" class="item item-headphone hide-on-mobile-tablet">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></svg>
+                        </div>
+                        <div class="item item-headphone hide-on-mobile-tablet" *ngIf="isLogin">
+                          <a href="javascript:void(0)" class="icon icon-account" (click)="toggleSubAction()">
+                            <i class="header__icon ti-user"></i>                                
+                          </a>
+                          <div class="sub-action">
+                            <div class="top-action">
+                              <a href="javascript:void(0)" class="icon">
+                                <div class="tit-top-action">Tài khoản của tôi</div>
+                              </a>
                             </div>
+                            <ul>
+                              <li><a href=""><i class="ti-id-badge" routerLink="/account/info"></i> Thông tin tài khoản</a></li>
+                              <li><a href=""><i class="ti-reload"></i> Quản lý đơn hàng</a></li>
+                              <li><a href=""><i class="ti-location-pin"></i> Sổ địa chỉ</a></li>
+                              <li><a href=""><i class="ti-heart"></i> Sản phẩm yêu thích</a></li>
+                              <li><a href=""><i class="ti-support"></i> Yêu cầu hỗ trợ</a></li>
+                              <li><a href="" (click)="logout()"><i class="ti-shift-left" ></i> Đăng xuất</a></li>
+                            </ul>
+                          </div>
                         </div>
-                        <div  *ngIf="userId">Đăng nhập</div>
                         <div class="item item-shopping">
-                            <a href="javascript:void(0)" class="icon icon-shopping-cart" (click)="toggleCart()">
-                                <i class="header__icon ti-shopping-cart"></i>
-                                <span class="number-cart">0</span>
-                            </a>
-                            <div class="sub-action-cart sub-action">
-                                <div class="top-action">
-                                    <h3>Giỏ hàng <span class="number-cart">0</span></h3>
-                                </div>
-                                <div class="main-action">
-                                    <div class="item-product-cart d-flex" *ngIf="quantityInputValue !== 0">
-                                        <div class="thumb-product-cart">
-                                            <img src="https://pubcdn.ivymoda.com/files/product/thumab/400/2023/08/16/eb36f523de15af6b9112db2aa322f0af.JPG"
-                                                alt="">
-                                        </div>
-                                        <div class="info-product-cart">
-                                            <h3><a href="">Zuýp 2 lớp xếp ly bản lớn</a></h3>
-                                            <div class="info-overview d-flex">
-                                                <p class="overview-color"><strong>Màu sắc:</strong> Be vàng</p>
-                                                <p><strong style="text-transform: uppercase">Size:</strong> S</p>
-                                            </div>
-                                            <div class="info-price-quantity d-flex">
-                                                <div class="price-quantity-minus price-quantity"
-                                                    (click)="updateQuantity('minus')"><i class="ti-minus"></i></div>
-                                                <input id="quantityInput" type="number" [(ngModel)]="quantityInputValue"
-                                                    (change)="updateQuantity('input')" />
-                                                <div class="price-quantity-plus price-quantity"
-                                                    (click)="updateQuantity('plus')"><i class="ti-plus"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="bottom-action">
-                                    <input type="hidden">
-                                    <div class="total-price">Tổng cộng: <strong>595.000₫</strong></div>
-                                    <div class="box-action">
-                                        <a href="" class="action-view-cart">Xem giỏ hàng</a>
-                                        <a href="" class="action-login">Đăng nhập</a>
-                                    </div>
-                                </div>
-                                <div class="close-action" (click)="closeCart($event)"><i class="ti-close"></i></div>
+                          <a href="javascript:void(0)" class="icon icon-shopping-cart" (click)="toggleCart()">
+                            <i class="header__icon ti-shopping-cart"></i>
+                            <span class="number-cart">{{cartNumberItem}}</span>
+                          </a>
+                          <div class="sub-action-cart sub-action">
+                            <div class="top-action">
+                              <h3>Giỏ hàng <span class="number-cart">{{cartNumberItem}}</span></h3>
                             </div>
+                            <div class="main-action">
+                              <div class="item-product-cart d-flex" *ngIf="quantityInputValue !== 0">
+                                <div class="thumb-product-cart">
+                                  <img src="https://pubcdn.ivymoda.com/files/product/thumab/400/2023/08/16/eb36f523de15af6b9112db2aa322f0af.JPG" alt="">
+                                </div>
+                                <div class="info-product-cart">
+                                  <h3><a href="">Zuýp 2 lớp xếp ly bản lớn</a></h3>
+                                  <div class="info-overview d-flex">
+                                    <p class="overview-color"><strong>Màu sắc:</strong> Be vàng</p>
+                                    <p><strong style="text-transform: uppercase">Size:</strong> S</p>
+                                  </div>
+                                  <div class="info-price-quantity d-flex">
+                                    <div class="price-quantity-minus price-quantity" (click)="updateQuantity('minus')"><i class="ti-minus"></i></div>
+                                    <input id="quantityInput" type="number" [(ngModel)]="quantityInputValue" (change)="updateQuantity('input')" />
+                                    <div class="price-quantity-plus price-quantity" (click)="updateQuantity('plus')"><i class="ti-plus"></i></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="bottom-action">
+                              <input type="hidden">
+                              <div class="total-price">Tổng cộng: <strong>595.000₫</strong></div>
+                              <div class="box-action">
+                                <a href="" class="action-view-cart" routerLink="/cart" (click)="closeCart($event)">Xem giỏ hàng</a>
+                                <a href="" class="action-login" *ngIf="!isLogin">Đăng nhập</a>
+                              </div>
+                            </div>
+                            <div class="close-action" (click)="closeCart($event)"><i class="ti-close"></i></div>
+                          </div>
                         </div>
                     </div>
-
-
+                      
+                
+                </div>
+            </div>
+            <div class="container">
+                <div class="nav-bottom-mb">
+                    <div class="item-nav-bot">
+                        <div class="item-nav" onclick="toggleSubItemNav(this)">
+                            <i class="icon-tab-mb ti-search"></i>
+                            <a href="#" class="link-nav-bot">Tìm kiếm</a>
+                        </div>
+                        <div class="sub-item-nav sub-item-nav-search">
+                            <form action="" class="search-form">
+                                <button class="search-form__btn">
+                                    <i class="eadher__icon ti-search icon"></i>
+                                </button>
+                                <input type="text" id="search-form__input" placeholder="TÌM KIẾM SẢN PHẨM">
+                                <div class="search-form__quick-search">
+                                    <div class="search-items">
+                                        <h4 class="">Tìm kiếm nhiều nhất</h4>
+                                        <div class="search-item__hot" *ngFor="let key of accountInfo.historySearch">
+                                            <label for="" class="search-item__hot-child">
+                                                <a href="" class="search-item__hot-child-link">{{key}}</a>
+                                            </label>
+                                          
+                                        </div>
+                                    </div>
+                                    <div class="search-items">
+                                        <h4>Vừa tìm kiếm</h4>
+                                        <ul class="search-item__hot d-flex history_list">
+                                            <li class="search-item__hot-child">
+                                                <a href="" class="search-item__hot-child-link">parka</a>
+                                            </li>
+                                            <li class="search-item__hot-child">
+                                                <a href="" class="search-item__hot-child-link">narsu</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="item-nav-bot">
+                        <div class="item-nav">
+                            <i class="icon-tab-mb ti-user"></i>
+                            <a href="#" class="link-nav-bot">Đăng nhập</a>
+                        </div>
+                    </div>
+                    <div class="item-nav-bot">
+                        <div class="item-nav">
+                            <i class="icon-tab-mb ti-headphone"></i>
+                            <a href="#" class="link-nav-bot">Trợ giúp</a>
+                        </div>
+                    </div>
+                    <div class="item-nav-bot">
+                        <div class="item item-headphone item-nav" *ngIf="isLogin">
+                            <a href="javascript:void(0)" class="icon icon-account" (click)="toggleSubAction()">
+                              <i class="header__icon ti-user"></i>                                
+                            </a>
+                            <div class="sub-action">
+                              <div class="top-action">
+                                <a href="javascript:void(0)" class="icon">
+                                  <div class="tit-top-action">Tài khoản của tôi</div>
+                                </a>
+                              </div>
+                              <ul>
+                                <li><a href=""><i class="ti-id-badge" routerLink="/account/info"></i> Thông tin tài khoản</a></li>
+                                <li><a href=""><i class="ti-reload"></i> Quản lý đơn hàng</a></li>
+                                <li><a href=""><i class="ti-location-pin"></i> Sổ địa chỉ</a></li>
+                                <li><a href=""><i class="ti-heart"></i> Sản phẩm yêu thích</a></li>
+                                <li><a href=""><i class="ti-support"></i> Yêu cầu hỗ trợ</a></li>
+                                <li><a href="" (click)="logout()"><i class="ti-shift-left" ></i> Đăng xuất</a></li>
+                              </ul>
+                            </div>
+                          </div>
+                    </div>
                 </div>
             </div>
         </header>
     </div>
 </body>
-
 </html>

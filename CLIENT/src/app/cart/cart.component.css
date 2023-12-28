@@ -1,4 +1,3 @@
-
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
 
 body {
@@ -39,7 +38,7 @@ input[type="checkbox"] {
 }
 
 .cart-container {
-  margin: auto;
+  margin: 110px auto auto auto;
   max-width: 800px;
   border: 1px solid #ccc;
   border-radius: 15px;
@@ -367,123 +366,136 @@ overflow-x: auto;
 .total-discount > span {
   color: red;
 }
-.red{
-  color:red
+.red {
+  color: red;
 }
 
 .voucher-list {
-    display: flex;
-    list-style: none;
-    padding-left: 0;
-    max-width: 100%;
-    overflow-x: auto;
-  }
-  .voucher-list::-webkit-scrollbar {
-    display: none;
-  }
-  .voucher-item {
-    cursor: pointer;
-    flex-shrink: 0;
-    margin-right: 10px;
-    position: relative;
-  }
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+  max-width: 100%;
+  overflow-x: auto;
+}
+.voucher-list::-webkit-scrollbar {
+  display: none;
+}
+.voucher-item {
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-right: 10px;
+  position: relative;
+}
 
-  .voucher-item__div {
-    text-decoration: none;
-    overflow: hidden;
-    text-align: center;
-    width: fit-content;
-    display: block;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    border-radius: 4px;
-    font-weight: 300;
-    user-select: none;
-    -webkit-user-select: none;
-    /* -webkit-tap-highlight-color: transparent; */
-    padding: 0 6px;
-  }
+.voucher-item__div {
+  text-decoration: none;
+  overflow: hidden;
+  text-align: center;
+  width: fit-content;
+  display: block;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  border-radius: 4px;
+  font-weight: 300;
+  user-select: none;
+  -webkit-user-select: none;
+  /* -webkit-tap-highlight-color: transparent; */
+  padding: 0 6px;
+}
 
-  /* hover */
-  .voucher-hover {
-    position: relative;
-    width: 200px;
-    height: 200px;
-  }
+/* hover */
+.voucher-hover {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
 
-  .overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-46.5%, -50%);
-    width: 90.5%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.3s;
-    border-radius: 11px;
-    z-index: 2
-  }
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-46.5%, -50%);
+  width: 90.5%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+  border-radius: 11px;
+  z-index: 2;
+}
 
-  .voucher-item:hover .overlay {
-    opacity: 1;
-  }
-  .overlay>button {
-    border-radius: 8px;
-    padding: 6px 8px;
-    background-color: #fff;
-  }
-  .choose{
-    display: block!important;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-46.5%, -50%);
-    width: 90.5%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 1;
-    transition: opacity 0.3s;
-    border-radius: 11px;
-    z-index: 2
+.voucher-item:hover .overlay {
+  opacity: 1;
+}
+.overlay > button {
+  border-radius: 8px;
+  padding: 6px 8px;
+  background-color: #fff;
+}
+.choose {
+  display: block !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-46.5%, -50%);
+  width: 90.5%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 0.3s;
+  border-radius: 11px;
+  z-index: 2;
+}
+.voucher-item__discount-choose {
+  position: absolute;
+  top: 0;
+  right: 16px;
+  width: 40px;
+  height: 20px;
+  text-align: center;
+  background-color: rgba(76, 7, 7, 0.94);
+}
+.voucher-item__discount-choose::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  border-width: 0 20px 4px;
+  border-style: solid;
+  color: rgba(76, 7, 7, 0.94);
+  border-color: transparent currentColor transparent currentColor;
+}
+.voucher-item__discount-label {
+  color: white;
+  font-size: 0.4rem;
+  /* line-height: 0.6rem; */
+  position: relative;
+  top: -4px;
+  font-weight: 600;
+}
+.no-cart img {
+  /* Ensure responsiveness: */
+  width: 100%;
+  height: auto;
 
-  }
-  .voucher-item__discount-choose {
-    position: absolute;
-    top: 0;
-    right: 16px;
-    width: 40px;
-    height: 20px;
-    text-align: center;
-    background-color: rgba(76, 7, 7, 0.94);
-  }
-  .voucher-item__discount-choose::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    border-width: 0 20px 4px;
-    border-style: solid;
-    color: rgba(76, 7, 7, 0.94);
-    border-color: transparent currentColor transparent currentColor;
-  }
-  .voucher-item__discount-label {
-    color: white;
-    font-size: 0.4rem;
-    /* line-height: 0.6rem; */
-    position: relative;
-    top: -4px;
-    font-weight: 600;
-  }
-  
-
-  
+  /* Optional: Set a maximum width for larger screens: */
+  max-width: 400px; /* Adjust as needed */
+}
+.no-cart__info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.btn-submit__returnHomepage{
+  padding-top: 20px;
+}

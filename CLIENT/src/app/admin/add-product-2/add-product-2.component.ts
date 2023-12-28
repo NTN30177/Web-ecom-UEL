@@ -78,7 +78,7 @@ export class AddProduct2Component implements OnInit {
     this.addVariant();
     this.apiColor()
     this.apiType()
-    this.apiCollection('64c4c7f4e2a184d32cff6540')
+    this.apiCollection('Bộ sưu tập')
   }
 
   getVariantControl(index: number, controlName: string) {
@@ -218,12 +218,12 @@ export class AddProduct2Component implements OnInit {
           variantFormGroup.get('sizeXL')?.updateValueAndValidity();
           variantFormGroup.get('sizeXXL')?.updateValueAndValidity();
 
-          variantFormGroup.get('color')?.disable();
-          variantFormGroup.get('sizeS')?.disable();
-          variantFormGroup.get('sizeL')?.disable();
-          variantFormGroup.get('sizeM')?.disable();
-          variantFormGroup.get('sizeXL')?.disable();
-          variantFormGroup.get('sizeXXL')?.disable();
+          // variantFormGroup.get('color')?.disable();
+          // variantFormGroup.get('sizeS')?.disable();
+          // variantFormGroup.get('sizeL')?.disable();
+          // variantFormGroup.get('sizeM')?.disable();
+          // variantFormGroup.get('sizeXL')?.disable();
+          // variantFormGroup.get('sizeXXL')?.disable();
         }
       );
     }
@@ -237,9 +237,10 @@ export class AddProduct2Component implements OnInit {
     this.showInputCollection = type === 'collectionName';
   }
 
+  accessoryId='Phụ kiện'
   selectChange(event: any) {
     const selectedValue = event.target.value;
-    if (selectedValue == 'Phụ kiện') {
+    if (selectedValue == this.accessoryId) {//Phụ kiện
       this.accessory = true;
       this.clearAllVariants();
       this.addVariant();
@@ -257,7 +258,7 @@ export class AddProduct2Component implements OnInit {
       this.handleTypeName();
     } else if (type === 'subTypeName') {
       this.handleSubTypeName();
-    } else if (type === 'collection') {
+    } else if (type === 'collectionName') {
       this.handleCollection();
     }
   }
@@ -392,6 +393,7 @@ export class AddProduct2Component implements OnInit {
       variantsArray.removeAt(0);
     }
   }
+  
 
   imageCollections: { [fieldId: string]: File[] } = {};
 

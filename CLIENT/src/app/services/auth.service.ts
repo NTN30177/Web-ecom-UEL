@@ -1,15 +1,41 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map, retry, throwError } from 'rxjs';
+import { Observable, catchError, map, retry, throwError, Subject, BehaviorSubject } from 'rxjs';
 import { local } from '../ENV/envi';
-import { IDistrictDocument, IProvinceDocument, IWardDocument } from '../interfaces/address';
+import {
+  IDistrictDocument,
+  IProvinceDocument,
+  IWardDocument,
+} from '../interfaces/address';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  private isLoginObservable: Observable<boolean>;
+  private userEmailSource = new BehaviorSubject<any[]>([]);
+  userEmail$ = this.userEmailSource.asObservable();
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient) {
+    this.isLoginObservable = this.isLoginSubject.asObservable();
+  }
+  // cartSubject = new Subject<any>();
+  idUserSubject = new BehaviorSubject<any>(null);
+  isLoginSubject = new BehaviorSubject<any>(null);
+  emailUserSubject = new BehaviorSubject<any>(null);
+  
+  cartSubject = new BehaviorSubject<any>(null);
+  updateCart(total_quantity: any) {
+    this.cartSubject.next(total_quantity);
+  }
+
+  getIsLoginObservable(): Observable<boolean> {
+    return this.isLoginObservable;
+  }
 
   getProvince(): Observable<any> {
     const headers = new HttpHeaders().set(
@@ -20,7 +46,7 @@ export class AuthService {
       headers: headers,
       responseType: 'text',
     };
-    return this._http.get<any>(`${local}/api/province/`,requestOptions).pipe(
+    return this._http.get<any>(`${local}/api/province/`, requestOptions).pipe(
       map((res) => JSON.parse(res) as IProvinceDocument),
       retry(3),
       catchError(this.handleError)
@@ -35,12 +61,14 @@ export class AuthService {
       headers: headers,
       responseType: 'text',
     };
-    console.log(provinceId)
-    return this._http.get<any>(`${local}/api/district/${provinceId}`,requestOptions).pipe(
-      map((res) => JSON.parse(res) as IDistrictDocument),
-      retry(3),
-      catchError(this.handleError)
-    );
+    console.log(provinceId);
+    return this._http
+      .get<any>(`${local}/api/district/${provinceId}`, requestOptions)
+      .pipe(
+        map((res) => JSON.parse(res) as IDistrictDocument),
+        retry(3),
+        catchError(this.handleError)
+      );
   }
   getWard(districtId: any): Observable<any> {
     const headers = new HttpHeaders().set(
@@ -51,12 +79,16 @@ export class AuthService {
       headers: headers,
       responseType: 'text',
     };
-    return this._http.get<any>(`${local}/api/ward/${districtId}`,requestOptions).pipe(
-      map((res) => JSON.parse(res) as IWardDocument),
-      retry(3),
-      catchError(this.handleError)
-    );
+    return this._http
+      .get<any>(`${local}/api/ward/${districtId}`, requestOptions)
+      .pipe(
+        map((res) => JSON.parse(res) as IWardDocument),
+        retry(3),
+        catchError(this.handleError)
+      );
   }
+
+  
   postInfoUser(data: any): Observable<any> {
     const headers = new HttpHeaders().set(
       'Content-Type',
@@ -68,7 +100,7 @@ export class AuthService {
     };
     return this._http
       .post<any>(
-        `${local}/register`,
+        `${local}/user/register`,
         data
         // requestOptions
       )
@@ -77,7 +109,7 @@ export class AuthService {
         catchError(this.handleError)
       );
   }
-  verifiedInForUser(data: any): Observable<any> {
+  verifiedInForUserService(data: any): Observable<any> {
     const headers = new HttpHeaders().set(
       'Content-Type',
       'application/json;charset=utf-8'
@@ -86,7 +118,7 @@ export class AuthService {
       headers: headers,
       responseType: 'text',
     };
-    console.log('122')
+    console.log('122');
     return this._http
       .post<any>(
         `${local}/user/login`,
@@ -97,10 +129,13 @@ export class AuthService {
         map((res) => res),
         catchError(this.handleError)
       );
-
   }
 
-  getUserID(): Observable<any> {
+
+
+  // isLoginSubject = new Subject<any>();
+
+  forGotPwProcessService(email: any): Observable<any> {
     const headers = new HttpHeaders().set(
       'Content-Type',
       'text/plain;charset=utf-8'
@@ -109,14 +144,18 @@ export class AuthService {
       headers: headers,
       responseType: 'text',
     };
-    return this._http.get<any>(`${local}/user/id`,requestOptions).pipe(
-      map((res) => JSON.parse(res)),
-      retry(3),
-      catchError(this.handleError)
-    );
+    return this._http
+      .get<any>(`${local}/user/forgot-pw/${email}`, requestOptions)
+      .pipe(
+        map((res) => JSON.parse(res) as IWardDocument),
+        retry(3),
+        catchError(this.handleError)
+      );
   }
-  
 
+  isEmailVerified(email: string): Observable<boolean> {
+    return this._http.get<boolean>(`${local}/user/is-email-verified/${email}`);
+  }
 
   handleError(error: HttpErrorResponse) {
     return throwError(() => new Error(error.message));

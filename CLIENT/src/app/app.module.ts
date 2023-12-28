@@ -49,13 +49,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { CartComponent } from './cart/cart.component';
 import { AddColorComponent } from './admin/add-color/add-color.component';
-import { FeedbackOrderComponent } from './manage-account/account-order/feedback-order/feedback-order.component';
-import { FeedbackOrderSuccessComponent } from './manage-account/account-order/feedback-order-success/feedback-order-success.component';
+import { FeedbackOrderComponent } from './manage-account/order-tracking/feedback-order/feedback-order.component';
+import { FeedbackOrderSuccessComponent } from './manage-account/order-tracking/feedback-order-success/feedback-order-success.component';
 import { OrderTrackingComponent } from './manage-account/order-tracking/order-tracking.component';
 import { TermPolicyComponent } from './term-policy/term-policy.component';
 import { ManageOrderComponent } from './admin/manage-order/manage-order.component';
 import { DeliveryPolicyComponent } from './delivery-policy/delivery-policy.component';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
+import { ForgetPwComponent } from './forget-pw/forget-pw.component';
+import { Select2Module } from 'ng-select2-component';
+import { PaymentThankComponent } from './payment/payment-thank/payment-thank.component';
+
 
 
 
@@ -92,12 +96,13 @@ import { DatePipe } from '@angular/common';
     AddColorComponent,
     FeedbackOrderComponent,
     FeedbackOrderSuccessComponent,
-
     OrderTrackingComponent,
     TermPolicyComponent,
     DeliveryPolicyComponent,
     ManageOrderComponent,
-    DeliveryPolicyComponent
+    DeliveryPolicyComponent,
+    ForgetPwComponent,
+    PaymentThankComponent,
   ],
   imports: [
     BrowserModule,
@@ -123,12 +128,14 @@ import { DatePipe } from '@angular/common';
     CarouselModule,
     MatButtonModule,
     NzFormModule,
-
+    CommonModule,
+    Select2Module,
+    
 
 
 
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, CartComponent, HomePageComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -12,7 +12,7 @@ interface IVariantColor {
   }
   
   interface IProduct {
-    id:string
+    _id:string
     title: string;
     slug: string;
     price: number;
@@ -45,6 +45,7 @@ interface IVariantColor {
   }
   
   interface IOrder {
+    // private _id(arg0: string, _id: any): unknown;
     orderItems: string[]; // Assuming order item IDs are stored as strings, modify accordingly
     shippingAddress: string;
     ward: string;

@@ -1,6 +1,6 @@
 <div id="popup-address-add" class="popup-address" [formGroup]="addressForm">
 
-    <div class="align-self-end mb-2 " (click)= "closePopup()">
+    <div class="align-self-end mb-2" (click)="closePopup()">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg"
             viewBox="0 0 16 16">
             <path
@@ -8,47 +8,82 @@
         </svg>
     </div>
 
-    <div class="row ">
-        <div class="col-sm-6 col-12 ">
-            <input type="text" placeholder="Họ tên" formControlName="fullName">
-        </div>
-        <div class="col-sm-6 col-12">
-            <input type="text" placeholder="Số điện thoại" formControlName="phoneNumber">
-        </div>
-    </div>
     <div class="row">
         <div class="col-sm-6 col-12">
-            <input type="text" placeholder="Địa chỉ" formControlName="address">
+            <input type="text" placeholder="Họ tên"  [ngClass]="{ 'has-error': addressForm.get('fullName')?.hasError('required') && addressForm.get('fullName')?.touched }" formControlName="fullName" />
+            <div *ngIf="addressForm.get('fullName')?.hasError('required') && addressForm.get('fullName')?.touched"
+                class="error-message">
+                Họ tên là bắt buộc
+            </div>
         </div>
-        <div class="col-sm-6 col-12">
-            <select class="address-select" formControlName="province">
-                <option value="" selected>Chọn tỉnh/thành</option>
-            </select>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6 col-12">
-            <select formControlName="district" class="address-select">
-                <option value="" selected>Chọn quận/huyện</option>
-            </select>
-        </div>
-        <div class="col-sm-6 col-12">
-            <select class="address-select" formControlName="ward">
-                <option value="" selected>Chọn phường/xã</option>
-            </select>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="form-check">
-                <input class="form-check-input check-custom" type="checkbox" id="isDefault" formControlName="isDefault">
-                <label class="form-check-label " for="isDefault">Đặt làm mặc định</label>
-
+        <div class="col-sm-6 col-12" >
+            <input type="text" placeholder="Số điện thoại" [ngClass]="{ 'has-error': addressForm.get('phoneNumber')?.hasError('required') && addressForm.get('phoneNumber')?.touched }" formControlName="phoneNumber" />
+            <div *ngIf="addressForm.get('phoneNumber')?.hasError('required') && addressForm.get('phoneNumber')?.touched"
+                class="error-message">
+                Số điện thoại là bắt buộc
             </div>
         </div>
     </div>
-    <!-- <button mat-button class="" (click)= "addAddress()">Thêm</button> -->
-    <div class="button-add align-self-end " (click)="addAddress()">
-        Thêm
+
+    <div class="row">
+        <div class="col-sm-6 col-12" >
+            <input type="text" placeholder="Địa chỉ" [ngClass]="{ 'has-error': addressForm.get('specific_address')?.hasError('required') && addressForm.get('specific_address')?.touched }"  formControlName="specific_address" />
+            <div  *ngIf="addressForm.get('specific_address')?.hasError('required') && addressForm.get('specific_address')?.touched"
+            class="error-message">
+                Địa chỉ là bắt buộc
+            </div>
+        </div>
+        <div class="col-sm-6 col-12">
+            <select class="address-select" [ngClass]="{ 'has-error': addressForm.get('province')?.hasError('required') && addressForm.get('province')?.touched }" formControlName="province" (change)="selectChangeP($event)">
+                <option value="" selected>Chọn tỉnh/thành phố</option>
+                <option *ngFor="let province of provinces" [value]="province.code">
+                    {{ province.name }}
+                </option>
+            </select>
+            <div *ngIf="addressForm.get('province')?.hasError('required') && addressForm.get('province')?.touched"
+            class="error-message">
+            Tỉnh/thành phố là bắt buộc
+        </div>
+        
+        </div>
     </div>
+
+    <div class="row">
+        <div class="col-sm-6 col-12">
+            <select class="address-select" formControlName="district" (change)="selectChangeD($event)">
+                <option value="" selected>Chọn Quận/Huyện</option>
+                <option *ngFor="let district of districts" [value]="district.code">
+                    {{ district.name }}
+                </option>
+            </select>
+            <div *ngIf="addressForm.get('district')?.hasError('required') && addressForm.get('district')?.touched"
+                class="error-message">
+                Quận/Huyện là bắt buộc
+            </div>
+        </div>
+        <div class="col-sm-6 col-12">
+            <select class="address-select" formControlName="ward">
+                <option value="" selected>Chọn Phường/Xã</option>
+                <option *ngFor="let ward of wards" [value]="ward.code">
+                    {{ ward.name }}
+                </option>
+            </select>
+            <div *ngIf="addressForm.get('ward')?.hasError('required') && addressForm.get('ward')?.touched"
+                class="error-message">
+                Phường/Xã là bắt buộc
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-check">
+                <input class="form-check-input check-custom" type="checkbox" id="isDefault"
+                    formControlName="isDefault" />
+                <label class="form-check-label" for="isDefault">Đặt làm mặc định</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="button-add align-self-end" (click)="addAddress()">Thêm</div>
 </div>

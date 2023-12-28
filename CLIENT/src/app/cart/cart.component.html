@@ -3,7 +3,7 @@
     <h3 class="row main-title">
       <div class="col">Giỏ hàng</div>
     </h3>
-    <div class="container">
+    <div class="container"*ngIf="!showNocart">
       <div class="row cart-title">
         <div class="col-1 d-flex align-items-center justify-content-center">
           <input type="checkbox" id="checkAll" onclick="checkAll(this);" />
@@ -15,17 +15,17 @@
       </div>
     </div>
   </div>
-  <hr class="col-12 gy-4" />
-  <div class="container cart-body">
-    <div class="cart-list" *ngFor="let pCode of productsCart">
-      <div class="cart-list__variant" *ngFor="let v of pCode.variants">
+  <hr class="col-12 gy-4" *ngIf="!showNocart"/>
+  <div class="container cart-body" *ngIf="!showNocart">
+    <div class="cart-list" *ngFor="let product of productsCart">
+      <div class="cart-list__variant" *ngFor="let v of product.variants">
         <div class="cart-list__varriantColor" *ngFor="let vc of v.variantColor">
           <div class="row cart-item__all">
             <div class="col-1 d-flex align-items-center justify-content-center">
               <input type="checkbox" name="cartItem" class="checkboxProduct" />
             </div>
             <div class="col-3 col-sm-auto">
-              <img src="http://localhost:3000/userImages/{{ v.images[0] }}" alt="" class="img-fluid"
+              <img src="http://localhost:3000/productImages/{{ v.images[0] }}" alt="" class="img-fluid"
                 style="max-width: 100%" />
             </div>
             <div class="col d-flex flex-column justify-content-between cart-item__detail">
@@ -38,22 +38,22 @@
                 </div>
               </div>
               <div class="cart-item__title text-start">
-                <div class="col">{{ pCode.productId.title }}</div>
+                <div class="col">{{ product.productId.title }}</div>
               </div>
               <div class="row cart-item__action pt-2 row-gap-2 ms-0">
                 <div class="col-5 col-sm-auto select-color">
-                  <select name="color" (change)="onColorChange($event,v.color, pCode.productId._id, vc.size, vc.quantity)" >
-                    <option *ngFor="let v_default of pCode.productId.variants" [value]="v_default.color._id"
-                      [attr.selected]="v_default.color._id === v.color ? true : null">
+                  <select name="color" (change)="onColorChange($event,v.color._id, product.productId._id, vc.size, vc.quantity)" >
+                    <option *ngFor="let v_default of product.productId.variants" [value]="v_default.color._id"
+                      [attr.selected]="v_default.color._id === v.color._id ? true : null">
                       {{ v_default.color.nameColor }}
                     </option>
                   </select>
                 </div>
 
                 <div class="col-auto select-size">
-                  <select name="size" (change)="onSizeChange($event,v.color, pCode.productId._id, vc.size, vc.quantity)">
+                  <select name="size" (change)="onSizeChange($event,v.color._id, product.productId._id, vc.size, vc.quantity)">
                     <option *ngFor="
-                          let vc_default of pCode.productId.variants[0].variantColor
+                          let vc_default of product.productId.variants[0].variantColor
                         " [value]="vc_default.size" [attr.selected]="vc_default.size === vc.size ? true : null">
                       {{ vc_default.size }}
                     </option>
@@ -61,19 +61,19 @@
                 </div>
                 <div class="col-auto cart-item__action--quantity">
                   <input class="stockP" type="hidden" value="10" />
-                  <button class="col dec" (click)="changeQuantity(v.color, pCode.productId._id, vc.size, -1)">
+                  <button class="col dec" (click)="changeQuantity(v.color._id, product.productId._id, vc.size, -1)">
                     -
                   </button>
                   <input type=" col text" value="{{ vc.quantity }}" class="qtyItem" readonly />
-                  <button class="col inc" (click)="changeQuantity(v.color, pCode.productId._id, vc.size, 1)">
+                  <button class="col inc" (click)="changeQuantity(v.color._id, product.productId._id, vc.size, 1)">
                     +
                   </button>
                 </div>
                 <div class="col-auto cart-item__price">
                   <input class="discount-hide" type="hidden" value="20" />
                   <input class="origin-price__hide" type="hidden" value="100" />
-                  <div class="sale-price">{{ (pCode.productId.price * vc.quantity) | number:'1.3-3' }}đ</div>
-                  <div class="origin-price">{{ (pCode.productId.price * vc.quantity) | number:'1.3-3' }}đ</div>
+                  <div class="sale-price">{{ formatMoneyVietNam(product.productId.price * vc.quantity)}}</div>
+                  <div class="origin-price">{{ formatMoneyVietNam(product.productId.price * vc.quantity)}}</div>
                 </div>
               </div>
               <!-- </div> -->
@@ -86,7 +86,7 @@
                 </div>
                 <!-- Cột 2 trong dòng 3 -->
                 <div class="col-sm-3 col-2 text-end undesired-deleteP">
-                  <i class="far fa-trash-alt" (click)="changeQuantity(v.color, pCode.productId._id, vc.size, 0)"></i>
+                  <i class="far fa-trash-alt" (click)="changeQuantity(v.color._id, product.productId._id, vc.size, 0)"></i>
                 </div>
               </div>
             </div>
@@ -205,15 +205,15 @@
     <hr class="col-12" />
   </div>
 
-  <div class="container cart-footer">
+  <div class="container cart-footer" *ngIf="!showNocart">
     <div class="total-product">
       <div class="total-product__title">Tổng sản phẩm</div>
-      <div class="total-product__value">0</div>
+      <div class="total-product__value">{{total_quantity}}</div>
     </div>
     <div class="estimated-cost">
       <div class="estimated-cost__title">Tạm tính</div>
       <div class="estimated-cost__value">
-        <div class="total-after__discount">0</div>
+        <div class="total-after__discount">{{formatMoneyVietNam(total_payment)}}</div>
         <div class="total-discount">
           (Tiết kiệm <span class="total-discount__value">0</span>)
         </div>
@@ -225,17 +225,27 @@
     </div>
     <div class="product-ship">
       <div class="product-ship__title">Phí vận chuyển</div>
-      <div class="product-ship__value">0</div>
+      <div class="product-ship__value">{{formatMoneyVietNam(ship_code)}}</div>
     </div>
     <div class="row">
       <hr class="col-12 p-0 m-0" />
     </div>
     <div class="product-gift">
       <div class="product-total__title">Tổng</div>
-      <div class="product-total__value">0</div>
+      <div class="product-total__value">{{formatMoneyVietNam(total_payment-ship_code)}}</div>
     </div>
     <div class="btn-submit">
-      <button>Mua ngay</button>
+      <button routerLink="/payment">Mua ngay</button>
+    </div>
+  </div>
+  <div class="no-cart" *ngIf="showNocart">
+    <div class="no-cart__info">
+      <img src="http://localhost:3000/cart/img-no-cart.png" alt="">
+      <div>Giỏ hàng của bạn đang trống</div>
+      <div>Hãy chọn thêm sản phẩm để mua sắp nhé</div>
+    </div>
+    <div class="btn-submit btn-submit__returnHomepage ">
+      <button>Quay về trang chủ</button>
     </div>
   </div>
 </div>
