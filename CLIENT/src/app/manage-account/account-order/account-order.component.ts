@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
+import { FeedbackOrderComponent } from './feedback-order/feedback-order.component';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 // import { IOrder } from '../../interfaces/order';
 import { OrderService } from '../../services/order.service';
@@ -28,6 +30,7 @@ export class AccountOrderComponent implements OnInit, AfterViewInit, OnDestroy {
   // constructor(private orderService: OrderService) {}
   constructor(
     private router: Router, 
+    public dialog: MatDialog, 
     private orderService: OrderService, 
     private _authService:AuthService) { }
 
@@ -85,4 +88,14 @@ export class AccountOrderComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dtTrigger.unsubscribe();
   }
 
+  openFeedbackOrderDialog(): void {
+    const dialogRef = this.dialog.open(FeedbackOrderComponent, {
+      width: '70%',
+    });
+
+    // Handle the modal close event if needed
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed', result);
+    });
+  }
 }

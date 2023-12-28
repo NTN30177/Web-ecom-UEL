@@ -11,15 +11,17 @@ import { Observable, catchError, map, retry, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class ManageProductService {
-  local = 'http://localhost:3000';
+  local = 'http://localhost:3000'
   cartData = new EventEmitter<IProduct[] | []>();
-  submitFeedback: any;
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient) { }
+
 
   getProducts(): Observable<any[]> {
     return this._http.get<any[]>(`${this.local}/product`);
   }
+
+
 
   postProduct(product: any): Observable<any> {
     const headers = new HttpHeaders().set(
@@ -81,13 +83,11 @@ export class ManageProductService {
       headers: headers,
       responseType: 'text',
     };
-    return this._http
-      .get<any>(`${this.local}/api/subType/${typeId}`, requestOptions)
-      .pipe(
-        map((res) => JSON.parse(res) as ISubType),
-        retry(3),
-        catchError(this.handleError)
-      );
+    return this._http.get<any>(`${this.local}/api/subType/${typeId}`, requestOptions).pipe(
+      map((res) => JSON.parse(res) as ISubType),
+      retry(3),
+      catchError(this.handleError)
+    );
   }
   getCollection(): Observable<any> {
     const headers = new HttpHeaders().set(
@@ -130,4 +130,6 @@ export class ManageProductService {
         catchError(this.handleError)
       );
   }
+
 }
+

@@ -13,12 +13,35 @@ import { data } from 'jquery';
   styleUrl: './order-tracking.component.css',
   encapsulation: ViewEncapsulation.None,
 })
-export class OrderTrackingComponent implements OnInit {
-  formatMoneyVietNam = formatMoneyVietNam;
+export class OrderTrackingComponent implements OnInit{
+  formatMoneyVietNam=formatMoneyVietNam
 
   orderId: any;
   orderDetails: any;
   userId: any;
+
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.orderId = params['orderId'];
+      console.log( this.orderId)
+      this.loadOrderDetails();
+    });  }
+
+
+    loadOrderDetails() {
+      // Use your OrderService to fetch order details based on orderId
+      this.orderService.getOrderDetails(this.orderId).subscribe(
+        (data) => {
+          this.orderDetails = data;
+          console.log('Order details:', this.orderDetails);
+          console.log('Order details:', data.dataWardDetail);
+          console.log('Order details:', data);
+        },
+        (error) => {
+          console.error('Error fetching order details:', error);
+        }
+      );
+    }
 
   constructor(
     private route: ActivatedRoute,
@@ -28,28 +51,6 @@ export class OrderTrackingComponent implements OnInit {
 
   ) {}
 
-  ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.orderId = params['orderId'];
-      console.log(this.orderId);
-      this.loadOrderDetails();
-    });
-  }
-
-  loadOrderDetails() {
-    // Use your OrderService to fetch order details based on orderId
-    this.orderService.getOrderDetails(this.orderId).subscribe(
-      (data) => {
-        this.orderDetails = data;
-        console.log('Order details:', this.orderDetails);
-        console.log('Order details:', data.dataWardDetail);
-        console.log('Order details:', data);
-      },
-      (error) => {
-        console.error('Error fetching order details:', error);
-      }
-    );
-  }
 
   openFeedbackOrderDialog(orderId: String, productId: String): void {
     console.log(productId, orderId)

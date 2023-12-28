@@ -95,7 +95,7 @@
                         <div class="search-form__quick-search" (click)="handleQuickSearchClick($event)">
                             <div class="search-items search-history">
                                 <h4 class="">Vừa tìm kiếm</h4>
-                                <div class="search-item__hot" >
+                                <div class="search-item__hot" *ngIf="accountInfo" >
                                     <label for="" class="search-item__hot-child" *ngFor="let key of accountInfo.historySearch">
                                         <a href="" class="search-item__hot-child-link">{{key}}</a>
                                     </label>
@@ -143,16 +143,16 @@
                           </a>
                           <div class="sub-action">
                             <div class="top-action">
-                              <a href="javascript:void(0)" class="icon">
+                              <a  routerLink="/account" href="javascript:void(0)" class="icon">
                                 <div class="tit-top-action">Tài khoản của tôi</div>
                               </a>
                             </div>
                             <ul>
-                              <li><a href=""><i class="ti-id-badge" routerLink="/account/info"></i> Thông tin tài khoản</a></li>
-                              <li><a href=""><i class="ti-reload"></i> Quản lý đơn hàng</a></li>
-                              <li><a href=""><i class="ti-location-pin"></i> Sổ địa chỉ</a></li>
-                              <li><a href=""><i class="ti-heart"></i> Sản phẩm yêu thích</a></li>
-                              <li><a href=""><i class="ti-support"></i> Yêu cầu hỗ trợ</a></li>
+                              <li><a routerLink="/account/info"><i class="ti-id-badge"></i> Thông tin tài khoản</a></li>
+                              <li><a routerLink="/account/order"><i class="ti-reload"></i> Quản lý đơn hàng</a></li>
+                              <li><a routerLink="/account/address"><i class="ti-location-pin"></i> Sổ địa chỉ</a></li>
+                              <li><a routerLink="/account/favorite"><i class="ti-heart"></i> Sản phẩm yêu thích</a></li>
+                              <li><a routerLink="/account/help"><i class="ti-support"></i> Yêu cầu hỗ trợ</a></li>
                               <li><a href="" (click)="logout()"><i class="ti-shift-left" ></i> Đăng xuất</a></li>
                             </ul>
                           </div>
@@ -215,15 +215,15 @@
                                 </button>
                                 <input type="text" id="search-form__input" placeholder="TÌM KIẾM SẢN PHẨM">
                                 <div class="search-form__quick-search">
-                                    <div class="search-items">
+                                    <!-- <div class="search-items">
                                         <h4 class="">Tìm kiếm nhiều nhất</h4>
-                                        <div class="search-item__hot" *ngFor="let key of accountInfo.historySearch">
+                                        <div class="search-item__hot" *ngFor="let key of accountInfo.?historySearch">
                                             <label for="" class="search-item__hot-child">
                                                 <a href="" class="search-item__hot-child-link">{{key}}</a>
                                             </label>
                                           
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="search-items">
                                         <h4>Vừa tìm kiếm</h4>
                                         <ul class="search-item__hot d-flex history_list">

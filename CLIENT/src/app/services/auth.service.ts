@@ -52,6 +52,10 @@ export class AuthService {
       catchError(this.handleError)
     );
   }
+
+  
+
+
   getDistrict(provinceId: any): Observable<any> {
     const headers = new HttpHeaders().set(
       'Content-Type',
@@ -156,6 +160,25 @@ export class AuthService {
   isEmailVerified(email: string): Observable<boolean> {
     return this._http.get<boolean>(`${local}/user/is-email-verified/${email}`);
   }
+
+  resetPw(data: any, email:any): Observable<any> {
+    const headers = new HttpHeaders().set(
+      'Content-Type',
+      'application/json' // Set the content type to 'application/json'
+    );
+  
+    const requestOptions: Object = {
+      headers: headers,
+      responseType: 'json',
+    };
+
+    return this._http.post<any>(`${local}/user/resetPassW?email=${email}`, data, requestOptions).pipe(
+      retry(3),
+      catchError(this.handleError)
+    );
+  }
+  
+
 
   handleError(error: HttpErrorResponse) {
     return throwError(() => new Error(error.message));

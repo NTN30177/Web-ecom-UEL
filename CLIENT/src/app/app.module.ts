@@ -36,7 +36,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { LoginComponent } from './login/login.component';
@@ -59,9 +59,13 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { ForgetPwComponent } from './forget-pw/forget-pw.component';
 import { Select2Module } from 'ng-select2-component';
 import { PaymentThankComponent } from './payment/payment-thank/payment-thank.component';
+import { ManageUserComponent } from './admin/manage-user/manage-user.component';
 
-
-
+// import { ChartModule } from 'angular-highcharts';
+import { HighchartsChartModule } from 'highcharts-angular';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { Chart1Component } from './admin/chart-1/chart-1.component';
+import { Chart2Component } from './admin/chart-2/chart-2.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +107,10 @@ import { PaymentThankComponent } from './payment/payment-thank/payment-thank.com
     DeliveryPolicyComponent,
     ForgetPwComponent,
     PaymentThankComponent,
+    ManageUserComponent,
+    Chart1Component,
+    Chart2Component,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -130,10 +138,7 @@ import { PaymentThankComponent } from './payment/payment-thank/payment-thank.com
     NzFormModule,
     CommonModule,
     Select2Module,
-    
-
-
-
+    HighchartsChartModule,
   ],
   providers: [DatePipe, CartComponent, HomePageComponent],
   bootstrap: [AppComponent],

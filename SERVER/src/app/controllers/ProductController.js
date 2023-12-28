@@ -3,7 +3,7 @@ const {
   Type,
   Subtype,
   Color,
-  CartItem,
+  CartItem, 
 } = require("../models/product");
 const { Feedback } = require("../models/feedback");
 
@@ -313,31 +313,6 @@ const addFeedback = async (req, res) => {
     res.sendStatus(500);
   }
 };
-
-// const addFeedback = async (req, res) => {
-//   try {
-//     const newFeedback = new Feedback({
-//       orderId: req.body.orderId,
-//       productId: req.body.productId,
-//       content: req.body.content,
-//       images: req.body.images || [],
-//     });
-
-//     console.log(newFeedback); // Log để kiểm tra dữ liệu trước khi lưu
-//     await newFeedback.save();
-
-//         const product = await Product.findOneAndUpdate(
-//       { _id: productId },
-//       { $push: { feedbackList: feedback._id } },
-//       { new: true }
-//     );
-
-//     res.status(200).json({ message: 'Phản hồi đã được lưu thành công' });
-//   } catch (error) {
-//     console.error('Lỗi khi lưu phản hồi:', error);
-//     res.status(500).json({ message: 'Lỗi khi lưu phản hồi', error: error.message });
-//   }
-// };
 
 
 module.exports = {

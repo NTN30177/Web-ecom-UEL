@@ -134,11 +134,9 @@ const verifyEmail = async (req, res) => {
 };
 const verifyLogin = async (req, res, next) => {
   try {
-    console.log("111");
     const { cus_account, cus_password } = req.body;
     const userData = await User.findOne({ email: cus_account });
     if (userData) {
-      console.log(cus_account, cus_password);
       const passwordMatch = await bcrypt.compare(
         cus_password,
         userData.password
@@ -147,8 +145,10 @@ const verifyLogin = async (req, res, next) => {
       if (passwordMatch) {
         if (userData.is_verified === 0) {
           console.log(userData._id.toString());
+      const name = userData.first_name+ updatedData.last_name 
+
           sendVerifyEmail(
-            userData.name,
+            name,
             userData.email,
             userData._id.toString()
           );
@@ -220,6 +220,8 @@ const getProductHomePage = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+
 const getForGotPW = async (req, res) => {
   try {
     console.log(123);
@@ -231,7 +233,8 @@ const getForGotPW = async (req, res) => {
         { email: email },
         { $set: { token: randomString } }
       ).lean();
-      sendResetPassword(userData.name, userData.email, randomString);
+      const name = userData.first_name + updatedData.last_name 
+      sendResetPassword(name, userData.email, randomString);
       res.send({
         message: "Please check your mail to reset password.",
         success: true,
@@ -276,16 +279,17 @@ const sendResetPassword = async (name, email, token) => {
 };
 const resetPassword = async (req, res) => {
   try {
-    const password = req.body.password;
-    console.log(password);
-    const email = req.body.email;
+    const password = req.body.re_cus_new_pass;
+    const email = req.query.email;
     console.log(email);
     const secure_Password = await securePassword(password);
     const updatedData = await User.findOneAndUpdate(
       { email: email.toString() },
       { $set: { password: secure_Password, token: "" } }
     ).lean();
-    res.send({ message: "Thay đổi mật khẩu thành công!" });
+    const userData = await User.findOne({ email });
+
+    res.send({ message: "Thay đổi mật khẩu thành công!",userData});
   } catch (err) {
     console.log(err.message);
   }

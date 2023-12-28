@@ -155,11 +155,44 @@ const postUserAddress = async (req, res) => {
   }
 }
 
+const getUserData = async (req, res) => {
+  try {
+    // Fetch user data
+    const users = await User.find({}, '-password'); // Exclude password field
+    const userData = [];
+
+    for (const user of users) {
+      const userWithOrders = await User.findById(user._id).populate('orderList');
+      const orderList = userWithOrders.orderList;
+
+      const totalRevenue = orderList.reduce((total, order) => total + order.totalPrice, 0);
+
+      const latestOrder = orderList.reduce((latest, order) => {
+        return order.createdAt > latest.createdAt ? order : latest;
+      }, orderList[0]);
+
+      userData.push({
+        _id: user._id,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        email: user.email,
+        totalRevenue,
+        latestPurchase: latestOrder ? latestOrder.createdAt : null,
+        is_admin: user.is_admin,
+      });
+    }
+
+    res.json(userData);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
 module.exports = {
   getAccountInfo,
   updateAccountInfo,
   getAccountAddresses,
   postUserAddress,
   getAccountOrder,
+  getUserData,
 
 };

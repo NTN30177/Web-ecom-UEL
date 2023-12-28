@@ -33,7 +33,7 @@ const routes: Routes = [
         path:'payment-success', component: PaymentThankComponent,
       },
       {
-        path:'forgot-pw', component: ForgotPasswordModalSuccessComponent,
+        path:'forgot-pw', component: ForgetPwComponent,
       },
       {
         path:'login', component: LoginComponent,
