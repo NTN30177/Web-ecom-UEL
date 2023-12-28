@@ -1,0 +1,17 @@
+<div class="container mt-5">
+    <label for="selectDay">Chọn khoảng thời gian:</label>
+    <select class="form-control" name="option" [(ngModel)]="selectedDay" (change)="onDayChange()">
+      <option value="7" selected>Thống kê theo tuần gần nhất</option>
+      <option value="30">Thống kê theo 1 tháng gần nhất</option>
+      <option value="12">Thống kê theo tháng</option>
+      <!-- Add other options -->
+    </select>
+    <br>
+    <div *ngIf="chartOptions">
+      <highcharts-chart
+        [Highcharts]="Highcharts"
+        [options]="chartOptions"
+      ></highcharts-chart>
+    </div>
+  </div>
+  

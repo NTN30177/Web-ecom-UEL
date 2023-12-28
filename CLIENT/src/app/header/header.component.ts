@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit {
   dataLiveSearch: any;
   currentSubMenuIndex: null | undefined;
   @ViewChild('searchInput') searchInput: ElementRef | undefined;
-  accountInfo: any;
+  accountInfo: any=false;
   constructor(
     private elRef: ElementRef,
     private renderer: Renderer2,
