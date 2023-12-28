@@ -1,64 +1,62 @@
-const express = require("express"); //
-const app = express(); //
+const express = require('express');
+const app = express();
 const port = 3000;
-const path = require("path");
-const route = require("./routes");
-const cors = require("cors");
-const methodOverride = require("method-override");
-const bodyParser = require("body-parser");
-const session = require("express-session"); //
+const path = require('path');
+const methodOverride = require('method-override');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const cors = require('cors'); // Moved this line here
+
+const corsOptions = {
+  origin: 'http://localhost:4200',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
+
+const route = require('./routes');
+const User = require('./app/models/user');
+const { Product, Type, Subtype, Color } = require('./app/models/product');
+const config = require('./config/config');
+
+// Http Request Logger
+const morgan = require('morgan');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
-
-// app.use(express.json());
-
-const User = require("./app/models/user");
-const { Product, Type, Subtype, Color } = require("./app/models/product");
-
-const config = require("./config/config");
-
-//Http Request Logger
-const morgan = require("morgan");
-
 app.use(session({ secret: config.sessionSecret }));
 
 app.use(async (req, res, next) => {
-  // Check if req.session exists and has the user_id property
   if (req.session && req.session.user_id) {
-    // Lấy thông tin user từ session và gán vào biến userDataSession
-    res.locals.userDataSession = await User.findById(
-      req.session.user_id
-    ).lean();
+    res.locals.userDataSession = await User.findById(req.session.user_id).lean();
   } else {
-    // Handle the case when user is not authenticated
-    res.locals.userDataSession = null; // or any other default value
+    res.locals.userDataSession = null;
   }
-
   next();
 });
 
-///API
+// API CORS setup
 app.use((req, res, next) => {
-    res.setHeader("Content-Type", "application/json");
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,PATCH");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-    next();
-  });
-  
+  res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  next();
+});
 
-app.use(methodOverride("_method"));
+app.use(methodOverride('_method'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(port, () => {
-  console.log(`listening on port ${port}`);
+  console.log(`Listening on port ${port}`);
 });
-const db = require("./config/db");
 
+const db = require('./config/db');
 db.connect();
 
 route(app);
-app.use(cors());
-// app.use('/static', express.static(path.join(__dirname, 'public')))
-app.use(express.static(path.join(__dirname, "public")));
+app.options('*', (req, res) => {
+  res.status(204).end();
+});

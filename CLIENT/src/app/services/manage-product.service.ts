@@ -98,16 +98,17 @@ export class ManageProductService {
       headers: headers,
       responseType: 'text',
     };
-    return this._http.get<any>(`${this.local}/api/collection/`, requestOptions).pipe(
-      map((res) => JSON.parse(res) as ISubType),
-      retry(3),
-      catchError(this.handleError)
-    );
+    return this._http
+      .get<any>(`${this.local}/api/collection/`, requestOptions)
+      .pipe(
+        map((res) => JSON.parse(res) as ISubType),
+        retry(3),
+        catchError(this.handleError)
+      );
   }
   handleError(error: HttpErrorResponse) {
     return throwError(() => new Error(error.message));
   }
-
 
   // softDeleteProduct(productId: string): Observable<any> {
   //   const url = `${this.local}/product/soft-delete/${productId}`;
@@ -119,11 +120,11 @@ export class ManageProductService {
     return this._http.patch(url, {});
   }
 
-
-  submitFeedback(formData: FormData): Observable<any> {
+  addFeedback(formData: FormData,productId:any, orderId:any, userId:any): Observable<any> {
     const headers = new HttpHeaders().set('enctype', 'multipart/form-data');
+    console.log(productId, orderId, '789')
     return this._http
-      .post<any>(`${this.local}/product/submit-feedback`, formData, { headers })
+      .post<any>(`${this.local}/product/add-feedback?productId=${productId}&orderId=${orderId}&userId=${userId}`, formData, { headers })
       .pipe(
         map((res) => res),
         catchError(this.handleError)

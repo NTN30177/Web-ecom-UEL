@@ -3,6 +3,7 @@
 <div class="modal-header">
     <span class="close" (click)="closeDialog()" style="margin-left: auto; width: 40px; font-size: 30px; padding-top: 20px">&times;</span>
   </div>
+  <!-- <h1>Đánh giá sản phẩm {{ productId }} cho đơn hàng {{ data.orderId }}</h1> -->
   <p class="text_head">Đánh giá sản phẩm</p>
   <form (ngSubmit)="openFeedbackOrderSuccessDialog()" [formGroup]="feedbackForm">
     <mat-dialog-content class="modal-content">
@@ -10,8 +11,8 @@
         <div class="col-md-12">
           <div class="form-group">
             <div class="frame_feedback">
-              <button class="btn_fb_detail" name="btn_fb_add_img" (change)="onFileChange($event)">Thêm hình ảnh</button>
-              <button class="btn_fb_detail" id="btn_fb_add_video" name="btn_fb_add_video">Thêm video</button>
+              Thêm ảnh<input type="file" name="images" id="images" multiple (change)="selectMultipleImage($event,i)"              >
+              Thêm video<input type="file" name="clip" id="clip" multiple (change)="selectMultipleImage($event,i)">
             </div>
           </div>
         </div>
@@ -28,5 +29,6 @@
     <mat-dialog-actions style="padding-right: 30px;">
       <button mat-button class="btn-send" type="submit" cdkFocusInitial>Gửi</button>
     </mat-dialog-actions>
+    <input type="hidden" [value]="orderId" formControlName="orderId">
   </form>
   

@@ -51,7 +51,7 @@ router.get("", productController.getProduct)
 
 router.patch("/toggle-soft-deleted/:productId", productController.toggleSoftDeleted)
 
-router.post("/submit-feedback", upload.array("images"), productController.submitFeedback);
+router.post("/add-feedback", productController.addFeedback);
 
 
 

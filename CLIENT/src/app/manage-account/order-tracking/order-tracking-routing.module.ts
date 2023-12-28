@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { OrderTrackingComponent } from './order-tracking.component';
 
 const routes: Routes = [
-  {path:'', component: OrderTrackingComponent}
+  {path:'', component: OrderTrackingComponent},
+  
 ];
 
 @NgModule({

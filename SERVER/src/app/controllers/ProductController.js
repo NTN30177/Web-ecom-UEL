@@ -8,7 +8,6 @@ const {
 const { Feedback } = require("../models/feedback");
 
 
-// getProduct controller
 const getProduct = async (req, res) => {
   try {
     const products = await Product.find();
@@ -284,38 +283,38 @@ const getTypeAndSubtypeData = async (req, res) => {
   }
 };
 
-const submitFeedback = async (req, res) => {
+const addFeedback = async (req, res) => {
   try {
-    const { content } = req.body;
-    const productId = '6587ea63026f8360883d3917'; // Default product ID
-    const orderId = '6589c44703ad145b56e9e68d'; // Default order ID
+    const { content_fb, images } = req.body;
+    const { productId, orderId, userId } = req.query;
+
+    console.log(content_fb, images, productId, orderId)
 
     const feedback = new Feedback({
-      idUser: req.session.user_id,
+      idUser: userId,
       idOrder: orderId,
-      content: content,
+      content: content_fb,
+      images: images,
     });
-
+    
+    console.log(req.session.user_id)
     await feedback.save();
 
-    // Update the product with the feedback ID
     const product = await Product.findOneAndUpdate(
       { _id: productId },
       { $push: { feedbackList: feedback._id } },
       { new: true }
     );
 
-    // Add logic to handle the updated product
+    res.status(200).json({ message: 'Feedback added successfully', feedback });
     console.log('Feedback submitted successfully');
-    res.sendStatus(200);
   } catch (error) {
-    console.error("Error submitting feedback:", error);
+    console.error('Error submitting feedback:', error);
     res.sendStatus(500);
   }
 };
 
 
 module.exports = {
-  saveProduct, getProduct,toggleSoftDeleted, softDeleteProduct,
-  submitFeedback
+  saveProduct, getProduct,toggleSoftDeleted, softDeleteProduct, addFeedback
 };

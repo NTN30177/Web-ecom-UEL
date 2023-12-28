@@ -393,6 +393,7 @@ export class AddProduct2Component implements OnInit {
       variantsArray.removeAt(0);
     }
   }
+  
 
   imageCollections: { [fieldId: string]: File[] } = {};
 
