@@ -4,6 +4,7 @@ import { ManageProductService } from '../../services/manage-product.service';
 import { DataTableDirective } from 'angular-datatables';
 import { IProduct, IVariant } from '../../interfaces/product';
 import { local } from '../../ENV/envi';
+import { formatMoneyVietNam } from '../../utils/utils';
 
 
 @Component({
@@ -12,6 +13,7 @@ import { local } from '../../ENV/envi';
   styleUrl: './manage-product.component.css'
 })
 export class ManageProductComponent implements OnInit, OnDestroy {
+  formatMoneyVietNam = formatMoneyVietNam;
 
 
 local=local
