@@ -1,0 +1,623 @@
+[{
+  "_id": {
+    "$oid": "658521b7229a4e7e738a8cf5"
+  },
+  "subTypeName": "Áo sơ mi",
+  "products": [
+    {
+      "$oid": "658521b7229a4e7e738a8ce4"
+    },
+    {
+      "$oid": "65880d2b334194b03d2f201b"
+    },
+    {
+      "$oid": "65880f54e455845cc1b9565f"
+    },
+    {
+      "$oid": "65880fa40a6c419634b5a57c"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703223735987"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703415716340"
+    }
+  },
+  "slug": "ao-so-mi",
+  "__v": 3
+},{
+  "_id": {
+    "$oid": "65880a5b68b8fa01b62e49f7"
+  },
+  "subTypeName": "Khăn lụa",
+  "products": [
+    {
+      "$oid": "65880a5b68b8fa01b62e49f0"
+    },
+    {
+      "$oid": "65880a9568b8fa01b62e49fb"
+    },
+    {
+      "$oid": "65880e2d0ae73cc6f7fabadb"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703414363835"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703415341475"
+    }
+  },
+  "slug": "khan-lua",
+  "__v": 2
+},{
+  "_id": {
+    "$oid": "6588fa4673595a888d45687a"
+  },
+  "subTypeName": "Ví",
+  "products": [
+    {
+      "$oid": "6588fa4673595a888d456871"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703475782708"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703475782708"
+    }
+  },
+  "slug": "vi",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6588fb6c73595a888d4568b2"
+  },
+  "subTypeName": "Thắt lưng",
+  "products": [
+    {
+      "$oid": "6588fb6c73595a888d4568a9"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703476076384"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703476076384"
+    }
+  },
+  "slug": "that-lung",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6589a14b4c45f8ca787e41fd"
+  },
+  "subTypeName": "Túi",
+  "products": [
+    {
+      "$oid": "6589a14b4c45f8ca787e41f4"
+    },
+    {
+      "$oid": "6589a1ff4c45f8ca787e4206"
+    },
+    {
+      "$oid": "6589a2a74c45f8ca787e4210"
+    },
+    {
+      "$oid": "6589a34f4c45f8ca787e421a"
+    },
+    {
+      "$oid": "6589a4044c45f8ca787e4224"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703518539463"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703519236848"
+    }
+  },
+  "slug": "tui",
+  "__v": 4
+},{
+  "_id": {
+    "$oid": "6589a4b24c45f8ca787e4237"
+  },
+  "subTypeName": "Balo",
+  "products": [
+    {
+      "$oid": "6589a4b24c45f8ca787e422e"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703519410114"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703519410114"
+    }
+  },
+  "slug": "balo",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "65851f85229a4e7e738a8cda"
+  },
+  "subTypeName": "Áo len/ thun",
+  "products": [
+    {
+      "$oid": "65851f85229a4e7e738a8cc6"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703223173816"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703223173816"
+    }
+  },
+  "slug": "ao-len-thun",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6588ee2e2effb5a0d5b85119"
+  },
+  "subTypeName": "Đầm công sở",
+  "products": [
+    {
+      "$oid": "6588ee2e2effb5a0d5b8510e"
+    },
+    {
+      "$oid": "6588ee9d2effb5a0d5b8511d"
+    },
+    {
+      "$oid": "6588eed92effb5a0d5b85129"
+    },
+    {
+      "$oid": "6588efc52effb5a0d5b85135"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703472686897"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703473093912"
+    }
+  },
+  "slug": "dam-cong-so",
+  "__v": 3
+},{
+  "_id": {
+    "$oid": "6588f0c72effb5a0d5b8514c"
+  },
+  "subTypeName": "Đầm voan/ maxi",
+  "products": [
+    {
+      "$oid": "6588f0c72effb5a0d5b85141"
+    },
+    {
+      "$oid": "6588f29d2effb5a0d5b85153"
+    },
+    {
+      "$oid": "6588f6022effb5a0d5b85183"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703473351263"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703474690538"
+    }
+  },
+  "slug": "dam-voan-maxi",
+  "__v": 2
+},{
+  "_id": {
+    "$oid": "6588f37a2effb5a0d5b8516d"
+  },
+  "subTypeName": "Đầm thun",
+  "products": [
+    {
+      "$oid": "6588f37a2effb5a0d5b85162"
+    },
+    {
+      "$oid": "6588f4a62effb5a0d5b85174"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703474042740"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703474342419"
+    }
+  },
+  "slug": "dam-thun",
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "6588f8572effb5a0d5b851a0"
+  },
+  "subTypeName": "Áo dài",
+  "products": [
+    {
+      "$oid": "6588f8572effb5a0d5b85195"
+    },
+    {
+      "$oid": "6588f9502effb5a0d5b851a7"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703475287697"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703475536452"
+    }
+  },
+  "slug": "ao-dai",
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "6587e0ac020f233b6371b18f"
+  },
+  "subTypeName": "Áo vest/blazer",
+  "products": [
+    {
+      "$oid": "6587e0ac020f233b6371b181"
+    },
+    {
+      "$oid": "6587f0e2026f8360883d398f"
+    },
+    {
+      "$oid": "6587f33f026f8360883d39ce"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703403692738"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703408447898"
+    }
+  },
+  "slug": "ao-vest-blazer",
+  "__v": 2
+},{
+  "_id": {
+    "$oid": "6587f171026f8360883d39b2"
+  },
+  "subTypeName": "Áo phao",
+  "products": [
+    {
+      "$oid": "6587f171026f8360883d39a7"
+    },
+    {
+      "$oid": "6587f22c026f8360883d39bc"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703407985156"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703408172829"
+    }
+  },
+  "slug": "ao-phao",
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "6587e251020f233b6371b1a4"
+  },
+  "subTypeName": "Áo dạ/măng tô",
+  "products": [
+    {
+      "$oid": "6587e250020f233b6371b199"
+    },
+    {
+      "$oid": "6587e5f5026f8360883d38ef"
+    },
+    {
+      "$oid": "6587e761026f8360883d3901"
+    },
+    {
+      "$oid": "6587ea63026f8360883d3917"
+    },
+    {
+      "$oid": "6587eb48026f8360883d3929"
+    },
+    {
+      "$oid": "6587ec92026f8360883d393b"
+    },
+    {
+      "$oid": "6587ede3026f8360883d3953"
+    },
+    {
+      "$oid": "6587eec5026f8360883d396b"
+    },
+    {
+      "$oid": "6587ef68026f8360883d397d"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703404113001"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703407464290"
+    }
+  },
+  "slug": "ao-da-mang-to",
+  "__v": 8
+},{
+  "_id": {
+    "$oid": "65883bf794cf44371b8bf8ce"
+  },
+  "subTypeName": "Chân váy chữ A",
+  "products": [
+    {
+      "$oid": "65883bf794cf44371b8bf8c3"
+    },
+    {
+      "$oid": "65883c4d94cf44371b8bf8d2"
+    },
+    {
+      "$oid": "65883ec294cf44371b8bf8ea"
+    },
+    {
+      "$oid": "6588411494cf44371b8bf901"
+    },
+    {
+      "$oid": "6588472a94cf44371b8bf98a"
+    },
+    {
+      "$oid": "65884eb994cf44371b8bf9f1"
+    },
+    {
+      "$oid": "65884f2c94cf44371b8bfa08"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703427063121"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703431980723"
+    }
+  },
+  "slug": "chan-vay-chu-a",
+  "__v": 6
+},{
+  "_id": {
+    "$oid": "6588422c94cf44371b8bf91e"
+  },
+  "subTypeName": "Chân váy bút chì",
+  "products": [
+    {
+      "$oid": "6588422b94cf44371b8bf913"
+    },
+    {
+      "$oid": "6588429094cf44371b8bf922"
+    },
+    {
+      "$oid": "658842db94cf44371b8bf92e"
+    },
+    {
+      "$oid": "6588439294cf44371b8bf946"
+    },
+    {
+      "$oid": "658846a494cf44371b8bf978"
+    },
+    {
+      "$oid": "65884cdb94cf44371b8bf9a1"
+    },
+    {
+      "$oid": "65884d5c94cf44371b8bf9b8"
+    },
+    {
+      "$oid": "65884ddf94cf44371b8bf9c9"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703428652038"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703431647375"
+    }
+  },
+  "slug": "chan-vay-but-chi",
+  "__v": 7
+},{
+  "_id": {
+    "$oid": "658845d094cf44371b8bf968"
+  },
+  "subTypeName": "Chân váy jeans",
+  "products": [
+    {
+      "$oid": "658845d094cf44371b8bf95d"
+    },
+    {
+      "$oid": "6588462994cf44371b8bf96c"
+    },
+    {
+      "$oid": "65884e2e94cf44371b8bf9e0"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703429584866"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703431726337"
+    }
+  },
+  "slug": "chan-vay-jeans",
+  "__v": 2
+},{
+  "_id": {
+    "$oid": "6588e682ba239378ac24c8a5"
+  },
+  "subTypeName": "Quần suông",
+  "products": [
+    {
+      "$oid": "6588e682ba239378ac24c89a"
+    },
+    {
+      "$oid": "6588f0ecb01e041f089b10f5"
+    },
+    {
+      "$oid": "6588f299b01e041f089b112c"
+    },
+    {
+      "$oid": "6588f31ab01e041f089b113d"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703470722954"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703473946652"
+    }
+  },
+  "slug": "quan-suong",
+  "__v": 3
+},{
+  "_id": {
+    "$oid": "6588eb28ba239378ac24c8bb"
+  },
+  "subTypeName": "Quần ống đứng",
+  "products": [
+    {
+      "$oid": "6588eb28ba239378ac24c8b0"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703471912805"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703471912805"
+    }
+  },
+  "slug": "quan-ong-dung",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6588ebd8ba239378ac24c8cf"
+  },
+  "subTypeName": "Quần Chiffon",
+  "products": [
+    {
+      "$oid": "6588ebd8ba239378ac24c8c4"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703472088236"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703472088236"
+    }
+  },
+  "slug": "quan-chiffon",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6588ee0e684b68e289852f9d"
+  },
+  "subTypeName": "Quần Jean",
+  "products": [
+    {
+      "$oid": "6588ee0e684b68e289852f92"
+    },
+    {
+      "$oid": "6588f39ab01e041f089b114e"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703472654122"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703474074416"
+    }
+  },
+  "slug": "quan-jean",
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "6588f20fb01e041f089b1123"
+  },
+  "subTypeName": "Quần tạo kiểu",
+  "products": [
+    {
+      "$oid": "6588f20fb01e041f089b1112"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703473679097"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703473679097"
+    }
+  },
+  "slug": "quan-tao-kieu",
+  "__v": 0
+}]

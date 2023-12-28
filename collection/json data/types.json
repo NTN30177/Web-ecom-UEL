@@ -1,0 +1,220 @@
+[{
+  "_id": {
+    "$oid": "65851939fb0cdd158835bc9d"
+  },
+  "typeName": "Áo khoác",
+  "subtypes": [
+    {
+      "$oid": "6587e0ac020f233b6371b18f"
+    },
+    {
+      "$oid": "6587e251020f233b6371b1a4"
+    },
+    {
+      "$oid": "6587f171026f8360883d39b2"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1690617698301"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1690894691255"
+    }
+  },
+  "slug": "ao-khoac",
+  "__v": 3
+},{
+  "_id": {
+    "$oid": "65851977fb0cdd158835bc9f"
+  },
+  "typeName": "Set bộ",
+  "subtypes": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1690617698301"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1702828992314"
+    }
+  },
+  "slug": "set-bo",
+  "__v": 10
+},{
+  "_id": {
+    "$oid": "65851f85229a4e7e738a8cd6"
+  },
+  "typeName": "Áo",
+  "subtypes": [
+    {
+      "$oid": "65851f85229a4e7e738a8cda"
+    },
+    {
+      "$oid": "658521b7229a4e7e738a8cf5"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703223173808"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703223736001"
+    }
+  },
+  "slug": "6585190efb0cdd158835bc9c",
+  "__v": 2
+},{
+  "_id": {
+    "$oid": "6585194cfb0cdd158835bc9e"
+  },
+  "typeName": "Chân váy",
+  "subtypes": [
+    {
+      "$oid": "65883bf794cf44371b8bf8ce"
+    },
+    {
+      "$oid": "6588422c94cf44371b8bf91e"
+    },
+    {
+      "$oid": "658845d094cf44371b8bf968"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1690617698301"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703429584870"
+    }
+  },
+  "slug": "chan-vay",
+  "__v": 6
+},{
+  "_id": {
+    "$oid": "6587160f9eccac2351ebff97"
+  },
+  "typeName": "Quần & JUMPSUIT",
+  "subtypes": [
+    {
+      "$oid": "6588e682ba239378ac24c8a5"
+    },
+    {
+      "$oid": "6588eb28ba239378ac24c8bb"
+    },
+    {
+      "$oid": "6588ebd8ba239378ac24c8cf"
+    },
+    {
+      "$oid": "6588ee0e684b68e289852f9d"
+    },
+    {
+      "$oid": "6588f20fb01e041f089b1123"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1690617698301"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703473679101"
+    }
+  },
+  "slug": "quan-jump-suit",
+  "__v": 15
+},{
+  "_id": {
+    "$oid": "64c4c7621539b1bd9c0fae5b"
+  },
+  "typeName": "Phụ kiện",
+  "subtypes": [
+    {
+      "$oid": "65880a5b68b8fa01b62e49f7"
+    },
+    {
+      "$oid": "6588fa4673595a888d45687a"
+    },
+    {
+      "$oid": "6588fb6c73595a888d4568b2"
+    },
+    {
+      "$oid": "6589a14b4c45f8ca787e41fd"
+    },
+    {
+      "$oid": "6589a4b24c45f8ca787e4237"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1690617698301"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703519410124"
+    }
+  },
+  "slug": "phu-kien",
+  "__v": 8
+},{
+  "_id": {
+    "$oid": "64c4c7f4e2a184d32cff6540"
+  },
+  "typeName": "Bộ sưu tập",
+  "subtypes": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1690617698301"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1702828992314"
+    }
+  },
+  "slug": "bts",
+  "__v": 10
+},{
+  "_id": {
+    "$oid": "658519b6fb0cdd158835bca0"
+  },
+  "typeName": "Đầm/ Áo dài",
+  "subtypes": [
+    {
+      "$oid": "6588e9cb2effb5a0d5b85107"
+    },
+    {
+      "$oid": "6588ee2e2effb5a0d5b85119"
+    },
+    {
+      "$oid": "6588f0c72effb5a0d5b8514c"
+    },
+    {
+      "$oid": "6588f37a2effb5a0d5b8516d"
+    },
+    {
+      "$oid": "6588f8572effb5a0d5b851a0"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1690617698301"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703475287713"
+    }
+  },
+  "slug": "dam-ao-dai",
+  "__v": 8
+}]
