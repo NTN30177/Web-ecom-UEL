@@ -38,7 +38,7 @@ const saveAccount = async (req, res, next) => {
     });
     const address = new UserAddress({
       is_default: true,
-      name: req.body.cus_lastname,
+      name: req.body.cus_firstname + req.body.cus_lastname,
       phone: req.body.cus_phonenumber,
       specific_address: req.body.cus_address_id,
       ward: req.body.cus_ward_id,
@@ -69,6 +69,7 @@ const saveAccount = async (req, res, next) => {
         link: "1",
       });
     } else {
+      
       res.send({
         message: "Your registeration has been failed.",
       });
@@ -133,11 +134,9 @@ const verifyEmail = async (req, res) => {
 };
 const verifyLogin = async (req, res, next) => {
   try {
-    console.log("111");
     const { cus_account, cus_password } = req.body;
     const userData = await User.findOne({ email: cus_account });
     if (userData) {
-      console.log(cus_account, cus_password);
       const passwordMatch = await bcrypt.compare(
         cus_password,
         userData.password
@@ -146,8 +145,10 @@ const verifyLogin = async (req, res, next) => {
       if (passwordMatch) {
         if (userData.is_verified === 0) {
           console.log(userData._id.toString());
+      const name = userData.first_name+ updatedData.last_name 
+
           sendVerifyEmail(
-            userData.name,
+            name,
             userData.email,
             userData._id.toString()
           );
@@ -219,6 +220,8 @@ const getProductHomePage = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+
 const getForGotPW = async (req, res) => {
   try {
     console.log(123);
@@ -230,7 +233,8 @@ const getForGotPW = async (req, res) => {
         { email: email },
         { $set: { token: randomString } }
       ).lean();
-      sendResetPassword(userData.name, userData.email, randomString);
+      const name = userData.first_name + updatedData.last_name 
+      sendResetPassword(name, userData.email, randomString);
       res.send({
         message: "Please check your mail to reset password.",
         success: true,
@@ -275,16 +279,17 @@ const sendResetPassword = async (name, email, token) => {
 };
 const resetPassword = async (req, res) => {
   try {
-    const password = req.body.password;
-    console.log(password);
-    const email = req.body.email;
+    const password = req.body.re_cus_new_pass;
+    const email = req.query.email;
     console.log(email);
     const secure_Password = await securePassword(password);
     const updatedData = await User.findOneAndUpdate(
       { email: email.toString() },
       { $set: { password: secure_Password, token: "" } }
     ).lean();
-    res.send({ message: "Thay đổi mật khẩu thành công!" });
+    const userData = await User.findOne({ email });
+
+    res.send({ message: "Thay đổi mật khẩu thành công!",userData});
   } catch (err) {
     console.log(err.message);
   }
@@ -300,6 +305,21 @@ const isEmailVerified = async (req, res) => {
   }
 };
 
+const subTypeApi = async (req, res, next) => {
+  try {
+    const typePopulateSubType = await Type.find({})
+      .populate("subtypes")
+      .lean();
+
+    console.log(typePopulateSubType); // Log the actual data, not the promise object
+    res.json({ typePopulateSubType });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Lỗi máy chủ." });
+  }
+};
+
+
 module.exports = {
   x,
   saveAccount,
@@ -309,5 +329,5 @@ module.exports = {
   getForGotPW,
   resetPassword,
   getUserID,
-  isEmailVerified,
+  isEmailVerified,subTypeApi
 };

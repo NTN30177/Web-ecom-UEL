@@ -24,7 +24,7 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'order-tracking',
+        path: 'order-tracking/:orderId',
         loadChildren: () =>
           import('./order-tracking/order-tracking.module').then(
             (m) => m.OrderTrackingModule
@@ -49,6 +49,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./account-favorite/account-favorite-routing.module').then(
             (m) => m.AccountFavoriteRoutingModule
+          ),
+      },
+      {
+        path: 'order-tracking:orderId',
+        loadChildren: () =>
+          import('./order-tracking/order-tracking.module').then(
+            (m) => m.OrderTrackingModule
           ),
       },
       { path: '', redirectTo: 'info', pathMatch: 'full' },

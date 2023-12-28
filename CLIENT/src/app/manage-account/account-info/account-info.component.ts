@@ -3,6 +3,9 @@ import { AccountInfoService } from '../../services/account-info.service';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IUser } from '../../interfaces/user';
+import { AuthService } from '../../services/auth.service';
+import { ChangePasswordComponent } from '../change-password/change-password.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-account-info',
@@ -11,31 +14,25 @@ import { IUser } from '../../interfaces/user';
 })
 export class AccountInfoComponent implements OnInit {
 
-
-
-
   userID: any
   userInfoForm!: FormGroup;
-  userInfo: IUser | undefined;// Use the IUser interface
-  notification: { message: string, type: 'success' | 'error' } | null = null;
+  userInfo: IUser | undefined;
+  errMessage: string = '';
+  successMessage: string = '';
 
-  constructor(private accountInfoService: AccountInfoService, private datePipe: DatePipe, private formBuilder: FormBuilder) { }
+  constructor(
+    private accountInfoService: AccountInfoService,
+    private datePipe: DatePipe,
+    private formBuilder: FormBuilder,
+    private _authService: AuthService,
+    private dialogRef: MatDialog,) { }
 
   ngOnInit(): void {
 
-
-    // Set the user ID in the service
-    const userdataString = localStorage.getItem('userData');
-    if (userdataString) {
-      const userdata = JSON.parse(userdataString);
-      this.accountInfoService.setUserId(userdata._id);
-
-      // Subscribe to the userId$ observable to get updates
-      this.accountInfoService.userId$.subscribe(userId => {
-        this.userID = userId;
-        console.log('User ID:', this.userID);
-      });
-    }
+    this._authService.idUserSubject.subscribe((data) => {
+      this.userID = data;
+      console.log(this.userID, 'user id:::')
+    });
 
     this.initForm();
     this.loadUserAccountInfo();
@@ -47,11 +44,10 @@ export class AccountInfoComponent implements OnInit {
       last_name: ['', Validators.required],
       phone: ['', Validators.required],
       email: [{ value: '' }, [Validators.required, Validators.email]],
-      gender: [0, Validators.required],
+      gender: [1, Validators.required],
       date_of_birth: ['']
     });
   }
-
 
   loadUserAccountInfo() {
     this.accountInfoService.getUserAccountInfo(this.userID).subscribe((response: IUser) => {
@@ -68,11 +64,6 @@ export class AccountInfoComponent implements OnInit {
     });
   }
 
-
-  // formatDateOfBirthForInput(date: Date | null): string {
-  //   return date ? this.datePipe.transform(date, 'yyyy-MM-dd') || '' : '';
-  // }
-
   formatDateOfBirthForInput(date: Date | null | undefined): string {
     return date ? this.datePipe.transform(date, 'yyyy-MM-dd') || '' : '';
   }
@@ -88,31 +79,16 @@ export class AccountInfoComponent implements OnInit {
       this.accountInfoService.updateUserAccountInfo(this.userID, updatedInfo)
         .subscribe(
           (response) => {
-            console.log('User information updated successfully:', response);
-            // Cập nhật lại dữ liệu hiển thị 
-            // 1. Update local data
-            this.userInfo = { ...this.userInfo, ...updatedInfo };
-
-            // 2. Update the form with new values
-            this.userInfoForm.patchValue({
-              first_name: this.userInfo?.first_name,
-              last_name: this.userInfo?.last_name,
-              phone: this.userInfo?.phone,
-              email: this.userInfo?.email,
-              gender: this.userInfo?.gender,
-              date_of_birth: this.formatDateOfBirthForInput(this.userInfo?.date_of_birth)
-            });
-            this.showNotification('Update successful', 'success');
-
-            // Auto-dismiss the notification after 3 seconds
+            this.successMessage = 'Cập nhật thông tin thành công!';
+            this.errMessage = '';
             setTimeout(() => {
-              this.notification = null;
+              this.successMessage = '';
             }, 3000);
 
           },
           (error) => {
             console.error('Error updating user information:', error);
-            // Xử lý lỗi nếu cần
+            this.errMessage = 'Cập nhật thông tin không thành công. Vui lòng thử lại!';
           }
         );
     } else {
@@ -120,17 +96,17 @@ export class AccountInfoComponent implements OnInit {
     }
   }
 
-  showNotification(message: string, type: 'success' | 'error') {
-    this.notification = { message, type };
-  }
 
-  submitForm() {
-    if (this.userInfoForm.valid) {
-      // Implement form submission logic here
-      console.log('Form submitted successfully!');
-      // Access form values using this.userInfoForm.value
-    } else {
-      this.userInfoForm.markAllAsTouched();
+  openDialog() {
+    // Check if there are open dialogs before opening a new one
+    if (this.dialogRef.openDialogs.length === 0) {
+      const dialogRef = this.dialogRef.open(ChangePasswordComponent, {
+        hasBackdrop: true,
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log('Dialog result:', result);
+      });
     }
   }
 }

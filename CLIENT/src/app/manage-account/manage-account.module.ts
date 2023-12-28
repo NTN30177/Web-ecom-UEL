@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { ManageAccountRoutingModule } from './manage-account-routing.module';
 import { AccountFavoriteComponent } from './account-favorite/account-favorite.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
   declarations: [
-    AccountFavoriteComponent
+    AccountFavoriteComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,

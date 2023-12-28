@@ -51,6 +51,11 @@ const productSchema = new mongoose.Schema(
             type: String,
             // required: true,
         },
+
+        feedbackList: [{
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Feedback",
+        }],
         images: [
             {
                 type: String,
@@ -110,45 +115,7 @@ const typeSchema = new mongoose.Schema(
 
 //Mua hàng
 
-const orderItemSchema = new mongoose.Schema({
-  product: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Product",
-  },
-  variants: [variantSchema],
-});
 
-const orderSchema = new mongoose.Schema(
-  {
-    orderItems: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "OrderItem",
-        required: true,
-      },
-    ],
-    address: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "UserAddress",
-      required: true,
-    },
-    status: {
-      type: String,
-      required: true,
-      default: "Đang xử lý",
-    },
-    totalPrice: {
-      type: Number,
-    },
-    feedback:{
-        type:String,
-    },
-
-  },
-  {
-    timestamps: true,
-  }
-);
 
 //Giỏ hàng
 
@@ -179,8 +146,6 @@ const Product = mongoose.model("Product", productSchema);
 const Subtype = mongoose.model("Subtype", subtypeSchema);
 const Type = mongoose.model("Type", typeSchema);
 
-const OrderItem = mongoose.model("OrderItem", orderItemSchema);
-const Order = mongoose.model("Order", orderSchema);
 
 const CartItem = mongoose.model("CartItem", cartItemSchema);
 // const Cart = mongoose.model('Cart', cartSchema);
@@ -194,8 +159,7 @@ module.exports = {
   Subtype,
   Type,
 
-  OrderItem,
-  Order,
+
 
   CartItem,
   // Cart,

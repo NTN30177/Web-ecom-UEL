@@ -334,7 +334,7 @@ p {
     border-bottom:#aeaeae 2px dashed;
 }
 
-.order-track .items .media-object {
+.order-track .group-left .media .media-left .media-object{
     width: 150px;
     height: 215px;
     background-color: #cccccc;
@@ -424,4 +424,21 @@ p {
     font-size: 18px;
     border-radius: 20px;
     background-color: #000;
+}
+
+.btn-fb{
+    color: #fff;
+    font-size: 12px;
+    border-radius: 10px;
+    padding: 10px 15px 10px 15px;
+    background-color: #9B3A23;
+    border: 1px solid #9B3A23;
+}
+.btn-fb:hover{
+    color: #9B3A23;
+    font-size: 12px;
+    border-radius: 10px;
+    padding: 10px 15px 10px 15px;
+    background-color: white;
+    border: 1px solid #9B3A23;
 }
