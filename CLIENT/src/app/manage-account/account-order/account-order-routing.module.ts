@@ -5,7 +5,7 @@ import { OrderTrackingComponent } from '../order-tracking/order-tracking.compone
 
 const routes: Routes = [
   {path: '', component: AccountOrderComponent},
-  {path: 'order-tracking', component: OrderTrackingComponent},
+  {path: 'order-tracking/:orderId', component: OrderTrackingComponent},
 
 ];
 
