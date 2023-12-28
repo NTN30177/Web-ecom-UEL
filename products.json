@@ -1,0 +1,879 @@
+[{
+  "_id": {
+    "$oid": "65880e2d0ae73cc6f7fabadb"
+  },
+  "title": "KHĂN LỤA OMBRÉ",
+  "price": 650000,
+  "sku": "50A1375",
+  "discount": 0,
+  "description": "Khăn lụa vuông, phối màu Ombré hút mắt. Thiết kế khăn được làm từ chất liệu lụa mềm cao cấp, phù hợp để nàng diện như một chiếc áo yếm hay dùng làm phụ kiện cho quần áo, túi xác hằng ngày.",
+  "author": "64ca103baeac1741e179f4c7",
+  "images": [],
+  "variants": [
+    {
+      "color": {
+        "$oid": "64cb7318066ac7727d33e0b6"
+      },
+      "images": [
+        "1703415341303-KHAN-LaA-OMBRA-VA-ng-1.jpg",
+        "1703415341317-KHAN-LaA-OMBRA-VA-ng-2.jpg",
+        "1703415341321-KHAN-LaA-OMBRA-VA-ng-3.jpg",
+        "1703415341331-KHAN-LaA-OMBRA-VA-ng-4.jpg"
+      ],
+      "variantColor": [
+        {
+          "size": "FreeSize",
+          "quantity": 0,
+          "_id": {
+            "$oid": "65880e2d0ae73cc6f7fabadd"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "65880e2d0ae73cc6f7fabadc"
+      }
+    },
+    {
+      "color": {
+        "$oid": "64cb726b066ac7727d33d8c6"
+      },
+      "images": [
+        "1703415341338-KHAN-LaA-OMBRA-Ghi-khAi-1.jpg",
+        "1703415341340-KHAN-LaA-OMBRA-Ghi-khai-2.jpg",
+        "1703415341343-KHAN-LaA-OMBRA-Ghi-khai-3.jpg"
+      ],
+      "variantColor": [
+        {
+          "size": "FreeSize",
+          "quantity": 20,
+          "_id": {
+            "$oid": "65880e2d0ae73cc6f7fabadf"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "65880e2d0ae73cc6f7fabade"
+      }
+    },
+    {
+      "color": {
+        "$oid": "64cb721d066ac7727d33ceda"
+      },
+      "images": [
+        "1703415341345-KHAN-LaA-OMBRA-1.jpg",
+        "1703415341347-KHAN-LaA-OMBRA-2.jpg",
+        "1703415341350-KHAN-LaA-OMBRA-3.jpg",
+        "1703415341353-KHAN-LaA-OMBRA-4.jpg"
+      ],
+      "variantColor": [
+        {
+          "size": "FreeSize",
+          "quantity": 20,
+          "_id": {
+            "$oid": "65880e2d0ae73cc6f7fabae1"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "65880e2d0ae73cc6f7fabae0"
+      }
+    }
+  ],
+  "is_deleted": false,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703415341436"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703415341436"
+    }
+  },
+  "slug": "khan-lua-ombre",
+  "__v": 0,
+  "feedbackList": [
+    ""
+  ]
+},{
+  "_id": {
+    "$oid": "65880fa40a6c419634b5a57c"
+  },
+  "title": "ÁO SƠ MI LỤA MAY VIỀN NỔI",
+  "price": 1290000,
+  "sku": "17M8125",
+  "discount": 0,
+  "description": "Áo sơ mi dáng suông, cài bằng hàng khuy ẩn phía trước. Điểm nhấn là chi tiết may viền vải tuysi khác màu độc đáo. Chất liệu vải lụa dày dặn có độ rủ, mềm mịn, nhăn nhẹ.\r\n\r\nVới mẫu thiết kế này, nàng sơ vin cùng chân váy hoặc quần vải ống suông là đã hoàn thiện trang phục đi làm chỉn chu, lịch sự mà vẫn rất trẻ trung, nữ tính. \r\n\r\nThông tin mẫu:\r\n\r\nChiều cao: 165 cm\r\n\r\nCân nặng: 48 kg\r\n\r\nSố đo 3 vòng: 80-63-89 cm\r\n\r\nMẫu mặc size S\r\n\r\nLưu ý: Màu sắc sản phẩm thực tế sẽ có sự chênh lệch nhỏ so với ảnh do điều kiện ánh sáng khi chụp và màu sắc hiển thị qua màn hình máy tính/ điện thoại.",
+  "author": "64ca103baeac1741e179f4c7",
+  "images": [],
+  "variants": [
+    {
+      "color": {
+        "$oid": "65852347fb0cdd158835bcb5"
+      },
+      "images": [
+        "1703415716166-1703223735946-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-1.jpg",
+        "1703415716178-1703223735948-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-2.jpg",
+        "1703415716181-1703223735950-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-3.jpg",
+        "1703415716183-1703223735953-AO-S-MI-LaA-MAY-VIaN-NaI-Aen-4.jpg"
+      ],
+      "variantColor": [
+        {
+          "size": "S",
+          "quantity": 20,
+          "_id": {
+            "$oid": "65880fa40a6c419634b5a57e"
+          }
+        },
+        {
+          "size": "M",
+          "quantity": 20,
+          "_id": {
+            "$oid": "65880fa40a6c419634b5a57f"
+          }
+        },
+        {
+          "size": "L",
+          "quantity": 20,
+          "_id": {
+            "$oid": "65880fa40a6c419634b5a580"
+          }
+        },
+        {
+          "size": "XL",
+          "quantity": 20,
+          "_id": {
+            "$oid": "65880fa40a6c419634b5a581"
+          }
+        },
+        {
+          "size": "XXL",
+          "quantity": 20,
+          "_id": {
+            "$oid": "65880fa40a6c419634b5a582"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "65880fa40a6c419634b5a57d"
+      }
+    },
+    {
+      "color": {
+        "$oid": "64cb7285066ac7727d33dcbe"
+      },
+      "images": [
+        "1703415716186-1703223735930-AO-S-MI-LaA-MAY-VIaN-NaI-1.jpg",
+        "1703415716189-1703223735933-AO-S-MI-LaA-MAY-VIaN-NaI-2.jpg",
+        "1703415716190-1703223735938-AO-S-MI-LaA-MAY-VIaN-NaI-3.jpg",
+        "1703415716193-1703223735941-AO-S-MI-LaA-MAY-VIaN-NaI-4.jpg"
+      ],
+      "variantColor": [
+        {
+          "size": "S",
+          "quantity": 20,
+          "_id": {
+            "$oid": "65880fa40a6c419634b5a584"
+          }
+        },
+        {
+          "size": "M",
+          "quantity": 20,
+          "_id": {
+            "$oid": "65880fa40a6c419634b5a585"
+          }
+        },
+        {
+          "size": "L",
+          "quantity": 20,
+          "_id": {
+            "$oid": "65880fa40a6c419634b5a586"
+          }
+        },
+        {
+          "size": "XL",
+          "quantity": 20,
+          "_id": {
+            "$oid": "65880fa40a6c419634b5a587"
+          }
+        },
+        {
+          "size": "XXL",
+          "quantity": 20,
+          "_id": {
+            "$oid": "65880fa40a6c419634b5a588"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "65880fa40a6c419634b5a583"
+      }
+    }
+  ],
+  "is_deleted": false,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703415716300"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703415716300"
+    }
+  },
+  "slug": "ao-so-mi-lua-may-vien-noi-Fi9Vk5xwo",
+  "__v": 0,
+  "feedbackList": [
+    ""
+  ]
+},{
+  "_id": {
+    "$oid": "6588fa4673595a888d456871"
+  },
+  "title": "CLUTCH NỮ CAO CẤP",
+  "price": 1290000,
+  "sku": "52A1336",
+  "discount": 0,
+  "description": "Túi clutch chần bông có 3 ngăn lớn, các ngăn nhỏ bên trong và một ngăn khóa kéo bên trong túi.\r\n\r\nTừ lâu, túi clutch nữ hàng hiệu đã trở thành một món đồ xa xỉ không thể thiếu đối với phái đẹp khi xuống phố, khi đi dự tiệc hay tụ tập bạn bè. Một chiếc clutch không chỉ giúp phái nữ đựng đồ dùng, trang thiết bị cá nhân mà còn khoe ra sự đẳng cấp, thời thượng.\r\n\r\nKích thước: Cao x rộng x sâu: 11 x 20 x 3 cm\r\n\r\nMàu sắc: Nude - Đen",
+  "author": "64ca103baeac1741e179f4c7",
+  "feedbackList": [],
+  "images": [],
+  "variants": [
+    {
+      "color": {
+        "$oid": "65852347fb0cdd158835bcb5"
+      },
+      "images": [
+        "1703475782569-CLUTCH-Na-CAO-CaP-AEN-1.jpg",
+        "1703475782571-CLUTCH-Na-CAO-CaP-AEN-2.jpg",
+        "1703475782577-CLUTCH-Na-CAO-CaP-AEN-3.jpg",
+        "1703475782580-CLUTCH-Na-CAO-CaP-AEN-4.jpg"
+      ],
+      "variantColor": [
+        {
+          "size": "FreeSize",
+          "quantity": 20,
+          "_id": {
+            "$oid": "6588fa4673595a888d456873"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "6588fa4673595a888d456872"
+      }
+    },
+    {
+      "color": {
+        "$oid": "65880c01c3cc26960695c93d"
+      },
+      "images": [
+        "1703475782584-CLUTCH-Na-CAO-CaP-2.jpg",
+        "1703475782600-CLUTCH-Na-CAO-CaP-3.jpg",
+        "1703475782604-CLUTCH-Na-CAO-CaP-4.jpg",
+        "1703475782607-CLUTCH-Na-CAO-CaP.jpg"
+      ],
+      "variantColor": [
+        {
+          "size": "FreeSize",
+          "quantity": 20,
+          "_id": {
+            "$oid": "6588fa4673595a888d456875"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "6588fa4673595a888d456874"
+      }
+    }
+  ],
+  "is_deleted": false,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703475782652"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703475782652"
+    }
+  },
+  "slug": "clutch-nu-cao-cap",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6588fb6c73595a888d4568a9"
+  },
+  "title": "THẮT LƯNG DA NỮ",
+  "price": 490000,
+  "sku": "35A1333",
+  "discount": 0,
+  "description": "Thắt lưng bằng da tổng hợp. Có đai luồn dây bằng da và mặt khóa cài hình tròn bằng kim loại.\r\n\r\nMàu sắc: Đen - Nâu cà phê",
+  "author": "64ca103baeac1741e179f4c7",
+  "feedbackList": [],
+  "images": [],
+  "variants": [
+    {
+      "color": {
+        "$oid": "65852347fb0cdd158835bcb5"
+      },
+      "images": [
+        "1703476076324-THaT-LNG-DA-Na-Aen-1.jpg",
+        "1703476076327-THaT-LNG-DA-Na-Aen-2.jpg",
+        "1703476076329-THaT-LNG-DA-Na-Aen-3.jpg"
+      ],
+      "variantColor": [
+        {
+          "size": "FreeSize",
+          "quantity": 20,
+          "_id": {
+            "$oid": "6588fb6c73595a888d4568ab"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "6588fb6c73595a888d4568aa"
+      }
+    },
+    {
+      "color": {
+        "$oid": "65880c01c3cc26960695c93d"
+      },
+      "images": [
+        "1703476076333-THaT-LNG-Na-nAu-1.jpg",
+        "1703476076335-THaT-LNG-Na-nAu-2.jpg",
+        "1703476076339-THaT-LNG-Na-nAu-3.jpg"
+      ],
+      "variantColor": [
+        {
+          "size": "FreeSize",
+          "quantity": 20,
+          "_id": {
+            "$oid": "6588fb6c73595a888d4568ad"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "6588fb6c73595a888d4568ac"
+      }
+    }
+  ],
+  "is_deleted": false,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703476076359"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703476076359"
+    }
+  },
+  "slug": "that-lung-da-nu",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6589a14b4c45f8ca787e41f4"
+  },
+  "title": "TÚI DA ĐEO VAI",
+  "price": 1790000,
+  "sku": "51A1357",
+  "discount": 0,
+  "description": "Túi xách size medium, chất liệu da PU. Bên trong lót vải, có 1 ngăn ẩn. Quai đeo vai cố định, không tháo rời và điều chỉnh được. Có túi nhỏ đi kèm.\r\n\r\nKích thước túi: cao x rộng x ngang: 21 x 29 x 12cm",
+  "author": "64ca103baeac1741e179f4c7",
+  "feedbackList": [],
+  "images": [],
+  "variants": [
+    {
+      "color": {
+        "$oid": "65880c01c3cc26960695c93d"
+      },
+      "images": [
+        "1703518539398-TAI-DA-AEO-VAI-Ghi-rAu-be-2.jpg",
+        "1703518539403-TAI-DA-AEO-VAI-Ghi-rAu-be-3.jpg",
+        "1703518539407-TAI-DA-AEO-VAI-Ghi-rAu-be-4.jpg",
+        "1703518539409-TAI-DA-AEO-VAI-Ghi-rAu-be.jpg"
+      ],
+      "variantColor": [
+        {
+          "size": "FreeSize",
+          "quantity": 20,
+          "_id": {
+            "$oid": "6589a14b4c45f8ca787e41f6"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "6589a14b4c45f8ca787e41f5"
+      }
+    },
+    {
+      "color": {
+        "$oid": "65851798fb0cdd158835bc99"
+      },
+      "images": [
+        "1703518539411-TAI-DA-AEO-VAI-xanh-lA-Aam.jpg",
+        "1703518539414-TAI-DA-AEO-VAI-xanh-lA-Aam.jpg",
+        "1703518539416-TAI-DA-AEO-VAI-xanh-lA-Aam.jpg",
+        "1703518539419-TAI-DA-AEO-VAI-xanh-lA-Aam.jpg"
+      ],
+      "variantColor": [
+        {
+          "size": "FreeSize",
+          "quantity": 20,
+          "_id": {
+            "$oid": "6589a14b4c45f8ca787e41f8"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "6589a14b4c45f8ca787e41f7"
+      }
+    }
+  ],
+  "is_deleted": false,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703518539435"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703518539435"
+    }
+  },
+  "slug": "tui-da-deo-vai",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6589a1ff4c45f8ca787e4206"
+  },
+  "title": "TÚI ĐEO VAI NẮP LỆCH",
+  "price": 1490000,
+  "sku": "51A1357",
+  "discount": 0,
+  "description": "Túi đeo vai Medium. Thân túi hình chữ nhật, chất liệu da pu giả da động vật. Có quai đeo vai tháo rời được. Lót vải bên trong có 1 ngăn nhỏ có khóa. Đóng mở bằng nam châm.\r\n\r\nKích thước túi: Cao x Rộng x Ngang: 7 x 24 x 7 cm",
+  "author": "64ca103baeac1741e179f4c7",
+  "feedbackList": [],
+  "images": [],
+  "variants": [
+    {
+      "color": {
+        "$oid": "65880c01c3cc26960695c93d"
+      },
+      "images": [
+        "1703518719435-TAI-AEO-VAI-NaP-LaCH-cam-1.jpg",
+        "1703518719435-TAI-AEO-VAI-NaP-LaCH-cam-2.jpg",
+        "1703518719440-TAI-AEO-VAI-NaP-LaCH-cam-3.jpg"
+      ],
+      "variantColor": [
+        {
+          "size": "FreeSize",
+          "quantity": 20,
+          "_id": {
+            "$oid": "6589a1ff4c45f8ca787e4208"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "6589a1ff4c45f8ca787e4207"
+      }
+    },
+    {
+      "color": {
+        "$oid": "64cb726b066ac7727d33d8c6"
+      },
+      "images": [
+        "1703518719442-TAI-AEO-VAI-NaP-LaCH-1.jpg",
+        "1703518719445-TAI-AEO-VAI-NaP-LaCH-2.jpg",
+        "1703518719446-TAI-AEO-VAI-NaP-LaCH-3.jpg"
+      ],
+      "variantColor": [
+        {
+          "size": "FreeSize",
+          "quantity": 20,
+          "_id": {
+            "$oid": "6589a1ff4c45f8ca787e420a"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "6589a1ff4c45f8ca787e4209"
+      }
+    }
+  ],
+  "is_deleted": false,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703518719458"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703518719458"
+    }
+  },
+  "slug": "tui-deo-vai-nap-lech",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6589a2a74c45f8ca787e4210"
+  },
+  "title": "TÚI HỘP MINI PHỐI XÍCH",
+  "price": 1490000,
+  "sku": "51A1357",
+  "discount": 0,
+  "description": "Túi đeo vai Medium. Thân túi hình chữ nhật, chất liệu da pu giả da động vật. Có quai đeo vai tháo rời được. Lót vải bên trong có 1 ngăn nhỏ có khóa. Đóng mở bằng nam châm.\r\n\r\nKích thước túi: Cao x Rộng x Ngang: 7 x 24 x 7 cm",
+  "author": "64ca103baeac1741e179f4c7",
+  "feedbackList": [],
+  "images": [],
+  "variants": [
+    {
+      "color": {
+        "$oid": "65851798fb0cdd158835bc99"
+      },
+      "images": [
+        "123.jpg",
+        "1234.jpg",
+        "1235.jpg",
+        "1236.jpg"
+      ],
+      "variantColor": [
+        {
+          "size": "FreeSize",
+          "quantity": 20,
+          "_id": {
+            "$oid": "6589a2a74c45f8ca787e4212"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "6589a2a74c45f8ca787e4211"
+      }
+    },
+    {
+      "color": {
+        "$oid": "65880c01c3cc26960695c93d"
+      },
+      "images": [
+        "1703518887763-TAI-HaP-MINI-PHaI-XACH-2.jpg",
+        "1703518887764-TAI-HaP-MINI-PHaI-XACH-3.jpg",
+        "1703518887767-TAI-HaP-MINI-PHaI-XACH-4.jpg",
+        "1703518887769-TAI-HaP-MINI-PHaI-XACH.jpg"
+      ],
+      "variantColor": [
+        {
+          "size": "FreeSize",
+          "quantity": 20,
+          "_id": {
+            "$oid": "6589a2a74c45f8ca787e4214"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "6589a2a74c45f8ca787e4213"
+      }
+    }
+  ],
+  "is_deleted": false,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703518887779"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703518887779"
+    }
+  },
+  "slug": "tui-hop-mini-phoi-xich",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6589a34f4c45f8ca787e421a"
+  },
+  "title": "TÚI DA CÔNG SỞ QUAI XÁCH",
+  "price": 1590000,
+  "sku": "51A1364",
+  "discount": 0,
+  "description": "Túi hộp size mini có dây da đeo chéo đi kèm. Trang trí họa tiết da động vật cùng xích kim loại cá tính. Bên trong lót vải, cài khóa nam châm.\r\n\r\nKích thước túi lớn: Cao x Rộng x Ngang: 15 x 21 x 8 cm ",
+  "author": "64ca103baeac1741e179f4c7",
+  "feedbackList": [],
+  "images": [],
+  "variants": [
+    {
+      "color": {
+        "$oid": "64cb721d066ac7727d33ceda"
+      },
+      "images": [
+        "1703519055125-TAI-DA-CANG-Sa-QUAI-XACH-1.jpg",
+        "1703519055128-TAI-DA-CANG-Sa-QUAI-XACH-2.jpg",
+        "1703519055130-TAI-DA-CANG-Sa-QUAI-XACH-3.jpg",
+        "1703519055137-TAI-DA-CANG-Sa-QUAI-XACH.jpg"
+      ],
+      "variantColor": [
+        {
+          "size": "FreeSize",
+          "quantity": 20,
+          "_id": {
+            "$oid": "6589a34f4c45f8ca787e421c"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "6589a34f4c45f8ca787e421b"
+      }
+    },
+    {
+      "color": {
+        "$oid": "64cb7277066ac7727d33dac2"
+      },
+      "images": [
+        "1703519055151-TAI-DA-CANG-Sa-QUAI-XACH-4.jpg",
+        "1703519055153-TAI-DA-CANG-Sa-QUAI-XACH-5.jpg",
+        "1703519055155-TAI-DA-CANG-Sa-QUAI-XACH-6.jpg",
+        "1703519055156-TAI-DA-CANG-Sa-QUAI-XACH-7.jpg"
+      ],
+      "variantColor": [
+        {
+          "size": "FreeSize",
+          "quantity": 20,
+          "_id": {
+            "$oid": "6589a34f4c45f8ca787e421e"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "6589a34f4c45f8ca787e421d"
+      }
+    }
+  ],
+  "is_deleted": false,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703519055165"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703519055165"
+    }
+  },
+  "slug": "tui-da-cong-so-quai-xach",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6589a4044c45f8ca787e4224"
+  },
+  "title": "TÚI XÁCH",
+  "price": 1390000,
+  "sku": "51A1055",
+  "discount": 0,
+  "description": "Túi hộp size mini có dây da đeo chéo đi kèm. Trang trí họa tiết da động vật cùng xích kim loại cá tính. Bên trong lót vải, cài khóa nam châm.\r\n\r\nKích thước túi lớn: Cao x Rộng x Ngang: 15 x 21 x 8 cm ",
+  "author": "64ca103baeac1741e179f4c7",
+  "feedbackList": [],
+  "images": [],
+  "variants": [
+    {
+      "color": {
+        "$oid": "64cb723b066ac7727d33d0d6"
+      },
+      "images": [
+        "1703519236774-TAI-XACH.png"
+      ],
+      "variantColor": [
+        {
+          "size": "FreeSize",
+          "quantity": 20,
+          "_id": {
+            "$oid": "6589a4044c45f8ca787e4226"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "6589a4044c45f8ca787e4225"
+      }
+    },
+    {
+      "color": {
+        "$oid": "64cb7260066ac7727d33d6ca"
+      },
+      "images": [
+        "1703519236792-TAI-XACH-1.jpg",
+        "1703519236794-TAI-XACH-2.png",
+        "1703519236801-TAI-XACH-3.png",
+        "1703519236805-TAI-XACH-4.png"
+      ],
+      "variantColor": [
+        {
+          "size": "FreeSize",
+          "quantity": 20,
+          "_id": {
+            "$oid": "6589a4044c45f8ca787e4228"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "6589a4044c45f8ca787e4227"
+      }
+    }
+  ],
+  "is_deleted": false,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703519236827"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703519236827"
+    }
+  },
+  "slug": "tui-xach",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6589a4b24c45f8ca787e422e"
+  },
+  "title": "BALO DA KẺ CARO",
+  "price": 1390000,
+  "sku": "51A1363",
+  "discount": 0,
+  "description": "Balo da PU, họa tiết kẻ caro  cùng tôn màu pastel đáng yêu, nữ tính. Đóng mở bằng khóa kéo kim loại màu vàng. Có một quai cầm tay và hai quai đeo vai cùng màu có thể điều chỉnh ở phía sau.\r\n\r\nKích thước: Cao x Rộng x Sâu: 25 x 21 x 11 cm",
+  "feedbackList": [],
+  "variants": [
+    {
+      "color": {
+        "$oid": "64cb7247066ac7727d33d2d2"
+      },
+      "images": [
+        "1703519410018-BALO-DA-Ka-CARO-5.jpg",
+        "1703519410021-BALO-DA-Ka-CARO-6.jpg",
+        "1703519410022-BALO-DA-Ka-CARO-7.jpg",
+        "1703519410024-BALO-DA-Ka-CARO-8.jpg"
+      ],
+      "variantColor": [
+        {
+          "size": "FreeSize",
+          "quantity": 20,
+          "_id": {
+            "$oid": "6589a4b24c45f8ca787e4230"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "6589a4b24c45f8ca787e422f"
+      }
+    },
+    {
+      "color": {
+        "$oid": "65852347fb0cdd158835bcb5"
+      },
+      "images": [
+        "1703519410075-BALO-DA-Ka-CARO-1.jpg",
+        "1703519410076-BALO-DA-Ka-CARO-2.jpg",
+        "1703519410077-BALO-DA-Ka-CARO-3.jpg",
+        "1703519410082-BALO-DA-Ka-CARO-4.jpg"
+      ],
+      "variantColor": [
+        {
+          "size": "FreeSize",
+          "quantity": 20,
+          "_id": {
+            "$oid": "6589a4b24c45f8ca787e4232"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "6589a4b24c45f8ca787e4231"
+      }
+    }
+  ],
+  "is_deleted": false,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703519410098"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703519410098"
+    }
+  },
+  "slug": "balo-da-ke-caro",
+  "__v": 0,
+  "admin_Upload": "64ca103baeac1741e179f4c7"
+},{
+  "_id": {
+    "$oid": "65883c4d94cf44371b8bf8d2"
+  },
+  "title": "CHÂN VÁY MINI LEN GÂN",
+  "price": 550000,
+  "sku": "CV0001",
+  "discount": 0,
+  "description": "Chân váy mini xòe nhẹ dáng ngắn giúp nàng \"hack\" chiều cao. Chất liệu vải len gân nổi co giãn, tông màu trung tính thời thượng mang lại cảm giác ấm áp. Thiết kế chân váy trẻ trung, cá tính dễ dàng kết hợp cùng nhiều kiểu áo khác nhau. Mix cùng đôi boots là nàng đã có một outfit xuống phố năng động, hợp mốt rồi đó!",
+  "author": "64ca103baeac1741e179f4c7",
+  "variants": [
+    {
+      "color": {
+        "$oid": "65852347fb0cdd158835bcb5"
+      },
+      "images": [
+        "1703519409990-TAI-AEO-VAI-NaP-LaCH-cam-1.jpg",
+        "1703427148988-f63f0bf435b92ea161b2415a01a5cc02.jpg"
+      ],
+      "variantColor": [
+        {
+          "size": "S",
+          "quantity": 50,
+          "_id": {
+            "$oid": "65883c4d94cf44371b8bf8d4"
+          }
+        },
+        {
+          "size": "M",
+          "quantity": 10,
+          "_id": {
+            "$oid": "65883c4d94cf44371b8bf8d5"
+          }
+        },
+        {
+          "size": "L",
+          "quantity": 19,
+          "_id": {
+            "$oid": "65883c4d94cf44371b8bf8d6"
+          }
+        },
+        {
+          "size": "XL",
+          "quantity": 10,
+          "_id": {
+            "$oid": "65883c4d94cf44371b8bf8d7"
+          }
+        },
+        {
+          "size": "XXL",
+          "quantity": 12,
+          "_id": {
+            "$oid": "65883c4d94cf44371b8bf8d8"
+          }
+        }
+      ],
+      "_id": {
+        "$oid": "65883c4d94cf44371b8bf8d3"
+      }
+    }
+  ],
+  "is_deleted": false,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703427149023"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703427149023"
+    }
+  },
+  "slug": "chan-vay-mini-len-gan",
+  "__v": 0
+}]
