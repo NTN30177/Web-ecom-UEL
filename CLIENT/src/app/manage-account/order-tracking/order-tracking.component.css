@@ -334,7 +334,7 @@ p {
     border-bottom:#aeaeae 2px dashed;
 }
 
-.order-track .items .media-object {
+.order-track .group-left .media .media-left .media-object{
     width: 150px;
     height: 215px;
     background-color: #cccccc;

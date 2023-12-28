@@ -77,11 +77,11 @@
                 <li class="list-group-item title">DANH SÁCH SẢN PHẨM</li>
                 <li class="list-group-item divider"></li>
                 <li class="list-group-item items" *ngFor="let product of orderDetails.dataOrderDetail[0].orderItems">
-                        <div class="cart-list__variant" *ngFor="let v of product.variants">
+                    <div class="cart-list__variant" *ngFor="let v of product.variants">
                     <div class="media" *ngFor="let vc of v.variantColor">
-                        <div class="media-left">
-                            <a href="#"><img class="media-object" src="http://localhost:3000/productImages/{{ v.images[0]}}" data-holder-rendered="true"></a>
-                        </div>
+                    <div class="media-left">
+                        <a href="#"><img class="media-object" src="http://localhost:3000/productImages/{{ v.images[0]}}" data-holder-rendered="true"></a>
+                    </div>
                         <div class="media-body">
                             <div class="voucher-icon">
                                 <span class="voucher-icon__img">
@@ -98,9 +98,7 @@
                         </div>
                     </div>
                     </div>
-                    <div class="divider"></div>
-
-                    
+                    <div class="divider"></div>   
                 </li>
             </ul>
         </div>
