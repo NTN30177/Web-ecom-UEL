@@ -47,7 +47,7 @@
                                             <td><img src="{{local}}/productImages/{{product.variants[0].images[0]}}" alt=""></td>
                                             <td>{{ product.title }} <br><span *ngIf="product.is_deleted" class="deleted_message">Sản phẩm đã được xóa khỏi trang bán hàng!</span></td>
                                             <td>{{ product.sku }}</td>
-                                            <td>{{ product.price }}</td>
+                                            <td>{{ formatMoneyVietNam(product.price) }}</td>
                                             <td>{{ getTotalQuantity(product.variants) }}</td>
                                             <td>{{ product.variants.length }}</td>
                                             <td>
