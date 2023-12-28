@@ -66,6 +66,8 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { Chart1Component } from './admin/chart-1/chart-1.component';
 import { Chart2Component } from './admin/chart-2/chart-2.component';
+import { ToastModule } from '@coreui/angular';
+
 
 @NgModule({
   declarations: [
@@ -139,6 +141,7 @@ import { Chart2Component } from './admin/chart-2/chart-2.component';
     CommonModule,
     Select2Module,
     HighchartsChartModule,
+    ToastModule
   ],
   providers: [DatePipe, CartComponent, HomePageComponent],
   bootstrap: [AppComponent],

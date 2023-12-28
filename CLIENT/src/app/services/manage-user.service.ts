@@ -18,3 +18,4 @@ export class ManageUserService {
     return this.http.put<IUser>(`${local}/admin/user${user._id}`, user);
   }
 }
+

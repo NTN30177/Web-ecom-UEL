@@ -1,4 +1,6 @@
 <link rel="icon" type="image/x-icon" href="favicon.ico">
+<!-- Replace the existing line with this one -->
+<div class="text_head">{{ infoResult?.toString() }}</div>
 
 <div class="container-login">
   <div class="container">
@@ -7,7 +9,6 @@
             <div class="frame">
                 <div class="row p-4">
                   <div class="text_head">ĐĂNG NHẬP</div>
-                  {{infoResult}}
                   <div class="form-group mt-3">
                       <p>Đăng nhập để không bỏ lỡ quyền lợi tích luỹ và hoàn tiền cho bất kỳ đơn hàng nào.</p>
                   </div>
@@ -72,6 +73,7 @@
 
 
 
-{{ loginForm.value | json }}
+
+<!-- {{ loginForm.value | json }} -->
 
 
