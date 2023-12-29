@@ -1,5 +1,3 @@
-
-
 .sideMenu {
 
     display: inline-block;
@@ -22,6 +20,9 @@
     align-items: center;
     padding-bottom: 14px;
     gap: 10px;
+    font-size: 16px;
+
+    font-weight: 700;
 }
 
 
@@ -84,6 +85,7 @@ ul {
     .sideMenu_menu.show {
         display: block;
     }
+
     .sideMenu,
     .sideMenu_user {
         width: 100%;
