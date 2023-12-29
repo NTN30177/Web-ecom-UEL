@@ -162,34 +162,38 @@
                             <i class="header__icon ti-shopping-cart"></i>
                             <span class="number-cart">{{cartNumberItem||0}}</span>
                           </a>
-                          <div class="sub-action-cart sub-action" >
+                          <div class="sub-action-cart sub-action">
                             <div class="top-action">
                               <h3>Giỏ hàng <span class="number-cart">{{cartNumberItem||0}}</span></h3>
                             </div>
-                            <!-- <div class="main-action" *ngFor="let product of productsCart">
+                            <div class="main-action" *ngIf="cartList">
+                              <div class="cart-list" *ngFor="let product of cartList">
                                 <div class="cart-list__variant" *ngFor="let v of product.variants">
                                   <div class="cart-list__varriantColor" *ngFor="let vc of v.variantColor">
                               <div class="item-product-cart d-flex" *ngIf="quantityInputValue !== 0">
                                 <div class="thumb-product-cart">
-                                  <img src="http://localhost:3000/productImages/{{ v.images[0] }}">
+                                  <img src="http://localhost:3000/productImages/{{ v.images[0]}}">
                                 </div>
                                 <div class="info-product-cart">
-                                  <h3><a href="">{{ product.productId.title }}</a></h3>
+                                  <h3><a href="">{{ product.productId.title}}</a></h3>
                                   <div class="info-overview d-flex">
-                                    <p class="overview-color"><strong>Màu sắc:</strong> Be vàng</p>
-                                    <p><strong style="text-transform: uppercase">Size:</strong> S</p>
+                                    <p class="overview-color"><strong>Màu sắc:</strong> {{v.color.nameColor}}</p>
+                                    <p><strong style="text-transform: uppercase">Size:</strong> {{vc.size}}</p>
                                   </div>
                                   <div class="info-price-quantity d-flex">
-                                    <div class="price-quantity-minus price-quantity" (click)="updateQuantity('minus')"><i class="ti-minus"></i></div>
-                                    <input id="quantityInput" type="number" [(ngModel)]="quantityInputValue" (change)="updateQuantity('input')" />
-                                    <div class="price-quantity-plus price-quantity" (click)="updateQuantity('plus')"><i class="ti-plus"></i></div>
+                                    <div class="price-quantity-minus price-quantity" (click)="changeQuantity(v.color._id, product.productId._id, vc.size, 1)"><i class="ti-minus"></i></div>
+                                    <input id="quantityInput" type="number" value="{{ vc.quantity }}" />
+                                    <div class="price-quantity-plus price-quantity" (click)="changeQuantity(v.color._id, product.productId._id, vc.size, 1)"><i class="ti-plus"></i></div>
                                   </div>
                                 </div>
-                              </div></div></div>
-                            </div> -->
+                              </div>
+                              </div>
+                              </div>
+                              </div>
+                            </div>
                             <div class="bottom-action">
                               <input type="hidden">
-                              <div class="total-price">Tổng cộng: <strong>{{cartNumberItem}}</strong></div>
+                              <div class="total-price">Tổng cộng: <strong>{{formatMoneyVietNam(totalPayment)}}</strong></div>
                               <div class="box-action">
                                 <a href="" class="action-view-cart" routerLink="/cart" (click)="closeCart($event)">Xem giỏ hàng</a>
                                 <a href="" class="action-login" *ngIf="!isLogin">Đăng nhập</a>

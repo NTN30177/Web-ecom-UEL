@@ -1,3 +1,5 @@
+import { CartComponent } from './../cart/cart.component';
+import { IUser } from './../interfaces/user';
 import {
   Component,
   ElementRef,
@@ -16,6 +18,7 @@ import { HomeService } from '../services/home.service';
 import { debounceTime, fromEvent, map } from 'rxjs';
 import { HeaderService } from '../services/header.service';
 import { formatMoneyVietNam, convertStringToNumbers } from '../utils/utils';
+import { CartService } from '../services/cart.service';
 
 interface CartItem {
   id: number;
@@ -48,6 +51,11 @@ export class HeaderComponent implements OnInit {
   @ViewChild('searchInput') searchInput: ElementRef | undefined;
   dataLiveSearch: any;
   currentSubMenuIndex: null | undefined;
+  parseUserData: any;
+  userIdFromHeader: any;
+  cartList: any;
+  errMessage: any;
+  totalPayment: any=false;
   constructor(
     private elRef: ElementRef,
     private renderer: Renderer2,
@@ -56,6 +64,7 @@ export class HeaderComponent implements OnInit {
     private _cartComponent: CartComponent,
     private _homeComponent: HomePageComponent,
     private _homeService: HomeService,
+    private _cartService: CartService,
     private _headerService: HeaderService
   ) {
     this._authService.cartSubject.subscribe((data) => {
@@ -73,7 +82,7 @@ export class HeaderComponent implements OnInit {
         map((event: any) => event.target.value)
       )
       .subscribe((inputValue: string) => {
-        this._headerService.liveSearch(inputValue).subscribe((data)=>{
+        this._headerService.liveSearch(inputValue, this.parseUserData._id).subscribe((data)=>{
           this.dataLiveSearch = data.productsByCategory
           console.log(data.productsByCategory)
           console.log(this.dataLiveSearch)
@@ -101,12 +110,12 @@ export class HeaderComponent implements OnInit {
   async checkLogin() {
     const userData = localStorage.getItem('userData');
     if (userData) {
-      const parseUserData: IUser = JSON.parse(userData);
+      this.parseUserData = JSON.parse(userData);
       // Assuming idUserSubject is an Observable<number> or similar
-      this._authService.idUserSubject.next(parseUserData._id);
-      console.log(parseUserData._id, 'UID');
+      this._authService.idUserSubject.next(this.parseUserData._id);
+      console.log(this.parseUserData._id, 'UID');
       const cartList = await this._cartComponent.apiCartProduct(
-        parseUserData._id
+        this.parseUserData._id
       );
       console.log(cartList, 'cl');
       let total_quantity = this._homeComponent.totalCartItem(cartList);
@@ -120,6 +129,40 @@ export class HeaderComponent implements OnInit {
       this.isLogin = false;
     }
   }
+  async changeQuantity(
+    colorID: any,
+    productID: any,
+    sizeLIST: any,
+    quantityACTION: any
+  ) {
+    const userData = await localStorage.getItem('userData');
+    if (userData) {
+      const parseUserData = JSON.parse(userData);
+      this.userIdFromHeader = parseUserData._id;
+    }
+    const data = {
+      colorId: colorID,
+      productId: productID,
+      size: sizeLIST,
+      quantityAction: quantityACTION,
+      userId: this.userIdFromHeader,
+    };
+    console.log(data, 'dddddddd');
+  
+    this._cartService.putProductItemCart(data).subscribe({
+      next: async (data: any) => {
+        this.cartList = await this._cartComponent.apiCartProduct(this.userIdFromHeader);
+        setTimeout(async () => {
+          this.totalPayment = this._cartComponent.totalPayment();
+        }, 500);
+      },
+      error: (err: any) => {
+        this.errMessage = err;
+      },
+    });
+  }
+
+
   logout() {
     window.localStorage.getItem('userData');
     window.localStorage.removeItem('userData');

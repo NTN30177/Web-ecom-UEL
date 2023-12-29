@@ -38,7 +38,7 @@ export class CartComponent implements OnInit {
       this.productsCart = await this.apiCartProduct(this.userIdFromHeader);
       console.log(this.productsCart, 'pc');
       await this.cartDetails();
-      await this.totalPayment();
+      await this.totalPayment(this.productsCart);
     } catch (error) {
       // Handle errors if necessary
       console.error('Error in ngOnInit:', error);
@@ -89,6 +89,11 @@ export class CartComponent implements OnInit {
     sizeLIST: any,
     quantityACTION: any
   ) {
+    const userData = await localStorage.getItem('userData');
+    if (userData) {
+      const parseUserData = JSON.parse(userData);
+      this.userIdFromHeader = parseUserData._id;
+    }
     const data = {
       colorId: colorID,
       productId: productID,
@@ -96,21 +101,18 @@ export class CartComponent implements OnInit {
       quantityAction: quantityACTION,
       userId: this.userIdFromHeader,
     };
-
-    // await this.apiChangeQuantityProductItem(data);
     this._cartService.putProductItemCart(data).subscribe({
       next: async (data: any) => {
-        console.log(data.productItem, 222);
         this.productsCart = await this.apiCartProduct(this.userIdFromHeader);
+        this.totalPayment(this.productsCart);
 
-        console.log(this.productsCart, '555');
-        this.totalPayment();
       },
       error: (err: any) => {
         this.errMessage = err;
       },
     });
   }
+  
 
   async onColorChange(
     event: any,
@@ -181,34 +183,38 @@ export class CartComponent implements OnInit {
   total_quantity: number = 0;
   total_variantColor: number = 0;
   ship_code: number = 0;
-  async totalPayment(): Promise<void> {
+  async totalPayment(productsCart:any): Promise<number> {
     console.log(this.productsCart, '1233');
     this.total_payment = 0;
     this.total_quantity = 0;
     this.total_variantColor = 0;
     this.ship_code = 0;
-
-    this.productsCart.forEach((product: any) => {
+  
+    productsCart.forEach((product: any) => {
       console.log(product);
       product.variants.forEach((variant: any) => {
         variant.variantColor.forEach((variantColor: any) => {
           console.log(variantColor);
           this.total_variantColor++;
-          this._authServer.cartSubject.next({ total_quantity: this.total_quantity,productsCart: this.productsCart });
-
+          this._authServer.cartSubject.next(this.total_quantity);
           // Assuming there is a 'price' property for each variant
           this.total_payment += variantColor.quantity * product.productId.price;
           this.total_quantity += variantColor.quantity;
         });
       });
     });
+  
     if (this.total_payment > 1000000) {
       this.ship_code = 0;
     } else {
       this.ship_code = 35000;
     }
-    console.log(this.ship_code);
+  
+    this._authServer.updateCart(this.total_quantity);
+  
+    return this.total_payment; // Return the total_payment value as a Promise<number>
   }
+  
 
   removeProduct() {
     localStorage.removeItem('localCart');
