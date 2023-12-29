@@ -14,6 +14,8 @@ import {
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { MatSelectChange } from '@angular/material/select';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-register',
@@ -38,7 +40,8 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private _authService: AuthService,
-    private renderer: Renderer2
+    private snackBar: MatSnackBar  // Add this line
+
   ) {}
 
   ngOnInit() {
@@ -208,15 +211,21 @@ this.postRegister()
           console.log(data, 'dât')
           if (data) {
             this.infoResult = data.message;
-            alert(data.message)
-            setTimeout(() => {
-              this.infoResult = '';
-            }, 5000);
-            if(data.success){
-      alert('Lưu dữ liệu thành công');
-
-              this.router.navigate(['/login']);
-
+            this.snackBar.open(this.infoResult, 'Close', {
+              duration: 5000,  
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            });
+            if (data.success) {
+              const snackBarRef = this.snackBar.open('Lưu dữ liệu thành công', 'Close', {
+                duration: 1000,
+                horizontalPosition: 'center',
+                verticalPosition: 'top',
+              });
+            
+              snackBarRef.afterDismissed().subscribe(() => {
+                this.router.navigate(['/login']);
+              });
             }
           } else {
             this.infoResult = 'Hệ thống lỗi, vui lòng đăng ký lại';
