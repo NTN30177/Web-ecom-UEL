@@ -51,7 +51,7 @@ const saveAccount = async (req, res, next) => {
         first_name: req.body.cus_firstname,
         last_name: req.body.cus_lastname,
         email: req.body.cus_email,
-        mobile: req.body.cus_phonenumber,
+        phone: req.body.cus_phonenumber,
         gender: req.body.cus_gender,
         date_of_birth: req.body.cus_dob,
         // image: req.file.filename,
@@ -148,31 +148,31 @@ const verifyLogin = async (req, res, next) => {
       if (passwordMatch) {
         if (userData.is_verified === 0) {
           console.log(userData._id.toString());
-      const name = userData.first_name+ updatedData.last_name 
+      const name = userData.first_name+ userData.last_name 
 
           sendVerifyEmail(
             name,
             userData.email,
             userData._id.toString()
           );
-          res.send({ message: "Vui lòng xác minh email" });
+          res.json({ message: "Vui lòng xác minh email" });
           console.log("Vui lòng xác minh email");
         } else {
           await req.session.save();
           req.session.user_id = userData._id;
-          console.log(req.session.user_id);
+          // console.log(req.session.user_id);
 
           // Kiểm tra xem session có được lưu hay không
-          if (req.session.user_id) {
-            console.log("Session đã được lưu:", req.session.user_id);
-          } else {
-            console.log("Session không được lưu");
-          }
-          req.session.user_id = userData._id;
-          res.locals.userDataSession = await User.findById(
-            req.session.user_id
-          ).lean();
-          console.log(req.session.user_id, "123");
+          // if (req.session.user_id) {
+          //   console.log("Session đã được lưu:", req.session.user_id);
+          // } else {
+          //   console.log("Session không được lưu");
+          // }
+          // req.session.user_id = userData._id;
+          // res.locals.userDataSession = await User.findById(
+          //   req.session.user_id
+          // ).lean();
+          // console.log(req.session.user_id, "123");
           res.send({
             message: "Đăng nhập thành công",
             userData: userData,
