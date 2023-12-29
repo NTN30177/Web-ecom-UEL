@@ -16,8 +16,8 @@
   </div>
 </div>
 <hr style="background: #CCC;">
-<div class="">
-  <table class="table responsive table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  id="dataTable">
+<div class="account-order-table">
+  <table class="table responsive table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="dataTable">
 
     <thead>
       <tr>
@@ -34,8 +34,8 @@
         <td>{{ order.createdAt | date: 'yyyy-MM-dd' }}</td>
         <td>{{ order.status }}</td>
         <td><strong>{{ order.totalPrice }} ({{ order.totalQuantity }} sản phẩm)</strong></td>
-        <td style="color: #2DA5F3;"><a routerLink="/account/order/order-tracking/{{order._id}}" style="color: #2DA5F3">Xem chi tiết</a><i
-            class="fas fa-regular fa-arrow-right-long ms-3"></i></td>
+        <td style="color: #2DA5F3;"><a routerLink="/account/order/order-tracking/{{order._id}}"
+            style="color: #2DA5F3">Xem chi tiết <i class="fas fa-regular fa-arrow-right-long ms-3"></i></a></td>
       </tr>
     </tbody>
 

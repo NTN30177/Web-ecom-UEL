@@ -25,14 +25,8 @@ const updateAccountInfo = async (req, res) => {
   console.log(userID)
   const { first_name, last_name, phone, email, gender, date_of_birth } = req.body;
   try {
-    // const updateResult = await User.updateOne({ _id: userID }, { $set: { first_name, last_name, phone, email, gender, date_of_birth } });
     const updateResult = await User.findByIdAndUpdate(userID, { $set: { first_name, last_name, phone, email, gender, date_of_birth } }, { new: true });
-
-    // if (updateResult.nModified > 0) {
     res.status(200).json({ message: 'Cập nhật thành công.' });
-    // } else {
-    //   res.status(404).json({ message: 'Không tìm thấy tài nguyên để cập nhật.' });
-    // }
   } catch (error) {
     res.status(500).json({ message: 'Lỗi server.' });
   }
@@ -43,12 +37,11 @@ const { ObjectId } = require('mongoose').Types;
 const getAccountAddresses = async (req, res) => {
   try {
     const { userId } = req.params;
-    // const userId = '65887ee5fe959ab7b5696168'
-    console.log('Received userId:', userId);
+    // console.log('Received userId:', userId);
 
     // Fetch the user with the given userId
     const user = await User.findById(userId).exec();
-    console.log('user doccument', user)
+    // console.log('user doccument', user)
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -96,14 +89,14 @@ const getAccountAddresses = async (req, res) => {
 const getAccountOrder = async (req, res) => {
   try {
     const userId = req.params.userId;
-    console.log(userId, 'uiiiiiid')
+    // console.log(userId, 'uiiiiiid')
     const user = await User.findById(userId).exec();
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
     const orders = await Order.find({ _id: { $in: user.orderList } }).exec();
-    console.log('user orders:', orders);
+    // console.log('user orders:', orders);
     res.json(orders);
   } catch (error) {
     console.error('Error fetching user orders:', error);
@@ -119,10 +112,10 @@ const postUserAddress = async (req, res) => {
     const form = req.body;
     console.log(form)
     const formAddress = form.address
-    console.log('formAddress:', formAddress)
+    // console.log('formAddress:', formAddress)
     const formUserID = form.userID
-    console.log('formUserID:', formUserID)
-    // Assuming you have a Mongoose model named 'User'
+    // console.log('formUserID:', formUserID)
+
     const user = await User.findById(formUserID).exec();
     // console.log('User:',user)
     if (!user) {
@@ -192,14 +185,11 @@ const getUserData = async (req, res) => {
 const deleteAccountAddress = async (req, res) => {
   try {
     const addressId = req.params.addressId;
-    console.log("server - addressID needed deleting:", addressId)
+    // console.log("server - addressID needed deleting:", addressId)
 
-    // Check if addressId is a valid ObjectId
     if (!mongoose.Types.ObjectId.isValid(addressId)) {
       return res.status(400).json({ message: 'Invalid addressId format' });
     }
-
-    // Use Mongoose to delete the address by its ID
     const result = await UserAddress.findByIdAndDelete(addressId);
 
     // Check if the address was found and deleted
