@@ -29,8 +29,8 @@ const saveAccount = async (req, res, next) => {
     if (checkEmailExist) {
       console.log('11111')
       res.json({
-        message:
-          "Your email have already, please login or use with other email",
+        message: "Địa chỉ email tồn tại, vui lòng chọn địa chỉ mới hoặc đăng nhập",
+        success: false,
       });
     } else{
 
