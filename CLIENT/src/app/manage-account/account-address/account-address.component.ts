@@ -88,16 +88,19 @@ export class AccountAddressComponent implements OnInit {
       }
     );
   }
-  deleteAddress(addressId: string) {
-    // console.log("client side, addressID to be deleted:", addressId)
-    this.addressService.deleteAddress(addressId).subscribe(
-      () => {
-        console.log('Address deleted successfully');
-        this.getAddressList(); // Refresh the address list after deleting an address
-      },
-      (error) => {
-        console.error('Error deleting address:', error);
-      }
-    );
+  deleteAddress(addressId: string): void {
+    const confirmation = window.confirm('Bạn có chắc chắn muốn xóa địa chỉ này?');
+  
+    if (confirmation) {
+      this.addressService.deleteAddress(addressId).subscribe(
+        () => {
+          console.log('Address deleted successfully');
+          this.getAddressList(); // Refresh the address list after deleting an address
+        },
+        (error) => {
+          console.error('Error deleting address:', error);
+        }
+      );
+    }
   }
 }

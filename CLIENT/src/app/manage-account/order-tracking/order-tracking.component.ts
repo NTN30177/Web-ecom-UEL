@@ -50,7 +50,9 @@ export class OrderTrackingComponent implements OnInit{
     private _authService: AuthService,
 
   ) {}
-
+  cancelOrder(){
+    alert("Chức năng đang được phát triển!")
+  }
 
   openFeedbackOrderDialog(orderId: String, productId: String): void {
     console.log(productId, orderId)
@@ -67,4 +69,5 @@ export class OrderTrackingComponent implements OnInit{
     });
   }
   
+
 }
