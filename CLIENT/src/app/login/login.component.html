@@ -5,7 +5,7 @@
 <div class="container-login">
   <div class="container">
     <div class="row">
-        <div class="col-md-8 col-sm-12 col-xs-12 d-grid gap-2 mx-auto">
+        <div class="col-md-9 col-sm-12 col-xs-12 d-grid gap-2 mx-auto">
             <div class="frame">
                 <div class="row p-4">
                   <div class="text_head">ĐĂNG NHẬP</div>
@@ -38,10 +38,10 @@
                           </div>
                             <div class="row mt-3">
                                 <div class="col mt-3 order-first">
-                                    <p><a routerLink="/register">Đăng ký tài khoản</a></p>
+                                    <p><a routerLink="/register" class="login-link">Đăng ký tài khoản</a></p>
                                 </div>
                                 <div class="col mt-3 order-last text-end">
-                                  <p><a (click)="openForgotPasswordDialog()" >Quên mật khẩu?</a></p>
+                                  <p><a (click)="openForgotPasswordDialog()" class="login-link">Quên mật khẩu?</a></p>
                                 </div>
                             </div>
                         </form>
@@ -61,8 +61,8 @@
                         </div>
                     </div>
                   
-                    <div class="col pt-2">
-                        <img src="/assets/img/login.png" class="img-fluid hidden-mobile">
+                    <div class="col-md-6 col-sm-6 pt-2">
+                        <img src="/assets/img/login.png" class="img-fluid hidden-mobile ps-3">
                     </div>
                 </div>
             </div>

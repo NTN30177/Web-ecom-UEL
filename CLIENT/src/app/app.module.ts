@@ -67,6 +67,10 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { Chart1Component } from './admin/chart-1/chart-1.component';
 import { Chart2Component } from './admin/chart-2/chart-2.component';
 import { ToastModule } from '@coreui/angular';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 
 @NgModule({
@@ -141,7 +145,11 @@ import { ToastModule } from '@coreui/angular';
     CommonModule,
     Select2Module,
     HighchartsChartModule,
-    ToastModule
+    ToastModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatCheckboxModule
+
   ],
   providers: [DatePipe, CartComponent, HomePageComponent],
   bootstrap: [AppComponent],
