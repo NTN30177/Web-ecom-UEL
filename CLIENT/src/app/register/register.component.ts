@@ -178,33 +178,11 @@ export class RegisterComponent implements OnInit {
   }
 
   clearSpecificErrorMessage(controlName: string) {
-    const errorElement = this.renderer.selectRootElement(
-      `#${controlName}_error`
-    );
-    const inputElement = this.renderer.selectRootElement(`#${controlName}`);
 
-    if (errorElement) {
-      this.renderer.setProperty(errorElement, 'innerHTML', '');
-    }
-
-    if (inputElement) {
-      this.renderer.removeClass(inputElement, 'error-input');
-    }
   }
 
   displayErrorMessage(controlName: string, errorMessage: string) {
-    const errorElement = this.renderer.selectRootElement(
-      `#${controlName}_error`
-    );
-    const inputElement = this.renderer.selectRootElement(`#${controlName}`);
 
-    if (errorElement) {
-      this.renderer.setProperty(errorElement, 'innerHTML', errorMessage);
-    }
-
-    if (inputElement) {
-      this.renderer.addClass(inputElement, 'error-input');
-    }
   }
 
   validateAndClearError(controlName: string) {
