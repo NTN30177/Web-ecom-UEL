@@ -58,6 +58,8 @@ form i {
     letter-spacing: 0.96px;
     font-weight: 700;
     height: 50px;
+    transition: background-color 0.3s, color 0.3s; /* Hiệu ứng chuyển đổi */
+
 }
 .btn-primary:hover{
     background-color: white;
@@ -69,13 +71,21 @@ form i {
     font-weight: 700;
     height: 50px;
 }
-a{
+/* Trạng thái bình thường */
+.login-link {
+    color: #c54c3d;
     text-decoration: none;
-    color: #C54C3D;
-}
-a:hover{
+  }
+  
+  /* Trạng thái hover */
+  .login-link:hover {
     color: black;
-}
+  }
+  
 .error-message{
     color: red; font-size: 13px;
 }
+
+mat-form-field {
+    width: 100%;
+  }

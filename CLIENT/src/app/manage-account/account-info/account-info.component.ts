@@ -4,6 +4,8 @@ import { DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IUser } from '../../interfaces/user';
 import { AuthService } from '../../services/auth.service';
+import { ChangePasswordComponent } from '../change-password/change-password.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-account-info',
@@ -19,10 +21,11 @@ export class AccountInfoComponent implements OnInit {
   successMessage: string = '';
 
   constructor(
-    private accountInfoService: AccountInfoService, 
-    private datePipe: DatePipe, 
+    private accountInfoService: AccountInfoService,
+    private datePipe: DatePipe,
     private formBuilder: FormBuilder,
-    private _authService:AuthService) { }
+    private _authService: AuthService,
+    private dialogRef: MatDialog,) { }
 
   ngOnInit(): void {
 
@@ -90,6 +93,20 @@ export class AccountInfoComponent implements OnInit {
         );
     } else {
       this.userInfoForm.markAllAsTouched();
+    }
+  }
+
+
+  openDialog() {
+    // Check if there are open dialogs before opening a new one
+    if (this.dialogRef.openDialogs.length === 0) {
+      const dialogRef = this.dialogRef.open(ChangePasswordComponent, {
+        hasBackdrop: true,
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log('Dialog result:', result);
+      });
     }
   }
 }

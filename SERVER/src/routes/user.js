@@ -24,6 +24,7 @@ router.post('/account/address/add-address', userController1.postUserAddress)
 router.get('/account/address/:userId', userController1.getAccountAddresses)
 router.get('/account/order/:userId', userController1.getAccountOrder)
 router.get('/types-populate-subtypes', userController.subTypeApi)
+router.post('/resetPassW', userController.resetPassword)
 
 
 module.exports = router;

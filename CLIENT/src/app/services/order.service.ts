@@ -24,19 +24,24 @@ export class OrderService {
       catchError(this.handleError)
     );
   }
+  getOrders(): Observable<IOrders[]> {
+    const headers = new HttpHeaders().set("Content-Type", "application/json"); // Use application/json instead of text/plain
+    const requestOptions: Object = {
+      headers: headers,
+      responseType: "json" // Set responseType to json
+    };
+  
+    return this.http.get<IOrders[]>(`${local}/order/manage-orders`, requestOptions).pipe(
+      retry(3),
+      catchError((error) => {
+        console.error('Error in getOrders:', error);
+        return this.handleError(error);
+      })
+    );
+  }
   
 
-  // getFashions(): Observable<any> {
-  //   const headers = new HttpHeaders().set("Content-Type", "text/plain;charset=utf-8")
-  //   const requestOptions: Object = {
-  //     headers: headers,
-  //     responseType: "text"
-  //   }
-  //   return this._http.get<any>(`${this.url}/fashions`, requestOptions).pipe(
-  //     map(res => JSON.parse(res) as Array<Fashion>),
-  //     retry(3),
-  //     catchError(this.handleError))
-  // }
+
 
   getOrderDetails(orderId: string): Observable<any> {
     console.log(orderId,'oiddd')

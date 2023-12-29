@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { Order } = require("../models/order");
 const userSchema = new mongoose.Schema(
   {
     first_name: {
@@ -59,9 +60,15 @@ const userSchema = new mongoose.Schema(
         ref: "UserAddress",
       },
     ],
-    orderList: {
-      type: Array,
-    },
+    // orderList: {
+    //   type: Array,
+    // },
+    orderList: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Order",
+      },
+    ],
   },
   {
     timestamps: true,

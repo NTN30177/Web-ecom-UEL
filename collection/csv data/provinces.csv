@@ -1,0 +1,64 @@
+_id,code,name,name_with_type,slug,type
+6580ea2f9fadc6b60cb85615,01,Hà Nội,Thành phố Hà Nội,ha-noi,thanh-pho
+6580ea2f9fadc6b60cb85616,02,Hà Giang,Tỉnh Hà Giang,ha-giang,tinh
+6580ea2f9fadc6b60cb85617,04,Cao Bằng,Tỉnh Cao Bằng,cao-bang,tinh
+6580ea2f9fadc6b60cb85618,06,Bắc Kạn,Tỉnh Bắc Kạn,bac-kan,tinh
+6580ea2f9fadc6b60cb85619,08,Tuyên Quang,Tỉnh Tuyên Quang,tuyen-quang,tinh
+6580ea2f9fadc6b60cb8561a,10,Lào Cai,Tỉnh Lào Cai,lao-cai,tinh
+6580ea2f9fadc6b60cb8561b,11,Điện Biên,Tỉnh Điện Biên,dien-bien,tinh
+6580ea2f9fadc6b60cb8561c,12,Lai Châu,Tỉnh Lai Châu,lai-chau,tinh
+6580ea2f9fadc6b60cb8561d,14,Sơn La,Tỉnh Sơn La,son-la,tinh
+6580ea2f9fadc6b60cb8561e,15,Yên Bái,Tỉnh Yên Bái,yen-bai,tinh
+6580ea2f9fadc6b60cb8561f,17,Hoà Bình,Tỉnh Hoà Bình,hoa-binh,tinh
+6580ea2f9fadc6b60cb85620,19,Thái Nguyên,Tỉnh Thái Nguyên,thai-nguyen,tinh
+6580ea2f9fadc6b60cb85621,20,Lạng Sơn,Tỉnh Lạng Sơn,lang-son,tinh
+6580ea2f9fadc6b60cb85622,22,Quảng Ninh,Tỉnh Quảng Ninh,quang-ninh,tinh
+6580ea2f9fadc6b60cb85623,24,Bắc Giang,Tỉnh Bắc Giang,bac-giang,tinh
+6580ea2f9fadc6b60cb85624,25,Phú Thọ,Tỉnh Phú Thọ,phu-tho,tinh
+6580ea2f9fadc6b60cb85625,26,Vĩnh Phúc,Tỉnh Vĩnh Phúc,vinh-phuc,tinh
+6580ea2f9fadc6b60cb85626,27,Bắc Ninh,Tỉnh Bắc Ninh,bac-ninh,tinh
+6580ea2f9fadc6b60cb85627,30,Hải Dương,Tỉnh Hải Dương,hai-duong,tinh
+6580ea2f9fadc6b60cb85628,31,Hải Phòng,Thành phố Hải Phòng,hai-phong,thanh-pho
+6580ea2f9fadc6b60cb85629,33,Hưng Yên,Tỉnh Hưng Yên,hung-yen,tinh
+6580ea2f9fadc6b60cb8562a,34,Thái Bình,Tỉnh Thái Bình,thai-binh,tinh
+6580ea2f9fadc6b60cb8562b,35,Hà Nam,Tỉnh Hà Nam,ha-nam,tinh
+6580ea2f9fadc6b60cb8562c,36,Nam Định,Tỉnh Nam Định,nam-dinh,tinh
+6580ea2f9fadc6b60cb8562d,37,Ninh Bình,Tỉnh Ninh Bình,ninh-binh,tinh
+6580ea2f9fadc6b60cb8562e,38,Thanh Hóa,Tỉnh Thanh Hóa,thanh-hoa,tinh
+6580ea2f9fadc6b60cb8562f,40,Nghệ An,Tỉnh Nghệ An,nghe-an,tinh
+6580ea2f9fadc6b60cb85630,42,Hà Tĩnh,Tỉnh Hà Tĩnh,ha-tinh,tinh
+6580ea2f9fadc6b60cb85631,44,Quảng Bình,Tỉnh Quảng Bình,quang-binh,tinh
+6580ea2f9fadc6b60cb85632,45,Quảng Trị,Tỉnh Quảng Trị,quang-tri,tinh
+6580ea2f9fadc6b60cb85633,46,Thừa Thiên Huế,Tỉnh Thừa Thiên Huế,thua-thien-hue,tinh
+6580ea2f9fadc6b60cb85634,48,Đà Nẵng,Thành phố Đà Nẵng,da-nang,thanh-pho
+6580ea2f9fadc6b60cb85635,49,Quảng Nam,Tỉnh Quảng Nam,quang-nam,tinh
+6580ea2f9fadc6b60cb85636,51,Quảng Ngãi,Tỉnh Quảng Ngãi,quang-ngai,tinh
+6580ea2f9fadc6b60cb85637,52,Bình Định,Tỉnh Bình Định,binh-dinh,tinh
+6580ea2f9fadc6b60cb85638,54,Phú Yên,Tỉnh Phú Yên,phu-yen,tinh
+6580ea2f9fadc6b60cb85639,56,Khánh Hòa,Tỉnh Khánh Hòa,khanh-hoa,tinh
+6580ea2f9fadc6b60cb8563a,58,Ninh Thuận,Tỉnh Ninh Thuận,ninh-thuan,tinh
+6580ea2f9fadc6b60cb8563b,60,Bình Thuận,Tỉnh Bình Thuận,binh-thuan,tinh
+6580ea2f9fadc6b60cb8563c,62,Kon Tum,Tỉnh Kon Tum,kon-tum,tinh
+6580ea2f9fadc6b60cb8563d,64,Gia Lai,Tỉnh Gia Lai,gia-lai,tinh
+6580ea2f9fadc6b60cb8563e,66,Đắk Lắk,Tỉnh Đắk Lắk,dak-lak,tinh
+6580ea2f9fadc6b60cb8563f,67,Đắk Nông,Tỉnh Đắk Nông,dak-nong,tinh
+6580ea2f9fadc6b60cb85640,68,Lâm Đồng,Tỉnh Lâm Đồng,lam-dong,tinh
+6580ea2f9fadc6b60cb85641,70,Bình Phước,Tỉnh Bình Phước,binh-phuoc,tinh
+6580ea2f9fadc6b60cb85642,72,Tây Ninh,Tỉnh Tây Ninh,tay-ninh,tinh
+6580ea2f9fadc6b60cb85643,74,Bình Dương,Tỉnh Bình Dương,binh-duong,tinh
+6580ea2f9fadc6b60cb85644,75,Đồng Nai,Tỉnh Đồng Nai,dong-nai,tinh
+6580ea2f9fadc6b60cb85645,77,Bà Rịa - Vũng Tàu,Tỉnh Bà Rịa - Vũng Tàu,ba-ria-vung-tau,tinh
+6580ea2f9fadc6b60cb85646,79,Hồ Chí Minh,Thành phố Hồ Chí Minh,ho-chi-minh,thanh-pho
+6580ea2f9fadc6b60cb85647,80,Long An,Tỉnh Long An,long-an,tinh
+6580ea2f9fadc6b60cb85648,82,Tiền Giang,Tỉnh Tiền Giang,tien-giang,tinh
+6580ea2f9fadc6b60cb85649,83,Bến Tre,Tỉnh Bến Tre,ben-tre,tinh
+6580ea2f9fadc6b60cb8564a,84,Trà Vinh,Tỉnh Trà Vinh,tra-vinh,tinh
+6580ea2f9fadc6b60cb8564b,86,Vĩnh Long,Tỉnh Vĩnh Long,vinh-long,tinh
+6580ea2f9fadc6b60cb8564c,87,Đồng Tháp,Tỉnh Đồng Tháp,dong-thap,tinh
+6580ea2f9fadc6b60cb8564d,89,An Giang,Tỉnh An Giang,an-giang,tinh
+6580ea2f9fadc6b60cb8564e,91,Kiên Giang,Tỉnh Kiên Giang,kien-giang,tinh
+6580ea2f9fadc6b60cb8564f,92,Cần Thơ,Thành phố Cần Thơ,can-tho,thanh-pho
+6580ea2f9fadc6b60cb85650,93,Hậu Giang,Tỉnh Hậu Giang,hau-giang,tinh
+6580ea2f9fadc6b60cb85651,94,Sóc Trăng,Tỉnh Sóc Trăng,soc-trang,tinh
+6580ea2f9fadc6b60cb85652,95,Bạc Liêu,Tỉnh Bạc Liêu,bac-lieu,tinh
+6580ea2f9fadc6b60cb85653,96,Cà Mau,Tỉnh Cà Mau,ca-mau,tinh

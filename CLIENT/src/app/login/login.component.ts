@@ -13,6 +13,8 @@ import { ForgotPasswordModalComponent } from './forgot-password-modal/forgot-pas
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { timer } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-login',
@@ -32,7 +34,9 @@ export class LoginComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private _authService: AuthService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private snackBar: MatSnackBar
+
   ) {
     this.loginForm = this.fb.group({
       cus_account: [
@@ -135,21 +139,34 @@ export class LoginComponent implements OnInit {
     }
     this.verifiedLogin();
   }
+  openSnackbar(duration: number): void {
+    // Check if this.infoResult is not undefined or null
+    if (this.infoResult !== undefined && this.infoResult !== null) {
+      // Open a snackbar with the infoResult message
+      this.snackBar.open(this.infoResult, 'Đóng', {
+        duration: duration, // Use the provided duration value
+        verticalPosition: 'top', // Display at the top
+        panelClass: ['custom-snackbar'], // Add custom styling if needed
+      });
+    }
+  }
 
   verifiedLogin() {
     if (this.loginForm.invalid) {
-      alert('Vui lòng kiểm tra lại thông tin form');
     } else {
       console.log('1235');
       this._authService.verifiedInForUserService(this.loginForm.value).subscribe({
         next: (data: any) => {
           this.infoResult = data.message;
+          // Use different durations based on login success
+          const duration = data.login ? 700 : 5000;
+          this.openSnackbar(duration);
+
           if (data.login) {
             localStorage.setItem('userData', JSON.stringify(data.userData));
             this._authService.isLoginSubject.next(data.login);
-            console.log(data.userData.email)
             this._authService.emailUserSubject.next(data.userData.email);
-            timer(3000).subscribe(() => {
+            timer(1000).subscribe(() => {
               this.router.navigate(['/']);
             });
           }
@@ -157,14 +174,15 @@ export class LoginComponent implements OnInit {
         error: (err) => {
           this.errMessage = err;
           console.log(this.errMessage);
+          // Use the default duration for errors
+          this.openSnackbar(5000);
         },
       });
       console.log('save');
     }
   }
-
   
-
+  
   openForgotPasswordDialog(): void {
     // Open the modal when the "Quên mật khẩu?" link is clicked
     const dialogRef = this.dialog.open(ForgotPasswordModalComponent, {
@@ -186,24 +204,3 @@ export class LoginComponent implements OnInit {
   }
 }
 
-//Popup hiển thị kết quả đăng nhập
-@Component({
-  selector: 'app-info-result-modal',
-  template: `
-    <div style="padding: 20px; text-align: center; font-size:20px; font-family: 'Montserrat', sans-serif;">
-      {{ data.infoResult }}
-    </div>
-  `,
-})
-export class InfoResultModalComponent implements OnInit {
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { infoResult: string },
-    public dialogRef: MatDialogRef<InfoResultModalComponent>
-  ) {}
-
-  ngOnInit(): void {
-    setTimeout(() => {
-      this.dialogRef.close(); // Tắt modal sau 5 giây
-    }, 5000);
-  }
-}

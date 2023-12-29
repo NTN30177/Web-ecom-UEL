@@ -6,6 +6,7 @@ import {
   ViewEncapsulation,
   ViewChild,
 } from '@angular/core';
+import { local } from '../ENV/envi';
 declare var $: any;
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { HomeService } from '../services/home.service';
@@ -32,6 +33,7 @@ export class HomePageComponent implements AfterViewInit {
   errMessage: any;
   currentColor = 0;
   // currentColor: any;
+  local=local
 
   constructor(
     private el: ElementRef,
@@ -123,9 +125,6 @@ export class HomePageComponent implements AfterViewInit {
       }
     }
 
-    //
-
-    //
     const sizeTableId = `sizeTable${productIndex}`;
     const sizeTable = this.el.nativeElement.querySelector(`#${sizeTableId}`);
     if (
@@ -145,21 +144,21 @@ export class HomePageComponent implements AfterViewInit {
 
   selectedColorId: number | null = null;
 
-  colorsArray: any = [
-    {
-      id: 33897,
-      imgSrc: 'https://pubcdn.ivymoda.com/ivy2/images/color/010.png',
-      alt: '010',
-    },
-    {
-      id: 33898,
-      imgSrc: 'https://pubcdn.ivymoda.com/ivy2/images/color/013.png',
-      alt: 'k50',
-    },
-    // Thêm các màu khác nếu cần
-  ];
+  // colorsArray: any = [
+  //   {
+  //     id: 33897,
+  //     imgSrc: 'https://pubcdn.ivymoda.com/ivy2/images/color/010.png',
+  //     alt: '010',
+  //   },
+  //   {
+  //     id: 33898,
+  //     imgSrc: 'https://pubcdn.ivymoda.com/ivy2/images/color/013.png',
+  //     alt: 'k50',
+  //   },
+  //   // Thêm các màu khác nếu cần
+  // ];
 
-  imagesArray: any = [];
+  // imagesArray: any = [];
 
   bannersArray: any = [
     { imgName: '../assets/img/banner/banner-1.jpeg' },
@@ -222,13 +221,9 @@ export class HomePageComponent implements AfterViewInit {
   products: any;
 
   async ngOnInit(): Promise<void> {
-    // Mặc định chọn màu đầu tiên
     await this.setupUserIdSubscription();
-    console.log(this.userIdFromHeader, '123');
     await this.apiProductHomePage();
-    console.log(this.productsHaveModified,'2222222222222')
    
-  
     // Khởi tạo mảng productStates với giá trị false cho mỗi sản phẩm
     this.productStates = Array(this.bannersArray.length).fill(false);
   }
@@ -261,6 +256,7 @@ export class HomePageComponent implements AfterViewInit {
       this.errMessage = err;
     }
   }
+
 
   total_quantity: number = 0;
 
@@ -306,38 +302,18 @@ export class HomePageComponent implements AfterViewInit {
       const cartList = await this._cartComponent.apiCartProduct(
         this.userIdFromHeader
       );
+      
       let total_quantity = await this.totalCartItem(cartList);
-      this._authServer.cartSubject.next(total_quantity);
+      // this._authServer.cartSubject.next(total_quantity);
+    this._authServer.updateCart(total_quantity);
+
+
+
     }
 
-    // let cartDataNull = localStorage.getItem('localCart');
-    // if (cartDataNull == null) {
-    //   let storeDataGet: any = [];
-    //   storeDataGet.push(product);
-    //   localStorage.setItem('localCart', JSON.stringify(storeDataGet));
-    // } else {
-    //   var id = product._id;
-    //   let index: number = -1;
-    //   const localCartString = localStorage.getItem('localCart');
-    //   if (localCartString !== null) {
-    //     this.itemsCart = JSON.parse(localCartString);
-    //   }
-    //   for (let i = 0; i < this.itemsCart.length; i++) {
-    //     if (id == this.itemsCart[i]._id) {
-    //       this.itemsCart[i].quantity = 1;
-    //       index = i;
-    //       break;
-    //     }
-    //   }
-    //   if (index == -1) {
-    //     this.itemsCart.push(product);
-    //     localStorage.setItem('localCart', JSON.stringify(this.itemsCart));
-    //   } else {
-    //     localStorage.setItem('localCart', JSON.stringify(this.itemsCart));
-    //   }
-    //   this.cartNumberFunc();
-    // }
+   
   }
+
 
   cartNumber: number = 0;
   cartNumberFunc() {
@@ -397,19 +373,6 @@ export class HomePageComponent implements AfterViewInit {
     return productsHaveModified;
   }
 
-  // createArrSupportChangeImgFollowChangeColor() {
-  //   this.productsHaveModified = this.products.map((product: any) => {
-  //     return {
-  //       ...product,
-  //       imgHomePage: product.variants.map((variant: any) => {
-  //         return {
-  //           colorID: variant.color._id,
-  //           images: variant.images.slice(0, 2),
-  //         };
-  //       }),
-  //     };
-  //   });
-  // }
 
   productsHaveModified: any;
 
@@ -419,6 +382,7 @@ export class HomePageComponent implements AfterViewInit {
         ...product,
         imgHomePage: product.variants.map((variant: any) => {
           const { _id: colorID } = variant.color;
+          const { nameColor: nameColor } = variant.color;
           const { images: variantImages, variantColor: sizes } = variant;
 
           // Create an array of objects for each size with quantity
@@ -426,10 +390,10 @@ export class HomePageComponent implements AfterViewInit {
             const { size, quantity } = sizeInfo;
             return { size, quantity };
           });
-
           // Return the object for a variant with variantColor
           return {
             colorID,
+            nameColor,
             images: variantImages.slice(0, 2),
             variantColor: sizeQuantityArray,
           };
@@ -438,22 +402,28 @@ export class HomePageComponent implements AfterViewInit {
     });
     console.log(this.productsHaveModified);
   }
-
+  productPopUp:any=false
   // Đóng mở popup thêm thành công sản phẩm vào giỏ hàng
   @ViewChild('popupContainer') popupContainer: ElementRef | undefined;
-  addActiveCartPopupClass() {
+  addActiveCartPopupClass(title: any, price: any, color: any, size: any, img: any) {
+    // addActiveCartPopupClass() {
+    console.log(title, price, color, size, img);
+    this.productPopUp = { title, price, color, size, img };
+  
     if (this.popupContainer) {
       const popupContainerElement = this.popupContainer.nativeElement;
+  
       if (popupContainerElement) {
         this.renderer.addClass(popupContainerElement, 'active-cartpopup');
-
-        // Sau 2 giây, xoá class "active-cartpopup"
+  
+        // After 2 seconds, remove the 'active-cartpopup' class
         setTimeout(() => {
           this.renderer.removeClass(popupContainerElement, 'active-cartpopup');
         }, 2000);
       }
     }
   }
+  
   // thêm xo color-active
   selectedColorIndex: number[] = []; // Sử dụng một mảng để lưu trữ index cho từng sản phẩm
 

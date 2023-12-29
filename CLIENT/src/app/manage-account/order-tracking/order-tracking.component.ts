@@ -2,20 +2,23 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OrderService } from '../../services/order.service';
 import { formatMoneyVietNam } from '../../utils/utils';
+import { FeedbackOrderComponent } from '../order-tracking/feedback-order/feedback-order.component';
+import { MatDialog } from '@angular/material/dialog';
+import { AuthService } from '../../services/auth.service';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-order-tracking',
   templateUrl: './order-tracking.component.html',
   styleUrl: './order-tracking.component.css',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class OrderTrackingComponent implements OnInit{
   formatMoneyVietNam=formatMoneyVietNam
 
   orderId: any;
   orderDetails: any;
-
-  constructor(private route: ActivatedRoute, private orderService: OrderService) { }
+  userId: any;
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -40,4 +43,28 @@ export class OrderTrackingComponent implements OnInit{
       );
     }
 
+  constructor(
+    private route: ActivatedRoute,
+    private orderService: OrderService,
+    public dialog: MatDialog,
+    private _authService: AuthService,
+
+  ) {}
+
+
+  openFeedbackOrderDialog(orderId: String, productId: String): void {
+    console.log(productId, orderId)
+    this._authService.idUserSubject.subscribe((data)=>
+    {this.userId=data})
+
+    const dialogRef = this.dialog.open(FeedbackOrderComponent, {
+      width: '80%',
+      data: { orderId: orderId, productId: productId, userId: this.userId},
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed', result);
+    });
+  }
+  
 }

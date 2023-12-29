@@ -1,11 +1,23 @@
-import { Component, ElementRef, Renderer2, ViewEncapsulation, HostListener, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Renderer2,
+  ViewEncapsulation,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/auth.service';
 import { IUser } from '../interfaces/user';
 import { CartComponent } from '../cart/cart.component';
 import { HomePageComponent } from '../home-page/home-page.component';
 import { HomeService } from '../services/home.service';
-// import{formatMoneyVietNam} from '../home-page/home-page.component';
+import { Subscription, debounceTime, fromEvent, map } from 'rxjs';
+import { HeaderService } from '../services/header.service';
+import { formatMoneyVietNam, convertStringToNumbers } from '../utils/utils';
+import { AccountInfoService } from '../services/account-info.service';
+
 interface CartItem {
   id: number;
   name: string;
@@ -20,70 +32,125 @@ interface CartItem {
   styleUrls: ['./styles.css', './header.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
+  formatMoneyVietNam = formatMoneyVietNam;
+
   isSearchFormActive: boolean = false;
   isMainMenuOpen: boolean = false;
   submenuOpen: boolean = false;
   isSubActionVisible: boolean = false;
   quantityInputValue: number = 1;
-  userId=1;  // Sử dụng string hoặc null tùy thuộc vào loại dữ liệu của user ID
-
-  currentSubMenuIndex: number | null = null;
+  userId: any = false;
   cartNumberItem: number = 0;
   isMobileMenuOpen: boolean | undefined;
   types: any;
+  dataLiveSearch: any;
+  currentSubMenuIndex: null | undefined;
+  @ViewChild('searchInput') searchInput: ElementRef | undefined;
+  accountInfo: any=false;
+  cartReview: any;
+  productsCart: any;
   constructor(
     private elRef: ElementRef,
     private renderer: Renderer2,
-    private snackBar: MatSnackBar, // Thêm MatSnackBar vào constructor
+    private snackBar: MatSnackBar,
     private _authService: AuthService,
-    private _cartComponent:CartComponent,
-    private _homeComponent:HomePageComponent,
-    private _homeService: HomeService
-  ) {
-    this._authService.cartSubject.subscribe((data) => {
-      this.cartNumberItem = data;
-    });
-    this._authService.isLoginSubject.subscribe((data) => {
-      this.isLogin = data;
-      console.log(this.isLogin, '...')
-    });
+    private _cartComponent: CartComponent,
+    private _homeComponent: HomePageComponent,
+    private _headerService: HeaderService,
+    private _accountInfoService: AccountInfoService
+  ) {}
+  ngAfterViewInit() {
+
   }
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    await this.getDataFromService();
+    this.getIsLogin();
+    this.cartItemFunc();
+    this.checkLogin();
+    this.getKeySearch();
+    this.getCategory();
+  }
+  
+ 
+  
+  // Other methods...
+  
+  
+  getKeySearch() {
+    if (this.userId) {
+      this._accountInfoService
+        .getUserAccountInfo(this.userId)
+        .subscribe((data) => {
+          this.accountInfo = data;
+          this.keyDown()
+          console.log(this.accountInfo.historySearch);
+          console.log(data, 'datausser');
+        });
+    } else {
+    }
+  }
+  keyDown(){
+    fromEvent(this.searchInput?.nativeElement, 'input')
+      .pipe(
+        debounceTime(1000),
+        map((event: any) => event.target.value)
+      )
+      .subscribe((inputValue: string) => {
+        this._headerService
+          .liveSearch(inputValue, this.userId)
+          .subscribe((data) => {
+            this.dataLiveSearch = data.productsByCategory;
+            this.getKeySearch();
+            console.log(data.productsByCategory);
+            console.log(this.dataLiveSearch);
+          });
+        console.log('Giá trị nhập liệu sau mỗi 1s:', inputValue);
+      });
+  }
+
+  getIsLogin() {
     this._authService.getIsLoginObservable().subscribe((data) => {
       this.isLogin = data;
       if (this.isLogin) {
-        this.checkLogin()
+        this.checkLogin();
       }
     });
-    this.cartItemFunc();
-    this.checkLogin()
-    this._homeService.getTypesPopulateSubtypes().subscribe((data)=>{
-      console.log(data)
-      this.types = data.typePopulateSubType;
-    })
-    console.log(this.types,'types')
-
   }
-
+  getCategory() {
+    this._headerService.getTypesPopulateSubtypes().subscribe((data) => {
+      this.types = data.typePopulateSubType;
+    });
+  }
+  getDataFromService() {
+    console.log('11111111')
+    this._authService.cartSubject.subscribe((data) => {
+      this.cartNumberItem = data.total_quantity;
+      this.productsCart = data.productsCart;
+      console.log(this.productsCart, 'pc')
+    });
+    this._authService.isLoginSubject.subscribe((data) => {
+      this.isLogin = data;
+    });
+    this._authService.idUserSubject.subscribe((data) => {
+      this.userId = data;
+    });
+  }
 
   isLogin = false;
   async checkLogin() {
     const userData = localStorage.getItem('userData');
     if (userData) {
       const parseUserData: IUser = JSON.parse(userData);
-      // Assuming idUserSubject is an Observable<number> or similar
-       this._authService.idUserSubject.next(parseUserData._id);
-       console.log(parseUserData._id,'UID')
-      const cartList = await this._cartComponent.apiCartProduct(parseUserData._id);
-      console.log(cartList, 'cl')
+      this._authService.idUserSubject.next(parseUserData._id);
+      this.userId = parseUserData._id;
+      const cartList = await this._cartComponent.apiCartProduct(
+        parseUserData._id
+      );
       let total_quantity = this._homeComponent.totalCartItem(cartList);
-      this.cartNumberItem =total_quantity
-      console.log(total_quantity, 'ttq')
+      this.cartNumberItem = total_quantity;
       this.isLogin = true;
-      console.log(this.isLogin, '...')
     } else {
-      // Ensure that idUserSubject is set to a default value or handle the case when there's no user data
       this._authService.idUserSubject.next(null);
       this.isLogin = false;
     }
@@ -168,39 +235,56 @@ export class HeaderComponent implements OnInit{
 
   toggleSubMenuChild(event: Event, index: number): void {
     event.stopPropagation();
-  
-    const allSubChildElements = this.elRef.nativeElement.querySelectorAll('.child-sub');
-    allSubChildElements.forEach((element: {
-      previousElementSibling: any; style: { display: string; }; classList: { remove: (arg0: string) => void; add: (arg0: string) => void; }; 
-    }, i: number) => {
-      element.style.display = 'none';
-      element.classList.remove('open');
-  
-      const allArrows = this.elRef.nativeElement.querySelectorAll('.sub-menu-mb .arrows');
-      allArrows.forEach((arrowElement: { classList: { remove: (arg0: string) => void; add: (arg0: string) => void; }; }) => {
-        arrowElement.classList.remove('open');
-      });
-  
-      if (i === index && this.currentSubMenuIndex !== index) {
-        const arrowsElement = element.previousElementSibling.querySelector('.arrows');
-        arrowsElement.classList.add('open');
-        element.style.display = 'block';
-        element.classList.add('open');
-        this.currentSubMenuIndex = index;
-      } else {
-        this.currentSubMenuIndex = null;
+
+    // Đóng tất cả các submenu khác
+    const allSubChildElements =
+      this.elRef.nativeElement.querySelectorAll('.child-sub');
+    allSubChildElements.forEach(
+      (
+        element: {
+          previousElementSibling: any;
+          style: { display: string };
+          classList: {
+            remove: (arg0: string) => void;
+            add: (arg0: string) => void;
+          };
+        },
+        i: number
+      ) => {
+        element.style.display = 'none';
+        element.classList.remove('open');
+
+        // Đóng tất cả các mũi tên trong sub-menu-mb khác
+        const allArrows = this.elRef.nativeElement.querySelectorAll(
+          '.sub-menu-mb .arrows'
+        );
+        allArrows.forEach(
+          (arrowElement: {
+            classList: {
+              remove: (arg0: string) => void;
+              add: (arg0: string) => void;
+            };
+          }) => {
+            arrowElement.classList.remove('open');
+          }
+        );
+
+        // Nếu index của submenu trùng với index của thẻ được click, thì mở nó
+        if (i === index) {
+          const arrowsElement =
+            element.previousElementSibling.querySelector('.arrows');
+          arrowsElement.classList.add('open');
+          element.style.display = 'block';
+          element.classList.add('open');
+        }
       }
-    });
+    );
   }
-  
-  
-
-
 
   toggleSubMenu(): void {
     const subMenuMb = this.elRef.nativeElement.querySelector('.sub-menu-mb');
     const mainMenu = this.elRef.nativeElement.querySelector('.main-menu');
-  
+
     if (!this.submenuOpen) {
       // Nếu submenu chưa mở, thì thêm class "open" vào cả sub-menu và main-menu
       this.renderer.setStyle(subMenuMb, 'display', 'block');
@@ -211,14 +295,9 @@ export class HeaderComponent implements OnInit{
       this.renderer.setStyle(subMenuMb, 'display', 'none');
       this.renderer.removeClass(subMenuMb, 'open');
     }
-  
+
     this.submenuOpen = !this.submenuOpen;
   }
-  
-
-
-
-
 
   cartItemFunc() {
     const localCartString = localStorage.getItem('localCart');
@@ -232,8 +311,6 @@ export class HeaderComponent implements OnInit{
     { id: 1, name: 'Zuýp 2 lớp xếp ly bản lớn', quantity: 1, price: 595000 },
     // Thêm các sản phẩm khác nếu có
   ];
-
- 
 
   // toggleSearchForm(): void {
   //   this.isSearchFormActive = !this.isSearchFormActive;
@@ -261,37 +338,40 @@ export class HeaderComponent implements OnInit{
 
   // đóng mở quick-search
   toggleSearchForm(event: Event): void {
-    
     // Kiểm tra xem sự kiện là focus hay không
     const isFocusEvent = event instanceof FocusEvent;
-  
+
     // Nếu là focus event và form đã được kích hoạt, không thực hiện toggle nữa
     if (isFocusEvent && this.isSearchFormActive) {
       return;
     }
-  
+
     this.isSearchFormActive = !this.isSearchFormActive;
     const searchForm = this.elRef.nativeElement.querySelector('.search-form');
-  
+
     if (this.isSearchFormActive) {
       this.renderer.addClass(searchForm, 'active');
     } else {
       this.renderer.removeClass(searchForm, 'active');
     }
   }
+
   isSearchInputActive: boolean = false;
   @HostListener('document:click', ['$event'])
   //đóng mở submenu
   handleClickOutsideSubMenu(event: Event): void {
-    const allSubChildElements = this.elRef.nativeElement.querySelectorAll('.child-sub');
-    allSubChildElements.forEach((element: {
-      style: { display: string; };
-      classList: { remove: (arg0: string) => void; };
-    }) => {
-      element.style.display = 'none';
-      element.classList.remove('open');
-    });
-  
+    const allSubChildElements =
+      this.elRef.nativeElement.querySelectorAll('.child-sub');
+    allSubChildElements.forEach(
+      (element: {
+        style: { display: string };
+        classList: { remove: (arg0: string) => void };
+      }) => {
+        element.style.display = 'none';
+        element.classList.remove('open');
+      }
+    );
+
     this.currentSubMenuIndex = null;
   }
   closeSubMenu(): void {
@@ -300,21 +380,26 @@ export class HeaderComponent implements OnInit{
 
   handleClickOutside(event: Event) {
     const searchForm = this.elRef.nativeElement.querySelector('.search-form');
-  
+
     // Nếu không phải là sự kiện focus, thực hiện việc đóng form
-    if (!(event instanceof FocusEvent) && searchForm && !searchForm.contains(event.target as Node)) {
+    if (
+      !(event instanceof FocusEvent) &&
+      searchForm &&
+      !searchForm.contains(event.target as Node)
+    ) {
       this.isSearchFormActive = false;
       this.renderer.removeClass(searchForm, 'active');
     }
   }
-  
+
   isClickInsideQuickSearch(event: Event): boolean {
-    const quickSearch = this.elRef.nativeElement.querySelector('.search-form__quick-search');
+    const quickSearch = this.elRef.nativeElement.querySelector(
+      '.search-form__quick-search'
+    );
     return quickSearch.contains(event.target);
   }
-  
-  
-  // 
+
+  //
 
   closeMainMenu(event: Event): void {
     const targetElement = event.target as HTMLElement;
@@ -343,7 +428,6 @@ export class HeaderComponent implements OnInit{
     }
   }
 
-  
   // Đóng mở giỏ hàng
   toggleCart(): void {
     this.isSubActionVisible = !this.isSubActionVisible;
@@ -363,7 +447,7 @@ export class HeaderComponent implements OnInit{
       this.elRef.nativeElement.querySelector('.sub-action-cart');
     this.renderer.removeClass(subActionCart, 'active');
   }
-  // 
+  //
   updateQuantity(action: string): void {
     if (action === 'minus' && this.quantityInputValue > 0) {
       this.quantityInputValue -= 1;
@@ -390,8 +474,4 @@ export class HeaderComponent implements OnInit{
       panelClass: ['custom-snackbar'], // Thêm class CSS tùy chỉnh
     });
   }
-  getTypesPopulateSubtypes(){
-  }
-
-
 }

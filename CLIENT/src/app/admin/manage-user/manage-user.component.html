@@ -1,0 +1,108 @@
+<div class="container_content">
+    <div class="frame_header">
+        <p style="gap: 5px;">Người dùng/ Quản lý người dùng</p>
+        <p class="text_head">Quản lý người dùng</p>
+    </div>
+    <hr>
+    <form action="" name="page_managecampaign" method="post">
+        <div class="col-md-12">
+            <div class="frame_title">
+                <p><strong>Bảng danh sách người dùng</strong></p>
+            </div>
+            <div class="frame_body">
+                <mat-tab-group>
+                    <mat-tab label="Tất cả ({{allUser.length}})">
+                        <div class="mt-4">
+                            <table class="table table-hover custom-datatable" datatable [dtOptions]="dtOptions"
+                                [dtTrigger]="dtTrigger" id="manage-campaigns">
+                                <thead>
+                                    <tr>
+                                        <th>Họ tên</th>
+                                        <th>Email</th>
+                                        <th>Doanh thu</th>
+                                        <th>Lần mua gần nhất</th>
+                                        <th>Quyền hạn</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let user of allUser">
+                                        <td>{{ user.first_name }} {{user.last_name}}</td>
+                                        <td>{{ user.email }}</td>
+                                        <td>{{ formatMoneyVietNam(user.totalRevenue)}}</td>
+                                        <td>{{ user.latestPurchase | date:'short' }}</td>
+                                        <td>
+                                            <select [(ngModel)]="user.is_admin" (change)="onAdminChange(user)">
+                                                <option value="0" [selected]="user.is_admin === 0">Customer</option>
+                                                <option value="1" [selected]="user.is_admin === 1">Admin</option>
+                                            </select>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Admin ({{getAdminUsers().length}})">
+                        <div class="mt-4">
+                            <table class="table table-hover custom-datatable" datatable [dtOptions]="dtOptions"
+                                [dtTrigger]="dtTrigger" id="manage-campaigns">
+                                <thead>
+                                    <tr>
+                                        <th>Họ tên</th>
+                                        <th>Email</th>
+                                        <th>Doanh thu</th>
+                                        <th>Lần mua gần nhất</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let user of getAdminUsers()">
+                                        <td>{{ user.first_name }} {{user.last_name}}</td>
+                                        <td>{{ user.email }}</td>
+                                        <td>{{ formatMoneyVietNam(user.totalRevenue)}}</td>
+                                        <td>{{ user.latestPurchase | date:'short' }}</td>
+                                        <td>
+                                            <select [(ngModel)]="user.is_admin" (change)="onAdminChange(user)">
+                                                <option value="0" [selected]="user.is_admin === 0">Customer</option>
+                                                <option value="1" [selected]="user.is_admin === 1">Admin</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Customer ({{getCustomer().length}})">
+                        <div class="mt-4">
+                            <table class="table table-hover custom-datatable" datatable [dtOptions]="dtOptions"
+                                [dtTrigger]="dtTrigger" id="manage-campaigns">
+                                <thead>
+                                    <tr>
+                                        <th>Họ tên</th>
+                                        <th>Email</th>
+                                        <th>Doanh thu</th>
+                                        <th>Lần mua gần nhất</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let user of getCustomer()">
+                                        <td>{{ user.first_name }} {{user.last_name}}</td>
+                                        <td>{{ user.email }}</td>
+                                        <td>{{ formatMoneyVietNam(user.totalRevenue)}}</td>
+                                        <td>{{ user.latestPurchase | date:'short' }}</td>
+                                        <td>
+                                            <select [(ngModel)]="user.is_admin" (change)="onAdminChange(user)">
+                                                <option value="0" [selected]="user.is_admin === 0">Customer</option>
+                                                <option value="1" [selected]="user.is_admin === 1">Admin</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </mat-tab>
+
+                </mat-tab-group>
+            </div>
+        </div>
+    </form>
+</div>

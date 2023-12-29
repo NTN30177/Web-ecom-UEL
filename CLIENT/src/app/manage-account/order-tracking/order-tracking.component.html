@@ -1,151 +1,201 @@
 <div class="breadcrumb-order">
-    <ul class="breadcrumb__list">
-        <li class="breadcrumb__item"><a class="breadcrumb__link" href="#">Trang chủ</a></li>
-        <li class="breadcrumb__item"><a href="#" class="breadcrumb__link" title="Tài khoản của tôi">Tài khoản của tôi</a></li>
-        <li class="breadcrumb__item">
-            <a href="#" class="breadcrumb__link" title="Thông tin đơn hàng"><b>Thông tin đơn hàng</b></a>
-        </li>
-    </ul>
-    <hr/>
+  <ul class="breadcrumb__list">
+    <li class="breadcrumb__item">
+      <a class="breadcrumb__link" href="#">Trang chủ</a>
+    </li>
+    <li class="breadcrumb__item">
+      <a href="#" class="breadcrumb__link" title="Tài khoản của tôi"
+        >Tài khoản của tôi</a
+      >
+    </li>
+    <li class="breadcrumb__item">
+      <a href="#" class="breadcrumb__link" title="Thông tin đơn hàng"
+        ><b>Thông tin đơn hàng</b></a
+      >
+    </li>
+  </ul>
+  <hr />
 </div>
 <div class="order-track container-fluid">
-    <div class="row step">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 title text-center">THÔNG TIN ĐƠN HÀNG</div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 title-notice text-center">
-            <div class="header-icon">
-                <img src="/CLIENT/src/assets/icon/icons/truck-tick.png" alt="#">
-            </div>
-            Thời gian giao hàng ước tính: 20-11-2023
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 divider"></div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 infor">
-            <div class="left">TRẠNG THÁI ĐƠN HÀNG: <span>W0430234</span></div>
-            <div class="right">Thanh toán COD - Tốc độ tiêu chuẩn</div>
-        </div>
+  <div class="row step">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 title text-center">
+      THÔNG TIN ĐƠN HÀNG
     </div>
-    <div class="order-process-bar">
-        <ul>
-            <li>
-                <span>Đặt hàng thành công</span>
-                <p>Vào lúc 2023-11-16 21:17:46</p>
-            </li>
-            <li>
-                <span>Chuyển qua giao nhận</span>
-                <p>Vào lúc 2023-11-18 14:05:53</p>
-            </li>
-            <li>
-                <span>Đang giao hàng</span>
-                <p>Vào lúc 2023-11-20 21:52:53</p>
-            </li>
-            <li>
-                <span>Giao hàng thành công</span>
-                <p>Vào lúc 2023-11-22 15:45:22</p>
-            </li>
-        </ul>
+    <div
+      class="col-xs-12 col-sm-12 col-md-12 col-lg-12 title-notice text-center"
+    >
+      <div class="header-icon">
+        <img src="/CLIENT/src/assets/icon/icons/truck-tick.png" alt="#" />
+      </div>
+      Thời gian giao hàng ước tính: 20-11-2023
     </div>
-    <div class="row group">
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 group-left">
-            <div class="media">
-                <div class="media-body">
-                    <h4 class="title">THÔNG TIN KHÁCH HÀNG</h4>
-                    <h4 class="text-1">Họ tên: {{orderDetails.dataOrderDetail[0].userId.last_name}}</h4>
-                    <h4 class="text-1">Điện thoại: {{orderDetails.dataOrderDetail[0].userId.mobile}}</h4>
-                    <h4 class="text-1">Email: {{orderDetails.dataOrderDetail[0].userId.email}}</h4>
-                    <h4 class="text-1">Địa chỉ: {{orderDetails.dataAddressDetail.wardDetailAccount}}</h4>
-                    <h4 class="text-1">Phường/xã: {{orderDetails.dataAddressDetail.wardAccount}}</h4>
-                    <h4 class="text-1">Quận/Huyện: {{orderDetails.dataAddressDetail.districtAccount}}</h4>
-                    <h4 class="text-1">Thành phố/Tỉnh: {{orderDetails.dataAddressDetail.provinceAccount}}</h4>
-                </div>
-            </div>
+  </div>
+  <div class="order-process-bar">
+    <ul>
+      <li>
+        <span>Đặt hàng thành công</span>
+        <p>Vào lúc 2023-11-16 21:17:46</p>
+      </li>
+      <li>
+        <span>Chuyển qua giao nhận</span>
+        <p>Vào lúc 2023-11-18 14:05:53</p>
+      </li>
+      <li>
+        <span>Đang giao hàng</span>
+        <p>Vào lúc 2023-11-20 21:52:53</p>
+      </li>
+      <li>
+        <span>Giao hàng thành công</span>
+        <p>Vào lúc 2023-11-22 15:45:22</p>
+      </li>
+    </ul>
+  </div>
+  <div class="row group">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 group-left">
+      <div class="media">
+        <div class="media-body">
+          <h4 class="title">THÔNG TIN KHÁCH HÀNG</h4>
+          <h4 class="text-1">
+            Họ tên: {{ orderDetails.dataOrderDetail[0].userId.last_name }}
+          </h4>
+          <h4 class="text-1">
+            Điện thoại: {{ orderDetails.dataOrderDetail[0].userId.mobile }}
+          </h4>
+          <h4 class="text-1">
+            Email: {{ orderDetails.dataOrderDetail[0].userId.email }}
+          </h4>
+          <h4 class="text-1">
+            Địa chỉ: {{ orderDetails.dataAddressDetail.wardDetailAccount }}
+          </h4>
+          <h4 class="text-1">
+            Phường/xã: {{ orderDetails.dataAddressDetail.wardAccount }}
+          </h4>
+          <h4 class="text-1">
+            Quận/Huyện: {{ orderDetails.dataAddressDetail.districtAccount }}
+          </h4>
+          <h4 class="text-1">
+            Thành phố/Tỉnh: {{ orderDetails.dataAddressDetail.provinceAccount }}
+          </h4>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 group-right">
-            <div class="media">
-                <div class="media-body">
-                    <h4 class="title">THÔNG TIN GIAO NHẬN</h4>
-                    <h4 class="text-1">Họ tên: {{orderDetails.dataOrderDetail[0].address.name}}</h4>
-                    <h4 class="text-1">Điện thoại: {{orderDetails.dataOrderDetail[0].address.phone}}</h4>
-                    <h4 class="text-1">Email: nghiant21406&#64;st.uel.edu.vn</h4>
-                    <h4 class="text-1">Địa chỉ:{{orderDetails.dataAddressDetail.wardDetail}}</h4>
-                    <h4 class="text-1">Phường/xã: {{orderDetails.dataAddressDetail.ward}}</h4>
-                    <h4 class="text-1">Quận/Huyện: {{orderDetails.dataAddressDetail.district}}</h4>
-                    <h4 class="text-1">Thành phố/Tỉnh:{{orderDetails.dataAddressDetail.province}}</h4>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 group-left">
-            <ul class="list-group">
-                <li class="list-group-item title">DANH SÁCH SẢN PHẨM</li>
-                <li class="list-group-item divider"></li>
-                <li class="list-group-item items" *ngFor="let product of orderDetails.dataOrderDetail[0].orderItems">
-                        <div class="cart-list__variant" *ngFor="let v of product.variants">
-                    <div class="media" *ngFor="let vc of v.variantColor">
-                        <div class="media-left">
-                            <a href="#"><img class="media-object" src="http://localhost:3000/productImages/{{ v.images[0] }}" data-holder-rendered="true"></a>
-                        </div>
-                        <div class="media-body">
-                            <div class="voucher-icon">
-                                <span class="voucher-icon__img">
-                                    <img src="/CLIENT/src/assets/icon/icons/gift.png" alt="#">
-                                </span>
-                                Mua 1 tặng 1
-                            </div>
-                            <h4 class="media-heading" style="margin-top: 20px">{{ product.product.title }}</h4>
-                            <h5><span class="size">{{v.color.nameColor}}/ {{vc.size}} </span><span class="quantity">Số lượng: </span><span class="value"> {{vc.quantity}}</span></h5>
-                            <h5>
-                                <span class="price">{{formatMoneyVietNam(product.product.price)}}</span>
-                                <span class="del">{{formatMoneyVietNam(product.product.price)}}</span>
-                            </h5>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="divider"></div>
-
-                    <div class="media">
-                        <div class="media-left">
-                            <a href="#"><img class="media-object" src="https://pubcdn.ivymoda.com/files/product/thumab/1400/2023/10/23/1d6bd56cd138f6d93caac04f0cf27398.jpg" data-holder-rendered="true"></a>
-                        </div>
-                        <div class="media-body">
-                            <h4 class="media-heading">Piece Suits - Set áo vest dáng oversize</h4>
-                            <h5><span class="size">Ghi khói / M </span><span class="quantity">Số lượng: </span><span class="value">1</span></h5>
-                            <h5>
-                                <span class="price">484.000 đ</span>
-                                <span class="del">598.000 đ</span>
-                            </h5>
-                            </div>
-                        </div>
-                    <div class="divider"></div>
-                    <div class="media">
-                        <div class="media-left">
-                            <a href="#"><img class="media-object" src="https://pubcdn.ivymoda.com/files/product/thumab/1400/2023/10/23/1d6bd56cd138f6d93caac04f0cf27398.jpg" data-holder-rendered="true"></a>
-                        </div>
-                        <div class="media-body">
-                            <h4 class="media-heading">Piece Suits - Set áo vest dáng oversize</h4>
-                            <h5><span class="size">Ghi khói / M </span><span class="quantity">Số lượng: </span><span class="value">1</span></h5>
-                            <h5>
-                                <span class="price">484.000 đ</span>
-                                <span class="del">598.000 đ</span>
-                            </h5>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 group-right calculate">
-            <div class="media">
-                <div class="media-body">
-                    <h4 class="title">THANH TOÁN</h4>
-                    <h4><span class="pleft">Trị giá đơn hàng:</span><span class="pright bold">1.660.000 VNĐ</span></h4>
-                    <h4><span class="pleft">Giảm giá:</span><span class="pright bold">-664.000 VNĐ</span>
-                    </h4>
-                    <h4><span class="pleft">Phí giao hàng:</span><span class="pright bold">0 VND</span></h4>
-                    <h4><span class="pleft">Phí thanh toán:</span><span class="pright bold">0 VND</span></h4>
-                    <h4 class="divider"></h4>
-                    <h4><span class="pleft bold">Tổng thanh toán:</span><span class="pright bold">996.000 VNĐ</span></h4>
-                </div>
-            </div>
-            <div class="butn">
-                <a href="http://localhost:4200/" class="btn btn-back pright">QUAY LẠI TRANG CHỦ</a>
-            </div>
-        </div>
+      </div>
     </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 group-right">
+      <div class="media">
+        <div class="media-body">
+          <h4 class="title">THÔNG TIN GIAO NHẬN</h4>
+          <h4 class="text-1">
+            Họ tên: {{ orderDetails.dataOrderDetail[0].address.name }}
+          </h4>
+          <h4 class="text-1">
+            Điện thoại: {{ orderDetails.dataOrderDetail[0].address.phone }}
+          </h4>
+          <h4 class="text-1">Email: nghiant21406&#64;st.uel.edu.vn</h4>
+          <h4 class="text-1">
+            Địa chỉ:{{ orderDetails.dataAddressDetail.wardDetail }}
+          </h4>
+          <h4 class="text-1">
+            Phường/xã: {{ orderDetails.dataAddressDetail.ward }}
+          </h4>
+          <h4 class="text-1">
+            Quận/Huyện: {{ orderDetails.dataAddressDetail.district }}
+          </h4>
+          <h4 class="text-1">
+            Thành phố/Tỉnh:{{ orderDetails.dataAddressDetail.province }}
+          </h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 group-left">
+      <ul class="list-group">
+        <li class="list-group-item title">DANH SÁCH SẢN PHẨM</li>
+        <li class="list-group-item divider"></li>
+        <li
+          class="list-group-item items"
+          *ngFor="let product of orderDetails.dataOrderDetail[0].orderItems"
+        >
+          <div class="cart-list__variant" *ngFor="let v of product.variants">
+            <div class="media" *ngFor="let vc of v.variantColor">
+              <div class="media-left">
+                <a href="#"
+                  ><img
+                    class="media-object"
+                    src="http://localhost:3000/productImages/{{ v.images[0] }}"
+                    data-holder-rendered="true"
+                /></a>
+              </div>
+              <div class="media-body">
+                <div class="voucher-icon">
+                  <span class="voucher-icon__img">
+                    <img src="/CLIENT/src/assets/icon/icons/gift.png" alt="#" />
+                  </span>
+                  Mua 1 tặng 1
+                </div>
+                <h4 class="media-heading" style="margin-top: 20px">
+                  {{ product.product.title }}
+                </h4>
+                <h5>
+                  <span class="size"
+                    >{{ v.color.nameColor }}/ {{ vc.size }} </span
+                  ><span class="quantity">Số lượng: </span
+                  ><span class="value"> {{ vc.quantity }}</span>
+                </h5>
+                <h5>
+                  <span class="price">{{
+                    formatMoneyVietNam(product.product.price)
+                  }}</span>
+                  <span class="del">{{
+                    formatMoneyVietNam(product.product.price)
+                  }}</span>
+                </h5>
+                <div style="margin-left: auto">
+                  <button class="btn-fb"
+                    (click)="
+                      openFeedbackOrderDialog(
+                        orderDetails.dataOrderDetail[0]._id,
+                        product.product._id
+                      )
+                    "                  >
+                    Đánh giá
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 group-right calculate">
+      <div class="media">
+        <div class="media-body">
+          <h4 class="title">THANH TOÁN</h4>
+          <h4>
+            <span class="pleft">Trị giá đơn hàng:</span
+            ><span class="pright bold">1.660.000 VNĐ</span>
+          </h4>
+          <h4>
+            <span class="pleft">Giảm giá:</span
+            ><span class="pright bold">-664.000 VNĐ</span>
+          </h4>
+          <h4>
+            <span class="pleft">Phí giao hàng:</span
+            ><span class="pright bold">0 VND</span>
+          </h4>
+          <h4>
+            <span class="pleft">Phí thanh toán:</span
+            ><span class="pright bold">0 VND</span>
+          </h4>
+          <h4 class="divider"></h4>
+          <h4>
+            <span class="pleft bold">Tổng thanh toán:</span
+            ><span class="pright bold">996.000 VNĐ</span>
+          </h4>
+        </div>
+      </div>
+      <div class="butn">
+        <a href="http://localhost:4200/" class="btn btn-back pright"
+          >QUAY LẠI TRANG CHỦ</a
+        >
+      </div>
+    </div>
+  </div>
 </div>
