@@ -15,7 +15,15 @@ const getColor = async (req, res, next) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   };
-
+  const getColor2 = async(req, res, next) => {
+    try{
+      const colorData = await Color.find({}).lean()
+      console.log(colorData)
+      res.json(colorData)
+    }catch(err){
+      console.error(err);
+    }
+  }
 
 
 const getType = async (req, res, next) => {
@@ -93,6 +101,6 @@ const getWard = async (req, res) => {
 
 
 module.exports = {
-    getColor, getType, getSubType,collection, getProvince, getDistrict, getWard
+    getColor, getType, getSubType,collection, getProvince, getDistrict, getWard, getColor2
   };
   

@@ -8,12 +8,13 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { HomeService } from '../services/home.service';
 import { localImg } from '../ENV/envi';
 import { ChangeDetectorRef } from '@angular/core';
-import { IProduct } from '../interfaces/product';
+import { IColor, IProduct } from '../interfaces/product';
 import { AuthService } from '../services/auth.service';
 import { CartComponent } from '../cart/cart.component';
 import { CartService } from '../services/cart.service';
 import { formatMoneyVietNam } from '../utils/utils';
 import { take } from 'rxjs';
+import { SortPaginationService } from '../services/sort-pagination.service';
 
 
 
@@ -33,6 +34,7 @@ export class FilterProductComponent implements AfterViewInit {
   errMessage: any;
   currentColor = 0;
   bannersArray: any;
+  colorList: any
   // currentColor: any;
 
   constructor(
@@ -42,7 +44,8 @@ export class FilterProductComponent implements AfterViewInit {
     private changeDetectorRef: ChangeDetectorRef,
     private _authServer: AuthService,
     private _cartService: CartService,
-    private _cartComponent: CartComponent
+    private _cartComponent: CartComponent,
+    private _sortPaginationService:SortPaginationService
   ) {
     this._authServer.idUserSubject.subscribe((data) => {
       this.userIdFromHeader = data;
@@ -51,11 +54,12 @@ export class FilterProductComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.initOwlCarousel();
+    // this.initOwlCarousel();
   }
-  initOwlCarousel() {
-    throw new Error('Method not implemented.');
-  }
+  // initOwlCarousel() {
+  //   throw new Error('Method not implemented.');
+  // }
+
 
 
   // Size table homepage
@@ -139,15 +143,19 @@ export class FilterProductComponent implements AfterViewInit {
   products: any;
 
   async ngOnInit(): Promise<void> {
-    // Mặc định chọn màu đầu tiên
     await this.setupUserIdSubscription();
-    console.log(this.userIdFromHeader, '123');
-    await this.apiProductHomePage();
-    console.log(this.productsHaveModified,'2222222222222')
+    // await this.apiProductHomePage();
+    this.getColor()
    
   this.bannersArray=[]
-    // Khởi tạo mảng productStates với giá trị false cho mỗi sản phẩm
     this.productStates = Array(this.bannersArray.length).fill(false);
+  }
+
+  getColor(){
+    this._sortPaginationService.getColor().subscribe((data)=>{
+      this.colorList = data
+      console.log(data,'data')
+    })
   }
   
   

@@ -14,12 +14,16 @@ import { ForgotPasswordModalSuccessComponent } from '../login/forgot-password-mo
 import { ForgetPwComponent } from '../forget-pw/forget-pw.component';
 import { PaymentThankComponent } from '../payment/payment-thank/payment-thank.component';
 import { FilterProductComponent } from '../filter-product/filter-product.component';
+import { PaginationComponent } from '@coreui/angular';
 
 const routes: Routes = [
   {
     path: '',
     component: UserComponent,
     children: [
+      {
+        path: 'pagination', component: PaginationComponent,
+      },
       {
         path:'filter-product', component: FilterProductComponent,
       },
