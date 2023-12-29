@@ -16,8 +16,8 @@
   </div>
 </div>
 <hr style="background: #CCC;">
-<div class="table-responsive table-responsive-sm">
-  <table class="table responsive table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="dataTable">
+<div class="">
+  <table class="table responsive table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  id="dataTable">
 
     <thead>
       <tr>
@@ -28,16 +28,6 @@
         <th scope="col">Chi tiết đơn hàng </th>
       </tr>
     </thead>
-    <!-- <tbody>
-          <tr *ngFor="let order of orders">
-            <th scope="row">{{ order.id }}</th>
-            <td>{{ order.date }}</td>
-            <td>{{ order.status }}</td>
-            <td><strong>{{ order.total }} ({{ order.totalProducts }} sản phẩm)</strong></td>
-            <td><button (click)="openFeedbackOrderDialog()" class="btn-action-order">Đánh giá</button></td>
-            <td style="color: #2DA5F3;"><a href="" style="color: #2DA5F3">Xem chi tiết</a><i class="fas fa-regular fa-arrow-right-long ms-3"></i></td>
-          </tr>
-        </tbody> -->
     <tbody>
       <tr *ngFor="let order of orders">
         <td scope="row">{{ order._id }}</td>

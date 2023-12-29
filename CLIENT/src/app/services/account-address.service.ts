@@ -17,8 +17,11 @@ export class AccountAddressService {
 
 
   addAddress(address: any, userID: string): Observable<any> {
-    // Adjust the API endpoint and method as needed
     return this.http.post(`${local}/user/account/address/add-address`, { address, userID });
+  }
+  
+  deleteAddress(addressId: string): Observable<any> {
+    return this.http.delete(`${local}/user/account/address/${addressId}`);
   }
 
 }

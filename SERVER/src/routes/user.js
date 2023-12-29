@@ -23,6 +23,11 @@ router.put('/account/info/update/:userID', userController1.updateAccountInfo);
 router.post('/account/address/add-address', userController1.postUserAddress)
 router.get('/account/address/:userId', userController1.getAccountAddresses)
 router.get('/account/order/:userId', userController1.getAccountOrder)
+
+router.delete('/account/address/:addressId', userController1.deleteAccountAddress);
+
+
+
 router.get('/types-populate-subtypes', userController.subTypeApi)
 router.post('/resetPassW', userController.resetPassword)
 

@@ -34,6 +34,10 @@ export class AccountAddressComponent implements OnInit {
       this.userID = data;
       console.log(this.userID, 'user id:::')
     });
+    this.getAddressList()
+  }
+
+  getAddressList() {
     this.addressService.getUserAddressList(this.userID).subscribe(
       (data) => {
         this.addressList = data;
@@ -44,8 +48,6 @@ export class AccountAddressComponent implements OnInit {
       }
     );
   }
-
-
   openDialog() {
     // Check if there are open dialogs before opening a new one
     if (this.dialogRef.openDialogs.length === 0) {
@@ -53,13 +55,38 @@ export class AccountAddressComponent implements OnInit {
         hasBackdrop: true,
       });
 
+      // Subscribe to the addressAdded event emitted by the popup
+      // dialogRef.componentInstance.addressAdded.subscribe((newAddress) => {
+      //   console.log('New address added:', newAddress);
+      //   this.updateAddressList(newAddress);
+      // });
+
+
       dialogRef.afterClosed().subscribe((result) => {
         console.log('Dialog result:', result);
       });
     }
   }
 
+  updateAddressList(newAddress: any) {
+    // Add the new address to the list
+    this.addressList.push(newAddress);
+  }
+
   setDefaultAddress() {
 
+  }
+
+  deleteAddress(addressId: string) {
+    // console.log("client side, addressID to be deleted:", addressId)
+    this.addressService.deleteAddress(addressId).subscribe(
+      () => {
+        console.log('Address deleted successfully');
+        this.getAddressList(); // Refresh the address list after deleting an address
+      },
+      (error) => {
+        console.error('Error deleting address:', error);
+      }
+    );
   }
 }

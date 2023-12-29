@@ -90,49 +90,49 @@ const saveOrder = async (req, res, next) => {
 const orderDetail = async (req, res) => {
   try {
     const { orderId } = req.params;
-    console.log(orderId,'5555')
+    console.log(orderId, '5555')
     const dataOrderDetail = await Order.find({ _id: orderId })
-    .populate({
-      path: "address",
-    })
-    .populate({
-      path: "userId",
-    })
-    .populate({
-      path: "orderItems.product",
-      populate: {
-        path: "variants.color",
+      .populate({
+        path: "address",
+      })
+      .populate({
+        path: "userId",
+      })
+      .populate({
+        path: "orderItems.product",
+        populate: {
+          path: "variants.color",
+          model: "Color",
+          select: "nameColor imageColor",
+        },
+      })
+      .populate({
+        path: "orderItems.variants.color",
         model: "Color",
         select: "nameColor imageColor",
-      },
-    })
-    .populate({
-      path: "orderItems.variants.color",
-      model: "Color",
-      select: "nameColor imageColor",
-    });
-    console.log(dataOrderDetail,'222222')
-    const addressUser = await UserAddress.findOne({_id:dataOrderDetail[0].userId.addressList[0]})
-    const wardDetailAccount = await Ward.findOne({code:addressUser.ward})
-    const districtAccount = await District.findOne({code:wardDetailAccount.parent_code})
-    const provinceAccount = await Province.findOne({code:districtAccount.parent_code})
-    
-    const wardDetail = await Ward.findOne({code:dataOrderDetail[0].address.ward})
-    const district = await District.findOne({code:wardDetail.parent_code})
-    const province = await Province.findOne({code:district.parent_code})
-    const dataAddressDetail ={
-      wardDetail:wardDetail.path_with_type,
+      });
+    console.log(dataOrderDetail, '222222')
+    const addressUser = await UserAddress.findOne({ _id: dataOrderDetail[0].userId.addressList[0] })
+    const wardDetailAccount = await Ward.findOne({ code: addressUser.ward })
+    const districtAccount = await District.findOne({ code: wardDetailAccount.parent_code })
+    const provinceAccount = await Province.findOne({ code: districtAccount.parent_code })
+
+    const wardDetail = await Ward.findOne({ code: dataOrderDetail[0].address.ward })
+    const district = await District.findOne({ code: wardDetail.parent_code })
+    const province = await Province.findOne({ code: district.parent_code })
+    const dataAddressDetail = {
+      wardDetail: wardDetail.path_with_type,
       ward: wardDetail.name_with_type,
       district: district.name_with_type,
       province: province.name_with_type,
 
-      wardDetailAccount:wardDetailAccount.path_with_type,
+      wardDetailAccount: wardDetailAccount.path_with_type,
       wardAccount: wardDetailAccount.name_with_type,
       districtAccount: districtAccount.name_with_type,
       provinceAccount: provinceAccount.name_with_type,
     }
     console.log(dataOrderDetail, addressUser)
-    res.json({dataOrderDetail,dataAddressDetail} );
+    res.json({ dataOrderDetail, dataAddressDetail });
   } catch (e) {
     console.log(e);
   }
@@ -140,9 +140,21 @@ const orderDetail = async (req, res) => {
 
 
 const getOrders = async (req, res) => {
+  // try {
+  //   const orders = await Order.find();
+  //   res.json(orders);
   try {
-    const orders = await Order.find();
-    res.json(orders);
+    const orders = await Order.find().populate({
+      path: 'userId',
+      select: 'first_name last_name',
+    });
+
+    const modifiedOrders = orders.map(order => {
+      const { userId: { first_name, last_name }, ...rest } = order.toObject();
+      return { first_name, last_name, ...rest };
+    });
+    console.log("order with user name:", modifiedOrders)
+    res.json(modifiedOrders);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });

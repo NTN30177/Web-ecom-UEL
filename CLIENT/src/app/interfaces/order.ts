@@ -18,7 +18,9 @@
 //   }
 
 export interface IOrders {
-userId: any;
+  userId: any;
+  first_name: string;
+  last_name: string;
   _id: string;
   address: string;
   createdAt: string;
