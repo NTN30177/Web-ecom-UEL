@@ -162,29 +162,10 @@ hidePassword = true;
   }
 
   clearSpecificErrorMessage(controlName: string) {
-    const errorElement = this.renderer.selectRootElement(`#${controlName}_error`);
-    const inputElement = this.renderer.selectRootElement(`#${controlName}`);
 
-    if (errorElement) {
-      this.renderer.setProperty(errorElement, 'innerHTML', '');
-    }
-
-    if (inputElement) {
-      this.renderer.removeClass(inputElement, 'error-input');
-    }
   }
 
   displayErrorMessage(controlName: string, errorMessage: string) {
-    const errorElement = this.renderer.selectRootElement(`#${controlName}_error`);
-    const inputElement = this.renderer.selectRootElement(`#${controlName}`);
-
-    if (errorElement) {
-      this.renderer.setProperty(errorElement, 'innerHTML', errorMessage);
-    }
-
-    if (inputElement) {
-      this.renderer.addClass(inputElement, 'error-input');
-    }
   }
 
   validateAndClearError(controlName: string) {
@@ -206,34 +187,28 @@ hidePassword = true;
       }
     }
   }
+  
 
   register() {
     // Mark all controls as touched to trigger validation messages
     this.registerForm.markAllAsTouched();
-
-    // Check if any option with value 0 is selected
-    const hasOptionZeroSelected =
-      this.isOptionZeroSelected('cus_gender') ||
-      this.isOptionZeroSelected('cus_region_id') ||
-      this.isOptionZeroSelected('cus_district_id') ||
-      this.isOptionZeroSelected('cus_ward_id');
-
-    // Show error only if an option with value 0 is selected
-    this.showOptionZeroError = hasOptionZeroSelected;
-
-    if (this.registerForm.valid && !hasOptionZeroSelected) {
+  
+    if (this.registerForm.valid) {
       // Clear error messages and remove error class for all controls
       Object.keys(this.registerForm.controls).forEach((field) => {
         this.clearSpecificErrorMessage(field);
       });
+      // this.router.navigate(['/login']);
     } else {
       // Show error messages and apply red border for each invalid field
       Object.keys(this.registerForm.controls).forEach((field) => {
         this.validateAndClearError(field);
       });
+      // Move this line outside the if block
+      this.router.navigate(['/login']);
     }
-    this.postRegister();
   }
+  
 
   postRegister() {
     if (this.registerForm.invalid) {
