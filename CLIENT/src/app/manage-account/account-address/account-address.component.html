@@ -1,3 +1,4 @@
+<div class="account-address-container">
 <div class=" row d-flex justify-content-between  address-header">
     <div class="col-12 col-sm-auto align-self-center ">
         SỔ ĐỊA CHỈ
@@ -36,9 +37,10 @@
             <button class="button-delete" (click)="deleteAddress(address._id.toString())">Xóa</button>
 
         </div>
-        <div class="button-set">
-            <button (click)="setDefaultAddress()">Đặt làm mặc định</button>
+        <div  *ngIf="!address.is_default" class="button-set">
+            <button  (click)="setDefaultAddress(address._id)">Đặt làm mặc định</button>
         </div> 
 
     </div>
+</div>
 </div>

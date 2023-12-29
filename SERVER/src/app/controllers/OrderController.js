@@ -140,9 +140,6 @@ const orderDetail = async (req, res) => {
 
 
 const getOrders = async (req, res) => {
-  // try {
-  //   const orders = await Order.find();
-  //   res.json(orders);
   try {
     const orders = await Order.find().populate({
       path: 'userId',

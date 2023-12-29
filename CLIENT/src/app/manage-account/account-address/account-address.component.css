@@ -1,11 +1,8 @@
-/* .table {
-    margin-top: 50px;
-} */
 
-/* .account-container .row{
-    justify-content: space-between;
-} */
 
+.account-address-container{
+    margin-bottom: 150px;
+}
 .address-header {
     font-size: 28px;
     /* padding-top: 20px; */
@@ -13,9 +10,6 @@
     letter-spacing: 1.92px;
 }
 
-/* .button-add{
-    justify-content: right;
-} */
 
 
 .address-block {

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountInfoService } from '../services/account-info.service';
+import { IUser } from '../interfaces/user';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-side-menu',
@@ -8,11 +10,18 @@ import { AccountInfoService } from '../services/account-info.service';
 })
 export class SideMenuComponent implements OnInit{
 
-  userID = '65830fbb6e84f0388d3e7b6b';
+  userID :any;
   userName: any
 
-  constructor(private accountInfoService: AccountInfoService) { }
+  constructor(private accountInfoService: AccountInfoService,
+    private _authServer: AuthService) {
+    this._authServer.idUserSubject.subscribe((data) => {
+      this.userID = data;
+      console.log(data, '1111');
+    });
+   }
   ngOnInit(): void {
+  
     this.loadUserName();
   }
 
@@ -24,9 +33,8 @@ export class SideMenuComponent implements OnInit{
   }
 
   loadUserName() {
-    this.accountInfoService.getUserAccountInfo(this.userID)
-      .subscribe(
-        (data: any) => {
+    this.accountInfoService.getUserAccountInfo(this.userID).subscribe((data: IUser) => {
+          console.log(data,'fsy')
           this.userName = `${data.first_name} ${data.last_name}`;
         },
         (error) => {

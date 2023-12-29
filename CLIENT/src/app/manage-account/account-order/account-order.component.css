@@ -7,7 +7,7 @@
 }
 @media (max-width: 767px) {
     .order-header {
-        font-size: 14px; /* Điều chỉnh kích thước văn bản cho màn hình điện thoại */
+        font-size: 14px;
     }
 }
 .status {
@@ -59,4 +59,6 @@
 
 }
   
-  
+.account-order-table{
+    margin-bottom: 150px;
+}
