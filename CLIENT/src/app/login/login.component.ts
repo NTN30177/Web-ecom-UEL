@@ -158,6 +158,7 @@ export class LoginComponent implements OnInit {
       this._authService.verifiedInForUserService(this.loginForm.value).subscribe({
         next: (data: any) => {
           this.infoResult = data.message;
+          alert(data.message)
           // Use different durations based on login success
           const duration = data.login ? 700 : 5000;
           this.openSnackbar(duration);
