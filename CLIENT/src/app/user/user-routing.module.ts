@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Router, RouterModule, Routes } from '@angular/router';
 import { UserComponent } from './user.component';
 import { HomePageComponent } from '../home-page/home-page.component';
 
@@ -77,7 +77,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes),
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'top', // Điều này đặt scroll lên đầu trang khi chuyển route
+    }),],
   exports: [RouterModule],
 })
 export class UserRoutingModule {}

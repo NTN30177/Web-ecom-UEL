@@ -76,6 +76,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -132,6 +133,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     DataTablesModule,
     BrowserAnimationsModule, // Quan tọng, k có là k chạy
     MatDialogModule,
+
     AdminRoutingModule,
     // UserModule,
     UserRoutingModule,
