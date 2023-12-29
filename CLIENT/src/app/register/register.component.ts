@@ -178,62 +178,9 @@ export class RegisterComponent implements OnInit {
   }
 
   clearSpecificErrorMessage(controlName: string) {
-    const errorElement = this.renderer.selectRootElement(
-      `#${controlName}_error`
-    );
-    const inputElement = this.renderer.selectRootElement(`#${controlName}`);
 
-    if (errorElement) {
-      this.renderer.setProperty(errorElement, 'innerHTML', '');
-    }
-
-    if (inputElement) {
-      this.renderer.removeClass(inputElement, 'error-input');
-    }
   }
 
-  displayErrorMessage(controlName: string, errorMessage: string) {
-    const errorElement = this.renderer.selectRootElement(
-      `#${controlName}_error`
-    );
-    const inputElement = this.renderer.selectRootElement(`#${controlName}`);
-
-    if (errorElement) {
-      this.renderer.setProperty(errorElement, 'innerHTML', errorMessage);
-    }
-
-    if (inputElement) {
-      this.renderer.addClass(inputElement, 'error-input');
-    }
-  }
-
-  validateAndClearError(controlName: string) {
-    const control = this.registerForm.get(controlName);
-    const errorElement = this.renderer.selectRootElement(
-      `#${controlName}_error`
-    );
-    const inputElement = this.renderer.selectRootElement(`#${controlName}`);
-
-    if (control && errorElement && inputElement) {
-      if (control.valid) {
-        // Clear error messages and remove error class for valid controls
-        this.clearSpecificErrorMessage(controlName);
-      } else {
-        // Show error messages and apply red border for invalid controls
-        this.displayErrorMessage(controlName, '* Vui lòng nhập/chọn giá trị.');
-        if (
-          controlName === 'cus_reenterpassword' &&
-          control.errors?.['passwordMismatch']
-        ) {
-          this.displayErrorMessage(
-            controlName,
-            'Mật khẩu nhập lại không khớp.'
-          );
-        }
-        this.renderer.addClass(inputElement, 'error-input');
-      }
-    }
-  }
 
   register() {
     // Mark all controls as touched to trigger validation messages
@@ -249,18 +196,7 @@ export class RegisterComponent implements OnInit {
     // Show error only if an option with value 0 is selected
     this.showOptionZeroError = hasOptionZeroSelected;
 
-    if (this.registerForm.valid && !hasOptionZeroSelected) {
-      // Clear error messages and remove error class for all controls
-      Object.keys(this.registerForm.controls).forEach((field) => {
-        this.clearSpecificErrorMessage(field);
-      });
-      this.postRegister();
-    } else {
-      // Show error messages and apply red border for each invalid field
-      Object.keys(this.registerForm.controls).forEach((field) => {
-        this.validateAndClearError(field);
-      });
-    }
+this.postRegister()
   }
 
   postRegister() {
@@ -269,12 +205,16 @@ export class RegisterComponent implements OnInit {
     } else {
       this._authService.postInfoUser(this.registerForm.value).subscribe({
         next: (data: any) => {
+          console.log(data, 'dât')
           if (data) {
             this.infoResult = data.message;
+            alert(data.message)
             setTimeout(() => {
               this.infoResult = '';
             }, 5000);
             if(data.success){
+      alert('Lưu dữ liệu thành công');
+
               this.router.navigate(['/login']);
 
             }
@@ -288,7 +228,6 @@ export class RegisterComponent implements OnInit {
       });
       console.log('save');
 
-      alert('Lưu dữ liệu thành công');
     }
   }
 

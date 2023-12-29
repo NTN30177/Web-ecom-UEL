@@ -2,5 +2,10 @@
     display: flex;
     padding: 20px;
     box-sizing: 10px 10px 5px #aaaaaa;
-}
+    font-family: 'Montserrat', sans-serif!important;
 
+}
+:host {
+    font-family: 'Montserrat', sans-serif!important;
+    
+  }
