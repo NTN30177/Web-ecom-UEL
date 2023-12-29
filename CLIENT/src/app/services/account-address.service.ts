@@ -24,4 +24,8 @@ export class AccountAddressService {
     return this.http.delete(`${local}/user/account/address/${addressId}`);
   }
 
+  setDefaultAddress(userId: string, addressId: string): Observable<any> {
+    // const url = `${local}/user/account/address/set-default`;
+    return this.http.put(`${local}/user/account/address/set-default`, { userId, addressId });
+  }
 }

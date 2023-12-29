@@ -26,7 +26,7 @@ router.get('/account/order/:userId', userController1.getAccountOrder)
 
 router.delete('/account/address/:addressId', userController1.deleteAccountAddress);
 
-
+router.put('/account/address/set-default', userController1.setDefaultAddress);
 
 router.get('/types-populate-subtypes', userController.subTypeApi)
 router.post('/resetPassW', userController.resetPassword)

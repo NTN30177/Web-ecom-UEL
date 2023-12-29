@@ -215,6 +215,35 @@ const deleteAccountAddress = async (req, res) => {
   }
 };
 
+const setDefaultAddress = async (req, res) => {
+  const { userId, addressId } = req.body;
+
+  try {
+    // Find the user and update the addressList to set is_default to false for all addresses
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Set is_default to false for all addresses of the user
+    user.addressList.forEach(async (address) => {
+      await UserAddress.findByIdAndUpdate(address, { is_default: false });
+    });
+
+    // Set is_default to true for the selected address
+    const updatedAddress = await UserAddress.findByIdAndUpdate(
+      addressId,
+      { is_default: true },
+      { new: true }
+    );
+
+    res.json(updatedAddress);
+  } catch (error) {
+    console.error('Error setting default address:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
 
 module.exports = {
   getAccountInfo,
@@ -224,5 +253,6 @@ module.exports = {
   getAccountOrder,
   getUserData,
   deleteAccountAddress,
-
+  setDefaultAddress,
+  
 };

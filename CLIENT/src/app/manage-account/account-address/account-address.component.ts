@@ -22,12 +22,7 @@ export class AccountAddressComponent implements OnInit {
     private dialogRef: MatDialog,
     private addressService: AccountAddressService,
     private _authService: AuthService
-  ) {
-    // this.accountInfoService.userIDSubject.subscribe((data) => {
-    //   this.userID = data;
-    // });
-  }
-
+  ) {}
   ngOnInit(): void {
 
     this._authService.idUserSubject.subscribe((data) => {
@@ -73,10 +68,18 @@ export class AccountAddressComponent implements OnInit {
     this.addressList.push(newAddress);
   }
 
-  setDefaultAddress() {
-
+  setDefaultAddress(addressId: string): void {
+    this.addressService.setDefaultAddress(this.userID, addressId).subscribe(
+      (response) => {
+        console.log('Default address set successfully:', response);
+        // You can update your component's address list if needed
+        this.getAddressList();
+      },
+      (error) => {
+        console.error('Error setting default address:', error);
+      }
+    );
   }
-
   deleteAddress(addressId: string) {
     // console.log("client side, addressID to be deleted:", addressId)
     this.addressService.deleteAddress(addressId).subscribe(
