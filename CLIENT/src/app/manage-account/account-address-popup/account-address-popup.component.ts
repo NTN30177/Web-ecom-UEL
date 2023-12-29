@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from '../../services/auth.service';
@@ -12,7 +12,7 @@ import { AccountInfoService } from '../../services/account-info.service';
 })
 export class AccountAddressPopupComponent implements OnInit {
 
-
+  @Output() addressAdded: EventEmitter<any> = new EventEmitter();
   addressForm!: FormGroup;
 
   addresses: any[] = [];
@@ -27,7 +27,7 @@ export class AccountAddressPopupComponent implements OnInit {
     public dialogRef: MatDialogRef<AccountAddressPopupComponent>,
     private _authService: AuthService,
     private addressService: AccountAddressService,
- ) { }
+  ) { }
 
   ngOnInit(): void {
 
@@ -112,6 +112,8 @@ export class AccountAddressPopupComponent implements OnInit {
       this.addressService.addAddress(newAddress, this.userID).subscribe(
         (response) => {
           console.log('Address added successfully:', response);
+          // Emit the event with the new address
+          this.addressAdded.emit(newAddress);
           // Optionally, you can handle the response or close the dialog.
           this.dialogRef.close();
         },

@@ -17,6 +17,7 @@ import { Subscription, debounceTime, fromEvent, map } from 'rxjs';
 import { HeaderService } from '../services/header.service';
 import { formatMoneyVietNam, convertStringToNumbers } from '../utils/utils';
 import { AccountInfoService } from '../services/account-info.service';
+import { CartService } from '../services/cart.service';
 
 interface CartItem {
   id: number;
@@ -34,6 +35,8 @@ interface CartItem {
 })
 export class HeaderComponent implements OnInit {
   formatMoneyVietNam = formatMoneyVietNam;
+  // changeQuantity = this._cartComponent.changeQuantity;
+
 
   isSearchFormActive: boolean = false;
   isMainMenuOpen: boolean = false;
@@ -48,6 +51,10 @@ export class HeaderComponent implements OnInit {
   currentSubMenuIndex: null | undefined;
   @ViewChild('searchInput') searchInput: ElementRef | undefined;
   accountInfo: any=false;
+  cartList:any=false;
+  userIdFromHeader: any;
+  errMessage: any;
+  totalPayment: any;
   constructor(
     private elRef: ElementRef,
     private renderer: Renderer2,
@@ -56,10 +63,11 @@ export class HeaderComponent implements OnInit {
     private _cartComponent: CartComponent,
     private _homeComponent: HomePageComponent,
     private _headerService: HeaderService,
-    private _accountInfoService: AccountInfoService
+    private _accountInfoService: AccountInfoService,
+    private _cartService: CartService
   ) {}
   ngAfterViewInit() {
-    // fromEvent(this.searchInput?.nativeElement, 'input')
+   
     //   .pipe(
     //     debounceTime(1000),
     //     map((event: any) => event.target.value)
@@ -83,6 +91,7 @@ export class HeaderComponent implements OnInit {
     this.checkLogin();
     this.getKeySearch();
     this.getCategory();
+    // this.getCart()
   }
   getKeySearch() {
     if (this.userId) {
@@ -142,6 +151,11 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  // getCart(){
+  //   this.cartList=this._cartComponent.apiCartProduct(this.userId)
+  //   console.log()
+  // }
+
   isLogin = false;
   async checkLogin() {
     const userData = localStorage.getItem('userData');
@@ -149,16 +163,55 @@ export class HeaderComponent implements OnInit {
       const parseUserData: IUser = JSON.parse(userData);
       this._authService.idUserSubject.next(parseUserData._id);
       this.userId = parseUserData._id;
-      const cartList = await this._cartComponent.apiCartProduct(
+      console.log(parseUserData._id,'parseUserData._id')
+      this.cartList = await this._cartComponent.apiCartProduct(
         parseUserData._id
       );
-      let total_quantity = this._homeComponent.totalCartItem(cartList);
+      this.totalPayment = await this._cartComponent.totalPayment(this.cartList);
+
+    console.log(this.cartList, 'cl')
+
+      let total_quantity = this._homeComponent.totalCartItem(this.cartList);
       this.cartNumberItem = total_quantity;
       this.isLogin = true;
     } else {
       this._authService.idUserSubject.next(null);
       this.isLogin = false;
     }
+  }
+  async changeQuantity(
+    colorID: any,
+    productID: any,
+    sizeLIST: any,
+    quantityACTION: any
+  ) {
+    const userData = await localStorage.getItem('userData');
+    if (userData) {
+      const parseUserData = JSON.parse(userData);
+      this.userIdFromHeader = parseUserData._id;
+    }
+    const data = {
+      colorId: colorID,
+      productId: productID,
+      size: sizeLIST,
+      quantityAction: quantityACTION,
+      userId: this.userIdFromHeader,
+    };
+    console.log(data, 'dddddddd');
+  
+    this._cartService.putProductItemCart(data).subscribe({
+      next: async (data: any) => {
+        this.cartList = await this._cartComponent.apiCartProduct(this.userIdFromHeader);
+        setTimeout(async () => {
+          this.totalPayment = await this._cartComponent.totalPayment(this.cartList);
+          console.log(this.totalPayment, 'ttp');
+          
+        }, 500);
+      },
+      error: (err: any) => {
+        this.errMessage = err;
+      },
+    });
   }
   logout() {
     window.localStorage.getItem('userData');

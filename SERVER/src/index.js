@@ -14,6 +14,7 @@ const corsOptions = {
   optionsSuccessStatus: 204,
 };
 
+
 app.use(cors(corsOptions));
 
 const route = require('./routes');

@@ -187,6 +187,34 @@ const getUserData = async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
+const deleteAccountAddress = async (req, res) => {
+  try {
+    const addressId = req.params.addressId;
+    console.log("server - addressID needed deleting:", addressId)
+
+    // Check if addressId is a valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(addressId)) {
+      return res.status(400).json({ message: 'Invalid addressId format' });
+    }
+
+    // Use Mongoose to delete the address by its ID
+    const result = await UserAddress.findByIdAndDelete(addressId);
+
+    // Check if the address was found and deleted
+    if (!result) {
+      return res.status(404).json({ message: 'Address not found' });
+    }
+
+    // Send a success response
+    res.json({ message: 'Address deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting user account address:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
 module.exports = {
   getAccountInfo,
   updateAccountInfo,
@@ -194,5 +222,6 @@ module.exports = {
   postUserAddress,
   getAccountOrder,
   getUserData,
+  deleteAccountAddress,
 
 };

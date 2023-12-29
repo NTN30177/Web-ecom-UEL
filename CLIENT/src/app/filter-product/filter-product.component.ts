@@ -1,13 +1,9 @@
-import {
-  Component,
-  AfterViewInit,
-  ElementRef,
-  Renderer2,
-  ViewEncapsulation,
-  ViewChild,
-} from '@angular/core';
-import { local } from '../ENV/envi';
-declare var $: any;
+import { AfterViewInit, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { HomeService } from '../services/home.service';
 import { localImg } from '../ENV/envi';
@@ -18,13 +14,17 @@ import { CartComponent } from '../cart/cart.component';
 import { CartService } from '../services/cart.service';
 import { formatMoneyVietNam } from '../utils/utils';
 import { take } from 'rxjs';
+
+
+
+
 @Component({
-  selector: 'app-home-page',
-  templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css'],
-  encapsulation: ViewEncapsulation.None,
+  selector: 'app-filter-product',
+  templateUrl: './filter-product.component.html',
+  styleUrl: './filter-product.component.css',
 })
-export class HomePageComponent implements AfterViewInit {
+
+export class FilterProductComponent implements AfterViewInit {
   formatMoneyVietNam = formatMoneyVietNam;
   productStates: boolean[] = [];
   i: number = 0;
@@ -32,8 +32,8 @@ export class HomePageComponent implements AfterViewInit {
   // products: any;
   errMessage: any;
   currentColor = 0;
+  bannersArray: any;
   // currentColor: any;
-  local=local
 
   constructor(
     private el: ElementRef,
@@ -53,35 +53,14 @@ export class HomePageComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.initOwlCarousel();
   }
+  initOwlCarousel() {
+    throw new Error('Method not implemented.');
+  }
 
-  
-  
 
   // Size table homepage
 
-  private initOwlCarousel(): void {
-    const owlSelector = '.exclusive-inner__list-products.owl-carousel';
-    const owlElement = this.el.nativeElement.querySelector(owlSelector);
 
-    if (owlElement) {
-      this.renderer.addClass(owlElement, 'owl-carousel');
-
-      const owlOptions: OwlOptions = {
-        dots: false,
-        nav: true,
-        autoplay: false,
-        loop: false,
-        autoWidth: false,
-        responsive: {
-          0: { items: 2, margin: 20, nav: false },
-          740: { items: 3, margin: 30 },
-          1025: { items: 5, margin: 30 },
-        },
-      };
-
-      $(owlElement).owlCarousel(owlOptions);
-    }
-  }
   
   toggleSizeTable(productIndex: number): void {
     // đóng mở các sizetable khác
@@ -95,6 +74,9 @@ export class HomePageComponent implements AfterViewInit {
       }
     }
 
+    //
+
+    //
     const sizeTableId = `sizeTable${productIndex}`;
     const sizeTable = this.el.nativeElement.querySelector(`#${sizeTableId}`);
     if (
@@ -116,35 +98,15 @@ export class HomePageComponent implements AfterViewInit {
 
 
 
-  bannersArray: any = [
-    { imgName: '../assets/img/banner/banner-1.jpeg' },
-    { imgName: '../assets/img/banner/banner-2.jpeg' },
-    { imgName: '../assets/img/banner/banner-3.jpeg' },
-  ];
+  imagesArray: any = [];
+
+
 
   // Setting Carousel slider
-  bannerOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: true,
-    navSpeed: 700,
-    navText: [
-      '<i class="ti-arrow-left"></i>',
-      '<i class="ti-arrow-right"></i>',
-    ],
-    responsive: {
-      0: { items: 0 },
-      400: { items: 1 },
-      740: { items: 1 },
-      940: { items: 1 },
-    },
-    nav: true,
-  };
+
 
   // Setting new-prod homepage
-  newprodOptions: OwlOptions = {
+  filterprodOptions: OwlOptions = {
     loop: false,
     mouseDrag: true,
     touchDrag: true,
@@ -166,7 +128,7 @@ export class HomePageComponent implements AfterViewInit {
         margin: 30,
       },
       1025: {
-        items: 5,
+        items: 4,
         margin: 30,
       },
     },
@@ -177,9 +139,13 @@ export class HomePageComponent implements AfterViewInit {
   products: any;
 
   async ngOnInit(): Promise<void> {
+    // Mặc định chọn màu đầu tiên
     await this.setupUserIdSubscription();
+    console.log(this.userIdFromHeader, '123');
     await this.apiProductHomePage();
+    console.log(this.productsHaveModified,'2222222222222')
    
+  
     // Khởi tạo mảng productStates với giá trị false cho mỗi sản phẩm
     this.productStates = Array(this.bannersArray.length).fill(false);
   }
@@ -204,13 +170,14 @@ export class HomePageComponent implements AfterViewInit {
   }
 
   async apiChangeQuantityProductItem(data: object) {
+    console.log(data, '55555');
     try {
       const responseData = await this._cartService.putProductItemCart(data);
+      console.log(responseData, 'dataput');
     } catch (err) {
       this.errMessage = err;
     }
   }
-
 
   total_quantity: number = 0;
 
@@ -256,17 +223,12 @@ export class HomePageComponent implements AfterViewInit {
       const cartList = await this._cartComponent.apiCartProduct(
         this.userIdFromHeader
       );
-      
       let total_quantity = await this.totalCartItem(cartList);
-    this._authServer.updateCart(total_quantity);
-
-
-
+      this._authServer.cartSubject.next(total_quantity);
     }
 
-   
-  }
 
+  }
 
   cartNumber: number = 0;
   cartNumberFunc() {
@@ -327,6 +289,7 @@ export class HomePageComponent implements AfterViewInit {
   }
 
 
+
   productsHaveModified: any;
 
   updateProductsHaveModified() {
@@ -335,7 +298,6 @@ export class HomePageComponent implements AfterViewInit {
         ...product,
         imgHomePage: product.variants.map((variant: any) => {
           const { _id: colorID } = variant.color;
-          const { nameColor: nameColor } = variant.color;
           const { images: variantImages, variantColor: sizes } = variant;
 
           // Create an array of objects for each size with quantity
@@ -343,10 +305,10 @@ export class HomePageComponent implements AfterViewInit {
             const { size, quantity } = sizeInfo;
             return { size, quantity };
           });
+
           // Return the object for a variant with variantColor
           return {
             colorID,
-            nameColor,
             images: variantImages.slice(0, 2),
             variantColor: sizeQuantityArray,
           };
@@ -355,28 +317,22 @@ export class HomePageComponent implements AfterViewInit {
     });
     console.log(this.productsHaveModified);
   }
-  productPopUp:any=false
+
   // Đóng mở popup thêm thành công sản phẩm vào giỏ hàng
   @ViewChild('popupContainer') popupContainer: ElementRef | undefined;
-  addActiveCartPopupClass(title: any, price: any, color: any, size: any, img: any) {
-    // addActiveCartPopupClass() {
-    console.log(title, price, color, size, img);
-    this.productPopUp = { title, price, color, size, img };
-  
+  addActiveCartPopupClass() {
     if (this.popupContainer) {
       const popupContainerElement = this.popupContainer.nativeElement;
-  
       if (popupContainerElement) {
         this.renderer.addClass(popupContainerElement, 'active-cartpopup');
-  
-        // After 2 seconds, remove the 'active-cartpopup' class
+
+        // Sau 2 giây, xoá class "active-cartpopup"
         setTimeout(() => {
           this.renderer.removeClass(popupContainerElement, 'active-cartpopup');
         }, 2000);
       }
     }
   }
-  
   // thêm xo color-active
   selectedColorIndex: number[] = []; // Sử dụng một mảng để lưu trữ index cho từng sản phẩm
 

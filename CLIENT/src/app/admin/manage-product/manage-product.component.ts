@@ -14,9 +14,7 @@ import { formatMoneyVietNam } from '../../utils/utils';
 })
 export class ManageProductComponent implements OnInit, OnDestroy {
   formatMoneyVietNam = formatMoneyVietNam;
-
-
-local=local
+  local = local
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
@@ -29,7 +27,12 @@ local=local
     this.products();
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 10
+      pageLength: 10,
+      searching: true,
+      // dom: 'lfrtip',
+      language: {
+        url: 'https://cdn.datatables.net/plug-ins/1.10.21/i18n/Vietnamese.json',
+      },
     };
 
 
@@ -80,53 +83,53 @@ local=local
       }
     }
     return totalQuantity;
-}
+  }
 
-// softDeleteProduct(productId: string): void {
-//   const productIndex = this.allProducts.findIndex(product => product.id === productId);
-//   if (productIndex !== -1) {
-//     this.allProducts[productIndex].deleted = true;
-//     // Add the deleted product to softDeletedProducts
-//     this.softDeletedProducts.push(this.allProducts[productIndex]);
-//     // Optionally, you can update your backend to handle soft deletion.
-//     // Make an API call to update the deleted status on the server.
+  // softDeleteProduct(productId: string): void {
+  //   const productIndex = this.allProducts.findIndex(product => product.id === productId);
+  //   if (productIndex !== -1) {
+  //     this.allProducts[productIndex].deleted = true;
+  //     // Add the deleted product to softDeletedProducts
+  //     this.softDeletedProducts.push(this.allProducts[productIndex]);
+  //     // Optionally, you can update your backend to handle soft deletion.
+  //     // Make an API call to update the deleted status on the server.
 
-//     // Trigger DataTables rendering for both allProducts and softDeletedProducts
-//     this.dtTrigger.next(null);
-// }}
+  //     // Trigger DataTables rendering for both allProducts and softDeletedProducts
+  //     this.dtTrigger.next(null);
+  // }}
 
-// private getSoftDeletedProducts(): IProduct[] {
-//   return this.allProducts.filter(product => product.deleted);
-// }
+  // private getSoftDeletedProducts(): IProduct[] {
+  //   return this.allProducts.filter(product => product.deleted);
+  // }
 
-// softDeleteProduct(productId: string): void {
-//   console.log(productId)
-//   this.manageProductService.softDeleteProduct(productId).subscribe(() => {
-//     // Cập nhật is_deleted trong danh sách sản phẩm của bạn
-//     const productIndex = this.allProducts.findIndex(product => product._id === productId);
-//     if (productIndex !== -1) {
-//       if is_deleted = false :
-//       this.allProducts[productIndex].is_deleted = true;
-//       else: 
-//       this.allProducts[productIndex].is_deleted = false;
-//     }
+  // softDeleteProduct(productId: string): void {
+  //   console.log(productId)
+  //   this.manageProductService.softDeleteProduct(productId).subscribe(() => {
+  //     // Cập nhật is_deleted trong danh sách sản phẩm của bạn
+  //     const productIndex = this.allProducts.findIndex(product => product._id === productId);
+  //     if (productIndex !== -1) {
+  //       if is_deleted = false :
+  //       this.allProducts[productIndex].is_deleted = true;
+  //       else: 
+  //       this.allProducts[productIndex].is_deleted = false;
+  //     }
 
-//     // Trigger DataTables rendering
-//     this.dtTrigger.next(null);
-//   });
-// }
+  //     // Trigger DataTables rendering
+  //     this.dtTrigger.next(null);
+  //   });
+  // }
 
-toggleIsDeleted(productId: string): void {
- // Find the product in the array
- const productIndex = this.allProducts.findIndex(product => product._id === productId);
-   // Toggle the value of is_deleted
-   this.allProducts[productIndex].is_deleted = !this.allProducts[productIndex].is_deleted;
+  toggleIsDeleted(productId: string): void {
+    // Find the product in the array
+    const productIndex = this.allProducts.findIndex(product => product._id === productId);
+    // Toggle the value of is_deleted
+    this.allProducts[productIndex].is_deleted = !this.allProducts[productIndex].is_deleted;
 
-  // Call the service method to toggle is_deleted on the server
-  this.manageProductService.toggleIsDeleted(productId).subscribe(() => {
-    // Trigger DataTables rendering
-    // this.dtTrigger.next(null);
-  });
-}
+    // Call the service method to toggle is_deleted on the server
+    this.manageProductService.toggleIsDeleted(productId).subscribe(() => {
+      // Trigger DataTables rendering
+      // this.dtTrigger.next(null);
+    });
+  }
 
 }

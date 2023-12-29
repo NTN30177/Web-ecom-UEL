@@ -36,6 +36,7 @@ export class CartService {
     );
   }
   putProductItemCart(data: any): Observable<any> {
+    console.log(data, 'ddđt')
     const headers = new HttpHeaders().set(
       'Content-Type',
       'application/json;charset=utf-8'
@@ -54,7 +55,6 @@ export class CartService {
       )
       .pipe(
         map((res) => (res)),
-        retry(3),
         // map((res) => JSON.parse(res)),
        
         catchError(this.handleError)
