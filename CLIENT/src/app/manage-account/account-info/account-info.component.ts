@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountInfoService } from '../../services/account-info.service';
 import { DatePipe } from '@angular/common';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl,FormGroup, Validators } from '@angular/forms';
 import { IUser } from '../../interfaces/user';
 import { AuthService } from '../../services/auth.service';
 import { ChangePasswordComponent } from '../change-password/change-password.component';
@@ -83,7 +83,7 @@ export class AccountInfoComponent implements OnInit {
             this.errMessage = '';
             setTimeout(() => {
               this.successMessage = '';
-            }, 3000);
+            }, 2000);
 
           },
           (error) => {

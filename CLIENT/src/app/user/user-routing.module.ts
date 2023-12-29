@@ -13,12 +13,16 @@ import { DeliveryPolicyComponent } from '../delivery-policy/delivery-policy.comp
 import { ForgotPasswordModalSuccessComponent } from '../login/forgot-password-modal-success/forgot-password-modal-success.component';
 import { ForgetPwComponent } from '../forget-pw/forget-pw.component';
 import { PaymentThankComponent } from '../payment/payment-thank/payment-thank.component';
+import { FilterProductComponent } from '../filter-product/filter-product.component';
 
 const routes: Routes = [
   {
     path: '',
     component: UserComponent,
     children: [
+      {
+        path:'filter-product', component: FilterProductComponent,
+      },
       {
         path: 'account',
         loadChildren: () =>

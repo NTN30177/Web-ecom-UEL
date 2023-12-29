@@ -59,6 +59,9 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { ForgetPwComponent } from './forget-pw/forget-pw.component';
 import { Select2Module } from 'ng-select2-component';
 import { PaymentThankComponent } from './payment/payment-thank/payment-thank.component';
+import { FilterProductComponent } from './filter-product/filter-product.component';
+import { MatSliderModule } from '@angular/material/slider';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { ManageUserComponent } from './admin/manage-user/manage-user.component';
 
 // import { ChartModule } from 'angular-highcharts';
@@ -113,6 +116,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     DeliveryPolicyComponent,
     ForgetPwComponent,
     PaymentThankComponent,
+    FilterProductComponent,
+
     ManageUserComponent,
     Chart1Component,
     Chart2Component,
@@ -144,14 +149,17 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     NzFormModule,
     CommonModule,
     Select2Module,
+    MatSliderModule,
+    MatSelectModule,
+
+
     HighchartsChartModule,
     ToastModule,
     MatFormFieldModule,
     MatSelectModule,
     MatCheckboxModule
-
   ],
-  providers: [DatePipe, CartComponent, HomePageComponent],
+  providers: [DatePipe, CartComponent, HomePageComponent, {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
