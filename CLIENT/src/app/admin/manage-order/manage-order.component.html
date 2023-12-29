@@ -31,9 +31,18 @@
             <tbody>
               <tr *ngFor="let order of allOrders">
                 <td>{{ order._id }}</td>
-                <td>{{ order.status }}</td>
+                <!-- <td>{{ order.status }}</td> -->
+                <td>
+                  <select [(ngModel)]="order.status" name="orderStatus">
+                      <option value="Đang xử lý" [selected]="order.status === 'pending'">Đang xử lý</option>
+                      <option value="Yêu cầu hủy" [selected]="order.status === 'pending'">Yêu cầu hủy</option>
+                      <option value="Đang giao hàng" [selected]="order.status === 'shipped'">Đang giao hàng</option>
+                      <option value="Đã giao hàng" [selected]="order.status === 'delivered'">Đã giao hàng</option>
+                      <option value="Đã hủy" [selected]="order.status === 'delivered'">Đã hủy</option>
+                      <!-- Thêm các tùy chọn khác nếu cần -->
+                  </select>
                 <td style="text-align: center">{{ order.totalQuantity }}</td>
-                <td>{{ order.userId }}</td>
+                <td>{{ order.first_name }} {{order.last_name}}</td>
                 <td>TRK987654321</td>
                 <td style="text-align: center">
                   <i class="fas fa-pen-square custom-smaller-icon"></i>

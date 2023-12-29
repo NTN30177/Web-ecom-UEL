@@ -7,7 +7,7 @@ import { IOrders } from '../../interfaces/order';
 @Component({
   selector: 'app-manage-order',
   templateUrl: './manage-order.component.html',
-  styleUrls: ['./manage-order.component.css'],  // Fix styleUrl to styleUrls
+  styleUrls: ['./manage-order.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
 export class ManageOrderComponent implements OnInit {

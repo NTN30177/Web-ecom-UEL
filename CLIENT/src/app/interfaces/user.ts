@@ -17,6 +17,7 @@ export interface IUser {
   }
 
   export interface IUserAddress {
+    _id: string;
     is_default: boolean;
     name: string;
     phone: string;
