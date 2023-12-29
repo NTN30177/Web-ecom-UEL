@@ -33,15 +33,25 @@ export class RegisterComponent implements OnInit {
   wards: any;
   // Thêm vào trong class RegisterComponent
   hidePassword = true;
+  userIdFromHeader: any;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private _authService: AuthService,
-    private renderer: Renderer2
-  ) {}
+    private renderer: Renderer2,
+
+  ) {
+    this._authService.idUserSubject.subscribe((data) => {
+      this.userIdFromHeader = data;
+     
+    });
+  }
 
   ngOnInit() {
+    if(this.userIdFromHeader){
+      this.router.navigate(['/']);
+    }
     this.initForm();
     this.setDefaultValues();
     this.apiProvince();

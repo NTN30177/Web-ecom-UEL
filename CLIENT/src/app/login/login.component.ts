@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   infoResult: string | undefined;
   errMessage: any;
+  userIdFromHeader: any;
 
   constructor(
     private fb: FormBuilder,
@@ -38,6 +39,10 @@ export class LoginComponent implements OnInit {
     private snackBar: MatSnackBar
 
   ) {
+    this._authService.idUserSubject.subscribe((data) => {
+      this.userIdFromHeader = data;
+     
+    });
     this.loginForm = this.fb.group({
       cus_account: [
         '',
@@ -47,7 +52,12 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(this.userIdFromHeader){
+      this.router.navigate(['/']);
+    }
+  }
+
 
   emailOrPhoneNumberValidator() {
     return (control: any) => {

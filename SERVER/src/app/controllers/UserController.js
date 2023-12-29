@@ -158,9 +158,10 @@ const verifyLogin = async (req, res, next) => {
           res.json({ message: "Vui lòng xác minh email" });
           console.log("Vui lòng xác minh email");
         } else {
-          await req.session.save();
-          req.session.user_id = userData._id;
+          // await req.session.save();
+          // req.session.user_id = userData._id;
           // console.log(req.session.user_id);
+
 
           // Kiểm tra xem session có được lưu hay không
           // if (req.session.user_id) {

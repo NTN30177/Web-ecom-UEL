@@ -5,6 +5,7 @@ const sortFilterPaginationController = require("../app/controllers/SortFilterPag
 
 router.get("/color", ApiController.getColor);
 router.get("/type", ApiController.getType);
+router.get("/color2", ApiController.getColor2);
 router.get("/subType/:id", ApiController.getSubType);
 router.get("/province", ApiController.getProvince);
 router.get("/district/:provinceId", ApiController.getDistrict);

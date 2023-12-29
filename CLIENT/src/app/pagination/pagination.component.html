@@ -1,0 +1,150 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <!-- <ol class="breadcrumb m-0">
+                                          <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                                          <li class="breadcrumb-item"><a href="/product/danh-muc/{{type.slug}}">{{type.typeName}}</a></li>
+                                          {{#if subtype}}
+                                          <li class="breadcrumb-item"><a href="/product/danh-muc/{{subtype.slug}}">{{subtype.subTypeName}}</a></li>
+                                          {{/if}}
+                                          {{#if product}}
+                                          <li class="breadcrumb-item active"><a href="/product/danh-muc/{{product.slug}}">{{product.title}}</a></li>
+                                          {{/if}}
+                                      </ol> -->
+                </div>
+                <h4 class="page-title">Danh mục sản phẩm</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <h1 class="mb-4">Product Filter</h1>
+            <form id="filterForm">
+                <div class="form-group">
+                    <label for="color">Color:</label>
+                    <div class="sub-list-side">
+                        <label class="item-sub-list po-relative">
+                            <input class="field-cat" type="checkbox" name="att_color[]" value="white" />
+                            <span class="item-sub-title item-sub-pr active">White</span>
+                        </label>
+                        <label class="item-sub-list po-relative">
+                            <input class="field-cat" type="checkbox" name="att_color[]" value="blue" />
+                            <span class="item-sub-title item-sub-pr active">Blue</span>
+                        </label>
+                        <label class="item-sub-list po-relative">
+                            <input class="field-cat" type="checkbox" name="att_color[]" value="red" />
+                            <span class="item-sub-title item-sub-pr active">Red</span>
+                        </label>
+                        <label class="item-sub-list po-relative">
+                            <input class="field-cat" type="checkbox" name="att_color[]" value="yellow" />
+                            <span class="item-sub-title item-sub-pr active">Yellow</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="size">Size:</label>
+                    <div class="sub-list-side">
+                        <label class="item-sub-list po-relative">
+                            <input class="field-cat" type="checkbox" name="att_size[]" value="s" />
+                            <span class="item-sub-title item-sub-pr active">S</span>
+                        </label>
+                        <label class="item-sub-list po-relative">
+                            <input class="field-cat" type="checkbox" name="att_size[]" value="m" />
+                            <span class="item-sub-title item-sub-pr active">M</span>
+                        </label>
+                        <label class="item-sub-list po-relative">
+                            <input class="field-cat" type="checkbox" name="att_size[]" value="l" />
+                            <span class="item-sub-title item-sub-pr active">L</span>
+                        </label>
+                        <label class="item-sub-list po-relative">
+                            <input class="field-cat" type="checkbox" name="att_size[]" value="xl" />
+                            <span class="item-sub-title item-sub-pr">XL</span>
+                        </label>
+                        <label class="item-sub-list po-relative">
+                            <input class="field-cat" type="checkbox" name="att_size[]" value="xxl" />
+                            <span class="item-sub-title item-sub-pr">XXL</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="sort-select">Sort By:</label>
+                    <select id="sort-select" class="form-control">
+                        <option value="asc">Price Ascending</option>
+                        <option value="desc">Price Descending</option>
+                        <option value="latest" selected>Mới nhất</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="minPrice">Min Price:</label>
+                    <input type="text" class="form-control" id="minPrice" name="minPrice" />
+                </div>
+
+                <div class="form-group">
+                    <label for="maxPrice">Max Price:</label>
+                    <input type="text" class="form-control" id="maxPrice" name="maxPrice" />
+                </div>
+            </form>
+
+            <div id="filteredProducts" class="mt-5"></div>
+        </div>
+
+        <div class="products-list col-md-10">
+            <div class="container mt-4">
+                <div class="row" id="product-list-container">
+                    <!-- Product items will be dynamically added here -->
+                </div>
+            </div>
+            <input type="hidden" id="category-slug"  />
+            <input type="hidden" id="current-page" value="1" />
+            <button id="load-more-btn" class="load-more-btn">Load More</button>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="breadcrumb-products">
+        <ul class="breadcrumb__list">
+            <li class="breadcrumb__item"><a class="breadcrumb__link" href="#">Trang chủ</a></li>
+            <li class="breadcrumb__item"><a href="#" class="breadcrumb__link" title="Chính sách giao hàng"><b>Chính sách giao hàng</b></a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="page_content">
+            <div class="page_header">DỊCH VỤ GIAO HÀNG CỦA LAROSÉ</div>
+            <div class="page_header-img">
+                <img src="/CLIENT/src/assets/img/Rectangle 529367.png" alt="#">
+            </div>
+            <div class="content">
+                <b>Giao hàng nhanh và đúng hẹn cho 95% đơn hàng</b> là mục tiêu mà đội ngũ vận hành của Larosé hướng tới. Khách hàng hãy tin ở Larosé, chúng tôi sẽ làm được! <br>
+                Hiện tại Larosé đang là đối tác lớn với 2 đơn vị giao hàng nổi tiếng có uy tín như Ninjavan và Snappy.
+            </div>
+            <div class="page_sub-header">LAROSÉ CÓ 2 TRUNG TÂM VẬN HÀNH</div>
+            <div class="page_sub-header-img">
+                <img src="/CLIENT/src/assets/img/CSGH_2.png" alt="#">
+            </div>
+            <div class="content">
+                Các đơn hàng phát sinh từ Đà Nẵng trở ra khu vực phía Bắc sẽ được gửi đi từ trung tâm vận hành phía Bắc của Larosé. <br>
+                Các đơn còn lại sẽ được đóng gói và vận chuyển từ trung tâm phía Nam.
+            </div>
+            <div class="page_sub-header">THỜI GIAN VẬN CHUYỂN TRUNG BÌNH</div>
+            <div class="page_sub-header-img">
+                <img src="/CLIENT/src/assets/img/CSGH_3.png" alt="#">
+            </div>
+            <div class="content">
+                Đơn nội thành Hà Nội và Hồ Chí Minh: Khách hàng sẽ nhận được trong vòng 1 -2 ngày kể từ khi đơn hàng được xác nhận (trừ trường hợp đơn hàng dạng đặt trước hoặc chưa đủ tồn kho, Larosé sẽ gửi đi từ kho vận hành khác tỉnh và CSKH của Larosé sẽ thông báo cho khách hàng về vấn đề này). Thông thường có thể sớm hơn tuỳ thuộc vào thời gian khách hàng đặt (Không tính chủ nhật và ngày lễ)
+            </div>
+            <div class="content">
+                Các khu vực khác: 2-5 ngày (thường là 2-4 ngày), nếu sau 3 ngày kể từ khi đặt hàng mà Anh/Chị chưa nhận được cuộc gọi giao hàng của bưu tá thì vui lòng xin liên hệ Larosé để được hỗ trợ (không bao gồm chủ nhật và ngày lễ).
+            </div>
+            <div class="content">
+                Tuy nhiên hiện tại do ảnh hưởng của dịch Covid 19, nên thời gian giao hàng ở một số nơi có thể lâu hơn dự kiến, mong các bạn thông cảm cho Larosé nhé!
+            </div>
+            <div class="content">
+                <b>LƯU Ý:</b> Trong trường hợp khách hàng cần nhận hàng gấp thì có thể liên hệ Hotline Larosé 1900272737 để được hỗ trợ. Larosé không cam kết có thể hỗ trợ các trường hợp khẩn cấp 100%, tuy nhiên Larosé chắc chắn sẽ làm mọi cách có thể để giúp khách hàng giải quyết công việc của mình.
+            </div>
+        </div>
+    </div>
+</div>

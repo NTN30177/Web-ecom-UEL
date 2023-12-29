@@ -68,21 +68,7 @@ export class HeaderComponent implements OnInit {
   ) {}
   ngAfterViewInit() {
    
-    //   .pipe(
-    //     debounceTime(1000),
-    //     map((event: any) => event.target.value)
-    //   )
-    //   .subscribe((inputValue: string) => {
-    //     this._headerService
-    //       .liveSearch(inputValue, this.userId)
-    //       .subscribe((data) => {
-    //         this.dataLiveSearch = data.productsByCategory;
-    //         this.getKeySearch();
-    //         console.log(data.productsByCategory);
-    //         console.log(this.dataLiveSearch);
-    //       });
-    //     console.log('Giá trị nhập liệu sau mỗi 1s:', inputValue);
-    //   });
+ 
   }
   ngOnInit(): void {
     this.getDataFromService();
@@ -151,10 +137,7 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  // getCart(){
-  //   this.cartList=this._cartComponent.apiCartProduct(this.userId)
-  //   console.log()
-  // }
+
 
   isLogin = false;
   async checkLogin() {
@@ -219,8 +202,7 @@ export class HeaderComponent implements OnInit {
     this.isLogin = false;
   }
 
-  // sub-menu-mobile
-  // Thêm open vào main-menu
+
   toggleMobileMenu(): void {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
 
@@ -370,9 +352,6 @@ export class HeaderComponent implements OnInit {
     // Thêm các sản phẩm khác nếu có
   ];
 
-  // toggleSearchForm(): void {
-  //   this.isSearchFormActive = !this.isSearchFormActive;
-  // }
 
   handleQuickSearchClick(event: Event): void {
     event.stopPropagation();
