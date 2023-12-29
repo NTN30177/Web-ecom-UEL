@@ -53,9 +53,9 @@ export class AccountAddressPopupComponent implements OnInit {
 
   selectChangeP(event: any) {
     const selectedValue = event.target.value;
-    console.log(selectedValue, 'district')
+    // console.log(selectedValue, 'district')
     this.apiDistrict(selectedValue)
-    console.log(selectedValue, 'district')
+    // console.log(selectedValue, 'district')
 
   }
   selectChangeD(event: any) {
@@ -63,11 +63,10 @@ export class AccountAddressPopupComponent implements OnInit {
     this.apiWard(selectedValue)
   }
   apiProvince() {
-    console.log('1235')
     this._authService.getProvince().subscribe({
       next: (data: any) => {
         this.provinces = data;
-        console.log(this.provinces, '123')
+        // console.log(this.provinces, '123')
       },
       error: (err: any) => {
         this.errMessage = err;
@@ -75,11 +74,10 @@ export class AccountAddressPopupComponent implements OnInit {
     });
   }
   apiDistrict(id: any) {
-    console.log('1235')
     this._authService.getDistrict(id).subscribe({
       next: (data: any) => {
         this.districts = data;
-        console.log(this.districts)
+        // console.log(this.districts)
       },
       error: (err: any) => {
         this.errMessage = err;
@@ -87,11 +85,10 @@ export class AccountAddressPopupComponent implements OnInit {
     });
   }
   apiWard(id: any) {
-    console.log('ward')
     this._authService.getWard(id).subscribe({
       next: (data: any) => {
         this.wards = data;
-        console.log(this.wards)
+        // console.log(this.wards)
       },
       error: (err: any) => {
         this.errMessage = err;
@@ -106,7 +103,7 @@ export class AccountAddressPopupComponent implements OnInit {
     this.addressForm.markAllAsTouched();
     if (this.addressForm.valid) {
       const newAddress = this.addressForm.value;
-      console.log('Form Data:', newAddress);
+      // console.log('Form Data:', newAddress);
 
       // Call the service to send data to the server
       this.addressService.addAddress(newAddress, this.userID).subscribe(
