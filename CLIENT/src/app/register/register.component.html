@@ -3,14 +3,16 @@
   href="https://cdn.jsdelivr.net/npm/@angular/material/prebuilt-themes/indigo-pink.css"
   rel="stylesheet"
 />
-
+          <!-- Display snackbar at the top -->
+          <div *ngIf="infoResult" class="snackbar-container">
+            {{ infoResult }}
+          </div>
 <!-- Your Angular component template -->
 <div class="container-register ms-3 me-3">
   <div class="container-fluid">
     <div class="text_head pt-2 pb-2">ĐĂNG KÝ</div>
     <div class="row">
       <form [formGroup]="registerForm" (ngSubmit)="register()">
-        {{ infoResult }}
         <div class="row">
           <div class="col-md-6 col-sm-6 col-xs-12 ps-3 pe-3 mt-5">
             <p>Thông tin khách hàng</p>
