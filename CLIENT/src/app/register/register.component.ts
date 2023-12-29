@@ -199,6 +199,7 @@ hidePassword = true;
         this.clearSpecificErrorMessage(field);
       });
       // this.router.navigate(['/login']);
+      this.postRegister()
     } else {
       // Show error messages and apply red border for each invalid field
       Object.keys(this.registerForm.controls).forEach((field) => {
@@ -216,7 +217,7 @@ hidePassword = true;
     } else {
       this._authService.postInfoUser(this.registerForm.value).subscribe({
         next: (data: any) => {
-          console.log(data)
+          console.log(data,'1233333')
             this.infoResult = data.message;
             if(data.success) {
               this.router.navigate(['/login']);
