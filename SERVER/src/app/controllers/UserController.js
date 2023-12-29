@@ -210,7 +210,7 @@ const getProductHomePage = async (req, res) => {
     let products = await Product.find({})
       .populate({
         path: "variants.color",
-        select: "imageColor",
+        select: "imageColor nameColor",
       })
       .lean();
     console.log("123");

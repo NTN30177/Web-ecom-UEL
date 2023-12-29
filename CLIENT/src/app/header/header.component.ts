@@ -48,6 +48,8 @@ export class HeaderComponent implements OnInit {
   currentSubMenuIndex: null | undefined;
   @ViewChild('searchInput') searchInput: ElementRef | undefined;
   accountInfo: any=false;
+  cartReview: any;
+  productsCart: any;
   constructor(
     private elRef: ElementRef,
     private renderer: Renderer2,
@@ -59,31 +61,22 @@ export class HeaderComponent implements OnInit {
     private _accountInfoService: AccountInfoService
   ) {}
   ngAfterViewInit() {
-    // fromEvent(this.searchInput?.nativeElement, 'input')
-    //   .pipe(
-    //     debounceTime(1000),
-    //     map((event: any) => event.target.value)
-    //   )
-    //   .subscribe((inputValue: string) => {
-    //     this._headerService
-    //       .liveSearch(inputValue, this.userId)
-    //       .subscribe((data) => {
-    //         this.dataLiveSearch = data.productsByCategory;
-    //         this.getKeySearch();
-    //         console.log(data.productsByCategory);
-    //         console.log(this.dataLiveSearch);
-    //       });
-    //     console.log('Giá trị nhập liệu sau mỗi 1s:', inputValue);
-    //   });
+
   }
-  ngOnInit(): void {
-    this.getDataFromService();
+  async ngOnInit(): Promise<void> {
+    await this.getDataFromService();
     this.getIsLogin();
     this.cartItemFunc();
     this.checkLogin();
     this.getKeySearch();
     this.getCategory();
   }
+  
+ 
+  
+  // Other methods...
+  
+  
   getKeySearch() {
     if (this.userId) {
       this._accountInfoService
@@ -116,7 +109,6 @@ export class HeaderComponent implements OnInit {
       });
   }
 
-
   getIsLogin() {
     this._authService.getIsLoginObservable().subscribe((data) => {
       this.isLogin = data;
@@ -131,8 +123,11 @@ export class HeaderComponent implements OnInit {
     });
   }
   getDataFromService() {
+    console.log('11111111')
     this._authService.cartSubject.subscribe((data) => {
-      this.cartNumberItem = data;
+      this.cartNumberItem = data.total_quantity;
+      this.productsCart = data.productsCart;
+      console.log(this.productsCart, 'pc')
     });
     this._authService.isLoginSubject.subscribe((data) => {
       this.isLogin = data;
