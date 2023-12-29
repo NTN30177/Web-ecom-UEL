@@ -145,7 +145,7 @@ export class FilterProductComponent implements AfterViewInit {
     await this.apiProductHomePage();
     console.log(this.productsHaveModified,'2222222222222')
    
-  
+  this.bannersArray=[]
     // Khởi tạo mảng productStates với giá trị false cho mỗi sản phẩm
     this.productStates = Array(this.bannersArray.length).fill(false);
   }

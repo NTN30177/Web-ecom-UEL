@@ -226,7 +226,6 @@ hidePassword = true;
       Object.keys(this.registerForm.controls).forEach((field) => {
         this.clearSpecificErrorMessage(field);
       });
-      this.router.navigate(['/login']);
     } else {
       // Show error messages and apply red border for each invalid field
       Object.keys(this.registerForm.controls).forEach((field) => {
@@ -242,14 +241,19 @@ hidePassword = true;
     } else {
       this._authService.postInfoUser(this.registerForm.value).subscribe({
         next: (data: any) => {
-          if (data) {
-            this.infoResult = 'Vui lòng xác thực địa chỉ gmail';
-            setTimeout(() => {
-              this.infoResult = '';
-            }, 5000);
-          } else {
-            this.infoResult = 'Hệ thống lỗi, vui lòng đăng ký lại';
-          }
+          console.log(data)
+            this.infoResult = data.message;
+            if(data.success) {
+              this.router.navigate(['/login']);
+            }
+          // if (data) {
+          //   this.infoResult = 'Vui lòng xác thực địa chỉ gmail';
+          //   setTimeout(() => {
+          //     this.infoResult = '';
+          //   }, 5000);
+          // } else {
+          //   this.infoResult = 'Hệ thống lỗi, vui lòng đăng ký lại';
+          // }
         },
         error: (err: any) => {
           this.errMessage = err;
