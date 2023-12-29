@@ -27,52 +27,55 @@ const saveAccount = async (req, res, next) => {
     console.log(req.body);
     const checkEmailExist = await User.findOne({ email: req.body.cus_email });
     if (checkEmailExist) {
-      res.status(200).send({
+      console.log('11111')
+      res.json({
         message:
           "Your email have already, please login or use with other email",
       });
-    }
-    const spassword = await securePassword(req.body.cus_password);
-    const cart = new CartItem({
-      productItem: [],
-    });
-    const address = new UserAddress({
-      is_default: true,
-      name: req.body.cus_firstname + req.body.cus_lastname,
-      phone: req.body.cus_phonenumber,
-      specific_address: req.body.cus_address_id,
-      ward: req.body.cus_ward_id,
-    });
-    await cart.save();
-    await address.save();
-    const user = new User({
-      first_name: req.body.cus_firstname,
-      last_name: req.body.cus_lastname,
-      email: req.body.cus_email,
-      mobile: req.body.cus_phonenumber,
-      gender: req.body.cus_gender,
-      date_of_birth: req.body.cus_dob,
-      // image: req.file.filename,
-      // image:
-      password: spassword,
-      is_admin: 0,
-      cart: [cart._id],
-      orderList: [],
-      addressList: [address._id],
-    });
-    const userData = await user.save();
-    if (userData) {
-      sendVerifyEmail(req.body.cus_lastname, req.body.cus_email, userData._id);
-      res.status(200).send({
-        message:
-          "Your registration has been succesSsfully. Please verify your email",
-        link: "1",
+    } else{
+
+      const spassword = await securePassword(req.body.cus_password);
+      const cart = new CartItem({
+        productItem: [],
       });
-    } else {
-      
-      res.send({
-        message: "Your registeration has been failed.",
+      const address = new UserAddress({
+        is_default: true,
+        name: req.body.cus_firstname + req.body.cus_lastname,
+        phone: req.body.cus_phonenumber,
+        specific_address: req.body.cus_address_id,
+        ward: req.body.cus_ward_id,
       });
+      await cart.save();
+      await address.save();
+      const user = new User({
+        first_name: req.body.cus_firstname,
+        last_name: req.body.cus_lastname,
+        email: req.body.cus_email,
+        mobile: req.body.cus_phonenumber,
+        gender: req.body.cus_gender,
+        date_of_birth: req.body.cus_dob,
+        // image: req.file.filename,
+        // image:
+        password: spassword,
+        is_admin: 0,
+        cart: [cart._id],
+        orderList: [],
+        addressList: [address._id],
+      });
+      const userData = await user.save();
+      if (userData) {
+        sendVerifyEmail(req.body.cus_lastname, req.body.cus_email, userData._id);
+        res.json({
+          message:
+            "Your registration has been succesSsfully. Please verify your email",
+          success:true,
+        });
+      } else {
+        
+        res.send({
+          message: "Your registeration has been failed.",
+        });
+      }
     }
   } catch (err) {
     console.log(err.message);
