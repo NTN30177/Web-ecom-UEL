@@ -153,7 +153,7 @@ const getOrders = async (req, res) => {
       const { userId: { first_name, last_name }, ...rest } = order.toObject();
       return { first_name, last_name, ...rest };
     });
-    console.log("order with user name:", modifiedOrders)
+    // console.log("order with user name:", modifiedOrders)
     res.json(modifiedOrders);
   } catch (error) {
     console.error(error);
