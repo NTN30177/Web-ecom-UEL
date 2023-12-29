@@ -63,6 +63,12 @@ const routes: Routes = [
         path: 'order-tracking/:orderId', component: OrderTrackingComponent,
       },
       {
+        path: 'app-filter-product', component: FilterProductComponent,
+      },
+      {
+        path: 'app-delivery-policy', component: DeliveryPolicyComponent,
+      },
+      {
         path: '',
         component: HomePageComponent,
       },
