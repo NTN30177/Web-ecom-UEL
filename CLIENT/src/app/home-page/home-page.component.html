@@ -78,7 +78,8 @@
                           <ul>
                             <li *ngFor="let vc of product.imgHomePage[0].variantColor" 
     [class.disabled]="vc.quantity === 0"
-    (click)="vc.quantity !== 0 && popupContainer && addActiveCartPopupClass()">
+    (click)="vc.quantity !== 0 && popupContainer && addActiveCartPopupClass(product.title, product.price,product.imgHomePage[0].nameColor, vc.size, product.imgHomePage[0].images[0])">
+    
     <button class="btn bt-large" 
             [disabled]="vc.quantity === 0"
             (click)="vc.quantity !== 0 && addToCart(product.imgHomePage[0].colorID, product._id, vc.size, 1)">
@@ -110,13 +111,14 @@
               <div class="notify__product">
                 <div class="notify-product">
                   <div class="notify-product__thumbnail">
-                    <img src="https://static.dchic.vn/uploads/media/2023/12/DTT_0884-93723949-576x768.JPG" alt="">
+        <img src="http://localhost:3000/productImages/{{productPopUp.img}}" alt="">
+
                   </div>
                   <div class="notify-product__content">
-                    <div class="notify-product__title">Quần Kaki Excool dáng Straight</div>
-                    <div class="notify-product__option">Xám/M</div>
+                    <div class="notify-product__title">{{productPopUp.title}}</div>
+                    <div class="notify-product__option">{{productPopUp.color}}/{{productPopUp.size}}</div>
                     <div class="notify-product__prices">
-                      <ins>499.000đ</ins>
+                      <ins>{{formatMoneyVietNam(productPopUp.price)}}</ins>
                     </div>
                   </div>
                 </div>
@@ -133,7 +135,7 @@
       </div>
     </section>
 
-    <section class="home-new-prod new-collection">
+    <!-- <section class="home-new-prod new-collection">
       <div class="exclusive-tabs">
         <div class="exclusive-head">
           <ul>
@@ -193,7 +195,7 @@
                         </div>
                         <div id="sizeTable{{productIndex}}" class="sizeTable js-list-size">
                           <ul>
-                            <li *ngFor="let vc of product.variants[0].variantColor" class="" (click)="popupContainer && addActiveCartPopupClass()">
+                            <li *ngFor="let vc of product.variants[0].variantColor" class="" (click)="popupContainer &&addActiveCartPopupClass(product.title, product.price,product.imgHomePage[0].nameColor, vc.size, product.imgHomePage[0].images[0])">
                               <button class="btn bt-large" (click)="addToCart(product.imgHomePage[0].colorID, product._id, vc.size,1)">{{ vc.size }}</button>
                             </li>
                           </ul>
@@ -234,7 +236,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <section class="social-benefit">
       <a href="">
