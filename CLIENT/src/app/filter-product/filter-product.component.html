@@ -60,11 +60,12 @@
                   <div class="filter-setting__tit">Mức giá</div>
                   <div class="sub-list-side">
                       <div id="slider-range">
-                          <mat-slider min="200" max="500" class="" style="width: 250px;">
+                          <!-- <mat-slider min="200" max="500" class="" style="width: 250px;">
                               <input value="0" matSliderStartThumb>
                               <input value="300" matSliderEndThumb>
                               
-                          </mat-slider>
+                          </mat-slider> -->
+                          <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ngx-slider>
                       </div>
                   </div>
               </div>

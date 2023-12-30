@@ -155,7 +155,7 @@ import { PaginationComponent } from './pagination/pagination.component';
     Select2Module,
     MatSliderModule,
     MatSelectModule,
-
+    NgxSliderModule,
     HighchartsChartModule,
     ToastModule,
     MatFormFieldModule,
