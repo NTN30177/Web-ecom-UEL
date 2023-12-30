@@ -1,0 +1,243 @@
+<div class="container" id="body">
+    <div id="product_detail" class="row">
+        <div class="container">
+            <div class="breadcrumb-products">
+                <ul class="breadcrumb__list">
+                    <li class="breadcrumb__item"><a class="breadcrumb__link" href="#">Trang chủ</a></li>
+                    <li class="breadcrumb__item"><a href="#" class="breadcrumb__link" title="Nữ">Nữ</a></li>
+                    <li class="breadcrumb__item">
+                        <a href="#" class="breadcrumb__link" title="Piece Suits - Set áo vest dáng oversize "><b>Piece Suits - Set áo vest dáng oversize</b></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="product-detail">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="product-single__thumbnails">
+                                <div class="product-single__inner">
+                                  <ngx-slick-carousel class="thumbnails" #thumbnailsSlick [config]="slideConfig">
+                                    <div ngxSlickItem class="image" *ngFor="let image of imagesArray">
+                                      <img loading="lazy" src="{{ image.imgName }}" alt="Piece Suits - Set áo vest dáng oversize" width="100%">
+                                    </div>
+                                  </ngx-slick-carousel>
+                                </div>
+                                <div class="thumbs">
+                                  <ngx-slick-carousel class="product-single__gallery" #productGallery [config]="galleryConfig">
+                                    <div ngxSlickItem class="image image-lazyload" *ngFor="let image of imagesArray">
+                                      <img loading="lazy" src="{{ image.imgName }}" alt="Piece Suits - Set áo vest dáng oversize">
+                                    </div>
+                                  </ngx-slick-carousel>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="product-detail__information">
+                                <h1 style="text-transform: uppercase;">Piece Suits - Set áo vest dáng oversize</h1>
+                                <div class="product-detail__sub-info">
+                                    <p>
+                                        SKU: <span>67M7969</span>
+                                    </p>
+                                </div>
+                                <div class="product-detail__price">
+                                    <input type="hidden" name="hid_product_price_not_format" value="3380000" />
+                                    <b>3.380.000đ</b>
+                                </div>
+                                <div class="product-single__addtocart">
+                                    <div class="product-single__options">
+                                        <div class="product-single__option">
+                                            <div class="option-heading">
+                                                <span class="option-heading__title">Màu sắc:
+                                                    <span rel-script="product-option-title-color" class="text--bold">Đen</span>
+                                                </span>
+                                            </div>
+                                            <div class="option-select option-select--color">
+                                                <label class="option-select__item option-select__item--color den">
+                                                    <div class="option-select__inner">
+                                                        <input type="radio" name="color" value="den" checked="checked"> 
+                                                        <span class="checkmark checkmark--color den" style="background-image: url(&quot;https://media2.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/November2023/23CMAW.CM003.3cl.jpg&quot;);"></span>
+                                                    </div>
+                                                </label> 
+                                                <label class="option-select__item option-select__item--color xam">
+                                                    <div class="option-select__inner">
+                                                        <input type="radio" name="color" value="xam"> 
+                                                        <span class="checkmark checkmark--color xam" style="background-image: url(&quot;https://media2.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/November2023/23CMAW.CM003.28.cljpg.jpg&quot;);"></span>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                            <div class="option-heading">
+                                                <span class="option-heading__title">Kích thước:
+                                                    <span rel-script="product-option-title-color" class="text--bold">L</span>
+                                                </span>
+                                                <a href="#" ga-tracking-value="huong-dan-chon-size" rel-script="toggle-size-guide" class="option-heading__sizeguide">
+                                                    Hướng dẫn chọn size
+                                                </a>
+                                            </div>
+                                            <div class="product-detail__size">
+                                                <div class="product-detail__size__input">
+                                                    <label>
+                                                        <input type="radio" name="size" value="s" />
+                                                        <span class="text-uppercase">s</span>
+                                                    </label>
+                                                    <label>
+                                                        <input type="radio" name="size" value="m" />
+                                                        <span class="text-uppercase">m</span>
+                                                    </label>
+                                                    <label>
+                                                        <input type="radio" name="size" value="l" />
+                                                        <span class="text-uppercase">L</span>
+                                                    </label>
+                                                    <label>
+                                                        <input type="radio" name="size" value="xl" />
+                                                        <span class="text-uppercase">XL</span>
+                                                    </label>
+                                                    <label>
+                                                        <input type="radio" name="size" value="2xl" />
+                                                        <span class="text-uppercase">2XL</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="product-detail__quantity">
+                                                <p>Số lượng:</p>
+                                                <div class="product-single__quantity">
+                                                    <div rel-script="quantity-change" class="quantity">
+                                                        <a href="#" class="quantity__reduce">-</a> 
+                                                        <input type="number" value="1" max="99" min="1" class="quantity__control"> 
+                                                        <a href="#" class="quantity__augure">+</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="product-detail__actions">
+                                                <div class="product-single__button col-sm-6">
+                                                    <a href="#" rel-script="product-add-to-cart" class="btn-add-to-cart">Thêm vào giỏ hàng</a>
+                                                </div>
+                                                <div class="product-single__button col-sm-6">
+                                                    <a href="#" rel-script="product-add-to-cart" class="btn-buy">Mua hàng</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="product-single__policy">
+                                <div class="product-policy">
+                                    <div class="product-policy__item">
+                                        <div class="product-policy__icon">
+                                            <img src="./assets/images/phone-call.svg" alt="Hotline 1900.27.27.37 hỗ trợ từ 8h30 - 22h mỗi ngày">
+                                        </div> 
+                                        <span class="product-policy__title">Hotline 1900.27.27.37<br>hỗ trợ từ 8h30 - 22h<br>mỗi ngày</span>
+                                    </div> 
+                                    <div class="product-policy__item">
+                                        <div class="product-policy__icon">
+                                            <img src="/CLIENT/src/assets/icon/SVG/truck.svg" alt="Giao hàng nhanh toàn quốc">
+                                        </div> 
+                                        <span class="product-policy__title">Giao hàng nhanh<br>toàn quốc</span>
+                                    </div> 
+                                    <div class="product-policy__item">
+                                        <div class="product-policy__icon">
+                                            <img src="./assets/images/credit-card.svg" alt="Thanh toán an toàn">
+                                        </div> 
+                                        <span class="product-policy__title">Thanh toán an toàn</span>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="product-single__features">
+                                <div class="product-features__heading">Chi tiết sản phẩm</div>
+                                <div class="product-features__list col-md-6">
+                                    <ul>
+                                        <li>Dòng sản phẩm: Ladies</li>
+                                        <li>Nhóm sản phẩm: Áo khoác</li>
+                                        <li>Cổ áo: Cổ hai ve</li>
+                                        <li>Tay áo: Tay dài</li>
+                                    </ul>
+                                </div>
+                                <div class="product-features__list col-md-6">
+                                    <ul>
+                                        <li>Kiểu dáng: Oversize</li>
+                                        <li>Độ dài: Ngang mông</li>
+                                        <li>Họa tiết: Trơn</li>
+                                        <li>Chất liệu: Tuysi</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="exclusive-content">
+                    <div class="exclusive-inner active">
+                        <p class="product-related__title">Sản phẩm bạn có thể thích</p>
+                        <!-- <owl-carousel-o [options]="newprodOptions">
+                            <ng-template carouselSlide  *ngFor="let product of productsHaveModified, index as productIndex" id="thumbProduct">
+                                <div class="owl-stage stage-detail">
+                                    <div class="owl-item">
+                                        <div class="item-new-prod">
+                                            <div class="product">
+                                                <div class="info-tag best-seller">Best Seller</div>
+                                                <span class="percent percent_02">-50%</span>
+                                                <div class="thumb-product" >
+                                                    <a href="/product/product-detail/{{product.slug}}" >
+                                                        <img id="ao" src="http://localhost:3000/productImages/{{product.imgHomePage[0].images[0]}}" alt="" class=" static">
+                                                        <img id="ao2" src="http://localhost:3000/productImages/{{product.imgHomePage[0].images[1]}}" alt="" class=" hover_img">
+                                                    </a>
+                                                </div>
+                                                <div class="info-product">
+                                                    <div class="list-color">
+                                                        <ul class="colors">
+                                                            <li *ngFor="let v of product.variants; index as colorI" 
+                                                                [ngClass]="{'color': true, 'color-active': colorI === selectedColorIndex[productIndex]}">
+                                                                <a href="javascript:void(0)" class="color-picked" data-id="{{ v._id }}" 
+                                                                (click)="changeColor(product, v.color._id); updateSelectedColorIndex(productIndex, colorI)" [ngClass]="{'active-color': colorI === 0}">
+                                                                    <img src="http://localhost:3000/colorImages/{{v.color.imageColor}}" alt="">
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="favorite">
+                                                            <i class="ti-heart"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="title-product">
+                                                        <a href="">{{product.title}}</a>
+                                                    </div>
+                                                    <div class="price-product">
+                                                        <ins>
+                                                            <h4>{{formatMoneyVietNam(product.price)}}</h4>
+                                                        </ins>
+                                                        <del>
+                                                            <span>1.790.000đ</span>
+                                                        </del>
+                                                    </div>
+                                                </div>
+                                                <div class="add-to-cart">
+                                                    <a href="javascript:void(0)#" class="js-cart-button" (click)="toggleSizeTable(productIndex)">
+                                                        <i class="ti-shopping-cart"></i>
+                                                    </a>
+                                                </div>
+                                                <div id="sizeTable{{productIndex}}" class="sizeTable js-list-size">
+                                                    <ul>
+                                                        <li *ngFor="let vc of product.imgHomePage[0].variantColor" [class.disabled]="vc.quantity === 0"
+                                                        (click)="vc.quantity !== 0 && popupContainer && addActiveCartPopupClass()">
+                                                            <button class="btn bt-large" [disabled]="vc.quantity === 0"
+                                                            (click)="vc.quantity !== 0 && addToCart(product.imgHomePage[0].colorID, product._id, vc.size, 1)">
+                                                                <ng-container *ngIf="vc.quantity !== 0; else noQuantity">{{ vc.size }}</ng-container>
+                                                                <ng-template #noQuantity><del>{{ vc.size }}</del></ng-template>
+                                                            </button>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </owl-carousel-o> -->
+                    </div>
+                </div>
+            </div>
+            <div class="img-trending-desktop" *ngFor="let bannersArrays of bannersArray">
+                <img src="{{bannersArrays.imgName}}" alt="BANNER TRENDING">
+            </div>
+        </div>
+    </div>    
+</div>
+

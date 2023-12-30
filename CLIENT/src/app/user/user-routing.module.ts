@@ -15,6 +15,7 @@ import { ForgetPwComponent } from '../forget-pw/forget-pw.component';
 import { PaymentThankComponent } from '../payment/payment-thank/payment-thank.component';
 import { FilterProductComponent } from '../filter-product/filter-product.component';
 import { PaginationComponent } from '@coreui/angular';
+import { ProductDetailComponent } from '../product-detail/product-detail.component';
 
 const routes: Routes = [
   {
@@ -71,6 +72,9 @@ const routes: Routes = [
       },
       {
         path: 'app-delivery-policy', component: DeliveryPolicyComponent,
+      },
+      {
+        path: 'product-detail', component: ProductDetailComponent,
       },
       {
         path: '',
