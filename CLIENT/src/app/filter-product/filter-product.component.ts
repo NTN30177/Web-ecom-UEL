@@ -14,9 +14,9 @@ import { CartComponent } from '../cart/cart.component';
 import { CartService } from '../services/cart.service';
 import { formatMoneyVietNam } from '../utils/utils';
 import { take } from 'rxjs';
+import { Options, LabelType } from "@angular-slider/ngx-slider";
 
-
-
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 @Component({
   selector: 'app-filter-product',
@@ -346,4 +346,16 @@ export class FilterProductComponent implements AfterViewInit {
     this.selectedColorIndex[productIndex] = colorI;
   }
 
+  //thêm class active vào màu
+  
+
+
+  // thêm class btn-active 
+  sizes: string[] = ['S', 'M', 'L', 'XL', '2XL'];
+  isActive: boolean[] = new Array(this.sizes.length).fill(false);
+
+  toggleSizeActive(index: number): void {
+    this.isActive[index] = !this.isActive[index];
+  }
+  
 }

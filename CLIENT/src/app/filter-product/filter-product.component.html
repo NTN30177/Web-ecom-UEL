@@ -1,197 +1,203 @@
 <main id="main" class="site-man">
-    <div class="container">
-        <section class="location">
-            <div class="main-location">
-                <a href="">Trang chủ /
-                    <span><a href=""> Phân loại</a></span>
-                </a>
-            </div>
-        </section>
+  <div class="container">
+      <section class="location">
+          <div class="main-location">
+              <a href="">Trang chủ /
+                  <span style="font-weight: 700;"><a href=""> Phân loại</a></span>
+              </a>
+          </div>
+      </section>
 
-        <section class="main-content">
-            <div class="filter__left">
-                <div class="filter-setting__content">
-                    <div class="filter-setting__tit">Màu sắc</div>
-                    <ul class="filter-setting__list-color">
-                        <li class="color-item">
-                            <div class="color-item__button button_den"></div>
-                            <div class="color-item__name">Đen</div>
-                        </li>
-                        <li class="color-item">
-                            <div class="color-item__button button_den"></div>
-                            <div class="color-item__name">Cam đỏ</div>
-                        </li>
-                        <li class="color-item">
-                            <div class="color-item__button button_den"></div>
-                            <div class="color-item__name">Tím khói</div>
-                        </li>
-                        <li class="color-item">
-                            <div class="color-item__button button_den"></div>
-                            <div class="color-item__name">Tím đen</div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="filter-setting__content">
-                    <div class="filter-setting__tit">Kích cỡ</div>
-                    <ul class="filter-setting__list-color">
-                        <li>
-                            <div class="filter-select-size__button">
-                                <span>S</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="filter-select-size__button">
-                                <span>M</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="filter-select-size__button">
-                                <span>L</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="filter-select-size__button">
-                                <span>XL</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="filter-select-size__button">
-                                <span>2XL</span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="filter-setting__content">
-                    <div class="filter-setting__tit">Mức giá</div>
-                    <div class="sub-list-side">
-                        <div id="slider-range">
-                            <mat-slider min="200" max="500" class="" style="width: 300px;">
-                                <input value="300" matSliderStartThumb>
-                                <input value="400" matSliderEndThumb>
-                              </mat-slider>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="fiter__right">
-                <div class="classify__fiter">
-                    <mat-form-field>
-                        <mat-label>Phân loại</mat-label>
-                        <mat-select>
-                          <mat-option value="one">Mới nhất</mat-option>
-                          <mat-option value="two">Bán chạy</mat-option>
-                          <mat-option value="two">Giá thấp đến giá cao</mat-option>
-                          <mat-option value="two">Giá cao đến giá thấp</mat-option>
-                          <mat-option value="two">% giảm nhiều</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                </div>
-                <section class="home-new-prod">
-                    <div class="exclusive-tabs">
-                      <div class="exclusive-head">
-                        <!-- <ul>
-                          <li class="exclusive-tab new-prod">Sản phẩm mới</li>
-                          <li class="exclusive-tab hot-prod">Bán chạy nhất</li>
-                        </ul> -->
+      <section class="main-content">
+          <div class="filter__left">
+              <div class="filter-setting__content">
+                  <div class="filter-setting__tit">Màu sắc</div>
+                  <ul class="filter-setting__list-color">
+                      <li class="color-item">
+                          <a class="color-item__button active">
+                            <img src="https://pubcdn.ivymoda.com/ivy2/images/color/009.png" alt="">
+                          </a>
+                          <div class="color-item__name">Đen</div>
+                      </li>
+                      <li class="color-item">
+                        <a class="color-item__button">
+                          <img src="https://pubcdn.ivymoda.com/ivy2/images/color/009.png" alt="">
+                        </a>
+                        <div class="color-item__name">Đen</div>
+                      </li>
+                      <li class="color-item">
+                        <a class="color-item__button">
+                          <img src="https://pubcdn.ivymoda.com/ivy2/images/color/009.png" alt="">
+                        </a>
+                        <div class="color-item__name">Đen</div>
+                      </li>
+                      <li class="color-item">
+                        <a class="color-item__button">
+                          <img src="https://pubcdn.ivymoda.com/ivy2/images/color/009.png" alt="">
+                        </a>
+                        <div class="color-item__name">Đen</div>
+                      </li>
+                  </ul>
+              </div>
+              <div class="filter-setting__content">
+                  <div class="filter-setting__tit">Kích cỡ</div>
+                  <ul class="filter-setting__list-color">
+                    <li
+                      class="filter-size-item"
+                      *ngFor="let size of sizes; let i = index"
+                    >
+                      <div
+                        class="filter-select-size__button"
+                        [ngClass]="{'btn-active': isActive[i]}"
+                        (click)="toggleSizeActive(i)"
+                      >
+                        <span>{{ size }}</span>
                       </div>
-                      <div class="exclusive-content">
-                        <div class="exclusive-inner active">
-                          <owl-carousel-o [options]="filterprodOptions">
-                            <ng-template carouselSlide  *ngFor="let product of productsHaveModified, index as productIndex" id="thumbProduct">
-                              <div class="owl-stage stage-detail">
-                                <div class="owl-item">
-                                  <div class="item-new-prod">
-                                    <div class="product">
-                                      <div class="info-tag best-seller">Best Seller</div>
-                                      <span class="percent percent_02">-50%
-                                      </span>
-                                      <div class="thumb-product" >
-                                        <a href="/product/product-detail/{{product.slug}}" >
-                                          <img id="ao" src="http://localhost:3000/productImages/{{product.imgHomePage[0].images[0]}}" alt="" class=" static">
-                                          <img id="ao2" src="http://localhost:3000/productImages/{{product.imgHomePage[0].images[1]}}" alt="" class=" hover_img">
-                                        </a>
-                                      </div>
-                                      <div class="info-product">
-                                        <div class="list-color">
-                                          <ul class="colors">
-                                            <li *ngFor="let v of product.variants; index as colorI" 
-                  [ngClass]="{'color': true, 'color-active': colorI === selectedColorIndex[productIndex]}">
-                  <a href="javascript:void(0)" class="color-picked" data-id="{{ v._id }}" 
-                      (click)="changeColor(product, v.color._id); updateSelectedColorIndex(productIndex, colorI)"
-                      [ngClass]="{'active-color': colorI === 0}">
-                      <img src="http://localhost:3000/colorImages/{{v.color.imageColor}}" alt="">
-                  </a>
-              </li>
-              
-              
-                                          </ul>
-                      
-                                          <div class="favorite">
-                                            <i class="ti-heart">
-                                            </i>
-                                          </div>
-                                        </div>
-                                        <div class="title-product">
-                                          <a href="">{{product.title}}</a>
-                                        </div>
-                                        <div class="price-product">
-                                          <ins>
-                                            <h4>{{formatMoneyVietNam(product.price)}}</h4>
-                                          </ins>
-                                          <del>
-                                            <span>1.790.000đ</span>
-                                          </del>
-                                        </div>
-                                      </div>
-                                      <div class="add-to-cart">
-                                        <a href="javascript:void(0)#" class="js-cart-button" (click)="toggleSizeTable(productIndex)">
-                                          <i class="ti-shopping-cart"></i>
-                                        </a>
-                                      </div>
-                                      <div id="sizeTable{{productIndex}}" class="sizeTable js-list-size">
-                                        <ul>
-                                          <li *ngFor="let vc of product.imgHomePage[0].variantColor" 
-                  [class.disabled]="vc.quantity === 0"
-                  (click)="vc.quantity !== 0 && popupContainer && addActiveCartPopupClass()">
-                  <button class="btn bt-large" 
-                          [disabled]="vc.quantity === 0"
-                          (click)="vc.quantity !== 0 && addToCart(product.imgHomePage[0].colorID, product._id, vc.size, 1)">
-                      <ng-container *ngIf="vc.quantity !== 0; else noQuantity">{{ vc.size }}</ng-container>
-                      <ng-template #noQuantity><del>{{ vc.size }}</del></ng-template>
-                  </button>
-              </li>
-              
+                    </li>
+                  </ul>
+              </div>
+              <div class="filter-setting__content">
+                  <div class="filter-setting__tit">Mức giá</div>
+                  <div class="sub-list-side">
+                      <div id="slider-range">
+                          <mat-slider min="200" max="500" class="" style="width: 250px;">
+                              <input value="0" matSliderStartThumb>
+                              <input value="300" matSliderEndThumb>
+                              
+                          </mat-slider>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="filter__right">
+              <div class="classify__fiter">
+                <div class="title__filter">Quần & Jumpsuit</div>
+                  <mat-form-field>
+                      <mat-label>Phân loại</mat-label>
+                      <mat-select>
+                        <mat-option value="one">Mới nhất</mat-option>
+                        <mat-option value="two">Bán chạy</mat-option>
+                        <mat-option value="two">Giá thấp đến giá cao</mat-option>
+                        <mat-option value="two">Giá cao đến giá thấp</mat-option>
+                        <mat-option value="two">% giảm nhiều</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+              </div>
+              <div class="home-new-prod">
+                  <div class="exclusive-tabs">
+                    <div class="exclusive-head">
+                      <!-- <ul>
+                        <li class="exclusive-tab new-prod">Sản phẩm mới</li>
+                        <li class="exclusive-tab hot-prod">Bán chạy nhất</li>
+                      </ul> -->
+                    </div>
+                    <div class="exclusive-content">
+                      <div class="exclusive-inner active">
+                          <div  *ngFor="let product of productsHaveModified, index as productIndex" id="thumbProduct">
+                            <div class="owl-stage stage-detail">
+                              <div class="owl-item">
+                                <div class="item-new-prod">
+                                  <div class="product">
+                                    <div class="info-tag best-seller">Best Seller</div>
+                                    <span class="percent percent_02">-50%
+                                    </span>
+                                    <div class="thumb-product" >
+                                      <a href="/product/product-detail/{{product.slug}}" >
+                                        <img id="ao" src="http://localhost:3000/productImages/{{product.imgHomePage[0].images[0]}}" alt="" class=" static">
+                                        <img id="ao2" src="http://localhost:3000/productImages/{{product.imgHomePage[0].images[1]}}" alt="" class=" hover_img">
+                                      </a>
+                                    </div>
+                                    <div class="info-product">
+                                      <div class="list-color">
+                                        <ul class="colors">
+                                          <li *ngFor="let v of product.variants; index as colorI" 
+                [ngClass]="{'color': true, 'color-active': colorI === selectedColorIndex[productIndex]}">
+                <a href="javascript:void(0)" class="color-picked" data-id="{{ v._id }}" 
+                    (click)="changeColor(product, v.color._id); updateSelectedColorIndex(productIndex, colorI)"
+                    [ngClass]="{'active-color': colorI === 0}">
+                    <img src="http://localhost:3000/colorImages/{{v.color.imageColor}}" alt="">
+                </a>
+            </li>
+            
+            
                                         </ul>
+                    
+                                        <div class="favorite">
+                                          <i class="ti-heart">
+                                          </i>
+                                        </div>
                                       </div>
+                                      <div class="title-product">
+                                        <a href="">{{product.title}}</a>
+                                      </div>
+                                      <div class="price-product">
+                                        <ins>
+                                          <h4>{{formatMoneyVietNam(product.price)}}</h4>
+                                        </ins>
+                                        <del>
+                                          <span>1.790.000đ</span>
+                                        </del>
+                                      </div>
+                                    </div>
+                                    <div class="add-to-cart">
+                                      <a href="javascript:void(0)#" class="js-cart-button" (click)="toggleSizeTable(productIndex)">
+                                        <i class="ti-shopping-cart"></i>
+                                      </a>
+                                    </div>
+                                    <div id="sizeTable{{productIndex}}" class="sizeTable js-list-size">
+                                      <ul>
+                                        <li *ngFor="let vc of product.imgHomePage[0].variantColor" 
+                [class.disabled]="vc.quantity === 0"
+                (click)="vc.quantity !== 0 && popupContainer && addActiveCartPopupClass()">
+                <button class="btn bt-large" 
+                        [disabled]="vc.quantity === 0"
+                        (click)="vc.quantity !== 0 && addToCart(product.imgHomePage[0].colorID, product._id, vc.size, 1)">
+                    <ng-container *ngIf="vc.quantity !== 0; else noQuantity">{{ vc.size }}</ng-container>
+                    <ng-template #noQuantity><del>{{ vc.size }}</del></ng-template>
+                </button>
+            </li>
+            
+                                      </ul>
                                     </div>
                                   </div>
                                 </div>
                               </div>
-                            </ng-template>
-                          </owl-carousel-o>
-                        </div>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="collection-section-loadmore">
+                        <a href="" class="collection-section-loadmore__btn btn">Xem thêm</a>
+                        <p class="collection-section-loadmore__page">
+                          Hiển thị
+                          <span>1</span>
+                          - 
+                          <span class="loadmore-total">18</span>
+                          trên tổng số
+                          <span class="total-products">116</span>
+                          sản phẩm
+                        </p>
                       </div>
                     </div>
-                    <div class="popup-container" #popupContainer>
-                      <div class="popup">
-                        <div class="hed-pop-not">
-                          <div class="tit___hed-pop-not">Đã thêm vào giỏ hàng!</div>
-                          <i class="close-icon ti-close" ></i>
-                        </div>
-                        <div class="notify_wrapper">
-                          <div class="notify__content">
-                            <div class="notify__message"></div>
-                            <div class="notify__product">
-                              <div class="notify-product">
-                                <div class="notify-product__thumbnail">
-                                  <img src="https://static.dchic.vn/uploads/media/2023/12/DTT_0884-93723949-576x768.JPG" alt="">
-                                </div>
-                                <div class="notify-product__content">
-                                  <div class="notify-product__title">Quần Kaki Excool dáng Straight</div>
-                                  <div class="notify-product__option">Xám/M</div>
-                                  <div class="notify-product__prices">
-                                    <ins>499.000đ</ins>
-                                  </div>
+                    </div>
+                  <div class="popup-container" #popupContainer>
+                    <div class="popup">
+                      <div class="hed-pop-not">
+                        <div class="tit___hed-pop-not">Đã thêm vào giỏ hàng!</div>
+                        <i class="close-icon ti-close" ></i>
+                      </div>
+                      <div class="notify_wrapper">
+                        <div class="notify__content">
+                          <div class="notify__message"></div>
+                          <div class="notify__product">
+                            <div class="notify-product">
+                              <div class="notify-product__thumbnail">
+                                <img src="https://static.dchic.vn/uploads/media/2023/12/DTT_0884-93723949-576x768.JPG" alt="">
+                              </div>
+                              <div class="notify-product__content">
+                                <div class="notify-product__title">Quần Kaki Excool dáng Straight</div>
+                                <div class="notify-product__option">Xám/M</div>
+                                <div class="notify-product__prices">
+                                  <ins>499.000đ</ins>
                                 </div>
                               </div>
                             </div>
@@ -199,8 +205,9 @@
                         </div>
                       </div>
                     </div>
-                </section>
-            </div>
-        </section>
-    </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+  </div>
 </main>
