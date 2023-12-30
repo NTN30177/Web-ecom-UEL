@@ -19,8 +19,7 @@ const getCategoryProductsPagination = async (req, res) => {
     } else {
       products = await Product.find({}).populate({
         path: "variants.color",
-        model: "Color",
-        select: "nameColor",
+        select: "imageColor nameColor",
       });
 
       if (keySearch && req.query.userId) {
@@ -67,17 +66,25 @@ const filterProductsBySlug = async (slug) => {
         path: "subtypes",
         populate: {
           path: "products",
-          model: "Product",
-        },
+        populate:{
+          path: "variants.color",
+          select: "imageColor nameColor",
+        }
+      }
       })
       .lean();
 
     if (type) {
       const allProducts = type.subtypes.flatMap((subtype) => subtype.products);
+      console.log(allProducts, "type");
       return allProducts;
     } else {
       const subtype = await Subtype.findOne({ slug })
-        .populate("products")
+        .populate({path: "products"})
+        .populate({
+          path: "variants.color",
+          select: "imageColor nameColor",
+        })
         .lean();
       if (subtype) {
         return subtype.products;
@@ -109,12 +116,12 @@ const filterProducts = (
         )
     );
   }
-
+console.log(color)
   if (color && color.length > 0) {
     filteredProducts = filteredProducts.filter((product) =>
       product.variants.some(
         (variant) =>
-          color.includes(variant.color.toLowerCase()) &&
+          color.includes(variant.color) &&
           variant.variantColor.some((vc) => vc.quantity > 0)
       )
     );

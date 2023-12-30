@@ -17,6 +17,7 @@ import { take } from 'rxjs';
 import { Options, LabelType } from "@angular-slider/ngx-slider";
 
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { SortPaginationService } from '../services/sort-pagination.service';
 
 @Component({
   selector: 'app-filter-product',
@@ -33,6 +34,8 @@ export class FilterProductComponent implements AfterViewInit {
   errMessage: any;
   currentColor = 0;
   bannersArray: any;
+  listColor:any=false;
+  selectedColorsId: any[] | undefined;
   // currentColor: any;
 
   constructor(
@@ -42,7 +45,9 @@ export class FilterProductComponent implements AfterViewInit {
     private changeDetectorRef: ChangeDetectorRef,
     private _authServer: AuthService,
     private _cartService: CartService,
-    private _cartComponent: CartComponent
+    private _cartComponent: CartComponent,
+    private _sortPaginationService: SortPaginationService
+
   ) {
     this._authServer.idUserSubject.subscribe((data) => {
       this.userIdFromHeader = data;
@@ -52,12 +57,18 @@ export class FilterProductComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initOwlCarousel();
+    console.log(this.listColor,'lc')
   }
   initOwlCarousel() {
     throw new Error('Method not implemented.');
   }
 
-
+  getColor() {
+    this._sortPaginationService.getColor().subscribe((data) => {
+      this.listColor = data;
+      console.log(data, 'data');
+    });
+  }
   // Size table homepage
 
 
@@ -140,15 +151,19 @@ export class FilterProductComponent implements AfterViewInit {
 
   async ngOnInit(): Promise<void> {
     // Mặc định chọn màu đầu tiên
+    this.getColor()
+    this.sortFilter()
+
     await this.setupUserIdSubscription();
     console.log(this.userIdFromHeader, '123');
-    await this.apiProductHomePage();
+    // await this.apiProductHomePage();
     console.log(this.productsHaveModified,'2222222222222')
-   
-  
     // Khởi tạo mảng productStates với giá trị false cho mỗi sản phẩm
     this.productStates = Array(this.bannersArray.length).fill(false);
+    
   }
+  
+  
   
   
 
@@ -333,8 +348,11 @@ export class FilterProductComponent implements AfterViewInit {
       }
     }
   }
+
+ 
+
   // thêm xo color-active
-  selectedColorIndex: number[] = []; // Sử dụng một mảng để lưu trữ index cho từng sản phẩm
+  selectedColorIndex: number[] = []; 
 
   initializeSelectedColorIndex(): void {
     this.selectedColorIndex = new Array(this.productsHaveModified.length).fill(
@@ -346,16 +364,91 @@ export class FilterProductComponent implements AfterViewInit {
     this.selectedColorIndex[productIndex] = colorI;
   }
 
-  //thêm class active vào màu
-  
 
 
-  // thêm class btn-active 
+  ///sort
   sizes: string[] = ['S', 'M', 'L', 'XL', '2XL'];
-  isActive: boolean[] = new Array(this.sizes.length).fill(false);
+  isActive: boolean[] = [false, false, false, false, false]; // Initialize with the correct number of elements
 
-  toggleSizeActive(index: number): void {
+  toggleSizeActive(index: number) {
     this.isActive[index] = !this.isActive[index];
+    this.getSelectedValues(); // Call the function when size is toggled
+  }
+
+
+
+  selectedColors: string[] = [];
+  toggleActive(color: string) {
+    const index = this.selectedColors.indexOf(color);
+    if (index !== -1) {
+      this.selectedColors.splice(index, 1);
+    } else {
+      this.selectedColors.push(color);
+    }
+    this.getSelectedValues(); // Call the function when color is toggled
+  }
+
+ 
+  minValue: number = 0;
+  maxValue: number = 500;
+  options: Options = {
+    floor: 0,
+    ceil: 500,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return "<b>Min price:</b> $" + formatMoneyVietNam(value);
+        case LabelType.High:
+          return "<b>Max price:</b> $" + formatMoneyVietNam(value);
+        default:
+          return "$" + value;
+      }
+    }
+  };
+
+
+  sizesChoose: string[] | undefined;
+  getSelectedValues() {
+    // Get selected colors
+    this.selectedColors = this.listColor.filter((color: string) => this.selectedColors.includes(color));
+    this.selectedColorsId=this.selectedColors.map((color:any) => color._id);
+    
+
+    // Get selected sizes
+    console.log('isActive Array:', this.isActive);
+    this.sizesChoose = this.sizes.filter((size, i) => this.isActive[i]);
+
+    // Log or use the selected values as needed
+    console.log('Selected Sizes:', this.sizesChoose);
+    console.log('Selected Colors:', this.selectedColorsId);
+    console.log('Selected Min Value:', this.minValue);
+    console.log('Selected Max Value:', this.maxValue);
+    this.sortFilter()
+  }
+
+  selectedSorting: string = 'latest'; // Set default value
+
+  onSortingChange(event: any): void {
+    this.selectedSorting = event.value;
+    this.sortFilter()
+  }
+  
+  currentPage = 1;
+  sortFilter(){
+    const slug='phu-kien'
+    const productsPerPage = 10;
+    const startIndex = (this.currentPage - 1) * productsPerPage;
+    setTimeout(() => {
+      console.log(this.selectedColorsId, this.sizesChoose, this.minValue, this.maxValue*1000000, this.selectedSorting,slug, startIndex, productsPerPage, this.currentPage )
+      // Call the sort function after 1 second
+      this._sortPaginationService.sort(this.selectedColorsId, this.sizesChoose, this.minValue, this.maxValue*100000, this.selectedSorting, slug, startIndex, productsPerPage, this.currentPage).subscribe((data) => {
+        this.products=data.productsByCategory
+        console.log(this.products)
+        this.updateProductsHaveModified();
+        this.initializeSelectedColorIndex();
+        console.log(this.productsHaveModified)
+      });
+    }, 100);
   }
   
 }

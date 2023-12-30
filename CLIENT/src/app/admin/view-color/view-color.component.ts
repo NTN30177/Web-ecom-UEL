@@ -11,7 +11,7 @@ import { SortPaginationService } from '../../services/sort-pagination.service';
 export class ViewColorComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
-  listColor!: import("d:/OneDrive - uel.edu.vn/hk5/webuel/NT4/30122023/Web-ecom-UEL/CLIENT/src/app/interfaces/product").IColor[];
+  listColor:any;
   constructor(private _sortPaginationService: SortPaginationService) {}
 
   ngOnInit(): void {

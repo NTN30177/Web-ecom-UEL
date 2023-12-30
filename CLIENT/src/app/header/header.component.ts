@@ -92,6 +92,7 @@ export class HeaderComponent implements OnInit {
     } else {
     }
   }
+  
   keyDown(){
     fromEvent(this.searchInput?.nativeElement, 'input')
       .pipe(
