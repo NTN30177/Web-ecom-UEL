@@ -1,6 +1,6 @@
 <div class="account-address-container">
 <div class=" row d-flex justify-content-between  address-header">
-    <div class="col-12 col-sm-auto align-self-center ">
+    <div class="col-12 col-sm-auto align-self-center mb-4 mb-sm-0 address-header">
         SỔ ĐỊA CHỈ
     </div>
     <div class=" col-12 col-sm-auto d-inline-flex button-add text-uppercase " id="open-popup-btn" (click)= "openDialog()">
@@ -31,7 +31,7 @@
         <div>Địa chỉ: {{ address.specific_address }}, {{ address.wardData }}</div>
     </div>
 
-    <div class="col-md-4 col-sm-12 col-address-action">
+    <div class="col-md-4 col-sm-12 col-address-action mt-lg-0 mt-3 ">
         <div class="d-flex justify-content-end gap-2 ">
             <button class="button-update">Cập nhật</button>
             <button class="button-delete" (click)="deleteAddress(address._id.toString())">Xóa</button>

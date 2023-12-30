@@ -76,6 +76,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { PaginationComponent } from './pagination/pagination.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 
 
@@ -127,6 +129,7 @@ import { PaginationComponent } from './pagination/pagination.component';
     Chart2Component,
     DashboardComponent,
     PaginationComponent,
+    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -162,7 +165,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     ToastModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    SlickCarouselModule
   ],
   providers: [DatePipe, CartComponent, HomePageComponent, {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}],
   bootstrap: [AppComponent],
