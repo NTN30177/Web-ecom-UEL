@@ -26,6 +26,9 @@
 
 .col-address-action {
     text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .button-update {
