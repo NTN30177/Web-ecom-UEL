@@ -133,3 +133,9 @@ button {
     visibility: visible;
     opacity: 1;
 } */
+
+@media screen and (max-width: 768px) {
+    .address-header{
+        font-size: 16px;
+    }
+}
