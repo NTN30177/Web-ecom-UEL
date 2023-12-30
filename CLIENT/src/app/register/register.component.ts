@@ -1,16 +1,28 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { MatSelectChange } from '@angular/material/select';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-
   @ViewChild('cusFirstname') cusFirstname!: ElementRef;
   @ViewChild('cusLastname') cusLastname!: ElementRef;
 
@@ -21,45 +33,62 @@ export class RegisterComponent implements OnInit {
   districts: any;
   provinces: any;
   wards: any;
-// Thêm vào trong class RegisterComponent
-hidePassword = true;
+  // Thêm vào trong class RegisterComponent
+  hidePassword = true;
+  userIdFromHeader: any;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private _authService: AuthService,
-    private renderer: Renderer2
-  ) { }
+    private snackBar: MatSnackBar  // Add this line
+,
+
+  ) {
+    this._authService.idUserSubject.subscribe((data) => {
+      this.userIdFromHeader = data;
+     
+    });
+  }
 
   ngOnInit() {
+    if(this.userIdFromHeader){
+      this.router.navigate(['/']);
+    }
     this.initForm();
     this.setDefaultValues();
     this.apiProvince();
   }
 
   initForm() {
-    this.registerForm = this.fb.group({
-      'cus_firstname': ['', [Validators.required, this.nameValidator]],
-      'cus_lastname': ['', [Validators.required, this.nameValidator]],
-      'cus_email': ['', [Validators.required, this.emailValidator()]],
-      'cus_phonenumber': ['', [Validators.required, this.phonenumberValidator()]],
-      'cus_dob': ['', Validators.required],
-      'cus_gender': [0, [Validators.required, this.optionValidator(0)]],
-      'cus_region_id': [0, [Validators.required, this.optionValidator(0)]],
-      'cus_district_id': [0, [Validators.required, this.optionValidator(0)]],
-      'cus_ward_id': [0, [Validators.required, this.optionValidator(0)]],
-      'cus_address_id': ['', Validators.required],
-      'cus_password': ['', [Validators.required, Validators.minLength(6)]],
-      'cus_reenterpassword': ['', Validators.required],
-      'cus_agree': [true],
-      'cus_register_news': [false],
-    }, {
-      validators: this.passwordMatchValidator.bind(this)
-    });
+    this.registerForm = this.fb.group(
+      {
+        cus_firstname: ['', [Validators.required, this.nameValidator]],
+        cus_lastname: ['', [Validators.required, this.nameValidator]],
+        cus_email: ['', [Validators.required, this.emailValidator()]],
+        cus_phonenumber: [
+          '',
+          [Validators.required, this.phonenumberValidator()],
+        ],
+        cus_dob: ['', Validators.required],
+        cus_gender: [0, [Validators.required, this.optionValidator(0)]],
+        cus_region_id: [0, [Validators.required, this.optionValidator(0)]],
+        cus_district_id: [0, [Validators.required, this.optionValidator(0)]],
+        cus_ward_id: [0, [Validators.required, this.optionValidator(0)]],
+        cus_address_id: ['', Validators.required],
+        cus_password: ['', [Validators.required, Validators.minLength(6)]],
+        cus_reenterpassword: ['', Validators.required],
+        cus_agree: [true],
+        cus_register_news: [false],
+      },
+      {
+        validators: this.passwordMatchValidator.bind(this),
+      }
+    );
   }
   genders = [
     { value: 1, viewValue: 'Nữ' },
-    { value: 2, viewValue: 'Nam' }
+    { value: 2, viewValue: 'Nam' },
   ];
 
   nameValidator(control: FormControl) {
@@ -67,14 +96,14 @@ hidePassword = true;
     if (!value) {
       return null; // Value is empty, don't perform further validation
     }
-  
+
     // Check if the name starts with a number
     const startsWithNumber = /^\d/.test(value);
-  
+
     if (startsWithNumber) {
       return { startsWithNumber: true };
     }
-  
+
     return null; // Validation passed
   }
 
@@ -82,7 +111,7 @@ hidePassword = true;
     const selectedValue = event.value;
     console.log(selectedValue, 'district');
     this.apiDistrict(selectedValue);
-    console.log()
+    console.log();
   }
 
   selectChangeD(event: MatSelectChange) {
@@ -162,50 +191,9 @@ hidePassword = true;
   }
 
   clearSpecificErrorMessage(controlName: string) {
-    const errorElement = this.renderer.selectRootElement(`#${controlName}_error`);
-    const inputElement = this.renderer.selectRootElement(`#${controlName}`);
 
-    if (errorElement) {
-      this.renderer.setProperty(errorElement, 'innerHTML', '');
-    }
-
-    if (inputElement) {
-      this.renderer.removeClass(inputElement, 'error-input');
-    }
   }
 
-  displayErrorMessage(controlName: string, errorMessage: string) {
-    const errorElement = this.renderer.selectRootElement(`#${controlName}_error`);
-    const inputElement = this.renderer.selectRootElement(`#${controlName}`);
-
-    if (errorElement) {
-      this.renderer.setProperty(errorElement, 'innerHTML', errorMessage);
-    }
-
-    if (inputElement) {
-      this.renderer.addClass(inputElement, 'error-input');
-    }
-  }
-
-  validateAndClearError(controlName: string) {
-    const control = this.registerForm.get(controlName);
-    const errorElement = this.renderer.selectRootElement(`#${controlName}_error`);
-    const inputElement = this.renderer.selectRootElement(`#${controlName}`);
-
-    if (control && errorElement && inputElement) {
-      if (control.valid) {
-        // Clear error messages and remove error class for valid controls
-        this.clearSpecificErrorMessage(controlName);
-      } else {
-        // Show error messages and apply red border for invalid controls
-        this.displayErrorMessage(controlName, '* Vui lòng nhập/chọn giá trị.');
-        if (controlName === 'cus_reenterpassword' && control.errors?.['passwordMismatch']) {
-          this.displayErrorMessage(controlName, 'Mật khẩu nhập lại không khớp.');
-        }
-        this.renderer.addClass(inputElement, 'error-input');
-      }
-    }
-  }
 
   register() {
     // Mark all controls as touched to trigger validation messages
@@ -221,19 +209,7 @@ hidePassword = true;
     // Show error only if an option with value 0 is selected
     this.showOptionZeroError = hasOptionZeroSelected;
 
-    if (this.registerForm.valid && !hasOptionZeroSelected) {
-      // Clear error messages and remove error class for all controls
-      Object.keys(this.registerForm.controls).forEach((field) => {
-        this.clearSpecificErrorMessage(field);
-      });
-      this.router.navigate(['/login']);
-    } else {
-      // Show error messages and apply red border for each invalid field
-      Object.keys(this.registerForm.controls).forEach((field) => {
-        this.validateAndClearError(field);
-      });
-    }
-    this.postRegister();
+this.postRegister()
   }
 
   postRegister() {
@@ -242,11 +218,25 @@ hidePassword = true;
     } else {
       this._authService.postInfoUser(this.registerForm.value).subscribe({
         next: (data: any) => {
+          console.log(data, 'dât')
           if (data) {
-            this.infoResult = 'Vui lòng xác thực địa chỉ gmail';
-            setTimeout(() => {
-              this.infoResult = '';
-            }, 5000);
+            this.infoResult = data.message;
+            this.snackBar.open(this.infoResult, 'Close', {
+              duration: 5000,  
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            });
+            if (data.success) {
+              const snackBarRef = this.snackBar.open('Lưu dữ liệu thành công', 'Close', {
+                duration: 1000,
+                horizontalPosition: 'center',
+                verticalPosition: 'top',
+              });
+            
+              snackBarRef.afterDismissed().subscribe(() => {
+                this.router.navigate(['/login']);
+              });
+            }
           } else {
             this.infoResult = 'Hệ thống lỗi, vui lòng đăng ký lại';
           }
@@ -257,7 +247,6 @@ hidePassword = true;
       });
       console.log('save');
 
-      alert('Lưu dữ liệu thành công');
     }
   }
 
@@ -301,7 +290,9 @@ hidePassword = true;
 
   passwordMatchValidator(formGroup: FormGroup) {
     const passwordControl = formGroup.get('cus_password') as FormControl;
-    const confirmPasswordControl = formGroup.get('cus_reenterpassword') as FormControl;
+    const confirmPasswordControl = formGroup.get(
+      'cus_reenterpassword'
+    ) as FormControl;
 
     if (passwordControl.value !== confirmPasswordControl.value) {
       // If passwords do not match, set a warning for FormControl
@@ -315,5 +306,4 @@ hidePassword = true;
   togglePasswordVisibility() {
     this.hidePassword = !this.hidePassword;
   }
-  
 }

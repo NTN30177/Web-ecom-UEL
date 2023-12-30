@@ -31,7 +31,7 @@ export class AccountInfoComponent implements OnInit {
 
     this._authService.idUserSubject.subscribe((data) => {
       this.userID = data;
-      console.log(this.userID, 'user id:::')
+      // console.log(this.userID, 'user id:::')
     });
 
     this.initForm();

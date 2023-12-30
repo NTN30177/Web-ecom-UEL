@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { AccountAddressPopupComponent } from '../account-address-popup/account-address-popup.component';
 import { IUserAddress } from '../../interfaces/user';
 import { AccountAddressService } from '../../services/account-address.service';
-import { AccountInfoService } from '../../services/account-info.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -22,17 +21,12 @@ export class AccountAddressComponent implements OnInit {
     private dialogRef: MatDialog,
     private addressService: AccountAddressService,
     private _authService: AuthService
-  ) {
-    // this.accountInfoService.userIDSubject.subscribe((data) => {
-    //   this.userID = data;
-    // });
-  }
-
+  ) { }
   ngOnInit(): void {
 
     this._authService.idUserSubject.subscribe((data) => {
       this.userID = data;
-      console.log(this.userID, 'user id:::')
+      // console.log(this.userID, 'user id:::')
     });
     this.getAddressList()
   }
@@ -41,7 +35,17 @@ export class AccountAddressComponent implements OnInit {
     this.addressService.getUserAddressList(this.userID).subscribe(
       (data) => {
         this.addressList = data;
-        console.log('addressService respond account address list:', this.addressList)
+
+        this.addressList.sort((a, b) => {
+          if (a.is_default) {
+            return -1;
+          } else if (b.is_default) {
+            return 1; 
+          } else {
+            return 0;
+          }
+        });
+        // console.log('addressService respond account address list:', this.addressList)
       },
       (error) => {
         console.error('Error fetching user addresses:', error);
@@ -49,7 +53,6 @@ export class AccountAddressComponent implements OnInit {
     );
   }
   openDialog() {
-    // Check if there are open dialogs before opening a new one
     if (this.dialogRef.openDialogs.length === 0) {
       const dialogRef = this.dialogRef.open(AccountAddressPopupComponent, {
         hasBackdrop: true,
@@ -63,7 +66,7 @@ export class AccountAddressComponent implements OnInit {
 
 
       dialogRef.afterClosed().subscribe((result) => {
-        console.log('Dialog result:', result);
+        // console.log('Dialog result:', result);
       });
     }
   }
@@ -73,20 +76,31 @@ export class AccountAddressComponent implements OnInit {
     this.addressList.push(newAddress);
   }
 
-  setDefaultAddress() {
-
-  }
-
-  deleteAddress(addressId: string) {
-    // console.log("client side, addressID to be deleted:", addressId)
-    this.addressService.deleteAddress(addressId).subscribe(
-      () => {
-        console.log('Address deleted successfully');
-        this.getAddressList(); // Refresh the address list after deleting an address
+  setDefaultAddress(addressId: string): void {
+    this.addressService.setDefaultAddress(this.userID, addressId).subscribe(
+      (response) => {
+        console.log('Default address set successfully:', response);
+        // You can update your component's address list if needed
+        this.getAddressList();
       },
       (error) => {
-        console.error('Error deleting address:', error);
+        console.error('Error setting default address:', error);
       }
     );
+  }
+  deleteAddress(addressId: string): void {
+    const confirmation = window.confirm('Bạn có chắc chắn muốn xóa địa chỉ này?');
+  
+    if (confirmation) {
+      this.addressService.deleteAddress(addressId).subscribe(
+        () => {
+          console.log('Address deleted successfully');
+          this.getAddressList(); // Refresh the address list after deleting an address
+        },
+        (error) => {
+          console.error('Error deleting address:', error);
+        }
+      );
+    }
   }
 }

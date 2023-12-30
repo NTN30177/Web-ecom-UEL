@@ -55,37 +55,7 @@ export class HomePageComponent implements AfterViewInit {
   }
 
   
-  // private initOwlCarousel(): void {
-  //   const owlSelector = '.exclusive-inner__list-products.owl-carousel';
-  //   this.renderer.addClass(
-  //     this.el.nativeElement.querySelector(owlSelector),
-  //     'owl-carousel'
-  //   );
-
-  //   $(owlSelector).owlCarousel({
-  //     dots: false,
-  //     nav: true,
-  //     autoplay: false,
-  //     loop: false,
-  //     autoWidth: false,
-  //     responsiveClass: true,
-  //     responsive: {
-  //       0: {
-  //         items: 2,
-  //         margin: 20,
-  //         nav: false,
-  //       },
-  //       740: {
-  //         items: 3,
-  //         margin: 30,
-  //       },
-  //       1025: {
-  //         items: 5,
-  //         margin: 30,
-  //       },
-  //     },
-  //   });
-  // }
+  
 
   // Size table homepage
 
@@ -144,21 +114,7 @@ export class HomePageComponent implements AfterViewInit {
 
   selectedColorId: number | null = null;
 
-  // colorsArray: any = [
-  //   {
-  //     id: 33897,
-  //     imgSrc: 'https://pubcdn.ivymoda.com/ivy2/images/color/010.png',
-  //     alt: '010',
-  //   },
-  //   {
-  //     id: 33898,
-  //     imgSrc: 'https://pubcdn.ivymoda.com/ivy2/images/color/013.png',
-  //     alt: 'k50',
-  //   },
-  //   // Thêm các màu khác nếu cần
-  // ];
 
-  // imagesArray: any = [];
 
   bannersArray: any = [
     { imgName: '../assets/img/banner/banner-1.jpeg' },
@@ -248,10 +204,8 @@ export class HomePageComponent implements AfterViewInit {
   }
 
   async apiChangeQuantityProductItem(data: object) {
-    console.log(data, '55555');
     try {
       const responseData = await this._cartService.putProductItemCart(data);
-      console.log(responseData, 'dataput');
     } catch (err) {
       this.errMessage = err;
     }
@@ -304,7 +258,6 @@ export class HomePageComponent implements AfterViewInit {
       );
       
       let total_quantity = await this.totalCartItem(cartList);
-      // this._authServer.cartSubject.next(total_quantity);
     this._authServer.updateCart(total_quantity);
 
 

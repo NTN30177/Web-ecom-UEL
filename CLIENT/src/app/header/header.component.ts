@@ -17,6 +17,7 @@ import { Subscription, debounceTime, fromEvent, map } from 'rxjs';
 import { HeaderService } from '../services/header.service';
 import { formatMoneyVietNam, convertStringToNumbers } from '../utils/utils';
 import { AccountInfoService } from '../services/account-info.service';
+import { CartService } from '../services/cart.service';
 
 interface CartItem {
   id: number;
@@ -34,6 +35,8 @@ interface CartItem {
 })
 export class HeaderComponent implements OnInit {
   formatMoneyVietNam = formatMoneyVietNam;
+  // changeQuantity = this._cartComponent.changeQuantity;
+
 
   isSearchFormActive: boolean = false;
   isMainMenuOpen: boolean = false;
@@ -48,8 +51,10 @@ export class HeaderComponent implements OnInit {
   currentSubMenuIndex: null | undefined;
   @ViewChild('searchInput') searchInput: ElementRef | undefined;
   accountInfo: any=false;
-  cartReview: any;
-  productsCart: any;
+  cartList:any=false;
+  userIdFromHeader: any;
+  errMessage: any;
+  totalPayment: any;
   constructor(
     private elRef: ElementRef,
     private renderer: Renderer2,
@@ -58,25 +63,22 @@ export class HeaderComponent implements OnInit {
     private _cartComponent: CartComponent,
     private _homeComponent: HomePageComponent,
     private _headerService: HeaderService,
-    private _accountInfoService: AccountInfoService
+    private _accountInfoService: AccountInfoService,
+    private _cartService: CartService
   ) {}
   ngAfterViewInit() {
-
+   
+ 
   }
-  async ngOnInit(): Promise<void> {
-    await this.getDataFromService();
+  ngOnInit(): void {
+    this.getDataFromService();
     this.getIsLogin();
     this.cartItemFunc();
     this.checkLogin();
     this.getKeySearch();
     this.getCategory();
+    // this.getCart()
   }
-  
- 
-  
-  // Other methods...
-  
-  
   getKeySearch() {
     if (this.userId) {
       this._accountInfoService
@@ -109,6 +111,7 @@ export class HeaderComponent implements OnInit {
       });
   }
 
+
   getIsLogin() {
     this._authService.getIsLoginObservable().subscribe((data) => {
       this.isLogin = data;
@@ -123,11 +126,8 @@ export class HeaderComponent implements OnInit {
     });
   }
   getDataFromService() {
-    console.log('11111111')
     this._authService.cartSubject.subscribe((data) => {
-      this.cartNumberItem = data.total_quantity;
-      this.productsCart = data.productsCart;
-      console.log(this.productsCart, 'pc')
+      this.cartNumberItem = data;
     });
     this._authService.isLoginSubject.subscribe((data) => {
       this.isLogin = data;
@@ -137,6 +137,8 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+
+
   isLogin = false;
   async checkLogin() {
     const userData = localStorage.getItem('userData');
@@ -144,10 +146,15 @@ export class HeaderComponent implements OnInit {
       const parseUserData: IUser = JSON.parse(userData);
       this._authService.idUserSubject.next(parseUserData._id);
       this.userId = parseUserData._id;
-      const cartList = await this._cartComponent.apiCartProduct(
+      console.log(parseUserData._id,'parseUserData._id')
+      this.cartList = await this._cartComponent.apiCartProduct(
         parseUserData._id
       );
-      let total_quantity = this._homeComponent.totalCartItem(cartList);
+      this.totalPayment = await this._cartComponent.totalPayment(this.cartList);
+
+    console.log(this.cartList, 'cl')
+
+      let total_quantity = this._homeComponent.totalCartItem(this.cartList);
       this.cartNumberItem = total_quantity;
       this.isLogin = true;
     } else {
@@ -155,14 +162,47 @@ export class HeaderComponent implements OnInit {
       this.isLogin = false;
     }
   }
+  async changeQuantity(
+    colorID: any,
+    productID: any,
+    sizeLIST: any,
+    quantityACTION: any
+  ) {
+    const userData = await localStorage.getItem('userData');
+    if (userData) {
+      const parseUserData = JSON.parse(userData);
+      this.userIdFromHeader = parseUserData._id;
+    }
+    const data = {
+      colorId: colorID,
+      productId: productID,
+      size: sizeLIST,
+      quantityAction: quantityACTION,
+      userId: this.userIdFromHeader,
+    };
+    console.log(data, 'dddddddd');
+  
+    this._cartService.putProductItemCart(data).subscribe({
+      next: async (data: any) => {
+        this.cartList = await this._cartComponent.apiCartProduct(this.userIdFromHeader);
+        setTimeout(async () => {
+          this.totalPayment = await this._cartComponent.totalPayment(this.cartList);
+          console.log(this.totalPayment, 'ttp');
+          
+        }, 500);
+      },
+      error: (err: any) => {
+        this.errMessage = err;
+      },
+    });
+  }
   logout() {
     window.localStorage.getItem('userData');
     window.localStorage.removeItem('userData');
     this.isLogin = false;
   }
 
-  // sub-menu-mobile
-  // Thêm open vào main-menu
+
   toggleMobileMenu(): void {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
 
@@ -312,9 +352,6 @@ export class HeaderComponent implements OnInit {
     // Thêm các sản phẩm khác nếu có
   ];
 
-  // toggleSearchForm(): void {
-  //   this.isSearchFormActive = !this.isSearchFormActive;
-  // }
 
   handleQuickSearchClick(event: Event): void {
     event.stopPropagation();

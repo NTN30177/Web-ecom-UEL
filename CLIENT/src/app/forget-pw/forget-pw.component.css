@@ -1,16 +1,18 @@
 :host {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif!important;
     
   }
 
 .container-forgotpw {
-    margin-top: 100px;
+    margin-top: 50px;
+    margin-bottom: 50px;
     color: #000;
-    font-family: Montserrat;
     display: flex;
     flex-direction: column;
     justify-content: center; /* Vertical centering */
     align-items: center; /* Horizontal centering */
+    font-family: 'Montserrat', sans-serif!important;
+    
   }
   .btn-reset {
     background-color: black;
@@ -37,12 +39,18 @@
     letter-spacing: 1.44px;
     color: black;
     text-align: center; /* Center the text */
+    font-family: 'Montserrat', sans-serif!important;
+
   }
   
-  p {
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 0.80px;
+h1{
+  font-family: 'Montserrat', sans-serif!important;
+  text-align: center;
+  font-weight: 700;
+}
+  ::placeholder{
+    font-family: 'Montserrat', sans-serif!important;
+
   }
   
   .input-pri {
@@ -79,7 +87,9 @@
     margin-top: 50px;
     display: flex;
     flex-direction: column;
-    width: 70%; margin: auto; margin-top: 50px;
+    width: 60%; margin: auto; margin-top: 50px;
+    font-family: 'Montserrat', sans-serif!important;
+
     
   }
   

@@ -1,0 +1,93 @@
+/* Reset some default styles for better consistency */
+body, h1, h2, h3, p, ul, li, figure, figcaption, div {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+.row {
+    margin-bottom: 20px;
+}
+
+.page-title-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-title {
+    margin-bottom: 0;
+}
+
+.col-md-2 {
+    width: 16.66667%; /* Adjust as needed based on your design */
+}
+
+.col-md-10 {
+    width: 83.33333%; /* Adjust as needed based on your design */
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.sub-list-side {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item-sub-list {
+    margin-right: 15px;
+}
+
+.field-cat {
+    margin-right: 5px;
+}
+
+#sort-select {
+    width: 100%;
+}
+
+.form-control {
+    width: 100%;
+}
+
+#minPrice,
+#maxPrice {
+    width: 100%;
+}
+
+#filteredProducts {
+    margin-top: 20px;
+}
+
+.products-list {
+    padding-left: 30px; /* Adjust as needed based on your design */
+}
+
+#product-list-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Load More Button */
+.load-more-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.load-more-btn:hover {
+    background-color: #0056b3;
+}

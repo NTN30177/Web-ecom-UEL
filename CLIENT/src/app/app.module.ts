@@ -73,6 +73,8 @@ import { ToastModule } from '@coreui/angular';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { PaginationComponent } from './pagination/pagination.component';
+
 
 
 
@@ -122,6 +124,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     Chart1Component,
     Chart2Component,
     DashboardComponent,
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,
@@ -132,6 +135,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     DataTablesModule,
     BrowserAnimationsModule, // Quan tọng, k có là k chạy
     MatDialogModule,
+
     AdminRoutingModule,
     // UserModule,
     UserRoutingModule,

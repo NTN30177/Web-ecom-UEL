@@ -622,3 +622,93 @@ section {
 
 
 
+/* Reset some default styles */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Basic styling for the main container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Style for the main content area */
+#main {
+    padding: 20px;
+}
+
+/* Style for the left filter section */
+.filter__left {
+    float: left;
+    width: 25%;
+    padding-right: 20px;
+}
+
+/* Style for the right content section */
+.fiter__right {
+    float: right;
+    width: 75%;
+}
+
+/* Style for the product list container */
+#product-list-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Style for the load more button */
+#load-more-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+/* Style for the product filter form */
+#filterForm {
+    margin-bottom: 20px;
+}
+
+/* Style for the form groups in the filter form */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Style for the color checkboxes */
+.field-cat[type="checkbox"] {
+    display: none;
+}
+
+/* Custom style for the label and span */
+.field-cat + span {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+/* Style for the selected state of the color checkboxes */
+.field-cat:checked + span {
+    background-color: #3498db;
+    color: #fff;
+}
+
+/* Style for the sort select */
+#sort-select {
+    width: 100%;
+    padding: 10px;
+}
+
+/* Style for the product list items */
+.item-new-prod {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Add more specific styles based on your design and preferences */

@@ -98,21 +98,13 @@ export class AuthService {
       'Content-Type',
       'application/json;charset=utf-8'
     );
-    const requestOptions: Object = {
-      headers: headers,
-      responseType: 'text',
-    };
     return this._http
-      .post<any>(
-        `${local}/user/register`,
-        data
-        // requestOptions
-      )
-      .pipe(
-        map((res) => JSON.parse(res)),
-        catchError(this.handleError)
-      );
+      .post<any>(`${local}/user/register`, data, { headers: headers })
+      .pipe(catchError(this.handleError));
   }
+
+
+
   verifiedInForUserService(data: any): Observable<any> {
     const headers = new HttpHeaders().set(
       'Content-Type',
