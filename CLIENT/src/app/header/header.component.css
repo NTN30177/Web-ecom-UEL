@@ -1279,6 +1279,9 @@ img {
 .sub-action ul {
   padding: 0 24px;
 }
+.sub-action{
+display: none;
+}
 .sub-action ul li a {
   font-weight: 600;
   font-size: 14px;
