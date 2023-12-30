@@ -311,13 +311,44 @@ export class ProductDetailComponent implements OnInit {
     const productGalleryElement = productGallery.$instance.nativeElement;
 
     $(thumbnailsSlickElement).slick({
-      infinite: false,
+      infinite: true,
       slidesToShow: 4,
       slidesToScroll: 1,
       arrows: true,
       asNavFor: '.product-single__gallery',
       prevArrow: '<button class="slick-prev" aria-label="Previous"><img src="../assets/icon/SVG/arrow-down.svg" alt="Previous"></button>',
       nextArrow: '<button class="slick-next" aria-label="Next"><img src="../assets/icon/SVG/arrow-down.svg" alt="Next"></button>',
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            infinite: true,
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
     });
 
     $(productGalleryElement).slick({
@@ -326,6 +357,37 @@ export class ProductDetailComponent implements OnInit {
       slidesToScroll: 1,
       arrows: false,
       asNavFor: '.thumbnails',
+      responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: false,
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
     });
 
     $(thumbnailsSlickElement).on('afterChange', () => {
@@ -344,5 +406,21 @@ export class ProductDetailComponent implements OnInit {
         $(thumbnailsSlickElement).slick('slickGoTo', index);
       });
     });
+  }
+
+  quantity: number = 1; // Số lượng mặc định
+
+  increaseQuantity(event: Event) {
+    event.preventDefault(); // Ngăn chặn sự kiện mặc định của thẻ <a>
+    if (this.quantity < 99) { // Giới hạn số lượng tối đa là 99
+      this.quantity++;
+    }
+  }
+
+  decreaseQuantity(event: Event) {
+    event.preventDefault(); // Ngăn chặn sự kiện mặc định của thẻ <a>
+    if (this.quantity > 1) { // Giới hạn số lượng tối thiểu là 1
+      this.quantity--;
+    }
   }
 }

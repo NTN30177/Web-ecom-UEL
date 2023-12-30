@@ -100,19 +100,19 @@
                                             <div class="product-detail__quantity">
                                                 <p>Số lượng:</p>
                                                 <div class="product-single__quantity">
-                                                    <div rel-script="quantity-change" class="quantity">
-                                                        <a href="#" class="quantity__reduce">-</a> 
-                                                        <input type="number" value="1" max="99" min="1" class="quantity__control"> 
-                                                        <a href="#" class="quantity__augure">+</a>
+                                                    <div class="quantity">
+                                                        <a href="#" class="quantity__reduce" (click)="decreaseQuantity($event)">-</a> 
+                                                        <input type="number" [(ngModel)]="quantity" max="99" min="1" class="quantity__control"> 
+                                                        <a href="#" class="quantity__augure" (click)="increaseQuantity($event)">+</a>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="product-detail__actions">
                                                 <div class="product-single__button col-sm-6">
-                                                    <a href="#" rel-script="product-add-to-cart" class="btn-add-to-cart">Thêm vào giỏ hàng</a>
+                                                    <a href="#" class="btn-add-to-cart">Thêm vào giỏ hàng</a>
                                                 </div>
                                                 <div class="product-single__button col-sm-6">
-                                                    <a href="#" rel-script="product-add-to-cart" class="btn-buy">Mua hàng</a>
+                                                    <a href="#" class="btn-buy">Mua hàng</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -167,7 +167,7 @@
                 <div class="exclusive-content">
                     <div class="exclusive-inner active">
                         <p class="product-related__title">Sản phẩm bạn có thể thích</p>
-                        <!-- <owl-carousel-o [options]="newprodOptions">
+                        <owl-carousel-o [options]="newprodOptions">
                             <ng-template carouselSlide  *ngFor="let product of productsHaveModified, index as productIndex" id="thumbProduct">
                                 <div class="owl-stage stage-detail">
                                     <div class="owl-item">
@@ -230,7 +230,7 @@
                                     </div>
                                 </div>
                             </ng-template>
-                        </owl-carousel-o> -->
+                        </owl-carousel-o>
                     </div>
                 </div>
             </div>
