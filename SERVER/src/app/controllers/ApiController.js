@@ -29,6 +29,8 @@ const getColor = async (req, res, next) => {
 const getType = async (req, res, next) => {
   try {
     const type = await Type.find({ _id: { $ne: '64c4c7f4e2a184d32cff6540' } });
+
+    console.log(type)
     res.json(type);
   } catch (err) {
     console.error(err.message);
@@ -58,7 +60,7 @@ const collection = async (req, res, next) => {
       .populate("subtypes")
       .lean();
 
-    // console.log(typePopulateSubType)
+    console.log(typePopulateSubType)
     res.json(typePopulateSubType);
   } catch (err) {
     console.error(err);

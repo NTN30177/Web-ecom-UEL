@@ -1,85 +1,162 @@
-[{
-  "_id": {
-    "$oid": "64cb721d066ac7727d33ceda"
+[
+  {
+    "_id": {
+      "$oid": "64cb721d066ac7727d33ceda"
+    },
+    "nameColor": "Cam đỏ",
+    "__v": 0,
+    "imageColor": "cam-do.png"
   },
-  "nameColor": "Cam đỏ",
-  "__v": 0,
-  "imageColor": "cam-do.png"
-},{
-  "_id": {
-    "$oid": "64cb723b066ac7727d33d0d6"
+  {
+    "_id": {
+      "$oid": "64cb723b066ac7727d33d0d6"
+    },
+    "nameColor": "Hồng nhạt",
+    "__v": 0,
+    "imageColor": "hong-nhat.png"
   },
-  "nameColor": "Hồng nhạt",
-  "__v": 0,
-  "imageColor": "hong-nhat.png"
-},{
-  "_id": {
-    "$oid": "64cb7247066ac7727d33d2d2"
+  {
+    "_id": {
+      "$oid": "64cb7247066ac7727d33d2d2"
+    },
+    "nameColor": "Hồng tím",
+    "__v": 0,
+    "imageColor": "hong-tim.png"
   },
-  "nameColor": "Hồng tím",
-  "__v": 0,
-  "imageColor": "hong-tim.png"
-},{
-  "_id": {
-    "$oid": "64cb7251066ac7727d33d4ce"
+  {
+    "_id": {
+      "$oid": "64cb7251066ac7727d33d4ce"
+    },
+    "nameColor": "Ngẫu nhiên",
+    "__v": 0,
+    "imageColor": "ngau-nhien.png"
   },
-  "nameColor": "Ngẫu nhiên",
-  "__v": 0,
-  "imageColor": "ngau-nhien.png"
-},{
-  "_id": {
-    "$oid": "64cb7260066ac7727d33d6ca"
+  {
+    "_id": {
+      "$oid": "64cb7260066ac7727d33d6ca"
+    },
+    "nameColor": "Tím cà",
+    "__v": 0,
+    "imageColor": "tim-ca.png"
   },
-  "nameColor": "Tím cà",
-  "__v": 0,
-  "imageColor": "tim-ca.png"
-},{
-  "_id": {
-    "$oid": "64cb726b066ac7727d33d8c6"
+  {
+    "_id": {
+      "$oid": "64cb726b066ac7727d33d8c6"
+    },
+    "nameColor": "Tím khối",
+    "__v": 0,
+    "imageColor": "tim-khoi.png"
   },
-  "nameColor": "Tím khối",
-  "__v": 0,
-  "imageColor": "tim-khoi.png"
-},{
-  "_id": {
-    "$oid": "64cb7277066ac7727d33dac2"
+  {
+    "_id": {
+      "$oid": "64cb7277066ac7727d33dac2"
+    },
+    "nameColor": "Tím thẫm",
+    "__v": 0,
+    "imageColor": "tim-tham.png"
   },
-  "nameColor": "Tím thẫm",
-  "__v": 0,
-  "imageColor": "tim-tham.png"
-},{
-  "_id": {
-    "$oid": "64cb7285066ac7727d33dcbe"
+  {
+    "_id": {
+      "$oid": "64cb7285066ac7727d33dcbe"
+    },
+    "nameColor": "Trắng",
+    "__v": 0,
+    "imageColor": "trang.png"
   },
-  "nameColor": "Trắng",
-  "__v": 0,
-  "imageColor": "trang.png"
-},{
-  "_id": {
-    "$oid": "64cb7297066ac7727d33deba"
+  {
+    "_id": {
+      "$oid": "64cb7297066ac7727d33deba"
+    },
+    "nameColor": "Vàng hoa cúc",
+    "__v": 0,
+    "imageColor": "vang-hoa-cuc.png"
   },
-  "nameColor": "Vàng hoa cúc",
-  "__v": 0,
-  "imageColor": "vang-hoa-cuc.png"
-},{
-  "_id": {
-    "$oid": "64cb7318066ac7727d33e0b6"
+  {
+    "_id": {
+      "$oid": "64cb7318066ac7727d33e0b6"
+    },
+    "nameColor": "Vàng mustard",
+    "__v": 0,
+    "imageColor": "vang-mustard.png"
   },
-  "nameColor": "Vàng mustard",
-  "__v": 0,
-  "imageColor": "vang-mustard.png"
-},{
-  "_id": {
-    "$oid": "65851798fb0cdd158835bc99"
+  {
+    "_id": {
+      "$oid": "65851798fb0cdd158835bc99"
+    },
+    "nameColor": "Xanh matcha",
+    "__v": 0,
+    "imageColor": "xanh-max-cha.png"
   },
-  "nameColor": "Xanh matcha",
-  "__v": 0,
-  "imageColor": "xanh-max-cha.png"
-},{
-  "_id": {
-    "$oid": "65852347fb0cdd158835bcb5"
+  {
+    "_id": {
+      "$oid": "65852347fb0cdd158835bcb5"
+    },
+    "nameColor": "Đen",
+    "__v": 0,
+    "imageColor": "den.png"
   },
-  "nameColor": "Đen",
-  "__v": 0,
-  "imageColor": "den.png"
-}]
+  {
+    "_id": {
+      "$oid": "65880c01c3cc26960695c93d"
+    },
+    "nameColor": "Be",
+    "__v": 0,
+    "imageColor": "Be.jpg"
+  },
+  {
+    "_id": {
+      "$oid": "65883dc145c7b6902e30445e"
+    },
+    "nameColor": "Be",
+    "__v": 0,
+    "imageColor": "be.jpg"
+  },
+  {
+    "_id": {
+      "$oid": "6588451c45c7b6902e304463"
+    },
+    "nameColor": "Xanh ghi đá",
+    "__v": 0,
+    "imageColor": "xanh-ghi-da.jpg"
+  },
+  {
+    "_id": {
+      "$oid": "6588ef5391512921d15adb88"
+    },
+    "nameColor": "Hồng san hô",
+    "__v": 0,
+    "imageColor": "hong-san-ho.png"
+  },
+  {
+    "_id": {
+      "$oid": "6588ed4791512921d15adb84"
+    },
+    "nameColor": "Xanh jean",
+    "__v": 0,
+    "imageColor": "xanhjean.png"
+  },
+  {
+    "_id": {
+      "$oid": "6588ef2d91512921d15adb87"
+    },
+    "nameColor": "Be",
+    "__v": 0,
+    "imageColor": "be.jpg"
+  },
+  {
+    "_id": {
+      "$oid": "6588ebd0f71d27a298a1bf6d"
+    },
+    "nameColor": "Ghi",
+    "__v": 0,
+    "imageColor": "ghi.png"
+  },
+  {
+    "_id": {
+      "$oid": "6588f72ef71d27a298a1bfc4"
+    },
+    "nameColor": "Đỏ tươi",
+    "__v": 0,
+    "imageColor": "do-tuoi.png"
+  }
+]

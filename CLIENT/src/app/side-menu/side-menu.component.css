@@ -71,7 +71,9 @@ ul {
     text-decoration: none;
     color: rgba(0, 0, 0, 1);
 }
-
+.sideMenu_menu li a:hover{
+    font-weight: bold;
+}
 .sideMenu_menu ul li a.active {
     font-weight: bold;
 }
