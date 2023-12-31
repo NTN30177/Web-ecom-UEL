@@ -283,9 +283,9 @@ img:not([src]) {
     position: absolute;
     top: calc(50% - 9px);
     left: calc(50% - 9px);
-    background-color: #fff;
-    width: 16px;
-    height: 16px;
+    background-color: #000;
+    width: 20px;
+    height: 20px;
     border-radius: 100px;
     background-image: url(https://static.coolmate.me/images/arrow-down-white.svg?d734b8db273ce2fea8bbd0f51b05fc91);
     background-repeat: no-repeat;
@@ -297,12 +297,12 @@ img:not([src]) {
 
 .product-single__thumbnails .thumbnails.slick-slider .slick-arrow.slick-prev {
     left: 0;
-    transform: rotate(90deg);
+    transform: rotate(180deg);
 }
 
 .product-single__thumbnails .thumbnails.slick-slider .slick-arrow.slick-next {
     right: 0;
-    transform: rotate(270deg);
+    transform: rotate(360deg);
 }
 
 .product-single__thumbnails .thumbnails.slick-slider .slick-dots {
@@ -539,10 +539,13 @@ img:not([src]) {
 .text--bold {
     font-weight: 700;
 }
-
+.product-single__options .option-heading__title {
+    margin-right: 15px;
+}
 .product-single__options .option-heading__title span.text--bold {
     margin-left: 5px;
 }
+.product-single__options 
 
 .product-single__options .option-heading__sizeguide {
     text-decoration: underline;
@@ -720,6 +723,9 @@ img:not([src]) {
     position: relative;
     transition: all .3s
 }
+.product-single__option .option-heading {
+    margin-bottom: 17px;
+}
 
 .product-single__option.is-error {
     padding-top: 10px;
@@ -757,6 +763,44 @@ img:not([src]) {
     padding-bottom: 30px;
     border-bottom: 1px solid #E5D4D0;
 }
+.product-single__addtocart .colors {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+ ul li.color {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    cursor: pointer;
+}
+ul li.color-active:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #9B3A23;
+    border-radius: 16px;
+    transform: rotate(0deg);
+}
+ul li .color-picked {
+    padding: 2px;
+}
+ul li .color-picked img {
+    display: block;
+    width: 35px;
+    height: 20px;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-size: 250%;
+    background-position: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+}
 
 @media (max-width: 991px) {
     .product-single__addtocart {
@@ -793,6 +837,14 @@ img:not([src]) {
     font-size: 18px;
     line-height: 23px;
 }
+.quantity .quantity__control {
+    border: 0;
+    background-color: transparent;
+    pointer-events: none;
+    text-align: center;
+    flex: 1;
+    max-width: 40px;
+}
 
 .quantity__augure, .quantity__reduce {
     display: flex;
@@ -814,6 +866,7 @@ img:not([src]) {
 
 .quantity input[type=number] {
     -moz-appearance: textfield;
+    
 }
 
 .product-detail__quantity p{
@@ -857,6 +910,7 @@ img:not([src]) {
     transition: all .2s;
     cursor: pointer;
     font-weight: 600;
+    gap: 15px;
 }
 
 .product-single__button .btn-add-to-cart .btn-icon{
@@ -872,7 +926,6 @@ img:not([src]) {
 }
 
 .btn-buy {
-    flex: 1;
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -883,6 +936,7 @@ img:not([src]) {
     transition: all .2s;
     cursor: pointer;
     font-weight: 600;
+    gap: 15px
 }
 
 .product-single__button .btn-buy .btn-icon {
@@ -893,7 +947,6 @@ img:not([src]) {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: 50%;
-    margin-right: 15px;
 }
 
 .product-single__policy {
@@ -928,6 +981,9 @@ img:not([src]) {
     width: 35px;
     height: 35px;
     margin-bottom: 10px;
+}
+.product-policy__icon img {
+    width: 100%;
 }
 
 
@@ -967,7 +1023,7 @@ img:not([src]) {
     font-size: 32px;
     text-transform: uppercase;
     text-align: center;
-    line-height: 0px;
+    margin-bottom: 30px;
 }
 
 .product-detail__size input[type=radio]:checked ~ span {
@@ -1172,7 +1228,6 @@ img:not([src]) {
     border-radius: 8px;
     width: 40px;
     height: 25px;
-    color: #FFF;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1181,7 +1236,9 @@ img:not([src]) {
     background-color: #fff;
     color: #000;
 }
-
+.add-to-cart a > i {
+    color: #fff;
+}
 .thumb-product{
     position: relative;
     cursor: pointer;
