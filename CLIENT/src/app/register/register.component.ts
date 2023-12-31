@@ -227,8 +227,8 @@ this.postRegister()
               verticalPosition: 'top',
             });
             if (data.success) {
-              const snackBarRef = this.snackBar.open('Lưu dữ liệu thành công', 'Close', {
-                duration: 1000,
+              const snackBarRef = this.snackBar.open('Vui lòng xác thực gmail', 'Close', {
+                duration: 4000,
                 horizontalPosition: 'center',
                 verticalPosition: 'top',
               });

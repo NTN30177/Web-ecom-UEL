@@ -37,6 +37,7 @@ export class FilterProductComponent implements AfterViewInit {
   totalProduct: any;
   slug: any;
   selectedValue = 'latest';
+  slugName: any;
 
   constructor(
     private el: ElementRef,
@@ -408,6 +409,7 @@ export class FilterProductComponent implements AfterViewInit {
         .subscribe((data) => {
           this.products = data.productsByCategory;
           this.totalProduct = data.totalProducts;
+          this.slugName = data.slugName;
           console.log(this.products);
           this.updateProductsHaveModified();
           this.initializeSelectedColorIndex();
