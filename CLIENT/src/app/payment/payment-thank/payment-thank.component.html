@@ -9,11 +9,11 @@
                 </svg>
             </div>
             <div class="thank-title">Cảm ơn bạn đã đặt hàng</div>
-            <div>Một email xác nhận sẽ được gửi tới <a href="">{{emailUser}}</a> </div>
-            <div>Xin vui lòng kiểm tra email của bạn.</div>
+            <div>Thư xác nhận sẽ được gửi tới email của bạn {{emailUser}}.</div>
+            <div>Xin vui lòng kiểm tra email của bạn!</div>
 
         </div>
-        <div class="mb-4 " style="font-weight: 700;">Đơn hàng: </div>
+        <div class="mb-4 " style="font-weight: 700;"  >Đơn hàng: <span class="orderId" routerLink="/account/order/order-tracking/{{orderInfo.orderId}}">{{orderInfo.orderId}} </span> </div>
         <hr class="mb-3 ">
         <div class="order-info">
             <div class="payment-footer-row">
@@ -39,6 +39,7 @@
             <div class="product-total__title">Tổng tiền</div>
             <div class="product-total__value">{{formatMoneyVietNam(orderInfo.total_payment-orderInfo.ship_code)}}</div>
         </div>
+        <div class="orderId view-order-link" routerLink="/account/order/order-tracking/{{orderInfo.orderId}}">Xem chi tiết đơn hàng</div>
     </div>
     <div class="thank-foot">
         <div routerLink="/" class="button-buy">Tiếp tục mua hàng</div>

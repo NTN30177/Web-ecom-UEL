@@ -33,7 +33,7 @@
 
     <div class="col-md-4 col-sm-12 col-address-action mt-lg-0 mt-3 ">
         <div class="d-flex justify-content-end gap-2 ">
-            <button class="button-update">Cập nhật</button>
+            <button class="button-update" (click)="alertwarning()">Cập nhật</button>
             <button class="button-delete" (click)="deleteAddress(address._id.toString())">Xóa</button>
 
         </div>

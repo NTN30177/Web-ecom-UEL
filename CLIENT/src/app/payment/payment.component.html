@@ -81,7 +81,7 @@
   <div class="address-container flex-column mb-5">
     <div class="row align-items-center">
       <div class="col-8">
-        <div class="block-header mb-5">Thông tin nhận hàng</div>
+        <div class="block-header mb-4">Thông tin nhận hàng</div>
 
         <div *ngIf="defaultAddress" class="">
           <div class="name">
@@ -192,7 +192,7 @@
     <div class="payment-footer-row">
       <div class="estimated-cost__title">Tạm tính</div>
       <div class="estimated-cost__value">
-        <div class="total-after__discount">1.900.000</div>
+        <div class="total-after__discount">{{formatMoneyVietNam(total_payment)}}</div>
         <div class="total-discount">
           (Tiết kiệm <span class="total-discount__value">0</span>)
         </div>
@@ -200,11 +200,11 @@
     </div>
     <div class="payment-footer-row">
       <div class="product-gift__title">Giảm giá</div>
-      <div class="product-gift__value red">{{formatMoneyVietNam(ship_code)}}</div>
+      <div class="product-gift__value red">{{formatMoneyVietNam(0)}}</div>
     </div>
     <div class="payment-footer-row">
       <div class="product-ship__title">Phí giao hàng</div>
-      <div class="product-ship__value">0</div>
+      <div class="product-ship__value">{{formatMoneyVietNam(ship_code)}}</div>
     </div>
   </div>
   <hr class="gy-4 mb-5 hr-custom" />
@@ -213,8 +213,8 @@
     <div class="payment-footer-row">
       <div class="product-total__title">Tổng tiền</div>
       <div>
-        <div class="product-total__value">{{formatMoneyVietNam(total_payment)}}</div>
-        <div class="total-note">(đã giảm 237k trên giá gốc)</div>
+        <div class="product-total__value">{{formatMoneyVietNam(total_payment+ship_code)}}</div>
+        <div class="total-note">(đã giảm 0đ trên giá gốc)</div>
       </div>
     </div>
     <div routerLink="/payment-success" class="button-buy" (click)="buy()">Mua ngay ({{total_quantity}})</div>

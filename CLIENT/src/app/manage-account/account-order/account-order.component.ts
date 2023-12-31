@@ -6,6 +6,7 @@ import { OrderService } from '../../services/order.service';
 import { IOrders } from '../../interfaces/order';
 import { AuthService } from '../../services/auth.service';
 import { DataTableDirective } from 'angular-datatables';
+import { formatDate, formatMoneyVietNam } from '../../utils/utils';
 
 
 @Component({
@@ -15,6 +16,8 @@ import { DataTableDirective } from 'angular-datatables';
   encapsulation: ViewEncapsulation.None,
 })
 export class AccountOrderComponent implements OnInit {
+  formatDate=formatDate
+  formatMoneyVietNam=formatMoneyVietNam
   dtOptions: DataTables.Settings = {};
   userID: any;
   orders: IOrders[] = [];
@@ -29,7 +32,8 @@ export class AccountOrderComponent implements OnInit {
       pagingType: 'full_numbers',
       pageLength: 10,
       searching: true,
-      // dom: 'lfrtip',
+      paging: true,
+      order: [[1, 'desc']],
       language: {
         url: 'https://cdn.datatables.net/plug-ins/1.10.21/i18n/Vietnamese.json',
       },
@@ -51,6 +55,8 @@ export class AccountOrderComponent implements OnInit {
     }
   }
 
+
+
   @ViewChild(DataTableDirective, { static: false })
   dtElement!: DataTableDirective;
   dtTrigger: Subject<any> = new Subject<any>();
@@ -59,10 +65,8 @@ export class AccountOrderComponent implements OnInit {
     this.orderService.getUserOrders(this.userID).subscribe(
       (data) => {
         this.orders = data;
+        this.dtTrigger.next(null);
         // console.log('OrderService respond account order list:', this.orders);
-        // this.orders.forEach(order => {
-        //   console.log('ORDER:', order);
-        // });
       },
       (error) => {
         console.error('Error fetching user orders:', error);

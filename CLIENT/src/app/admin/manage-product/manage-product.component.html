@@ -21,7 +21,7 @@
                         </svg>
                         <input type="text" value="" placeholder="Search">
                     </div> -->
-                    <div class="btn-create col-lg-2 col-md-3"><button routerLink="add-product" type="button"
+                    <div class="btn-create col-lg-2 col-md-3"><button routerLink="/admin/add-product" type="button"
                             class="btn"><i class="bi bi-plus"></i>Tạo sản phẩm</button>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                                             <td>{{ product.variants.length }}</td>
                                             <td>
                                                 <div class="d-flex gap-4 justify-content-start  ">
-                                                    <div style="cursor: pointer;">
+                                                    <div style="cursor: pointer;"(click)="alertwarning()">
                                                         <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16"
                                                             viewBox="0 0 512 512">
                                                             <path
@@ -103,7 +103,7 @@
                                             <td>{{ product.variants.length }}</td>
                                             <td>
                                                 <div class="d-flex gap-4 justify-content-start  ">
-                                                    <div style="cursor: pointer;">
+                                                    <div style="cursor: pointer;" (click)="alertwarning()">
                                                         <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16"
                                                             viewBox="0 0 512 512">
                                                             <path

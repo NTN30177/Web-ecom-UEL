@@ -191,10 +191,10 @@ export class CartComponent implements OnInit {
     this.ship_code = 0;
   
     productsCart.forEach((product: any) => {
-      console.log(product);
+      // console.log(product);
       product.variants.forEach((variant: any) => {
         variant.variantColor.forEach((variantColor: any) => {
-          console.log(variantColor);
+          // console.log(variantColor);
           this.total_variantColor++;
           this._authServer.cartSubject.next(this.total_quantity);
           // Assuming there is a 'price' property for each variant

@@ -98,3 +98,17 @@
     height: 78px;
     flex-shrink: 0;
 }
+
+.orderId {
+    color: rgba(35, 154, 26, 1);
+    cursor: pointer;
+}
+
+.view-order-link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.view-order-link:hover {
+    font-weight: bold;
+}
