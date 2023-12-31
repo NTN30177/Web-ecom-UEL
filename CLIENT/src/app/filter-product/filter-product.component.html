@@ -145,14 +145,14 @@
                 </div>
               </div>
               <div class="collection-section-loadmore">
-                <a href="" class="collection-section-loadmore__btn btn">Xem thêm</a>
+                <a class="collection-section-loadmore__btn btn" (click)="viewMore()" *ngIf="totalProduct>(productsPerPage*currentPage)">Xem thêm</a>
                 <p class="collection-section-loadmore__page">
                   Hiển thị
                   <span>1</span>
                   -
-                  <span class="loadmore-total">18</span>
+                  <span class="loadmore-total">{{totalProduct>(productsPerPage*currentPage) ?(productsPerPage*currentPage):totalProduct}}</span>
                   trên tổng số
-                  <span class="total-products">116</span>
+                  <span class="total-products">{{totalProduct}}</span>
                   sản phẩm
                 </p>
               </div>

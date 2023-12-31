@@ -10,7 +10,7 @@ const { User } = require("../models/user");
 const getCategoryProductsPagination = async (req, res) => {
   const slug = req.params.slug;
   const page = parseInt(req.query.page) || 1;
-  const pageSize = 10; // Số lượng sản phẩm trên mỗi trang
+  const pageSize = req.query.productsPerPage; // Số lượng sản phẩm trên mỗi trang
   const keySearch = req.query.keySearch;
   try {
     let products;
@@ -66,21 +66,20 @@ const filterProductsBySlug = async (slug) => {
         path: "subtypes",
         populate: {
           path: "products",
-        populate:{
-          path: "variants.color",
-          select: "imageColor nameColor",
-        }
-      }
+          populate: {
+            path: "variants.color",
+            select: "imageColor nameColor",
+          },
+        },
       })
       .lean();
 
     if (type) {
       const allProducts = type.subtypes.flatMap((subtype) => subtype.products);
-      console.log(allProducts, "type");
       return allProducts;
     } else {
       const subtype = await Subtype.findOne({ slug })
-        .populate({path: "products"})
+        .populate({ path: "products" })
         .populate({
           path: "variants.color",
           select: "imageColor nameColor",
@@ -116,22 +115,30 @@ const filterProducts = (
         )
     );
   }
-console.log(color)
-  if (color && color.length > 0) {
-    filteredProducts = filteredProducts.filter((product) =>
-      product.variants.some(
-        (variant) =>
-          color.includes(variant.color) &&
-          variant.variantColor.some((vc) => vc.quantity > 0)
-      )
-    );
-  }
+  if (color != "undefined" && color.length > 0) {
+    const arrayOfColor = color.split(",");
+    console.log(typeof arrayOfColor)
+    console.log( arrayOfColor)
+      filteredProducts = filteredProducts.filter((product) =>
+        product.variants.some(
+          (variant) =>
+          arrayOfColor.includes(variant.color._id.toString()) &&
+            variant.variantColor.some((vc) => vc.quantity > 0)
+        )
+      );
 
-  if (size && size.length > 0) {
+
+
+    console.log(filteredProducts)
+  }
+  if (size != "undefined" && size.length > 0) {
+    const arrayOfSize = size.split(",");
+    console.log(typeof arrayOfSize)
+    console.log( arrayOfSize)
     filteredProducts = filteredProducts.filter((product) =>
       product.variants.some((variant) =>
         variant.variantColor.some(
-          (vc) => size.includes(vc.size.toLowerCase()) && vc.quantity > 0
+          (vc) => arrayOfSize.includes(vc.size) && vc.quantity > 0
         )
       )
     );
@@ -174,11 +181,15 @@ const sort = (products, { sort }) => {
 };
 
 const paginateProducts = (products, page, pageSize) => {
+  console.log(pageSize)
+  console.log(products.length)
+  console.log(page)
   const startIndex = (page - 1) * pageSize;
   const endIndex = startIndex + pageSize;
   const totalPage = Math.ceil(products.length / pageSize);
-  const paginatedProducts = products.slice(startIndex, endIndex);
+  const paginatedProducts = products.slice(0, endIndex);
   console.log("totalpage", totalPage);
+  console.log(paginatedProducts)
   return { paginatedProducts, totalPage };
 };
 
