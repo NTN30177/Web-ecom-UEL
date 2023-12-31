@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CartService } from '../services/cart.service';
 import { AuthService } from '../services/auth.service';
 import { formatMoneyVietNam, convertStringToNumbers } from '../utils/utils';
+import { localProductImg } from '../ENV/envi';
 
 @Component({
   selector: 'app-cart',
@@ -12,6 +13,7 @@ import { formatMoneyVietNam, convertStringToNumbers } from '../utils/utils';
 export class CartComponent implements OnInit {
   formatMoneyVietNam = formatMoneyVietNam;
   convertStringToNumbers = convertStringToNumbers;
+  localProductImg=localProductImg
 
   rfDataModal: FormGroup;
   errFlag: boolean | undefined;

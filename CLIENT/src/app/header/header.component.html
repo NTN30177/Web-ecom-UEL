@@ -44,7 +44,7 @@
                             <a href="" class="action-login">Đăng nhập</a>
                         </div>
                         <ul class="menu-mb">
-                            <li class="has-child">
+                            <li class="has-child"  *ngIf="types">
                                 <a href="javascript:void(0)" (click)="toggleSubMenu()">
                                     Sản phẩm
                                     <span class="arrows" [class.open]="submenuOpen">
@@ -53,17 +53,16 @@
                                     </span>
                                 </a>
                                 <ul class="sub-menu-mb">
-                                    <li class="has-sub-child" *ngFor="let item of menuItems; let i = index" (click)="closeSubMenu()">
-                                        <a href="javascript:void(0)" (click)="toggleSubMenuChild($event, i)">
-                                          {{ item.label }}
+                                    <li class="has-sub-child" *ngFor="let type of types; let i = index" (click)="closeSubMenu()">
+                                          <a routerLink="/category/{{type.slug}}" (click)="toggleSubMenuChild($event, i)">{{type.typeName}}
                                           <span class="arrows child">
                                             <i class="ti-plus"></i>
                                             <i class="ti-minus"></i>
                                           </span>
                                         </a>
                                         <ul class="child-sub" #childSubmenu style="display:none">
-                                          <li *ngFor="let subItem of item.subItems">
-                                            <a href="">{{ subItem.label }}</a>
+                                          <li *ngFor="let subtype of type.subtypes">
+                                            <a routerLink="/category/{{subtype.slug}}">{{subtype.subTypeName}}</a>
                                           </li>
                                         </ul>
                                       </li>

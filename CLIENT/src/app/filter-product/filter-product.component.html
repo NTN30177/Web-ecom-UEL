@@ -17,7 +17,7 @@
             <li class="color-item" *ngFor="let color of listColor">
               <a class="color-item__button" (click)="toggleActive(color)"
                 [ngClass]="{'active': selectedColors.includes(color)}">
-                <img src="http://localhost:3000/colorImages/{{ color.imageColor }}" />
+                <img src="{{localColorImg}}/{{ color.imageColor }}" />
               </a>
             </li>
           </ul>
@@ -74,10 +74,10 @@
                           <div class="thumb-product">
                             <a href="/product/product-detail/{{product.slug}}">
                               <img id="ao"
-                                src="http://localhost:3000/productImages/{{product.imgHomePage[0].images[0]}}" alt=""
+                                src="{{localProductImg}}/{{product.imgHomePage[0].images[0]}}" alt=""
                                 class=" static">
                               <img id="ao2"
-                                src="http://localhost:3000/productImages/{{product.imgHomePage[0].images[1]}}" alt=""
+                                src="{{localProductImg}}/{{product.imgHomePage[0].images[1]}}" alt=""
                                 class=" hover_img">
                             </a>
                           </div>
@@ -89,7 +89,7 @@
                                   <a href="javascript:void(0)" class="color-picked" data-id="{{ v._id }}"
                                     (click)="changeColor(product, v.color._id); updateSelectedColorIndex(productIndex, colorI)"
                                     [ngClass]="{'active-color': colorI === 0}">
-                                    <img src="http://localhost:3000/colorImages/{{v.color.imageColor}}" alt="">
+                                    <img src="{{localColorImg}}/{{v.color.imageColor}}" alt="">
                                   </a>
                                 </li>
 

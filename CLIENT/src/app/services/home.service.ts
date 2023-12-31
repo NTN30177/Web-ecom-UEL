@@ -22,9 +22,6 @@ getProductHomePage(): Observable<any> {
   );
 }
 
-  
-
-  
   handleError(error: HttpErrorResponse) {
     return throwError(() => new Error(error.message));
   }

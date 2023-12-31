@@ -16,6 +16,7 @@ import { take } from 'rxjs';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
 import { SortPaginationService } from '../services/sort-pagination.service';
 import { ActivatedRoute } from '@angular/router';
+import { localProductImg, localColorImg } from '../ENV/envi';
 
 @Component({
   selector: 'app-filter-product',
@@ -24,6 +25,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class FilterProductComponent implements AfterViewInit {
   formatMoneyVietNam = formatMoneyVietNam;
+  localProductImg=localProductImg
+  localColorImg=localColorImg
   productStates: boolean[] = [];
   i: number = 0;
   errMessage: any;
