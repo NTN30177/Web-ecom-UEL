@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder,
   FormGroup,
   Validators,
-  ReactiveFormsModule,
   FormControl,
-  FormArray, } from '@angular/forms';
+ } from '@angular/forms';
 
 @Component({
   selector: 'app-add-color',
@@ -49,35 +48,37 @@ export class AddColorComponent implements OnInit{
     console.log(formData);
   }
 
-  onFileChange(event: any) {
-    const files = event.target.files;
-    if (files.length > 0) {
-      const file = files[0];
-      const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
-      // Access the 'images' control using the 'get' method
-      const imagesControl = this.addColorForm.get('images');
+  // onFileChange(event: any) {
+  //   const files = event.target.files;
+  //   if (files.length > 0) {
+  //     const file = files[0];
+  //     const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+  //     const imagesControl = this.addColorForm.get('images');
 
-      if (imagesControl) {
-        imagesControl.setValue(files[0]);
-        imagesControl.markAsTouched();
-      }
+  //     if (imagesControl) {
+  //       imagesControl.setValue(files[0]);
+  //       imagesControl.markAsTouched();
+  //     }
 
-      if (allowedTypes.includes(file.type)) {
-        console.log('Tệp hợp lệ:', file);
-      } 
-      else {
-        console.error('Loại tệp không hợp lệ');
-      }
-    } 
-    else {
-      // Clear the 'images' control value if no file is selected
-      const imagesControl = this.addColorForm.get('images');
-      if (imagesControl) {
-        imagesControl.setValue(null);
-      }
-    }
+  //     if (allowedTypes.includes(file.type)) {
+  //       console.log('Tệp hợp lệ:', file);
+  //     } 
+  //     else {
+  //       console.error('Loại tệp không hợp lệ');
+  //     }
+  //   } 
+  //   else {
+  //     const imagesControl = this.addColorForm.get('images');
+  //     if (imagesControl) {
+  //       imagesControl.setValue(null);
+  //     }
+  //   }
+  // }
+
+  featureUnderDevelopment(){
+    alert('Chức năng đang được phát triển')
   }
-
+  
   get colorName() {
     return this.addColorForm.get('name') as FormControl;
   }

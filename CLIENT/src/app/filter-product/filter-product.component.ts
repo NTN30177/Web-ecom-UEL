@@ -362,7 +362,7 @@ export class FilterProductComponent implements AfterViewInit {
   }
 
   ///sort
-  sizes: string[] = ['S', 'M', 'L', 'XL', '2XL', 'FreeSize'];
+  sizes: string[] = ['S', 'M', 'L', 'XL', 'XXL', 'FreeSize'];
   isActive: boolean[] = [false, false, false, false, false]; // Initialize with the correct number of elements
 
   toggleSizeActive(index: number) {

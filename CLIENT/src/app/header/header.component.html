@@ -22,7 +22,6 @@
                                 <div class="list-submenu" *ngIf="types">
                                     <div class="list-submenu__item" *ngFor="let type of types">
                                       <h3><a routerLink="/category/{{type.slug}}">{{type.typeName}}</a></h3>
-
                                         <ul *ngFor="let subtype of type.subtypes">
                                             <li><a routerLink="/category/{{subtype.slug}}">{{subtype.subTypeName}}</a></li>
                                         </ul>
@@ -262,8 +261,8 @@
                             <a href="#" class="link-nav-bot">Trợ giúp</a>
                         </div>
                     </div>
-                    <div class="item-nav-bot">
-                        <div class="item item-headphone item-nav" *ngIf="isLogin">
+                    <div class="item-nav-bot" *ngIf="isLogin">
+                        <div class="item item-headphone item-nav" >
                             <a href="javascript:void(0)" class="icon icon-account" (click)="toggleSubAction()">
                               <i class="header__icon ti-user"></i>                                
                             </a>

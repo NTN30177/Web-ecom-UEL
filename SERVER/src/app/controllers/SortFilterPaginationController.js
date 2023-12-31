@@ -197,9 +197,14 @@ const paginateProducts = (products, page, pageSize) => {
   const totalPage = Math.ceil(products.length / pageSize);
   const paginatedProducts = products.slice(0, endIndex);
   console.log("totalpage", totalPage);
+  
  
+  
+
+
   return { paginatedProducts, totalPage };
 };
+
 
 module.exports = {
   getCategoryProductsPagination,
