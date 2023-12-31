@@ -201,7 +201,7 @@
           <div class="form-group type p-0">
             <label for="color ">Type :</label>
             <select class="col-12" (change)="selectChange($event)" formControlName="typeName"
-            [class.is-invalid]="errFlag && productType.touched"  (blur)="validateCourse(productType.value)" (change)="validateCourse(productType.value)"
+            [class.is-invalid]="errFlag && productType.touched"  (blur)="validateSelect(productType.value)" (change)="validateSelect(productType.value)"
             >
               <option value="">Chọn type</option>
               <option *ngFor="let type of types" [value]="type.typeName">
