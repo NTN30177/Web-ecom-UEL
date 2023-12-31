@@ -1,9 +1,8 @@
-import { Component, ViewEncapsulation, ElementRef, Renderer2, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, ElementRef, Renderer2, ViewChild, OnInit,ChangeDetectorRef } from '@angular/core';
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { HomeService } from '../services/home.service';
 import { IProduct } from '../interfaces/product';
-import { ChangeDetectorRef } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { CartComponent } from '../cart/cart.component';
 import { CartService } from '../services/cart.service';
@@ -32,6 +31,8 @@ export class ProductDetailComponent implements OnInit {
   currentColor = 0;
   userIdFromHeader: any;
   slug: any;
+  product: IProduct | undefined;
+  productIndex: any;
 
 
   private initOwlCarousel(): void {
@@ -193,9 +194,7 @@ export class ProductDetailComponent implements OnInit {
   selectedColorIndex: number[] = []; // Sử dụng một mảng để lưu trữ index cho từng sản phẩm
 
   initializeSelectedColorIndex(): void {
-    this.selectedColorIndex = new Array(this.productsHaveModified.length).fill(
-      0
-    );
+    this.selectedColorIndex = new Array(this.productsHaveModified.length).fill(0);
   }
 
   updateSelectedColorIndex(productIndex: number, colorI: number): void {

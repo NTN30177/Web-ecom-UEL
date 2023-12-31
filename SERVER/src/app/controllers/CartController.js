@@ -1,10 +1,4 @@
-const { Address } = require("../models/address");
 const { User, UserAddress } = require("../models/user");
-const bcrypt = require("bcryptjs");
-const nodemailer = require("nodemailer");
-const randomstring = require("randomstring");
-const { emailUser, emailPassword } = require("../../config/config");
-const { Province, District, Ward } = require("../models/address");
 const {
   Product,
   Type,
@@ -17,7 +11,6 @@ const getProductCart = async (req, res) => {
   try {
     const userId = req.params.userId;
     console.log(userId, "UID");
-    // const userId = req.session.user_id || "6580f3713804fc632783f4cf";
     const user = await User.findOne({ _id: userId });
 
     if (!user || !user.cart) {
@@ -59,95 +52,6 @@ const getProductCart = async (req, res) => {
   }
 };
 
-// const addOrPutProductToCart = async (req, res, next) => {
-//   try {
-//     const { colorId, productId, size, quantityAction } = req.body;
-//     console.log(1)
-//     console.log(colorId, productId, size )
-//     // const size2 =size.slice(0, 3).trim();
-//     const size2 =size
-//     console.log('s'+size2)
-//     console.log(size)
-
-//     const quantity = 1
-//     const quantityColorNew = parseInt(quantityAction)
-//     const p = await Product.findOne({_id:productId})
-//     .populate({
-//       path: "variants.color",
-//       select: "nameColor imageColor"})
-//     .lean();
-
-//     const variant = p.variants.find(v => v.color._id.toString() === colorId);
-//     const imageCart = variant ? variant.images[0] : [];
-
-//     const colorFind = await Color.findOne({ _id: colorId });
-//     const colorName = colorFind.nameColor;
-
-//     const userId = req.session.user_id || '6580f3713804fc632783f4cf'
-
-//     const userOri = await User.findOne({ _id: userId }).lean();
-//     const cartUser = await CartItem.findOne({ _id: userOri.cart.toString() });
-//     const userByCart = await User.findOne({ _id: userId }).populate('cart').lean();
-
-//     const variantColorData = [{ size2, quantity: parseInt(quantity) }];
-//     const variantData = { color: colorId, images: [imageCart], variantColor: variantColorData };
-//     const newCartItem = { productId, variants: [variantData] };
-//     console.log(colorId, productId, size2)
-
-//     const existProductIndex = cartUser.productItem.findIndex(
-//       (p) => p.productId.toString() === productId
-//     );
-//     if (existProductIndex === -1) {
-//       cartUser.productItem.push(newCartItem);
-//     } else {
-//       const existingProduct = cartUser.productItem[existProductIndex];
-//       const existColorIndex = existingProduct.variants.findIndex(
-//         (v) => v.color._id.toString() === colorId
-//       );
-//       if (existColorIndex !== -1) {
-//         const existingColor = existingProduct.variants[existColorIndex];
-//         const existSizeIndex = existingColor.variantColor.findIndex(
-//           (vc) => vc.size === size2
-//         );
-//         if (existSizeIndex !== -1) {
-//           if(parseInt(quantityAction) >0){
-//           console.log('Cộng dồn 1 hoặc nhiều sp')
-//             console.log(parseInt(quantityAction))
-//             existingColor.variantColor[existSizeIndex].quantity += parseInt(quantityAction);
-//           }else if(parseInt(quantityAction) ===0){
-//           console.log('Xóa sp')
-//             // existingColor.variantColor[existSizeIndex].quantity =existingColor.variantColor[existSizeIndex].quantity + quantityAction;
-//             existingColor.variantColor[existSizeIndex].quantity =0
-//             console.log(existingColor.variantColor[existSizeIndex].quantity, '5')
-//             console.log(existingColor)
-//             await checkQuantity(cartUser, existingProduct, existingColor)
-//             console.log('xóa xp 1')
-//           }else{
-//           console.log('Nút giảm')
-
-//             existingColor.variantColor[existSizeIndex].quantity -= parseInt(quantity);
-//             await checkQuantity(cartUser, existingProduct, existingColor)
-//           }
-//         } else {
-//           console.log(quantityColorNew, quantityAction)
-//           existingColor.variantColor.push({ size, quantity:quantityColorNew });
-//         }
-//       } else {
-//         existingProduct.variants.push({
-//           color: colorId,
-//           images:[imageCart],
-//           variantColor: [{ size, quantity }],
-//         });
-//       }
-//     }
-//     await cartUser.save();
-//     console.log('11233api')
-//     console.log(userByCart.cart)
-//     res.json(userByCart.cart);
-//   } catch (err) {
-//     console.error(err);
-//   }
-// };
 const checkQuantity = async (cartUser, productItem, productColor) => {
   productColor.variantColor = productColor.variantColor.filter(
     (vc) => vc.quantity > 0
@@ -158,7 +62,7 @@ const checkQuantity = async (cartUser, productItem, productColor) => {
   cartUser.productItem = cartUser.productItem.filter(
     (item) => item.variants.length > 0
   );
-  console.log("1");
+  // console.log("1");
 };
 
 const addOrPutProductToCart = async (req, res, next) => {
@@ -170,7 +74,6 @@ const addOrPutProductToCart = async (req, res, next) => {
     console.log(userId, "UID");
     const size2 = size;
     const quantity = 1;
-    // const quantityColorNew = parseInt(quantityAction);
 
     const p = await Product.findOne({ _id: productId })
       .populate({
@@ -182,18 +85,14 @@ const addOrPutProductToCart = async (req, res, next) => {
       const variantColorId = v.color._id.toString();
       const providedColorId = colorId.toString();
 
-      console.log("Variant Color ID:", variantColorId);
-      console.log("Provided Color ID:", providedColorId);
+      // console.log("Variant Color ID:", variantColorId);
+      // console.log("Provided Color ID:", providedColorId);
 
       return variantColorId === providedColorId;
     });
 
     const imageCart = variant ? variant.images[0] : [];
-
     const colorFind = await Color.findOne({ _id: colorId });
-    // const colorName = colorFind.nameColor;
-
-    // const userId = req.session.user_id || '6580f3713804fc632783f4cf';
     const userOri = await User.findOne({ _id: userId }).lean();
     const cartUser = await CartItem.findOne({ _id: userOri.cart.toString() });
     const userByCart = await User.findOne({ _id: userId })
@@ -219,13 +118,11 @@ const addOrPutProductToCart = async (req, res, next) => {
       const existColorIndex = existingProduct.variants.findIndex(
         (v) => v.color._id.toString() === colorId
       );
-
       if (existColorIndex !== -1) {
         const existingColor = existingProduct.variants[existColorIndex];
         const existSizeIndex = existingColor.variantColor.findIndex(
           (vc) => vc.size === size2
         );
-
         if (existSizeIndex !== -1) {
           if (parseInt(quantityAction) > 0) {
             existingColor.variantColor[existSizeIndex].quantity +=
@@ -271,43 +168,36 @@ const addOrPutProductToCart = async (req, res, next) => {
   }
 };
 const checkStock = async (req, res, next) => {
-  try {
+  try{
     const { colorId, productId, size, quantity } = req.query;
-    const s = size.slice(0, 3).trim();
-    console.log("sssss" + s);
-    // const u = await User.findOne({_id:req.session.user_id || '64d600df4aa3bbbf4a81e6d2'})
-    // const cart = await CartItem.findOne({_id:u.cart.toString()})
-    // const pct = cart.productItem.find(p=>p.productId.toString()===productId)
-    // const vt = pct.variants.find(v=>v.color.toString()===colorId)
-    // const vct = pct.variants.find(v=>v.size=colorId)
-
-    // const vcct = vct.variantColor.forEach(vc=>{
-    //   vc.size===s,
-    //   quantityAll+=parseInt(vc.quantity)
-    // })
-    const pData = await Product.findOne({ _id: productId }).lean();
-    const variant = await pData.variants.find(
-      (v) => v.color.toString() === colorId
-    );
-    const vco = await variant.variantColor.find((vc) => (vc.size = s));
-    const quantityInStore = vco.quantity;
-    let checkStockResult;
-    if (quantityInStore < quantity) {
-      checkStockResult =
-        "Sản phẩm trong kho còn ít hơn nhu cầu của bạn, vui lòng thay đổi!";
-    } else {
-      checkStockResult = "";
+    const s = size.slice(0, 3).trim()
+    console.log('sssss'+s)
+    const u = await User.findOne({_id:req.body.user_id || '64d600df4aa3bbbf4a81e6d2'})
+    const cart = await CartItem.findOne({_id:u.cart.toString()})
+    const pct = cart.productItem.find(p=>p.productId.toString()===productId)
+    const vct = pct.variants.find(v=>v.color.toString()===colorId)
+    let quantityAll=0
+    const vcct = vct.variantColor.forEach(vc=>{
+      vc.size===s,
+      quantityAll+=parseInt(vc.quantity)
+    })      
+    const pData = await Product.findOne({_id: productId}).lean()
+    const variant = await pData.variants.find(v=>v.color.toString()===colorId)
+    const vco = await variant.variantColor.find(vc => vc.size = s);
+    const quantityInStore = vco.quantity
+    let checkStockResult
+    if(quantityInStore<quantityAll){
+      checkStockResult = 'Sản phẩm trong kho còn ít hơn nhu cầu của bạn, vui lòng thay đổi!'
+    } else{
+      checkStockResult =""
     }
-    res.json(checkStockResult);
-  } catch (err) {
+    res.json(checkStockResult)
+  }catch(err){
     console.log(err);
   }
-};
-
-
+}
 
 module.exports = {
   getProductCart,
-  addOrPutProductToCart,
-  
+  addOrPutProductToCart,checkStock
 };

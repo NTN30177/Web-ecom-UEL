@@ -39,14 +39,12 @@ export class HomePageComponent implements AfterViewInit {
     private el: ElementRef,
     private renderer: Renderer2,
     private _homeService: HomeService,
-    private changeDetectorRef: ChangeDetectorRef,
-    private _authServer: AuthService,
+    private _authService: AuthService,
     private _cartService: CartService,
     private _cartComponent: CartComponent
   ) {
-    this._authServer.idUserSubject.subscribe((data) => {
+    this._authService.idUserSubject.subscribe((data) => {
       this.userIdFromHeader = data;
-      console.log(data, '1111');
     });
   }
 
@@ -181,7 +179,7 @@ export class HomePageComponent implements AfterViewInit {
 
   private async setupUserIdSubscription(): Promise<void> {
     return new Promise<void>((resolve) => {
-      const subscription = this._authServer.idUserSubject
+      const subscription = this._authService.idUserSubject
         .pipe(take(1))
         .subscribe((data) => {
           this.userIdFromHeader = data;
@@ -247,9 +245,10 @@ export class HomePageComponent implements AfterViewInit {
       const cartList = await this._cartComponent.apiCartProduct(
         this.userIdFromHeader
       );
-      // this._authServer.cartSubject.next(cartList);
+      //
+      this._cartService.updateCartItems(cartList);
       let total_quantity = await this.totalCartItem(cartList);
-      this._authServer.updateCart(total_quantity);
+      this._authService.updateCart(total_quantity);
     }
   }
 
@@ -259,7 +258,7 @@ export class HomePageComponent implements AfterViewInit {
     if (localCartString !== null) {
       var cartValue = JSON.parse(localCartString);
       this.cartNumber = cartValue.length;
-      //  this._authServer.cartSubject.next(this.cartNumber)
+      //  this._authService.cartSubject.next(this.cartNumber)
     }
   }
 
@@ -371,9 +370,7 @@ export class HomePageComponent implements AfterViewInit {
   selectedColorIndex: number[] = []; // Sử dụng một mảng để lưu trữ index cho từng sản phẩm
 
   initializeSelectedColorIndex(): void {
-    this.selectedColorIndex = new Array(this.productsHaveModified.length).fill(
-      0
-    );
+    this.selectedColorIndex = new Array(this.productsHaveModified.length).fill(0);
   }
 
   updateSelectedColorIndex(productIndex: number, colorI: number): void {

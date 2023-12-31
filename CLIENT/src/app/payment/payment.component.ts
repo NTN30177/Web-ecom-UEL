@@ -4,7 +4,7 @@ import { AccountAddressPopupComponent } from '../manage-account/account-address-
 import { AddressListPopupComponent } from './address-list-popup/address-list-popup.component';
 import { MethodListComponent } from './method-list/method-list.component';
 import { CartService } from '../services/cart.service';
-import { formatMoneyVietNam, convertStringToNumbers } from '../utils/utils';
+import { formatMoneyVietNam } from '../utils/utils';
 import { AuthService } from '../services/auth.service';
 import { PaymentService } from '../services/payment.service';
 
@@ -72,7 +72,6 @@ export class PaymentComponent implements OnInit {
     } else {
       this.ship_code = 35000;
     }
-    // console.log(this.ship_code);
   }
   getAddressUser() {
     this._paymentService.getAddress(this.userId).subscribe({
@@ -80,7 +79,6 @@ export class PaymentComponent implements OnInit {
         this.addresses = responseData;
         this.setDefaultAddress();
         this._paymentService.addressSubject.next(responseData);
-        // console.log(responseData, 'rđ');
       },
       error: (err: any) => {
         this.errMessage = err;
@@ -110,8 +108,7 @@ export class PaymentComponent implements OnInit {
           ship_code: this.ship_code ,
           orderId:responseData.orderId
         }
-        // console.log(paymentSuccess)
-        // console.log(responseData)
+
         this._paymentService.updateResultPayment([paymentSuccess]);
 
         // this._paymentService.paymentSuccessSubject.next(paymentSuccess);

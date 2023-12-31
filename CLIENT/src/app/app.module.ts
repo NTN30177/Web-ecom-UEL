@@ -78,6 +78,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { PaginationComponent } from './pagination/pagination.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { ValidateEmailComponent } from './validate-email/validate-email.component';
+import { ValidateEmailPopupComponent } from './validate-email-popup/validate-email-popup.component';
 
 
 
@@ -130,6 +132,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     DashboardComponent,
     PaginationComponent,
     ProductDetailComponent,
+    ValidateEmailComponent,
+    ValidateEmailPopupComponent,
   ],
   imports: [
     BrowserModule,

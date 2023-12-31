@@ -1,11 +1,5 @@
-const { Address } = require("../models/address");
 const { User, UserAddress } = require("../models/user");
 const { Order } = require("../models/order");
-const bcrypt = require("bcryptjs");
-const nodemailer = require("nodemailer");
-const randomstring = require("randomstring");
-const { emailUser, emailPassword } = require("../../config/config");
-const { Province, District, Ward } = require("../models/address");
 const mongoose = require('mongoose');
 
 const getAccountInfo = async (req, res) => {
@@ -32,12 +26,10 @@ const updateAccountInfo = async (req, res) => {
   }
 };
 
-const { ObjectId } = require('mongoose').Types;
 
 const getAccountAddresses = async (req, res) => {
   try {
     const { userId } = req.params;
-    // console.log('Received userId:', userId);
 
     // Fetch the user with the given userId
     const user = await User.findById(userId).exec();

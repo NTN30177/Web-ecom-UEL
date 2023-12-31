@@ -20,6 +20,7 @@ import { formatMoneyVietNam } from '../utils/utils';
 import { AccountInfoService } from '../services/account-info.service';
 import { CartService } from '../services/cart.service';
 import { CartItem } from '../interfaces/cart';
+import { localProductImg } from '../ENV/envi';
 
 @Component({
   selector: 'app-header',
@@ -29,6 +30,7 @@ import { CartItem } from '../interfaces/cart';
 })
 export class HeaderComponent implements OnInit {
   formatMoneyVietNam = formatMoneyVietNam;
+  localProductImg=localProductImg
   isSearchFormActive: boolean = false;
   isMainMenuOpen: boolean = false;
   submenuOpen: boolean = false;
@@ -56,12 +58,16 @@ export class HeaderComponent implements OnInit {
     private _headerService: HeaderService,
     private _accountInfoService: AccountInfoService,
     private _cartService: CartService
-  ) {}
+  ) {
+    this._cartService.cartItems$.subscribe((data)=>{
+      this.cartList=data
+    })
+  }
   ngAfterViewInit() {}
   ngOnInit(): void {
     this.getDataFromService();
     this.getIsLogin();
-    this.cartItemFunc();
+    // this.cartItemFunc();
     this.checkLogin();
     this.getKeySearch();
     this.getCategory();
@@ -95,7 +101,7 @@ export class HeaderComponent implements OnInit {
           .subscribe((data) => {
             this.dataLiveSearch = data.productsByCategory;
             this.getKeySearch();
-            console.log(data.productsByCategory);
+            console.log(data.productsByCategory,'111111');
             console.log(this.dataLiveSearch);
           });
       });
@@ -277,13 +283,13 @@ export class HeaderComponent implements OnInit {
     this.submenuOpen = !this.submenuOpen;
   }
 
-  cartItemFunc() {
-    const localCartString = localStorage.getItem('localCart');
-    if (localCartString !== null) {
-      var cartCount = JSON.parse(localCartString);
-      this.cartNumberItem = cartCount.length;
-    }
-  }
+  // cartItemFunc() {
+  //   const localCartString = localStorage.getItem('localCart');
+  //   if (localCartString !== null) {
+  //     var cartCount = JSON.parse(localCartString);
+  //     this.cartNumberItem = cartCount.length;
+  //   }
+  // }
 
   cartItems: CartItem[] = [
     { id: 1, name: 'Zuýp 2 lớp xếp ly bản lớn', quantity: 1, price: 595000 },

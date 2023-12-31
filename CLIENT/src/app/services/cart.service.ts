@@ -16,7 +16,7 @@ export class CartService {
   private cartItemsSource = new BehaviorSubject<any[]>([]);
   cartItems$ = this.cartItemsSource.asObservable();
 
-  updateCartItems(cartItems: any[]) {
+  updateCartItems(cartItems: any) {
     this.cartItemsSource.next(cartItems);
   }
 

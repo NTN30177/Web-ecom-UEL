@@ -109,25 +109,24 @@
                             </div>
                             <div class="search-items search-suggest">
                                 <h4>Sản phẩm gợi ý</h4>
-                                <div class="search-item__hot history_list" *ngFor="let product of dataLiveSearch">                                    
-                                    <a class="product-suggest" href="">
-                                            <div class="sg-item-img">
-                                                <img src="http://localhost:3000/productImages/{{product.variants[0].images[0]}}" alt="">
-                                            </div>
-                                            <div class="sg-item-info">
-                                                <title>{{product.title}}</title>
-                                                <div class="item-info">
-                                                    <div class="sg-item-price">{{formatMoneyVietNam(product.price)}}</div>
-                                                    <div class="box-p">
-                                                        <p class="price-old">2.790.000₫</p>
-                                                        <span class="percent">-14%</span>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                    </a>
-                                   
+                                <div class="search-item__hot history_list" style="height: 300px; overflow-y: auto;">
+                                  <a class="product-suggest" *ngFor="let product of dataLiveSearch" style="cursor: pointer;">
+                                    <div class="sg-item-img" routerLink="product-detail/{{product.slug}}">
+                                      <img src="{{localProductImg}}/{{product.variants[0].images[0]}}" alt="">
+                                    </div>
+                                    <div class="sg-item-info"  routerLink="product-detail/{{product.slug}}">
+                                      <title>{{product.title}}</title>
+                                      <div class="item-info">
+                                        <div class="sg-item-price">{{formatMoneyVietNam(product.price)}}</div>
+                                        <div class="box-p">
+                                          <p class="price-old">2.790.000₫</p>
+                                          <span class="percent">-14%</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </a>
                                 </div>
+                                
                             </div>
                         </div>
                     </form>
@@ -174,11 +173,11 @@
                                 <div class="cart-list__variant" *ngFor="let v of product.variants">
                                   <div class="cart-list__varriantColor" *ngFor="let vc of v.variantColor">
                               <div class="item-product-cart d-flex" *ngIf="quantityInputValue !== 0">
-                                <div class="thumb-product-cart">
-                                  <img src="http://localhost:3000/productImages/{{ v.images[0]}}">
+                                <div class="thumb-product-cart" routerLink="product-detail/{{product.slug}}">
+                                  <img src="{{localProductImg}}/{{ v.images[0]}}">
                                 </div>
                                 <div class="info-product-cart">
-                                  <h3><a href="">{{ product.productId.title}}</a></h3>
+                                  <h3><a routerLink="product-detail/{{product.slug}}">{{ product.productId.title}}</a></h3>
                                   <div class="info-overview d-flex">
                                     <p class="overview-color"><strong>Màu sắc:</strong> {{v.color.nameColor}}</p>
                                     <p><strong style="text-transform: uppercase">Size:</strong> {{vc.size}}</p>
