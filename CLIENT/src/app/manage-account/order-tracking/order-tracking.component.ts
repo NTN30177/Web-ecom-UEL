@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OrderService } from '../../services/order.service';
-import { formatMoneyVietNam } from '../../utils/utils';
+import { alertwarning, formatDate, formatMoneyVietNam } from '../../utils/utils';
 import { FeedbackOrderComponent } from '../order-tracking/feedback-order/feedback-order.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../../services/auth.service';
@@ -15,11 +15,12 @@ import { data } from 'jquery';
 })
 export class OrderTrackingComponent implements OnInit{
   formatMoneyVietNam=formatMoneyVietNam
-
+  formatDate=formatDate
   orderId: any;
   orderDetails: any;
   userId: any;
-
+  alertwarning=alertwarning
+  
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.orderId = params['orderId'];
@@ -33,9 +34,10 @@ export class OrderTrackingComponent implements OnInit{
       this.orderService.getOrderDetails(this.orderId).subscribe(
         (data) => {
           this.orderDetails = data;
-          console.log('Order details:', this.orderDetails);
-          console.log('Order details:', data.dataWardDetail);
-          console.log('Order details:', data);
+          console.log('Order details:', this.orderDetails)
+
+          // console.log('Order details:', data.dataWardDetail);
+          // console.log('Order details:', data);
         },
         (error) => {
           console.error('Error fetching order details:', error);
@@ -50,10 +52,16 @@ export class OrderTrackingComponent implements OnInit{
     private _authService: AuthService,
 
   ) {}
-  cancelOrder(){
-    alert("Chức năng đang được phát triển!")
-  }
 
+
+  calculateDeliveryEstimate(isoString: string): string {
+    const dateObject = new Date(isoString);
+    dateObject.setDate(dateObject.getDate() + 5);
+    const day = dateObject.getDate();
+    const month = dateObject.getMonth() + 1; // Months are zero-based
+    const year = dateObject.getFullYear(); 
+    return `${day}/${month}/${year}`;
+  }
   openFeedbackOrderDialog(orderId: String, productId: String): void {
     console.log(productId, orderId)
     this._authService.idUserSubject.subscribe((data)=>

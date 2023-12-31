@@ -4,3 +4,9 @@
     font-weight: 700;
     letter-spacing: 1.92px;
 }
+
+@media screen and (max-width: 768px) {
+    .fav-header{
+        font-size: 14px;
+    }
+}

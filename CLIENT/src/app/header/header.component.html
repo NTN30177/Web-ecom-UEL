@@ -19,12 +19,16 @@
                         <li>
                             <a href="">Sản phẩm</a>
                             <ul class="sub-menu">
-                                <div class="list-submenu">
+                                <div class="list-submenu" *ngIf="types">
                                     <div class="list-submenu__item" *ngFor="let type of types">
-                                        <h3>{{type.typeName}}</h3>
+                                      <h3><a routerLink="/category/{{type.slug}}">{{type.typeName}}</a></h3>
                                         <ul *ngFor="let subtype of type.subtypes">
-                                            <li><a href="">{{subtype.subTypeName}}</a></li>
+                                            <li><a routerLink="/category/{{subtype.slug}}">{{subtype.subTypeName}}</a></li>
                                         </ul>
+                                    </div>
+
+                                    <div class="list-submenu__item" >
+                                      <h3><a routerLink="/category/all">Tất cả sản phẩm</a></h3>
                                     </div>
                                 
             
@@ -40,7 +44,7 @@
                             <a href="" class="action-login">Đăng nhập</a>
                         </div>
                         <ul class="menu-mb">
-                            <li class="has-child">
+                            <li class="has-child"  *ngIf="types">
                                 <a href="javascript:void(0)" (click)="toggleSubMenu()">
                                     Sản phẩm
                                     <span class="arrows" [class.open]="submenuOpen">
@@ -49,17 +53,16 @@
                                     </span>
                                 </a>
                                 <ul class="sub-menu-mb">
-                                    <li class="has-sub-child" *ngFor="let item of menuItems; let i = index" (click)="closeSubMenu()">
-                                        <a href="javascript:void(0)" (click)="toggleSubMenuChild($event, i)">
-                                          {{ item.label }}
+                                    <li class="has-sub-child" *ngFor="let type of types; let i = index" (click)="closeSubMenu()">
+                                          <a routerLink="/category/{{type.slug}}" (click)="toggleSubMenuChild($event, i)">{{type.typeName}}
                                           <span class="arrows child">
                                             <i class="ti-plus"></i>
                                             <i class="ti-minus"></i>
                                           </span>
                                         </a>
                                         <ul class="child-sub" #childSubmenu style="display:none">
-                                          <li *ngFor="let subItem of item.subItems">
-                                            <a href="">{{ subItem.label }}</a>
+                                          <li *ngFor="let subtype of type.subtypes">
+                                            <a routerLink="/category/{{subtype.slug}}">{{subtype.subTypeName}}</a>
                                           </li>
                                         </ul>
                                       </li>
@@ -257,8 +260,8 @@
                             <a href="#" class="link-nav-bot">Trợ giúp</a>
                         </div>
                     </div>
-                    <div class="item-nav-bot">
-                        <div class="item item-headphone item-nav" *ngIf="isLogin">
+                    <div class="item-nav-bot" *ngIf="isLogin">
+                        <div class="item item-headphone item-nav" >
                             <a href="javascript:void(0)" class="icon icon-account" (click)="toggleSubAction()">
                               <i class="header__icon ti-user"></i>                                
                             </a>

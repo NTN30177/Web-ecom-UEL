@@ -61,7 +61,7 @@ export class ManageUserComponent implements OnInit, AfterViewInit, OnDestroy {
       (data) => {
         this.allUser = data;
         console.log("all user:", this.allUser)
-
+        this.dtTrigger.next(null);
 
       },
 

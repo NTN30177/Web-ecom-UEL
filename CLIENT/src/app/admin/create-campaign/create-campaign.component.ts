@@ -74,13 +74,11 @@ export class CreateCampaignComponent implements OnInit {
         },
         (error) => {
           console.error('Error creating campaign:', error);
-          // Handle error, e.g., show an error message
           alert('Lỗi tạo campaign!');
 
         }
       );
     } else {
-      // Handle form validation errors
       console.log('Form is not valid');
       alert('Form is not valid');
 

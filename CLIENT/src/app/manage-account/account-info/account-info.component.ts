@@ -52,7 +52,7 @@ export class AccountInfoComponent implements OnInit {
   loadUserAccountInfo() {
     this.accountInfoService.getUserAccountInfo(this.userID).subscribe((response: IUser) => {
       this.userInfo = response;
-      console.log(this.userInfo, "Info:");
+      // console.log(this.userInfo, "Info:");
       this.userInfoForm.patchValue({
         first_name: this.userInfo.first_name,
         last_name: this.userInfo.last_name,

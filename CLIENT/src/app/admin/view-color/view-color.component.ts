@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs';
+import { SortPaginationService } from '../../services/sort-pagination.service';
 
 @Component({
   selector: 'app-view-color',
@@ -10,8 +11,11 @@ import { Subject } from 'rxjs';
 export class ViewColorComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
+  listColor:any;
+  constructor(private _sortPaginationService: SortPaginationService) {}
 
   ngOnInit(): void {
+    this.getColor()
     if (!$.fn.dataTable.isDataTable('#example')) {
       this.dtOptions = {
         language: {
@@ -20,5 +24,11 @@ export class ViewColorComponent implements OnInit {
       };
       this.dtTrigger.next(null);
     }
+  }
+  getColor() {
+    this._sortPaginationService.getColor().subscribe((data) => {
+      this.listColor = data;
+      console.log(data, 'data');
+    });
   }
 }

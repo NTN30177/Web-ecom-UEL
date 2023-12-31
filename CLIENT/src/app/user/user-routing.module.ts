@@ -26,7 +26,10 @@ const routes: Routes = [
         path: 'pagination', component: PaginationComponent,
       },
       {
-        path:'filter-product', component: FilterProductComponent,
+        path:'category/:slug', component: FilterProductComponent,
+      },
+      {
+        path: 'product-detail/:slug', component: ProductDetailComponent,
       },
       {
         path: 'account',
@@ -73,9 +76,7 @@ const routes: Routes = [
       {
         path: 'app-delivery-policy', component: DeliveryPolicyComponent,
       },
-      {
-        path: 'product-detail', component: ProductDetailComponent,
-      },
+      
       {
         path: '',
         component: HomePageComponent,

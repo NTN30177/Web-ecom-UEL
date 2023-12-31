@@ -1,5 +1,4 @@
 import { Component, NgZone } from '@angular/core';
-import { HighchartsChartModule } from 'highcharts-angular';
 import * as Highcharts from 'highcharts';
 import { HttpClient } from '@angular/common/http';
 import HC_exporting from 'highcharts/modules/exporting';
@@ -20,7 +19,6 @@ export class Chart2Component {
   selectedDay: any = '7';
 
   constructor(
-    private http: HttpClient,
     private _chartService: ChartService,
     private ngZone: NgZone
   ) {}

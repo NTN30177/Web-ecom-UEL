@@ -11,13 +11,8 @@
       </div>
       <div class="frame_body">
         <div class="mt-4">
-          <table
-            id="manage-orders"
-            class="table table-hover custom-datatable"
-            datatable
-            [dtOptions]="dtOptions"
-            [dtTrigger]="dtTrigger"
-          >
+          <table id="manage-orders" class="table table-hover custom-datatable" datatable [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger">
             <thead>
               <tr>
                 <th>Order ID</th>
@@ -32,20 +27,43 @@
               <tr *ngFor="let order of allOrders">
                 <td>{{ order._id }}</td>
                 <!-- <td>{{ order.status }}</td> -->
-                <td>
+                <!-- <td>
                   <select [(ngModel)]="order.status" name="orderStatus">
-                      <option value="Đang xử lý" [selected]="order.status === 'pending'">Đang xử lý</option>
-                      <option value="Yêu cầu hủy" [selected]="order.status === 'pending'">Yêu cầu hủy</option>
-                      <option value="Đang giao hàng" [selected]="order.status === 'shipped'">Đang giao hàng</option>
-                      <option value="Đã giao hàng" [selected]="order.status === 'delivered'">Đã giao hàng</option>
-                      <option value="Đã hủy" [selected]="order.status === 'delivered'">Đã hủy</option>
-                      <!-- Thêm các tùy chọn khác nếu cần -->
+                    <option value="Đang xử lý" [selected]="order.status === 'Đang xử lý'">Đang xử lý</option>
+
+                    <option value="Chuyển qua giao nhận" [selected]="order.status === 'Chuyển qua giao nhận'">Chuyển qua
+                      giao nhận</option>
+
+                    <option value="Đang giao hàng" [selected]="order.status === 'Đang giao hàng'">Đang giao hàng
+                    </option>
+
+                    <option value="Đã giao hàng" [selected]="order.status === 'Đã giao hàng'">Giao hàng thành công
+                    </option>
+
+                    <option value="Yêu cầu hủy" [selected]="order.status === 'Yêu cầu hủy'">Yêu cầu hủy</option>
+
+                    <option value="Đã hủy" [selected]="order.status === 'Đã hủy'">Đã hủy</option>
                   </select>
-                <td style="text-align: center">{{ order.totalQuantity }}</td>
+                </td> -->
+                <td>
+                  <select [(ngModel)]="order.status" name="orderStatus" [ngModelOptions]="{standalone: true}">
+                    <option [ngValue]="'Đang xử lý'" [selected]="order.status === 'Đang xử lý'">Đang xử lý</option>
+                    <option [ngValue]="'Chuyển qua giao nhận'" [selected]="order.status === 'Chuyển qua giao nhận'">
+                      Chuyển qua giao nhận</option>
+                    <option [ngValue]="'Đang giao hàng'" [selected]="order.status === 'Đang giao hàng'">Đang giao hàng
+                    </option>
+                    <option [ngValue]="'Đã giao hàng'" [selected]="order.status === 'Đã giao hàng'">Giao hàng thành công
+                    </option>
+                    <option [ngValue]="'Yêu cầu hủy'" [selected]="order.status === 'Yêu cầu hủy'">Yêu cầu hủy</option>
+                    <option [ngValue]="'Đã hủy'" [selected]="order.status === 'Đã hủy'">Đã hủy</option>
+                    <!-- <option value="0" [selected]="user.is_admin === 0">Customer</option> -->
+                  </select>
+                </td>
+                <td>{{ order.totalQuantity }}</td>
                 <td>{{ order.first_name }} {{order.last_name}}</td>
                 <td>TRK987654321</td>
-                <td style="text-align: center">
-                  <i class="fas fa-pen-square custom-smaller-icon"></i>
+                <td>
+                  <i (click)="alertwarning()" class="fas fa-pen-square custom-smaller-icon"></i>
                 </td>
               </tr>
             </tbody>

@@ -200,3 +200,8 @@ body {
     background-color: #f44336;
     /* Red */
 }
+@media screen and (max-width: 768px) {
+    .info-header{
+        font-size: 14px;
+    }
+}
