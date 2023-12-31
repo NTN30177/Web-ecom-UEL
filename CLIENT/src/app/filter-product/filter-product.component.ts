@@ -409,8 +409,9 @@ export class FilterProductComponent implements AfterViewInit {
         .subscribe((data) => {
           this.products = data.productsByCategory;
           this.totalProduct = data.totalProducts;
-          this.slugName = data.slugName;
+          this.slugName = data.getSlug;
           console.log(this.products);
+          console.log(this.slugName)
           this.updateProductsHaveModified();
           this.initializeSelectedColorIndex();
         });

@@ -2,9 +2,10 @@
   <div class="container">
     <section class="location">
       <div class="main-location">
-        <a href="">Trang chủ /
-          <span style="font-weight: 700;"><a href=""> Phân loại</a></span>
+        <a routerLink="">Trang chủ /
         </a>
+        <span style="font-weight: 700;" *ngIf="slugName.type"><a routerLink="/category/{{slugName.type.slug}}"> {{slugName.type.typeName}}</a></span>
+        <span style="font-weight: 700;" *ngIf="slugName.subtype"><span>/</span><a routerLink="/category/{{slugName.subtype.slug}}"> {{slugName.subtype.subTypeName}}</a></span>
       </div>
     </section>
 
@@ -46,7 +47,7 @@
       </div>
       <div class="filter__right">
         <div class="classify__fiter">
-          <div class="title__filter">Quần & Jumpsuit</div>
+          <!-- <div class="title__filter"></div> -->
           <mat-form-field>
             <mat-label>Phân loại</mat-label>
             <mat-select [(value)]="selectedValue" (selectionChange)="onSortingChange($event)">

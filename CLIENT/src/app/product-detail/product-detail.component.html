@@ -17,15 +17,15 @@
                             <div class="product-single__thumbnails">
                                 <div class="product-single__inner">
                                   <ngx-slick-carousel class="thumbnails" #thumbnailsSlick [config]="slideConfig">
-                                    <div ngxSlickItem class="image" *ngFor="let image of imagesArray">
-                                      <img loading="lazy" src="http://localhost:3000/productImages/{{productsHaveModified[0].imgHomePage[0].images[0]}}" alt="#" width="100%">
+                                    <div ngxSlickItem class="image" *ngFor="let image of productsHaveModified[0].imgHomePage[0].images">
+                                      <img loading="lazy" src="http://localhost:3000/productImages/{{image}}" alt="#" width="100%">
                                     </div>
                                   </ngx-slick-carousel>
                                 </div>
                                 <div class="thumbs">
                                   <ngx-slick-carousel class="product-single__gallery" #productGallery [config]="galleryConfig">
-                                    <div ngxSlickItem class="image image-lazyload" *ngFor="let image of imagesArray">
-                                      <img loading="lazy" src="http://localhost:3000/productImages/{{productsHaveModified[0].imgHomePage[0].images[0]}}" alt="#">
+                                    <div ngxSlickItem class="image image-lazyload" *ngFor="let image of productsHaveModified[0].imgHomePage[0].images">
+                                      <img loading="lazy" src="http://localhost:3000/productImages/{{image}}" alt="#">
                                     </div>
                                   </ngx-slick-carousel>
                                 </div>
@@ -101,8 +101,8 @@
                                                 </div>
                                             </div>
                                             <div class="product-detail__actions">
-                                                <div class="product-single__button col-sm-6">
-                                                    <a href="#" rel-script="product-add-to-cart" class="btn-add-to-cart">
+                                                <div class="product-single__button col-sm-6" (click)="featureUnderDevelopment()">
+                                                    <a  rel-script="product-add-to-cart" class="btn-add-to-cart">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
                                                             <g clip-path="url(#clip0_2230_8332)">
                                                             <path d="M9.5918 22C10.1441 22 10.5918 21.5523 10.5918 21C10.5918 20.4477 10.1441 20 9.5918 20C9.03951 20 8.5918 20.4477 8.5918 21C8.5918 21.5523 9.03951 22 9.5918 22Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -117,8 +117,8 @@
                                                             </svg>
                                                         Thêm vào giỏ hàng</a>
                                                 </div>
-                                                <div class="product-single__button col-sm-6">
-                                                    <a href="#" class="btn-buy">
+                                                <div class="product-single__button col-sm-6" (click)="featureUnderDevelopment()">
+                                                    <a  class="btn-buy">
                                                         <img class="btn-icon" src="../assets/icon/SVG/shopping-bag.svg">
                                                         Mua hàng</a>
                                                 </div>

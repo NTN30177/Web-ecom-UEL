@@ -433,10 +433,14 @@ export class ProductDetailComponent implements OnInit {
     }
   }
 
+  
   decreaseQuantity(event: Event) {
     event.preventDefault(); // Ngăn chặn sự kiện mặc định của thẻ <a>
     if (this.quantity > 1) { // Giới hạn số lượng tối thiểu là 1
       this.quantity--;
     }
+  }
+  featureUnderDevelopment() {
+    alert('Chức năng đang được phát triển');
   }
 }

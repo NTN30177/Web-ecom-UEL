@@ -14,8 +14,11 @@ const getCategoryProductsPagination = async (req, res) => {
   const keySearch = req.query.keySearch;
   try {
     let products;
+    let getSlug
     if (slug !== "search") {
       products = await filterProductsBySlug(slug);
+      getSlug = await getSlugData(slug)
+
     } else {
       products = await Product.find({}).populate({
         path: "variants.color",
@@ -44,15 +47,16 @@ const getCategoryProductsPagination = async (req, res) => {
     const { paginatedProducts } = paginateProducts(
       sortedProducts,
       page,
-      pageSize
+      pageSize,
     );
     const totalPage = Math.ceil(totalProducts / pageSize);
-    console.log(paginatedProducts,123456)
+    console.log(getSlug)
     res.json({
       productsByCategory: paginatedProducts,
       slug,
       totalPage,
       totalProducts,
+      getSlug,
     });
   } catch (err) {
     console.error(err);
@@ -195,7 +199,39 @@ const paginateProducts = (products, page, pageSize) => {
   return { paginatedProducts, totalPage };
 };
 
+const getSlugData = async (slug) => {
+  try {
+    const type = await Type.findOne({ slug })
+      .populate({
+        path: "subtypes",
+        populate: {
+          path: "products",
+          model: "Product",
+        },
+      })
+      .lean();
+
+    if (type) {
+      return { type, slug }
+    }
+
+    const subtype = await Subtype.findOne({ slug }).populate("products").lean();
+    if (subtype) {
+      const type = await Type.findOne({ subtypes: subtype._id }).lean();
+      return { type, subtype, slug }
+    }
+    const product = await Product.findOne({ slug }).lean();
+    if (product) {
+      const subtype = await Subtype.findOne({ products: product._id }).lean();
+      const type = await Type.findOne({ subtypes: subtype._id }).lean();
+      return { type, subtype, product, slug }
+    }
+  } catch (err) {
+    console.error(err);
+
+  }
+};
 
 module.exports = {
-  getCategoryProductsPagination,
+  getCategoryProductsPagination,getSlugData
 };

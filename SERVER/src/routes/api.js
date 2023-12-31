@@ -14,4 +14,6 @@ router.get(
     '/searchSortPagination/:slug',
     sortFilterPaginationController.getCategoryProductsPagination,
 );
+
+
 module.exports = router;
