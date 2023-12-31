@@ -34,7 +34,7 @@
     <ul>
       <li>
         <span>Đặt hàng thành công</span>
-        <p>Vào lúc 2023-11-16 21:17:46</p>
+        <p style="color:rgb(255, 0, 0)">Vào lúc {{ orderDetails.dataOrderDetail[0].createdAt }}</p>
       </li>
       <li>
         <span>Chuyển qua giao nhận</span>
@@ -59,7 +59,7 @@
             Họ tên: {{ orderDetails.dataOrderDetail[0].userId.last_name }}
           </h4>
           <h4 class="text-1">
-            Điện thoại: {{ orderDetails.dataOrderDetail[0].userId.mobile }}
+            Điện thoại: {{ orderDetails.dataOrderDetail[0].userId.phone }}
           </h4>
           <h4 class="text-1">
             Email: {{ orderDetails.dataOrderDetail[0].userId.email }}
@@ -89,9 +89,9 @@
           <h4 class="text-1">
             Điện thoại: {{ orderDetails.dataOrderDetail[0].address.phone }}
           </h4>
-          <h4 class="text-1">Email: nghiant21406&#64;st.uel.edu.vn</h4>
+          <h4 class="text-1">Email: {{ orderDetails.dataOrderDetail[0].userId.email }}</h4>
           <h4 class="text-1">
-            Địa chỉ:{{ orderDetails.dataAddressDetail.wardDetail }}
+            Địa chỉ: {{ orderDetails.dataAddressDetail.wardDetail }}
           </h4>
           <h4 class="text-1">
             Phường/xã: {{ orderDetails.dataAddressDetail.ward }}
@@ -100,7 +100,7 @@
             Quận/Huyện: {{ orderDetails.dataAddressDetail.district }}
           </h4>
           <h4 class="text-1">
-            Thành phố/Tỉnh:{{ orderDetails.dataAddressDetail.province }}
+            Thành phố/Tỉnh: {{ orderDetails.dataAddressDetail.province }}
           </h4>
         </div>
       </div>
@@ -169,25 +169,25 @@
         <div class="media-body">
           <h4 class="title">THANH TOÁN</h4>
           <h4>
-            <span class="pleft">Trị giá đơn hàng:</span
-            ><span class="pright bold">1.660.000 VNĐ</span>
+            <span class="pleft">Trị giá đơn hàng: </span
+            ><span class="pright bold">{{ formatMoneyVietNam(orderDetails.dataOrderDetail[0].totalPrice)}}</span>
           </h4>
           <h4>
-            <span class="pleft">Giảm giá:</span
-            ><span class="pright bold">-664.000 VNĐ</span>
+            <span class="pleft">Giảm giá: </span
+            ><span class="pright bold">{{formatMoneyVietNam(0)}}</span>
           </h4>
           <h4>
-            <span class="pleft">Phí giao hàng:</span
-            ><span class="pright bold">0 VND</span>
+            <span class="pleft">Phí giao hàng: </span
+            ><span class="pright bold">{{formatMoneyVietNam(0)}}</span>
           </h4>
           <h4>
-            <span class="pleft">Phí thanh toán:</span
-            ><span class="pright bold">0 VND</span>
+            <span class="pleft">Phí thanh toán: </span
+            ><span class="pright bold">{{formatMoneyVietNam(0)}}</span>
           </h4>
           <h4 class="divider"></h4>
           <h4>
-            <span class="pleft bold">Tổng thanh toán:</span
-            ><span class="pright bold">996.000 VNĐ</span>
+            <span class="pleft bold">Tổng thanh toán: </span
+            ><span class="pright bold">{{formatMoneyVietNam(orderDetails.dataOrderDetail[0].totalPrice)}}</span>
           </h4>
         </div>
       </div>

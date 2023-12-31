@@ -17,7 +17,7 @@ export class SideMenuComponent implements OnInit{
     private _authServer: AuthService) {
     this._authServer.idUserSubject.subscribe((data) => {
       this.userID = data;
-      console.log(data, '1111');
+      // console.log(data, '1111');
     });
    }
   ngOnInit(): void {
@@ -34,7 +34,7 @@ export class SideMenuComponent implements OnInit{
 
   loadUserName() {
     this.accountInfoService.getUserAccountInfo(this.userID).subscribe((data: IUser) => {
-          console.log(data,'fsy')
+          // console.log(data,'fsy')
           this.userName = `${data.first_name} ${data.last_name}`;
         },
         (error) => {

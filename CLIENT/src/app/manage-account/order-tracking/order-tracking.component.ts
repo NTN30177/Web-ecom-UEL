@@ -34,8 +34,13 @@ export class OrderTrackingComponent implements OnInit{
         (data) => {
           this.orderDetails = data;
           console.log('Order details:', this.orderDetails);
-          console.log('Order details:', data.dataWardDetail);
-          console.log('Order details:', data);
+
+          const createdAt = this.orderDetails.dataOrderDetail[0].createdAt;
+          const formattedDate = this.formatDate(createdAt);
+          this.orderDetails.dataOrderDetail[0].createdAt = formattedDate;
+
+          // console.log('Order details:', data.dataWardDetail);
+          // console.log('Order details:', data);
         },
         (error) => {
           console.error('Error fetching order details:', error);
@@ -50,6 +55,17 @@ export class OrderTrackingComponent implements OnInit{
     private _authService: AuthService,
 
   ) {}
+
+  formatDate(isoString: string): string {
+    const dateObject = new Date(isoString);
+    const day = dateObject.getDate();
+    const month = dateObject.getMonth() + 1; 
+    const year = dateObject.getFullYear();
+    const hours = dateObject.getHours();
+    const minutes = dateObject.getMinutes();
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
+  }
+
   cancelOrder(){
     alert("Chức năng đang được phát triển!")
   }

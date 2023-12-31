@@ -26,7 +26,7 @@ export class PaymentThankComponent {
   getOrderInfo() {
     this._paymentService.resultPayment$.subscribe(async (orderInfo) => {
       this.orderInfo = orderInfo[0];
-      console.log(this.orderInfo, 'orderInfo');
+      // console.log(this.orderInfo, 'orderInfo');
 
      
 
@@ -36,7 +36,7 @@ export class PaymentThankComponent {
   getEmail() {
     this._authService.emailUserSubject.subscribe((data:any) => {
       this.emailUser = data;
-      console.log(this.emailUser, 'emailUser');
+      // console.log(this.emailUser, 'emailUser');
     });
   }
 }
