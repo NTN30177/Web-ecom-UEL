@@ -8,6 +8,8 @@ import { AuthService } from '../services/auth.service';
 import { CartComponent } from '../cart/cart.component';
 import { CartService } from '../services/cart.service';
 import { formatMoneyVietNam } from '../utils/utils';
+import { ActivatedRoute } from '@angular/router';
+import { ProductDetailService } from '../services/product-detail.service';
 
 declare var $: any;
 
@@ -29,6 +31,8 @@ export class ProductDetailComponent implements OnInit {
   errMessage: any;
   currentColor = 0;
   userIdFromHeader: any;
+  slug: any;
+
 
   private initOwlCarousel(): void {
     const owlSelector = '.exclusive-inner__list-products.owl-carousel';
@@ -60,7 +64,9 @@ export class ProductDetailComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef,
     private _authServer: AuthService,
     private _cartService: CartService,
-    private _cartComponent: CartComponent
+    private _cartComponent: CartComponent,
+    private route: ActivatedRoute,
+    private _productDetailService: ProductDetailService
   ) {
     this._authServer.idUserSubject.subscribe((data) => {
       this.userIdFromHeader = data;
@@ -86,8 +92,19 @@ export class ProductDetailComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.initSlick();
+    // this.initSlick();
     this.initOwlCarousel();
+    this.slug = this.route.snapshot.params['slug'];
+    this.getProductDetails(this.slug)    
+  }
+   getProductDetails(slug:any){
+    this._productDetailService.getProductDetail(slug).subscribe((data)=>{
+      this.products = [data]
+      console.log(data)
+       this.updateProductsHaveModified()
+      console.log(this.productsHaveModified)
+    })
+
   }
 
   bannersArray: any = [
@@ -305,7 +322,7 @@ export class ProductDetailComponent implements OnInit {
     const thumbnailsSlick = this.thumbnailsSlick;
     const productGallery = this.productGallery;
 
-    thumbnailsSlick.slickGoTo(0);
+    // thumbnailsSlick.slickGoTo(0);
 
     const thumbnailsSlickElement = thumbnailsSlick.$instance.nativeElement;
     const productGalleryElement = productGallery.$instance.nativeElement;

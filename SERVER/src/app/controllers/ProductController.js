@@ -3,10 +3,9 @@ const {
   Type,
   Subtype,
   Color,
-  CartItem, 
+  CartItem,
 } = require("../models/product");
 const { Feedback } = require("../models/feedback");
-
 
 const getProduct = async (req, res) => {
   try {
@@ -14,7 +13,7 @@ const getProduct = async (req, res) => {
     res.json(products);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 softDeleteProduct = async (req, res) => {
@@ -26,7 +25,7 @@ softDeleteProduct = async (req, res) => {
 
     // Kiểm tra nếu sản phẩm không tồn tại
     if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
+      return res.status(404).json({ message: "Product not found" });
     }
 
     // Cập nhật trạng thái is_deleted
@@ -35,13 +34,12 @@ softDeleteProduct = async (req, res) => {
     // Lưu sản phẩm đã cập nhật vào cơ sở dữ liệu
     await product.save();
 
-    return res.status(200).json({ message: 'Soft delete successful' });
+    return res.status(200).json({ message: "Soft delete successful" });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: 'Internal Server Error' });
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
 
 toggleSoftDeleted = async (req, res) => {
   const productId = req.params.productId;
@@ -50,7 +48,7 @@ toggleSoftDeleted = async (req, res) => {
     const product = await Product.findById(productId);
 
     if (!product) {
-      return res.status(404).json({ error: 'Product not found' });
+      return res.status(404).json({ error: "Product not found" });
     }
 
     // Toggle the is_deleted property
@@ -59,10 +57,10 @@ toggleSoftDeleted = async (req, res) => {
     // Save the updated product
     await product.save();
 
-    res.json({ message: 'Soft delete toggled successfully', product });
+    res.json({ message: "Soft delete toggled successfully", product });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
@@ -76,7 +74,7 @@ const saveProduct2 = async (req, res) => {
 
 const saveProduct = async (req, res) => {
   try {
-    console.log('route')
+    console.log("route");
     const {
       productName,
       productSku,
@@ -103,7 +101,7 @@ const saveProduct = async (req, res) => {
       variants
     );
     await product.save();
-    console.log(product, 'p')
+    console.log(product, "p");
 
     const type = await findOrCreateType(typeName);
     await findOrCreateSubType(type, subTypeName, product);
@@ -136,14 +134,14 @@ const convertFilesToDesiredFormat = (receivedFiles) => {
   return result;
 };
 const createVariantsFromData = (req, typeName, imageList) => {
-  const variantsString = req.body
-  console.log(variantsString, '5555')
-  console.log(variantsString.variant, '5555')
+  const variantsString = req.body;
+  console.log(variantsString, "5555");
+  console.log(variantsString.variant, "5555");
   const variants = variantsString.variant.map((v, index) => {
-    console.log(v.color, 'c5555')
+    console.log(v.color, "c5555");
     // const colorFake = "64cb721d066ac7727d33ceda";
-    accessoryId='64c4c7621539b1bd9c0fae5b'
-    if (typeName === 'Phụ kiện') {
+    accessoryId = "64c4c7621539b1bd9c0fae5b";
+    if (typeName === "Phụ kiện") {
       const variant = {
         color: v.colorFreeSize,
         images: imageList[index],
@@ -153,11 +151,10 @@ const createVariantsFromData = (req, typeName, imageList) => {
         size: "FreeSize",
         quantity: parseInt(req.body.variant[index].freeSize),
       });
-    return variant;
+      return variant;
 
-      console.log(parseInt(req.body.variant[index].freeSize))
+      console.log(parseInt(req.body.variant[index].freeSize));
     } else {
-      
       const variant = {
         color: v.color,
         images: imageList[index],
@@ -173,18 +170,25 @@ const createVariantsFromData = (req, typeName, imageList) => {
       }
       return variant;
     }
-
   });
 
   return variants;
 };
 
-const convertStringToNumbers= (string) =>{
-  let valueNumber = string.replace(/[^\d]/g, '');
+const convertStringToNumbers = (string) => {
+  let valueNumber = string.replace(/[^\d]/g, "");
   return parseInt(valueNumber);
-}
+};
 
-const createProduct = (title, sku, price,cost, description, author, variants) => {
+const createProduct = (
+  title,
+  sku,
+  price,
+  cost,
+  description,
+  author,
+  variants
+) => {
   return new Product({
     title,
     sku,
@@ -193,8 +197,6 @@ const createProduct = (title, sku, price,cost, description, author, variants) =>
     description,
     author,
     variants,
-
-
   });
 };
 
@@ -288,7 +290,7 @@ const addFeedback = async (req, res) => {
     const { content_fb, images } = req.body;
     const { productId, orderId, userId } = req.query;
 
-    console.log(content_fb, images, productId, orderId)
+    console.log(content_fb, images, productId, orderId);
 
     const feedback = new Feedback({
       idUser: userId,
@@ -296,8 +298,8 @@ const addFeedback = async (req, res) => {
       content: content_fb,
       images: images,
     });
-    
-    console.log(req.session.user_id)
+
+    console.log(req.session.user_id);
     await feedback.save();
 
     const product = await Product.findOneAndUpdate(
@@ -306,15 +308,33 @@ const addFeedback = async (req, res) => {
       { new: true }
     );
 
-    res.status(200).json({ message: 'Feedback added successfully', feedback });
-    console.log('Feedback submitted successfully');
+    res.status(200).json({ message: "Feedback added successfully", feedback });
+    console.log("Feedback submitted successfully");
   } catch (error) {
-    console.error('Error submitting feedback:', error);
+    console.error("Error submitting feedback:", error);
     res.sendStatus(500);
   }
 };
-
+const getProductDetail = async (req, res) => {
+  try {
+    const slug = req.params.slug;
+    console.log(slug);
+    const data = await Product.findOne({ slug }).populate({
+      path: "variants.color",
+      select: "imageColor nameColor",
+    });
+    console.log(data)
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 module.exports = {
-  saveProduct, getProduct,toggleSoftDeleted, softDeleteProduct, addFeedback
+  saveProduct,
+  getProduct,
+  toggleSoftDeleted,
+  softDeleteProduct,
+  addFeedback,
+  getProductDetail,
 };

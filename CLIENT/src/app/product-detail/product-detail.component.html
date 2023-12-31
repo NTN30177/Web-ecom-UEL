@@ -18,30 +18,30 @@
                                 <div class="product-single__inner">
                                   <ngx-slick-carousel class="thumbnails" #thumbnailsSlick [config]="slideConfig">
                                     <div ngxSlickItem class="image" *ngFor="let image of imagesArray">
-                                      <img loading="lazy" src="{{ image.imgName }}" alt="Piece Suits - Set áo vest dáng oversize" width="100%">
+                                      <img loading="lazy" src="http://localhost:3000/productImages/{{productsHaveModified[0].imgHomePage[0].images[0]}}" alt="Piece Suits - Set áo vest dáng oversize" width="100%">
                                     </div>
                                   </ngx-slick-carousel>
                                 </div>
                                 <div class="thumbs">
                                   <ngx-slick-carousel class="product-single__gallery" #productGallery [config]="galleryConfig">
                                     <div ngxSlickItem class="image image-lazyload" *ngFor="let image of imagesArray">
-                                      <img loading="lazy" src="{{ image.imgName }}" alt="Piece Suits - Set áo vest dáng oversize">
+                                      <img loading="lazy" src="http://localhost:3000/productImages/{{productsHaveModified[0].imgHomePage[0].images[0]}}" alt="Piece Suits - Set áo vest dáng oversize">
                                     </div>
                                   </ngx-slick-carousel>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6" *ngIf="productsHaveModified">
                             <div class="product-detail__information">
-                                <h1 style="text-transform: uppercase;">Piece Suits - Set áo vest dáng oversize</h1>
+                                <h1 style="text-transform: uppercase;">{{productsHaveModified[0].title}}</h1>
                                 <div class="product-detail__sub-info">
                                     <p>
-                                        SKU: <span>67M7969</span>
+                                        SKU: <span>{{productsHaveModified[0].sku}}</span>
                                     </p>
                                 </div>
                                 <div class="product-detail__price">
                                     <input type="hidden" name="hid_product_price_not_format" value="3380000" />
-                                    <b>3.380.000đ</b>
+                                    <b>{{formatMoneyVietNam(productsHaveModified[0].price)}}</b>
                                 </div>
                                 <div class="product-single__addtocart">
                                     <div class="product-single__options">
@@ -52,19 +52,20 @@
                                                 </span>
                                             </div>
                                             <div class="option-select option-select--color">
-                                                <label class="option-select__item option-select__item--color den">
+                                                <label class="option-select__item option-select__item--color den" *ngFor="let v of productsHaveModified[0].variants; index as colorI" >
                                                     <div class="option-select__inner">
                                                         <input type="radio" name="color" value="den" checked="checked"> 
-                                                        <span class="checkmark checkmark--color den" style="background-image: url(&quot;https://media2.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/November2023/23CMAW.CM003.3cl.jpg&quot;);"></span>
+                                                        <span class="checkmark checkmark--color den" style="background-image: url(http://localhost:3000/productImages/{{productsHaveModified[0].imgHomePage[0].images[0]}});"></span>
                                                     </div>
                                                 </label> 
-                                                <label class="option-select__item option-select__item--color xam">
+                                                <!-- <label class="option-select__item option-select__item--color xam">
                                                     <div class="option-select__inner">
                                                         <input type="radio" name="color" value="xam"> 
                                                         <span class="checkmark checkmark--color xam" style="background-image: url(&quot;https://media2.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/November2023/23CMAW.CM003.28.cljpg.jpg&quot;);"></span>
                                                     </div>
-                                                </label>
+                                                </label> -->
                                             </div>
+                                         
                                             <div class="option-heading">
                                                 <span class="option-heading__title">Kích thước:
                                                     <span rel-script="product-option-title-color" class="text--bold">L</span>
@@ -168,7 +169,7 @@
                     <div class="exclusive-inner active">
                         <p class="product-related__title">Sản phẩm bạn có thể thích</p>
                         <owl-carousel-o [options]="newprodOptions">
-                            <ng-template carouselSlide  *ngFor="let product of productsHaveModified, index as productIndex" id="thumbProduct">
+                            <ng-template carouselSlide  *ngFor="let product of productsHaveModified[0], index as productIndex" id="thumbProduct">
                                 <div class="owl-stage stage-detail">
                                     <div class="owl-item">
                                         <div class="item-new-prod">

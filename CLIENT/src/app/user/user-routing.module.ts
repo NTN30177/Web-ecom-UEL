@@ -29,6 +29,9 @@ const routes: Routes = [
         path:'filter-product', component: FilterProductComponent,
       },
       {
+        path: 'product-detail/:slug', component: ProductDetailComponent,
+      },
+      {
         path: 'account',
         loadChildren: () =>
           import('../manage-account/manage-account.module').then(
@@ -73,9 +76,7 @@ const routes: Routes = [
       {
         path: 'app-delivery-policy', component: DeliveryPolicyComponent,
       },
-      {
-        path: 'product-detail', component: ProductDetailComponent,
-      },
+      
       {
         path: '',
         component: HomePageComponent,

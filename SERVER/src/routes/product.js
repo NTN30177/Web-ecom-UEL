@@ -48,6 +48,7 @@ router.post(
 );
 
 router.get("", productController.getProduct)
+router.get("/product-detail/:slug", productController.getProductDetail)
 
 router.patch("/toggle-soft-deleted/:productId", productController.toggleSoftDeleted)
 
