@@ -16,7 +16,6 @@ export class CartComponent implements OnInit {
   rfDataModal: FormGroup;
   errFlag: boolean | undefined;
   showNocart = false;
-
   colorList: any;
   productsCart: any;
   errMessage: any;
@@ -40,7 +39,6 @@ export class CartComponent implements OnInit {
       await this.cartDetails();
       await this.totalPayment(this.productsCart);
     } catch (error) {
-      // Handle errors if necessary
       console.error('Error in ngOnInit:', error);
     }
   }
@@ -52,14 +50,12 @@ export class CartComponent implements OnInit {
       console.log(data, 'UserIdFromHeader in CartComponent');
     });
   }
-  totalQuantity() {}
 
   async apiCartProduct(userIdFromHeader: any): Promise<void> {
     try {
       const data = await this._cartService
         .getProductCart(userIdFromHeader)
         .toPromise();
-
       this._cartService.updateCartItems(data.productItemUser);
       return data.productItemUser;
     } catch (err) {
@@ -67,21 +63,6 @@ export class CartComponent implements OnInit {
       this.showNocart = true;
     }
   }
-
-  // async apiChangeQuantityProductItem(data: object) {
-  //   console.log(data, '55555');
-
-  //   try {
-  //     const responseData = await this._cartService
-  //       .putProductItemCart(data)
-  //       .toPromise();
-  //     console.log(responseData, 'dataput');
-  //     // await this.apiCartProduct(this.userIdFromHeader);
-  //     await this.totalPayment();
-  //   } catch (err) {
-  //     this.errMessage = err;
-  //   }
-  // }
 
   async changeQuantity(
     colorID: any,
@@ -105,14 +86,12 @@ export class CartComponent implements OnInit {
       next: async (data: any) => {
         this.productsCart = await this.apiCartProduct(this.userIdFromHeader);
         this.totalPayment(this.productsCart);
-
       },
       error: (err: any) => {
         this.errMessage = err;
       },
     });
   }
-  
 
   async onColorChange(
     event: any,
@@ -123,16 +102,9 @@ export class CartComponent implements OnInit {
   ) {
     try {
       const newColor = event.target.value;
-      console.log('Trước khi chọn:', currentColor);
-
-      console.log('Sau khi chọn:', newColor);
-
       this.previousColor = newColor;
       await this.changeQuantity(newColor, productId, size, quantity);
-      console.log('test change color 2');
-
       await this.changeQuantity(currentColor, productId, size, 0);
-      console.log('test change color');
     } catch (err) {
       console.error(err);
     }
@@ -148,26 +120,13 @@ export class CartComponent implements OnInit {
     try {
       this.previousColor = sizeCurrent;
       const newSize = event.target.value;
-
-      console.log(
-        'Trước khi chọn:',
-        currentColor,
-        productId,
-        sizeCurrent,
-        quantity
-      );
-      console.log('Sau khi chọn:', newSize);
-
       this.previousSize = newSize;
 
       // Assuming that changeQuantity returns a promise
       await this.changeQuantity(currentColor, productId, newSize, quantity);
-      console.log('test change size');
       await this.changeQuantity(currentColor, productId, sizeCurrent, 0);
-      console.log(newSize, 'ns');
     } catch (error) {
       console.error('An error occurred:', error);
-      // Handle the error appropriately
     }
   }
   getCartDetails: any = [];
@@ -183,38 +142,32 @@ export class CartComponent implements OnInit {
   total_quantity: number = 0;
   total_variantColor: number = 0;
   ship_code: number = 0;
-  async totalPayment(productsCart:any): Promise<number> {
+  async totalPayment(productsCart: any): Promise<number> {
     console.log(this.productsCart, '1233');
     this.total_payment = 0;
     this.total_quantity = 0;
     this.total_variantColor = 0;
     this.ship_code = 0;
-  
     productsCart.forEach((product: any) => {
-      // console.log(product);
       product.variants.forEach((variant: any) => {
         variant.variantColor.forEach((variantColor: any) => {
-          // console.log(variantColor);
           this.total_variantColor++;
           this._authServer.cartSubject.next(this.total_quantity);
-          // Assuming there is a 'price' property for each variant
           this.total_payment += variantColor.quantity * product.productId.price;
           this.total_quantity += variantColor.quantity;
         });
       });
     });
-  
+
     if (this.total_payment > 1000000) {
       this.ship_code = 0;
     } else {
       this.ship_code = 35000;
     }
-  
     this._authServer.updateCart(this.total_quantity);
-  
-    return this.total_payment; // Return the total_payment value as a Promise<number>
+
+    return this.total_payment;
   }
-  
 
   removeProduct() {
     localStorage.removeItem('localCart');

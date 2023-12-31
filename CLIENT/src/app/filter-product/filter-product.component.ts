@@ -3,17 +3,10 @@ import {
   Component,
   ElementRef,
   Renderer2,
-  ViewChild,
+  ViewChild,ChangeDetectorRef
 } from '@angular/core';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatSelectModule } from '@angular/material/select';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { HomeService } from '../services/home.service';
-import { localImg } from '../ENV/envi';
-import { ChangeDetectorRef } from '@angular/core';
 import { IProduct } from '../interfaces/product';
 import { AuthService } from '../services/auth.service';
 import { CartComponent } from '../cart/cart.component';
@@ -21,10 +14,8 @@ import { CartService } from '../services/cart.service';
 import { formatMoneyVietNam } from '../utils/utils';
 import { take } from 'rxjs';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
-
-import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { SortPaginationService } from '../services/sort-pagination.service';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-filter-product',
@@ -35,8 +26,6 @@ export class FilterProductComponent implements AfterViewInit {
   formatMoneyVietNam = formatMoneyVietNam;
   productStates: boolean[] = [];
   i: number = 0;
-
-  // products: any;
   errMessage: any;
   currentColor = 0;
   bannersArray: any;
@@ -44,34 +33,45 @@ export class FilterProductComponent implements AfterViewInit {
   selectedColorsId: any[] | undefined;
   totalProduct: any;
   slug: any;
-  // currentColor: any;
+  selectedValue = 'latest';
 
   constructor(
     private el: ElementRef,
     private renderer: Renderer2,
     private _homeService: HomeService,
-    private changeDetectorRef: ChangeDetectorRef,
     private _authServer: AuthService,
     private _cartService: CartService,
     private _cartComponent: CartComponent,
     private _sortPaginationService: SortPaginationService,
     private route: ActivatedRoute,
-    private router: Router
   ) {
     this._authServer.idUserSubject.subscribe((data) => {
       this.userIdFromHeader = data;
-      console.log(data, '1111');
     });
     this.slug = this.route.snapshot.params['slug'];
   }
 
+
+  async ngOnInit(): Promise<void> {
+    this.getColor();
+    this.route.params.subscribe(params => {
+      this.slug=params['slug']
+      this.sortFilter();
+      
+    });
+    await this.setupUserIdSubscription();
+    this.productStates = Array(this.bannersArray.length).fill(false);
+  }
+
+
   ngAfterViewInit(): void {
-    this.initOwlCarousel();
-    console.log(this.listColor, 'lc');
+    // this.initOwlCarousel();
   }
-  initOwlCarousel() {
-    throw new Error('Method not implemented.');
-  }
+
+
+  // initOwlCarousel() {
+  //   throw new Error('Method not implemented.');
+  // }
 
   getColor() {
     this._sortPaginationService.getColor().subscribe((data) => {
@@ -79,10 +79,8 @@ export class FilterProductComponent implements AfterViewInit {
       console.log(data, 'data');
     });
   }
-  // Size table homepage
 
   toggleSizeTable(productIndex: number): void {
-    // đóng mở các sizetable khác
     for (let i = 0; i < this.productStates.length; i++) {
       const otherSizeTableId = `sizeTable${i}`;
       const otherSizeTable = this.el.nativeElement.querySelector(
@@ -93,9 +91,6 @@ export class FilterProductComponent implements AfterViewInit {
       }
     }
 
-    //
-
-    //
     const sizeTableId = `sizeTable${productIndex}`;
     const sizeTable = this.el.nativeElement.querySelector(`#${sizeTableId}`);
     if (
@@ -114,12 +109,7 @@ export class FilterProductComponent implements AfterViewInit {
   }
 
   selectedColorId: number | null = null;
-
   imagesArray: any = [];
-
-  // Setting Carousel slider
-
-  // Setting new-prod homepage
   filterprodOptions: OwlOptions = {
     loop: false,
     mouseDrag: true,
@@ -152,32 +142,14 @@ export class FilterProductComponent implements AfterViewInit {
   isHovered: boolean | undefined;
   products: any;
 
-  async ngOnInit(): Promise<void> {
-    // Mặc định chọn màu đầu tiên
-    this.getColor();
-    this.route.params.subscribe(params => {
-      this.slug=params['slug']
-      // params.slug sẽ chứa giá trị mới của slug
-      this.sortFilter();
-      
-    });
 
-
-    await this.setupUserIdSubscription();
-    console.log(this.userIdFromHeader, '123');
-    // await this.apiProductHomePage();
-    console.log(this.productsHaveModified, '2222222222222');
-    // Khởi tạo mảng productStates với giá trị false cho mỗi sản phẩm
-    this.productStates = Array(this.bannersArray.length).fill(false);
-  }
 
   private async setupUserIdSubscription(): Promise<void> {
     return new Promise<void>((resolve) => {
-      const subscription = this._authServer.idUserSubject
+      this._authServer.idUserSubject
         .pipe(take(1))
         .subscribe((data) => {
           this.userIdFromHeader = data;
-          console.log(data, 'UserIdFromHeader in CartComponent');
           resolve();
         });
     });
@@ -188,7 +160,6 @@ export class FilterProductComponent implements AfterViewInit {
   }
 
   async apiChangeQuantityProductItem(data: object) {
-    console.log(data, '55555');
     try {
       const responseData = await this._cartService.putProductItemCart(data);
       console.log(responseData, 'dataput');
@@ -198,7 +169,6 @@ export class FilterProductComponent implements AfterViewInit {
   }
 
   total_quantity: number = 0;
-
   totalCartItem(productsCart: any): number {
     this.total_quantity = 0;
     productsCart.forEach((product: any) => {
@@ -209,13 +179,12 @@ export class FilterProductComponent implements AfterViewInit {
         });
       });
     });
-
     return this.total_quantity;
   }
 
+
   itemsCart: any = [];
   userIdFromHeader: any;
-
   async addToCart(
     colorID: any,
     product_Id: any,
@@ -252,19 +221,15 @@ export class FilterProductComponent implements AfterViewInit {
     if (localCartString !== null) {
       var cartValue = JSON.parse(localCartString);
       this.cartNumber = cartValue.length;
-      //  this._authServer.cartSubject.next(this.cartNumber)
     }
   }
 
   apiProductHomePage() {
-    console.log('1235');
     this._homeService.getProductHomePage().subscribe({
       next: (data: any) => {
         this.products = data.products;
-
         this.updateProductsHaveModified();
         this.initializeSelectedColorIndex();
-        console.log(this.products, '123');
       },
       error: (err: any) => {
         this.errMessage = err;
@@ -273,8 +238,6 @@ export class FilterProductComponent implements AfterViewInit {
   }
 
   changeColor(product: IProduct, colorId: string) {
-    console.log(product._id, colorId);
-    console.log(this.productsHaveModified);
     this.moveImgHomePageToFront(
       this.productsHaveModified,
       product._id,
@@ -300,12 +263,10 @@ export class FilterProductComponent implements AfterViewInit {
         break; // Dừng vòng lặp sau khi xử lý sản phẩm
       }
     }
-
     return productsHaveModified;
   }
 
-  productsHaveModified: any;
-
+  productsHaveModified: any
   updateProductsHaveModified() {
     this.productsHaveModified = this.products.map((product: any) => {
       return {
@@ -319,7 +280,6 @@ export class FilterProductComponent implements AfterViewInit {
             const { size, quantity } = sizeInfo;
             return { size, quantity };
           });
-
           // Return the object for a variant with variantColor
           return {
             colorID,
@@ -339,8 +299,6 @@ export class FilterProductComponent implements AfterViewInit {
       const popupContainerElement = this.popupContainer.nativeElement;
       if (popupContainerElement) {
         this.renderer.addClass(popupContainerElement, 'active-cartpopup');
-
-        // Sau 2 giây, xoá class "active-cartpopup"
         setTimeout(() => {
           this.renderer.removeClass(popupContainerElement, 'active-cartpopup');
         }, 2000);
@@ -350,7 +308,6 @@ export class FilterProductComponent implements AfterViewInit {
 
   // thêm xo color-active
   selectedColorIndex: number[] = [];
-
   initializeSelectedColorIndex(): void {
     this.selectedColorIndex = new Array(this.productsHaveModified.length).fill(
       0
@@ -363,11 +320,11 @@ export class FilterProductComponent implements AfterViewInit {
 
   ///sort
   sizes: string[] = ['S', 'M', 'L', 'XL', 'XXL', 'FreeSize'];
-  isActive: boolean[] = [false, false, false, false, false]; // Initialize with the correct number of elements
+  isActive: boolean[] = [false, false, false, false, false]; 
 
   toggleSizeActive(index: number) {
     this.isActive[index] = !this.isActive[index];
-    this.getSelectedValues(); // Call the function when size is toggled
+    this.getSelectedValues();
   }
 
   selectedColors: string[] = [];
@@ -378,7 +335,7 @@ export class FilterProductComponent implements AfterViewInit {
     } else {
       this.selectedColors.push(color);
     }
-    this.getSelectedValues(); // Call the function when color is toggled
+    this.getSelectedValues(); 
   }
 
   minValue: number = 0;
@@ -400,26 +357,16 @@ export class FilterProductComponent implements AfterViewInit {
 
   sizesChoose: string[] | undefined;
   getSelectedValues() {
-    // Get selected colors
     this.selectedColors = this.listColor.filter((color: string) =>
       this.selectedColors.includes(color)
     );
     this.selectedColorsId = this.selectedColors.map((color: any) => color._id);
-
-    // Get selected sizes
-    console.log('isActive Array:', this.isActive);
     this.sizesChoose = this.sizes.filter((size, i) => this.isActive[i]);
-
-    // Log or use the selected values as needed
-    console.log('Selected Sizes:', this.sizesChoose);
-    console.log('Selected Colors:', this.selectedColorsId);
-    console.log('Selected Min Value:', this.minValue);
-    console.log('Selected Max Value:', this.maxValue);
     this.currentPage = 1;
     this.sortFilter();
   }
 
-  selectedSorting: string = 'latest'; // Set default value
+  selectedSorting: string = 'latest';
 
   onSortingChange(event: any): void {
     this.selectedSorting = event.value;
@@ -430,7 +377,7 @@ export class FilterProductComponent implements AfterViewInit {
   productsPerPage: any;
   currentPage = 1;
   sortFilter() {
-    this.productsPerPage = 5;
+    this.productsPerPage = 8;
     const startIndex = (this.currentPage - 1) * this.productsPerPage;
     setTimeout(() => {
       console.log(
@@ -461,7 +408,6 @@ export class FilterProductComponent implements AfterViewInit {
           console.log(this.products);
           this.updateProductsHaveModified();
           this.initializeSelectedColorIndex();
-          console.log(this.productsHaveModified,'5555555555');
         });
     }, 100);
   }
@@ -469,14 +415,5 @@ export class FilterProductComponent implements AfterViewInit {
     this.currentPage += 1;
     this.sortFilter();
   }
-  changeSlug() {
-    this.router.events.subscribe((event: any) => {
-      if (event instanceof NavigationEnd) {
-        // Gọi sortFilter khi route đã thay đổi
-        this.currentPage = 1;
 
-        this.sortFilter();
-      }
-    });
-  }
 }

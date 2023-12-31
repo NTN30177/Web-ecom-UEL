@@ -49,22 +49,17 @@
           <div class="title__filter">Quần & Jumpsuit</div>
           <mat-form-field>
             <mat-label>Phân loại</mat-label>
-            <mat-select (selectionChange)="onSortingChange($event)">
+            <mat-select [(value)]="selectedValue" (selectionChange)="onSortingChange($event)">
               <mat-option value="latest">Mới nhất</mat-option>
               <mat-option value="two">Bán chạy</mat-option>
               <mat-option value="asc">Giá thấp đến giá cao</mat-option>
               <mat-option value="desc">Giá cao đến giá thấp</mat-option>
-              <!-- <mat-option value="two">% giảm nhiều</mat-option> -->
             </mat-select>
           </mat-form-field>
         </div>
         <div class="home-new-prod">
           <div class="exclusive-tabs">
             <div class="exclusive-head">
-              <!-- <ul>
-                        <li class="exclusive-tab new-prod">Sản phẩm mới</li>
-                        <li class="exclusive-tab hot-prod">Bán chạy nhất</li>
-                      </ul> -->
             </div>
             <div class="exclusive-content">
               <div class="exclusive-inner active">
