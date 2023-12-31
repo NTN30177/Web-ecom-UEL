@@ -82,6 +82,7 @@ section {
     text-transform: uppercase;
     text-align: center;
     line-height: 78px;
+    max-width: calc(100% - 212px);
 }
 .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
     padding: 10px 16px;
@@ -132,7 +133,9 @@ section {
     width: 26px;
     height: 26px;
     border-radius: 50%;
-    border: 2px solid transparent;;
+    border: 2px solid transparent;
+    border: 2px solid #ccc;
+
 }
 .color-item__name {
     font-size: 12px;
@@ -542,6 +545,17 @@ section {
 }
 .notify-product__prices ins {
     text-decoration: none;
+}
+.sizeTable {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #e7e8e9;
+    right: 0;
+    display: none;
+    bottom: 35px;
+}
+.sizeTable.open {
+    display: block;
 }
 .collection-section-loadmore {
     display: flex;
