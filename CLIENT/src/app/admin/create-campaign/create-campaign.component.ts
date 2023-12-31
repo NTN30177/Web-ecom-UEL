@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CampaignService } from '../../services/campaign.service';
+import { alertwarning } from '../../utils/utils';
 
 @Component({
   selector: 'app-create-campaign',
@@ -11,11 +12,12 @@ export class CreateCampaignComponent implements OnInit {
   createcampaignForm!: FormGroup;
   products: any[] = [];
   productTitles: { value: string; label: string }[] = [];
-
+  alertwarning = alertwarning
+  
   constructor(
     private fb: FormBuilder,
     private _campaignService: CampaignService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.createcampaignForm = this.fb.group({
