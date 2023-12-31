@@ -48,21 +48,18 @@
                                         <div class="product-single__option">
                                             <div class="option-heading">
                                                 <span class="option-heading__title">Màu sắc:
-                                                    <span rel-script="product-option-title-color" class="text--bold">Đen</span>
+                                                    <span rel-script="product-option-title-color" class="text--bold"></span>
                                                 </span>
                                             </div>
                                             <ul class="colors">
                                                 <li *ngFor="let v of productsHaveModified[0].variants; index as colorI" 
-                      [ngClass]="{'color': true, 'color-active': colorI === selectedColorIndex[productIndex]}">
-                      <a href="javascript:void(0)" class="color-picked" data-id="{{ v._id }}" 
-                          (click)="changeColor(productsHaveModified[0], v.color._id); updateSelectedColorIndex(productIndex, colorI)"
-                          [ngClass]="{'active-color': colorI === 0}">
-                          <img src="http://localhost:3000/colorImages/{{v.color.imageColor}}" alt="">
-                      </a>
-                  </li>
-                  
-                  
-                                              </ul>
+                                                [ngClass]="{'color': true, 'color-active': colorI === selectedColorIndex[productIndex]}">
+                                                    <a href="javascript:void(0)" class="color-picked" data-id="{{ v._id }}" 
+                                                    (click)="changeColor(productsHaveModified[0], v.color._id); updateSelectedColorIndex(productIndex, colorI)" [ngClass]="{'active-color': colorI === 0}">
+                                                        <img src="http://localhost:3000/colorImages/{{v.color.imageColor}}" alt="">
+                                                    </a>
+                                                </li>
+                                            </ul>
                                             <div class="option-heading">
                                                 <span class="option-heading__title">Kích thước:
                                                     <span rel-script="product-option-title-color" class="text--bold">L</span>
