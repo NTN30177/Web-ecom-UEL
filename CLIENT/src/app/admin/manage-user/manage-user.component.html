@@ -31,7 +31,7 @@
                                         <td>{{ formatMoneyVietNam(user.totalRevenue)}}</td>
                                         <td>{{ user.latestPurchase | date:'short' }}</td>
                                         <td>
-                                            <select [(ngModel)]="user.is_admin" (change)="onAdminChange(user)">
+                                            <select [(ngModel)]="user.is_admin" (change)="onAdminChange(user)"  name="isAdmin">
                                                 <option value="0" [selected]="user.is_admin === 0">Customer</option>
                                                 <option value="1" [selected]="user.is_admin === 1">Admin</option>
                                             </select>
@@ -61,7 +61,7 @@
                                         <td>{{ formatMoneyVietNam(user.totalRevenue)}}</td>
                                         <td>{{ user.latestPurchase | date:'short' }}</td>
                                         <td>
-                                            <select [(ngModel)]="user.is_admin" (change)="onAdminChange(user)">
+                                            <select [(ngModel)]="user.is_admin" (change)="onAdminChange(user)"  name="isAdmin">
                                                 <option value="0" [selected]="user.is_admin === 0">Customer</option>
                                                 <option value="1" [selected]="user.is_admin === 1">Admin</option>
                                             </select>
@@ -90,7 +90,7 @@
                                         <td>{{ formatMoneyVietNam(user.totalRevenue)}}</td>
                                         <td>{{ user.latestPurchase | date:'short' }}</td>
                                         <td>
-                                            <select [(ngModel)]="user.is_admin" (change)="onAdminChange(user)">
+                                            <select [(ngModel)]="user.is_admin" (change)="onAdminChange(user)"  name="isAdmin">
                                                 <option value="0" [selected]="user.is_admin === 0">Customer</option>
                                                 <option value="1" [selected]="user.is_admin === 1">Admin</option>
                                             </select>
