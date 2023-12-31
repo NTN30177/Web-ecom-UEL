@@ -8,6 +8,8 @@ import { AuthService } from '../services/auth.service';
 import { CartComponent } from '../cart/cart.component';
 import { CartService } from '../services/cart.service';
 import { formatMoneyVietNam } from '../utils/utils';
+import { ActivatedRoute } from '@angular/router';
+import { ProductDetailService } from '../services/product-detail.service';
 
 declare var $: any;
 
@@ -29,6 +31,8 @@ export class ProductDetailComponent implements OnInit {
   errMessage: any;
   currentColor = 0;
   userIdFromHeader: any;
+  slug: any;
+
 
   private initOwlCarousel(): void {
     const owlSelector = '.exclusive-inner__list-products.owl-carousel';
@@ -60,7 +64,9 @@ export class ProductDetailComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef,
     private _authServer: AuthService,
     private _cartService: CartService,
-    private _cartComponent: CartComponent
+    private _cartComponent: CartComponent,
+    private route: ActivatedRoute,
+    private _productDetailService: ProductDetailService
   ) {
     this._authServer.idUserSubject.subscribe((data) => {
       this.userIdFromHeader = data;
@@ -86,8 +92,19 @@ export class ProductDetailComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.initSlick();
+    // this.initSlick();
     this.initOwlCarousel();
+    this.slug = this.route.snapshot.params['slug'];
+    this.getProductDetails(this.slug)    
+  }
+   getProductDetails(slug:any){
+    this._productDetailService.getProductDetail(slug).subscribe((data)=>{
+      this.products = [data]
+      console.log(data)
+       this.updateProductsHaveModified()
+      console.log(this.productsHaveModified)
+    })
+
   }
 
   bannersArray: any = [
@@ -305,19 +322,50 @@ export class ProductDetailComponent implements OnInit {
     const thumbnailsSlick = this.thumbnailsSlick;
     const productGallery = this.productGallery;
 
-    thumbnailsSlick.slickGoTo(0);
+    // thumbnailsSlick.slickGoTo(0);
 
     const thumbnailsSlickElement = thumbnailsSlick.$instance.nativeElement;
     const productGalleryElement = productGallery.$instance.nativeElement;
 
     $(thumbnailsSlickElement).slick({
-      infinite: false,
+      infinite: true,
       slidesToShow: 4,
       slidesToScroll: 1,
       arrows: true,
       asNavFor: '.product-single__gallery',
       prevArrow: '<button class="slick-prev" aria-label="Previous"><img src="../assets/icon/SVG/arrow-down.svg" alt="Previous"></button>',
       nextArrow: '<button class="slick-next" aria-label="Next"><img src="../assets/icon/SVG/arrow-down.svg" alt="Next"></button>',
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            infinite: true,
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
     });
 
     $(productGalleryElement).slick({
@@ -326,6 +374,37 @@ export class ProductDetailComponent implements OnInit {
       slidesToScroll: 1,
       arrows: false,
       asNavFor: '.thumbnails',
+      responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: false,
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
     });
 
     $(thumbnailsSlickElement).on('afterChange', () => {
@@ -344,5 +423,21 @@ export class ProductDetailComponent implements OnInit {
         $(thumbnailsSlickElement).slick('slickGoTo', index);
       });
     });
+  }
+
+  quantity: number = 1; // Số lượng mặc định
+
+  increaseQuantity(event: Event) {
+    event.preventDefault(); // Ngăn chặn sự kiện mặc định của thẻ <a>
+    if (this.quantity < 99) { // Giới hạn số lượng tối đa là 99
+      this.quantity++;
+    }
+  }
+
+  decreaseQuantity(event: Event) {
+    event.preventDefault(); // Ngăn chặn sự kiện mặc định của thẻ <a>
+    if (this.quantity > 1) { // Giới hạn số lượng tối thiểu là 1
+      this.quantity--;
+    }
   }
 }

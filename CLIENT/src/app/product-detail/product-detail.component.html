@@ -1,12 +1,12 @@
 <div class="container" id="body">
     <div id="product_detail" class="row">
         <div class="container">
-            <div class="breadcrumb-products">
+            <div class="breadcrumb-products" *ngIf="productsHaveModified">
                 <ul class="breadcrumb__list">
                     <li class="breadcrumb__item"><a class="breadcrumb__link" href="#">Trang chủ</a></li>
                     <li class="breadcrumb__item"><a href="#" class="breadcrumb__link" title="Nữ">Nữ</a></li>
                     <li class="breadcrumb__item">
-                        <a href="#" class="breadcrumb__link" title="Piece Suits - Set áo vest dáng oversize "><b>Piece Suits - Set áo vest dáng oversize</b></a>
+                        <a href="#" class="breadcrumb__link" style="font-weight: 700;">{{productsHaveModified[0].title}}</a>
                     </li>
                 </ul>
             </div>
@@ -18,30 +18,30 @@
                                 <div class="product-single__inner">
                                   <ngx-slick-carousel class="thumbnails" #thumbnailsSlick [config]="slideConfig">
                                     <div ngxSlickItem class="image" *ngFor="let image of imagesArray">
-                                      <img loading="lazy" src="{{ image.imgName }}" alt="Piece Suits - Set áo vest dáng oversize" width="100%">
+                                      <img loading="lazy" src="http://localhost:3000/productImages/{{productsHaveModified[0].imgHomePage[0].images[0]}}" alt="#" width="100%">
                                     </div>
                                   </ngx-slick-carousel>
                                 </div>
                                 <div class="thumbs">
                                   <ngx-slick-carousel class="product-single__gallery" #productGallery [config]="galleryConfig">
                                     <div ngxSlickItem class="image image-lazyload" *ngFor="let image of imagesArray">
-                                      <img loading="lazy" src="{{ image.imgName }}" alt="Piece Suits - Set áo vest dáng oversize">
+                                      <img loading="lazy" src="http://localhost:3000/productImages/{{productsHaveModified[0].imgHomePage[0].images[0]}}" alt="#">
                                     </div>
                                   </ngx-slick-carousel>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6" *ngIf="productsHaveModified">
                             <div class="product-detail__information">
-                                <h1 style="text-transform: uppercase;">Piece Suits - Set áo vest dáng oversize</h1>
+                                <h1 style="text-transform: uppercase;">{{productsHaveModified[0].title}}</h1>
                                 <div class="product-detail__sub-info">
                                     <p>
-                                        SKU: <span>67M7969</span>
+                                        SKU: <span>{{productsHaveModified[0].sku}}</span>
                                     </p>
                                 </div>
                                 <div class="product-detail__price">
                                     <input type="hidden" name="hid_product_price_not_format" value="3380000" />
-                                    <b>3.380.000đ</b>
+                                    <b>{{formatMoneyVietNam(productsHaveModified[0].price)}}</b>
                                 </div>
                                 <div class="product-single__addtocart">
                                     <div class="product-single__options">
@@ -52,26 +52,18 @@
                                                 </span>
                                             </div>
                                             <div class="option-select option-select--color">
-                                                <label class="option-select__item option-select__item--color den">
+                                                <label class="option-select__item option-select__item--color den" *ngFor="let v of productsHaveModified[0].variants; index as colorI" >
                                                     <div class="option-select__inner">
                                                         <input type="radio" name="color" value="den" checked="checked"> 
-                                                        <span class="checkmark checkmark--color den" style="background-image: url(&quot;https://media2.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/November2023/23CMAW.CM003.3cl.jpg&quot;);"></span>
+                                                        <span class="checkmark checkmark--color den" style="background-image: url(http://localhost:3000/productImages/{{productsHaveModified[0].imgHomePage[0].images[0]}});"></span>
                                                     </div>
                                                 </label> 
-                                                <label class="option-select__item option-select__item--color xam">
-                                                    <div class="option-select__inner">
-                                                        <input type="radio" name="color" value="xam"> 
-                                                        <span class="checkmark checkmark--color xam" style="background-image: url(&quot;https://media2.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/November2023/23CMAW.CM003.28.cljpg.jpg&quot;);"></span>
-                                                    </div>
-                                                </label>
                                             </div>
                                             <div class="option-heading">
                                                 <span class="option-heading__title">Kích thước:
                                                     <span rel-script="product-option-title-color" class="text--bold">L</span>
                                                 </span>
-                                                <a href="#" ga-tracking-value="huong-dan-chon-size" rel-script="toggle-size-guide" class="option-heading__sizeguide">
-                                                    Hướng dẫn chọn size
-                                                </a>
+                                                <a href="#" class="option-heading__sizeguide">Hướng dẫn chọn size</a>
                                             </div>
                                             <div class="product-detail__size">
                                                 <div class="product-detail__size__input">
@@ -100,19 +92,23 @@
                                             <div class="product-detail__quantity">
                                                 <p>Số lượng:</p>
                                                 <div class="product-single__quantity">
-                                                    <div rel-script="quantity-change" class="quantity">
-                                                        <a href="#" class="quantity__reduce">-</a> 
-                                                        <input type="number" value="1" max="99" min="1" class="quantity__control"> 
-                                                        <a href="#" class="quantity__augure">+</a>
+                                                    <div class="quantity">
+                                                        <a href="#" class="quantity__reduce" (click)="decreaseQuantity($event)">-</a> 
+                                                        <input type="number" [(ngModel)]="quantity" max="99" min="1" class="quantity__control"> 
+                                                        <a href="#" class="quantity__augure" (click)="increaseQuantity($event)">+</a>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="product-detail__actions">
                                                 <div class="product-single__button col-sm-6">
-                                                    <a href="#" rel-script="product-add-to-cart" class="btn-add-to-cart">Thêm vào giỏ hàng</a>
+                                                    <a href="#" class="btn-add-to-cart">
+                                                        <img class="btn-icon" src="../assets/icon/SVG/shopping-cart1.svg">
+                                                        Thêm vào giỏ hàng</a>
                                                 </div>
                                                 <div class="product-single__button col-sm-6">
-                                                    <a href="#" rel-script="product-add-to-cart" class="btn-buy">Mua hàng</a>
+                                                    <a href="#" class="btn-buy">
+                                                        <img class="btn-icon" src="../assets/icon/SVG/shopping-bag.svg">
+                                                        Mua hàng</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -122,19 +118,19 @@
                                 <div class="product-policy">
                                     <div class="product-policy__item">
                                         <div class="product-policy__icon">
-                                            <img src="./assets/images/phone-call.svg" alt="Hotline 1900.27.27.37 hỗ trợ từ 8h30 - 22h mỗi ngày">
+                                            <img src="../assets/icon/SVG/phone-call.svg" alt="Hotline 1900.27.27.37 hỗ trợ từ 8h30 - 22h mỗi ngày">
                                         </div> 
                                         <span class="product-policy__title">Hotline 1900.27.27.37<br>hỗ trợ từ 8h30 - 22h<br>mỗi ngày</span>
                                     </div> 
                                     <div class="product-policy__item">
                                         <div class="product-policy__icon">
-                                            <img src="/CLIENT/src/assets/icon/SVG/truck.svg" alt="Giao hàng nhanh toàn quốc">
+                                            <img src="../assets/icon/SVG/truck1.svg" alt="Giao hàng nhanh toàn quốc">
                                         </div> 
                                         <span class="product-policy__title">Giao hàng nhanh<br>toàn quốc</span>
                                     </div> 
                                     <div class="product-policy__item">
                                         <div class="product-policy__icon">
-                                            <img src="./assets/images/credit-card.svg" alt="Thanh toán an toàn">
+                                            <img src="../assets/icon/SVG/credit-card1.svg" alt="Thanh toán an toàn">
                                         </div> 
                                         <span class="product-policy__title">Thanh toán an toàn</span>
                                     </div>
@@ -167,8 +163,8 @@
                 <div class="exclusive-content">
                     <div class="exclusive-inner active">
                         <p class="product-related__title">Sản phẩm bạn có thể thích</p>
-                        <!-- <owl-carousel-o [options]="newprodOptions">
-                            <ng-template carouselSlide  *ngFor="let product of productsHaveModified, index as productIndex" id="thumbProduct">
+                        <owl-carousel-o [options]="newprodOptions">
+                            <ng-template carouselSlide  *ngFor="let product of productsHaveModified[0], index as productIndex" id="thumbProduct">
                                 <div class="owl-stage stage-detail">
                                     <div class="owl-item">
                                         <div class="item-new-prod">
@@ -230,7 +226,7 @@
                                     </div>
                                 </div>
                             </ng-template>
-                        </owl-carousel-o> -->
+                        </owl-carousel-o>
                     </div>
                 </div>
             </div>

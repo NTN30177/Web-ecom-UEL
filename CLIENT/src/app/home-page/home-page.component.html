@@ -31,12 +31,14 @@
                         <div class="info-tag best-seller">Best Seller</div>
                         <span class="percent percent_02">-50%
                         </span>
+                        <a routerLink="product-detail/{{product.slug}}">
                         <div class="thumb-product" >
-                          <a href="/product/product-detail/{{product.slug}}" >
-                            <img id="ao" src="http://localhost:3000/productImages/{{product.imgHomePage[0].images[0]}}" alt="" class=" static">
-                            <img id="ao2" src="http://localhost:3000/productImages/{{product.imgHomePage[0].images[1]}}" alt="" class=" hover_img">
+                          <a >
+                            <img id="ao" src="{{localProductImg}}/{{product.imgHomePage[0].images[0]}}" alt="" class=" static">
+                            <img id="ao2" src="{{localProductImg}}/{{product.imgHomePage[0].images[1]}}" alt="" class=" hover_img">
                           </a>
                         </div>
+                      </a>
                         <div class="info-product">
                           <div class="list-color">
                             <ul class="colors">
@@ -111,7 +113,7 @@
               <div class="notify__product">
                 <div class="notify-product">
                   <div class="notify-product__thumbnail">
-        <img src="http://localhost:3000/productImages/{{productPopUp.img}}" alt="">
+        <img src="{{localProductImg}}/{{productPopUp.img}}" alt="">
 
                   </div>
                   <div class="notify-product__content">
@@ -155,8 +157,8 @@
                         </span>
                         <div class="thumb-product" >
                           <a href="/product/product-detail/{{product.slug}}" >
-                            <img id="ao" src="http://localhost:3000/productImages/{{product.imgHomePage[0].images[0]}}" alt="" class=" static">
-                            <img id="ao2" src="http://localhost:3000/productImages/{{product.imgHomePage[0].images[1]}}" alt="" class=" hover_img">
+                            <img id="ao" src="{{localProductImg}}/{{product.imgHomePage[0].images[0]}}" alt="" class=" static">
+                            <img id="ao2" src="{{localProductImg}}/{{product.imgHomePage[0].images[1]}}" alt="" class=" hover_img">
                           </a>
                         </div>
                         <div class="info-product">

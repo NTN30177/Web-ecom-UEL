@@ -3,6 +3,7 @@ import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { OrderService } from '../../services/order.service';
 import { IOrders } from '../../interfaces/order';
+import { alertwarning } from '../../utils/utils';
 
 @Component({
   selector: 'app-manage-order',
@@ -13,7 +14,7 @@ import { IOrders } from '../../interfaces/order';
 export class ManageOrderComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   allOrders: IOrders[] = [];
-
+  alertwarning=alertwarning
   constructor(private _service: OrderService) {}
 
   ngOnInit(): void {

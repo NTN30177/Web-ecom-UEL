@@ -42,7 +42,7 @@ export class PaymentComponent implements OnInit {
   getUserId() {
     this._authService.idUserSubject.subscribe((data) => {
       this.userId = data;
-      console.log(this.userId, 'uid');
+      // console.log(this.userId, 'uid');
     });
   }
   total_payment: number = 0;
@@ -55,10 +55,10 @@ export class PaymentComponent implements OnInit {
     this.total_variantColor = 0;
     this.ship_code = 0;
     this.cartItems.forEach((product: any) => {
-      console.log(product);
+      // console.log(product);
       product.variants.forEach((variant: any) => {
         variant.variantColor.forEach((variantColor: any) => {
-          console.log(variantColor);
+          // console.log(variantColor);
           this.total_variantColor++;
           this._authService.cartSubject.next(this.total_quantity);
           // Assuming there is a 'price' property for each variant
@@ -72,7 +72,7 @@ export class PaymentComponent implements OnInit {
     } else {
       this.ship_code = 35000;
     }
-    console.log(this.ship_code);
+    // console.log(this.ship_code);
   }
   getAddressUser() {
     this._paymentService.getAddress(this.userId).subscribe({
@@ -80,7 +80,7 @@ export class PaymentComponent implements OnInit {
         this.addresses = responseData;
         this.setDefaultAddress();
         this._paymentService.addressSubject.next(responseData);
-        console.log(responseData, 'rđ');
+        // console.log(responseData, 'rđ');
       },
       error: (err: any) => {
         this.errMessage = err;
@@ -110,8 +110,8 @@ export class PaymentComponent implements OnInit {
           ship_code: this.ship_code ,
           orderId:responseData.orderId
         }
-        console.log(paymentSuccess)
-        console.log(responseData)
+        // console.log(paymentSuccess)
+        // console.log(responseData)
         this._paymentService.updateResultPayment([paymentSuccess]);
 
         // this._paymentService.paymentSuccessSubject.next(paymentSuccess);
@@ -152,7 +152,7 @@ export class PaymentComponent implements OnInit {
 
     dialogRef.componentInstance.addressSelected.subscribe(
       (selectedAddress: any) => {
-        console.log('Selected Address:', selectedAddress);
+        // console.log('Selected Address:', selectedAddress);
         // Update the default address in the parent component
         this.defaultAddress = selectedAddress;
       }

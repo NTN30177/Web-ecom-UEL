@@ -8,16 +8,18 @@
       <select class="selection" name="" id="">
         <option value="">Tất cả</option>
         <option value="">Đang chờ xử lý</option>
-        <option value=""></option>
-        <option value=""></option>
-        <option value=""></option>
+        <option value="">Chuyển qua giao nhận</option>
+        <option value="">Đang giao hàng</option>
+        <option value="">Giao hàng thành công</option>
+        <option value="">Yêu cầu hủy</option>
+        <option value="">Đã hủy</option>
       </select>
     </div>
   </div>
 </div>
 <hr style="background: #CCC;">
 <div class="account-order-table">
-  <table class="table responsive table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="dataTable">
+  <table class="table responsive table-hover" datatable [dtOptions]= "dtOptions" [dtTrigger]="dtTrigger" id="dataTable">
 
     <thead>
       <tr>
@@ -31,9 +33,9 @@
     <tbody>
       <tr *ngFor="let order of orders">
         <td scope="row">{{ order._id }}</td>
-        <td>{{ order.createdAt | date: 'yyyy-MM-dd' }}</td>
+        <td>{{ formatDate(order.createdAt)}}</td>
         <td>{{ order.status }}</td>
-        <td><strong>{{ order.totalPrice }} ({{ order.totalQuantity }} sản phẩm)</strong></td>
+        <td><strong>{{formatMoneyVietNam(order.totalPrice)}} ({{ order.totalQuantity }} sản phẩm)</strong></td>
         <td style="color: #2DA5F3;"><a routerLink="/account/order/order-tracking/{{order._id}}"
             style="color: #2DA5F3">Xem chi tiết <i class="fas fa-regular fa-arrow-right-long ms-3"></i></a></td>
       </tr>

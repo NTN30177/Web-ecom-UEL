@@ -63,6 +63,9 @@ import { FilterProductComponent } from './filter-product/filter-product.componen
 import { MatSliderModule } from '@angular/material/slider';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { ManageUserComponent } from './admin/manage-user/manage-user.component';
+import { NgxSliderModule } from 'ngx-slider-v2';
+// import { NgxSliderModule } from '@angular-slider/ngx-slider';
+
 // import { ChartModule } from 'angular-highcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
@@ -157,13 +160,14 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     Select2Module,
     MatSliderModule,
     MatSelectModule,
-
+    NgxSliderModule,
     HighchartsChartModule,
     ToastModule,
     MatFormFieldModule,
     MatSelectModule,
     MatCheckboxModule,
-    SlickCarouselModule
+    SlickCarouselModule,
+    
   ],
   providers: [DatePipe, CartComponent, HomePageComponent, {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}],
   bootstrap: [AppComponent],

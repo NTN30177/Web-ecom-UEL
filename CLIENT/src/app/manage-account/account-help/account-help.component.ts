@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrl: './account-help.component.css'
 })
 export class AccountHelpComponent {
-
+  alertwarning(){
+    alert("Chức năng đang được phát triển!")
+  }
 }

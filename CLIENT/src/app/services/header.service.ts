@@ -3,10 +3,8 @@ import {
   HttpErrorResponse,
   HttpHeaders,
 } from '@angular/common/http';
-import { EventEmitter, Injectable } from '@angular/core';
-import { IColor, IProduct, ISubType, IType } from '../interfaces/product';
-
-import { Observable, catchError, map, retry, throwError } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable, catchError, map, throwError } from 'rxjs';
 import { local } from '../ENV/envi';
 
 @Injectable({
@@ -28,7 +26,6 @@ export class HeaderService {
       .get<any>(`${local}/user/types-populate-subtypes`, requestOptions)
       .pipe(
         map((res) => res),
-        // retry(3),
         catchError(this.handleError)
       );
   }
@@ -54,7 +51,6 @@ export class HeaderService {
     };
     return this._http.get<any>(apiUrl, requestOptions).pipe(
       map((res) => res),
-      // retry(3),
       catchError(this.handleError)
     );
   }

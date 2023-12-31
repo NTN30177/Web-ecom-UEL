@@ -5,3 +5,9 @@ export interface CartUpdate {
   total_variantColor: any;
   ship_code: any;
 }
+export interface CartItem {
+  id: number;
+  name: string;
+  quantity: number;
+  price: number;
+}
