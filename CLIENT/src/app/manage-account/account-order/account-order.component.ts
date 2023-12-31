@@ -32,7 +32,7 @@ export class AccountOrderComponent implements OnInit {
       pagingType: 'full_numbers',
       pageLength: 10,
       searching: true,
-      // dom: 'lfrtip',
+      paging: true,
       language: {
         url: 'https://cdn.datatables.net/plug-ins/1.10.21/i18n/Vietnamese.json',
       },
@@ -68,6 +68,7 @@ export class AccountOrderComponent implements OnInit {
   
           return dateB - dateA;
         });
+        this.dtTrigger.next(null);
         // console.log('OrderService respond account order list:', this.orders);
         // this.orders.forEach(order => {
         //   console.log('ORDER:', order);

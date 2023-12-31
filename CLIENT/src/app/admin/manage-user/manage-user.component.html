@@ -4,7 +4,7 @@
         <p class="text_head">Quản lý người dùng</p>
     </div>
     <hr>
-    <form action="" name="page_managecampaign" method="post">
+    <form action="" name="" method="post">
         <div class="col-md-12">
             <div class="frame_title">
                 <p><strong>Bảng danh sách người dùng</strong></p>
@@ -14,7 +14,7 @@
                     <mat-tab label="Tất cả ({{allUser.length}})">
                         <div class="mt-4">
                             <table class="table table-hover custom-datatable" datatable [dtOptions]="dtOptions"
-                                [dtTrigger]="dtTrigger" id="manage-campaigns">
+                                [dtTrigger]="dtTrigger" id="">
                                 <thead>
                                     <tr>
                                         <th>Họ tên</th>
@@ -36,13 +36,6 @@
                                                 <option value="1" [selected]="user.is_admin === 1">Admin</option>
                                             </select>
                                         </td>
-                                        <!-- <td>
-                                            <select [(ngModel)]="user.is_admin" (change)="onAdminChange(user)" name="isAdmin">
-                                              <option value="0">Customer</option>
-                                              <option value="1">Admin</option>
-                                            </select>
-                                          </td> -->
-
                                     </tr>
                                 </tbody>
                             </table>
@@ -51,13 +44,14 @@
                     <mat-tab label="Admin ({{getAdminUsers().length}})">
                         <div class="mt-4">
                             <table class="table table-hover custom-datatable" datatable [dtOptions]="dtOptions"
-                                [dtTrigger]="dtTrigger" id="manage-campaigns">
+                                [dtTrigger]="dtTrigger" id="">
                                 <thead>
                                     <tr>
                                         <th>Họ tên</th>
                                         <th>Email</th>
                                         <th>Doanh thu</th>
                                         <th>Lần mua gần nhất</th>
+                                        <th>Quyền hạn</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -80,13 +74,14 @@
                     <mat-tab label="Customer ({{getCustomer().length}})">
                         <div class="mt-4">
                             <table class="table table-hover custom-datatable" datatable [dtOptions]="dtOptions"
-                                [dtTrigger]="dtTrigger" id="manage-campaigns">
+                                [dtTrigger]="dtTrigger" id="">
                                 <thead>
                                     <tr>
                                         <th>Họ tên</th>
                                         <th>Email</th>
                                         <th>Doanh thu</th>
                                         <th>Lần mua gần nhất</th>
+                                        <th>Quyền hạn</th>
                                     </tr>
                                 </thead>
                                 <tbody>
