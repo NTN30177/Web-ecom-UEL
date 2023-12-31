@@ -22,7 +22,6 @@
                                 <div class="list-submenu" *ngIf="types">
                                     <div class="list-submenu__item" *ngFor="let type of types">
                                       <h3><a routerLink="/category/{{type.slug}}">{{type.typeName}}</a></h3>
-
                                         <ul *ngFor="let subtype of type.subtypes">
                                             <li><a routerLink="/category/{{subtype.slug}}">{{subtype.subTypeName}}</a></li>
                                         </ul>
@@ -45,7 +44,7 @@
                             <a href="" class="action-login">Đăng nhập</a>
                         </div>
                         <ul class="menu-mb">
-                            <li class="has-child">
+                            <li class="has-child"  *ngIf="types">
                                 <a href="javascript:void(0)" (click)="toggleSubMenu()">
                                     Sản phẩm
                                     <span class="arrows" [class.open]="submenuOpen">
@@ -54,17 +53,16 @@
                                     </span>
                                 </a>
                                 <ul class="sub-menu-mb">
-                                    <li class="has-sub-child" *ngFor="let item of menuItems; let i = index" (click)="closeSubMenu()">
-                                        <a href="javascript:void(0)" (click)="toggleSubMenuChild($event, i)">
-                                          {{ item.label }}
+                                    <li class="has-sub-child" *ngFor="let type of types; let i = index" (click)="closeSubMenu()">
+                                          <a routerLink="/category/{{type.slug}}" (click)="toggleSubMenuChild($event, i)">{{type.typeName}}
                                           <span class="arrows child">
                                             <i class="ti-plus"></i>
                                             <i class="ti-minus"></i>
                                           </span>
                                         </a>
                                         <ul class="child-sub" #childSubmenu style="display:none">
-                                          <li *ngFor="let subItem of item.subItems">
-                                            <a href="">{{ subItem.label }}</a>
+                                          <li *ngFor="let subtype of type.subtypes">
+                                            <a routerLink="/category/{{subtype.slug}}">{{subtype.subTypeName}}</a>
                                           </li>
                                         </ul>
                                       </li>
@@ -111,25 +109,24 @@
                             </div>
                             <div class="search-items search-suggest">
                                 <h4>Sản phẩm gợi ý</h4>
-                                <div class="search-item__hot history_list" *ngFor="let product of dataLiveSearch">                                    
-                                    <a class="product-suggest" href="">
-                                            <div class="sg-item-img">
-                                                <img src="http://localhost:3000/productImages/{{product.variants[0].images[0]}}" alt="">
-                                            </div>
-                                            <div class="sg-item-info">
-                                                <title>{{product.title}}</title>
-                                                <div class="item-info">
-                                                    <div class="sg-item-price">{{formatMoneyVietNam(product.price)}}</div>
-                                                    <div class="box-p">
-                                                        <p class="price-old">2.790.000₫</p>
-                                                        <span class="percent">-14%</span>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                    </a>
-                                   
+                                <div class="search-item__hot history_list" style="height: 300px; overflow-y: auto;">
+                                  <a class="product-suggest" *ngFor="let product of dataLiveSearch" style="cursor: pointer;">
+                                    <div class="sg-item-img" routerLink="product-detail/{{product.slug}}">
+                                      <img src="{{localProductImg}}/{{product.variants[0].images[0]}}" alt="">
+                                    </div>
+                                    <div class="sg-item-info"  routerLink="product-detail/{{product.slug}}">
+                                      <title>{{product.title}}</title>
+                                      <div class="item-info">
+                                        <div class="sg-item-price">{{formatMoneyVietNam(product.price)}}</div>
+                                        <div class="box-p">
+                                          <p class="price-old">2.790.000₫</p>
+                                          <span class="percent">-14%</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </a>
                                 </div>
+                                
                             </div>
                         </div>
                     </form>
@@ -176,11 +173,11 @@
                                 <div class="cart-list__variant" *ngFor="let v of product.variants">
                                   <div class="cart-list__varriantColor" *ngFor="let vc of v.variantColor">
                               <div class="item-product-cart d-flex" *ngIf="quantityInputValue !== 0">
-                                <div class="thumb-product-cart">
-                                  <img src="http://localhost:3000/productImages/{{ v.images[0]}}">
+                                <div class="thumb-product-cart" routerLink="product-detail/{{product.slug}}">
+                                  <img src="{{localProductImg}}/{{ v.images[0]}}">
                                 </div>
                                 <div class="info-product-cart">
-                                  <h3><a href="">{{ product.productId.title}}</a></h3>
+                                  <h3><a routerLink="product-detail/{{product.slug}}">{{ product.productId.title}}</a></h3>
                                   <div class="info-overview d-flex">
                                     <p class="overview-color"><strong>Màu sắc:</strong> {{v.color.nameColor}}</p>
                                     <p><strong style="text-transform: uppercase">Size:</strong> {{vc.size}}</p>
@@ -262,8 +259,8 @@
                             <a href="#" class="link-nav-bot">Trợ giúp</a>
                         </div>
                     </div>
-                    <div class="item-nav-bot">
-                        <div class="item item-headphone item-nav" *ngIf="isLogin">
+                    <div class="item-nav-bot" *ngIf="isLogin">
+                        <div class="item item-headphone item-nav" >
                             <a href="javascript:void(0)" class="icon icon-account" (click)="toggleSubAction()">
                               <i class="header__icon ti-user"></i>                                
                             </a>

@@ -6,6 +6,11 @@
   line-height: normal;
   letter-spacing: 0.72px;
   padding: -10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 20px;
+  margin-top: 35px;
   
 }
 .header-info {

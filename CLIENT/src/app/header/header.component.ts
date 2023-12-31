@@ -14,20 +14,13 @@ import { AuthService } from '../services/auth.service';
 import { IUser } from '../interfaces/user';
 import { CartComponent } from '../cart/cart.component';
 import { HomePageComponent } from '../home-page/home-page.component';
-import { HomeService } from '../services/home.service';
-import { Subscription, debounceTime, fromEvent, map } from 'rxjs';
+import { debounceTime, fromEvent, map } from 'rxjs';
 import { HeaderService } from '../services/header.service';
-import { formatMoneyVietNam, convertStringToNumbers } from '../utils/utils';
+import { formatMoneyVietNam } from '../utils/utils';
 import { AccountInfoService } from '../services/account-info.service';
 import { CartService } from '../services/cart.service';
-
-interface CartItem {
-  id: number;
-  name: string;
-  quantity: number;
-  price: number;
-  // Thêm các trường khác nếu cần
-}
+import { CartItem } from '../interfaces/cart';
+import { localProductImg } from '../ENV/envi';
 
 @Component({
   selector: 'app-header',
@@ -37,9 +30,7 @@ interface CartItem {
 })
 export class HeaderComponent implements OnInit {
   formatMoneyVietNam = formatMoneyVietNam;
-  // changeQuantity = this._cartComponent.changeQuantity;
-
-
+  localProductImg=localProductImg
   isSearchFormActive: boolean = false;
   isMainMenuOpen: boolean = false;
   submenuOpen: boolean = false;
@@ -52,8 +43,8 @@ export class HeaderComponent implements OnInit {
   dataLiveSearch: any;
   currentSubMenuIndex: null | undefined;
   @ViewChild('searchInput') searchInput: ElementRef | undefined;
-  accountInfo: any=false;
-  cartList:any=false;
+  accountInfo: any = false;
+  cartList: any = false;
   userIdFromHeader: any;
   errMessage: any;
   totalPayment: any;
@@ -67,27 +58,23 @@ export class HeaderComponent implements OnInit {
     private _headerService: HeaderService,
     private _accountInfoService: AccountInfoService,
     private _cartService: CartService
-  ) {}
-  ngAfterViewInit() {
-   
- 
+  ) {
+    this._cartService.cartItems$.subscribe((data)=>{
+      this.cartList=data
+    })
   }
+  ngAfterViewInit() {}
   ngOnInit(): void {
     this.getDataFromService();
     this.getIsLogin();
-    this.cartItemFunc();
+    // this.cartItemFunc();
     this.checkLogin();
     this.getKeySearch();
     this.getCategory();
-    // this.getCart()
   }
 
   @Output() linkClicked = new EventEmitter<string>();
 
-  handleClick(slug: string) {
-    // Gửi sự kiện tới bodycomponent với thông tin slug
-    this.linkClicked.emit(slug);
-  }
 
   getKeySearch() {
     if (this.userId) {
@@ -95,15 +82,14 @@ export class HeaderComponent implements OnInit {
         .getUserAccountInfo(this.userId)
         .subscribe((data) => {
           this.accountInfo = data;
-          this.keyDown()
+          this.keyDown();
           console.log(this.accountInfo.historySearch);
-          console.log(data, 'datausser');
         });
     } else {
     }
   }
-  
-  keyDown(){
+
+  keyDown() {
     fromEvent(this.searchInput?.nativeElement, 'input')
       .pipe(
         debounceTime(1000),
@@ -115,13 +101,11 @@ export class HeaderComponent implements OnInit {
           .subscribe((data) => {
             this.dataLiveSearch = data.productsByCategory;
             this.getKeySearch();
-            console.log(data.productsByCategory);
+            console.log(data.productsByCategory,'111111');
             console.log(this.dataLiveSearch);
           });
-        console.log('Giá trị nhập liệu sau mỗi 1s:', inputValue);
       });
   }
-
 
   getIsLogin() {
     this._authService.getIsLoginObservable().subscribe((data) => {
@@ -131,11 +115,13 @@ export class HeaderComponent implements OnInit {
       }
     });
   }
+
   getCategory() {
     this._headerService.getTypesPopulateSubtypes().subscribe((data) => {
       this.types = data.typePopulateSubType;
     });
   }
+
   getDataFromService() {
     this._authService.cartSubject.subscribe((data) => {
       this.cartNumberItem = data;
@@ -148,8 +134,6 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-
-
   isLogin = false;
   async checkLogin() {
     const userData = localStorage.getItem('userData');
@@ -157,14 +141,11 @@ export class HeaderComponent implements OnInit {
       const parseUserData: IUser = JSON.parse(userData);
       this._authService.idUserSubject.next(parseUserData._id);
       this.userId = parseUserData._id;
-      console.log(parseUserData._id,'parseUserData._id')
+      console.log(parseUserData._id, 'parseUserData._id');
       this.cartList = await this._cartComponent.apiCartProduct(
         parseUserData._id
       );
       this.totalPayment = await this._cartComponent.totalPayment(this.cartList);
-
-    console.log(this.cartList, 'cl')
-
       let total_quantity = this._homeComponent.totalCartItem(this.cartList);
       this.cartNumberItem = total_quantity;
       this.isLogin = true;
@@ -173,6 +154,7 @@ export class HeaderComponent implements OnInit {
       this.isLogin = false;
     }
   }
+
   async changeQuantity(
     colorID: any,
     productID: any,
@@ -191,15 +173,16 @@ export class HeaderComponent implements OnInit {
       quantityAction: quantityACTION,
       userId: this.userIdFromHeader,
     };
-    console.log(data, 'dddddddd');
-  
+
     this._cartService.putProductItemCart(data).subscribe({
       next: async (data: any) => {
-        this.cartList = await this._cartComponent.apiCartProduct(this.userIdFromHeader);
+        this.cartList = await this._cartComponent.apiCartProduct(
+          this.userIdFromHeader
+        );
         setTimeout(async () => {
-          this.totalPayment = await this._cartComponent.totalPayment(this.cartList);
-          console.log(this.totalPayment, 'ttp');
-          
+          this.totalPayment = await this._cartComponent.totalPayment(
+            this.cartList
+          );
         }, 500);
       },
       error: (err: any) => {
@@ -207,12 +190,12 @@ export class HeaderComponent implements OnInit {
       },
     });
   }
+
   logout() {
     window.localStorage.getItem('userData');
     window.localStorage.removeItem('userData');
     this.isLogin = false;
   }
-
 
   toggleMobileMenu(): void {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
@@ -232,57 +215,7 @@ export class HeaderComponent implements OnInit {
     this.renderer.removeClass(mainMenu, 'open');
   }
 
-  // Data sub-menu
-  menuItems = [
-    {
-      label: 'áo',
-      subItems: [
-        { label: 'Áo sơ mi' },
-        { label: 'Áo kiểu' },
-        { label: 'Áo len' },
-      ],
-    },
-    {
-      label: 'áo khoác',
-      subItems: [
-        { label: 'Áo sơ mi' },
-        { label: 'Áo kiểu' },
-        { label: 'Áo len' },
-      ],
-    },
-    {
-      label: 'quần & Jumpsuit',
-      subItems: [
-        { label: 'Áo sơ mi' },
-        { label: 'Áo kiểu' },
-        { label: 'Áo len' },
-      ],
-    },
-    {
-      label: 'phụ kiện',
-      subItems: [
-        { label: 'Áo sơ mi' },
-        { label: 'Áo kiểu' },
-        { label: 'Áo len' },
-      ],
-    },
-    {
-      label: 'chân váy',
-      subItems: [
-        { label: 'Áo sơ mi' },
-        { label: 'Áo kiểu' },
-        { label: 'Áo len' },
-      ],
-    },
-    {
-      label: 'đầm',
-      subItems: [
-        { label: 'Áo sơ mi' },
-        { label: 'Áo kiểu' },
-        { label: 'Áo len' },
-      ],
-    },
-  ];
+
 
   toggleSubMenuChild(event: Event, index: number): void {
     event.stopPropagation();
@@ -350,19 +283,17 @@ export class HeaderComponent implements OnInit {
     this.submenuOpen = !this.submenuOpen;
   }
 
-  cartItemFunc() {
-    const localCartString = localStorage.getItem('localCart');
-    if (localCartString !== null) {
-      var cartCount = JSON.parse(localCartString);
-      this.cartNumberItem = cartCount.length;
-    }
-  }
+  // cartItemFunc() {
+  //   const localCartString = localStorage.getItem('localCart');
+  //   if (localCartString !== null) {
+  //     var cartCount = JSON.parse(localCartString);
+  //     this.cartNumberItem = cartCount.length;
+  //   }
+  // }
 
   cartItems: CartItem[] = [
     { id: 1, name: 'Zuýp 2 lớp xếp ly bản lớn', quantity: 1, price: 595000 },
-    // Thêm các sản phẩm khác nếu có
   ];
-
 
   handleQuickSearchClick(event: Event): void {
     event.stopPropagation();
@@ -388,15 +319,12 @@ export class HeaderComponent implements OnInit {
   toggleSearchForm(event: Event): void {
     // Kiểm tra xem sự kiện là focus hay không
     const isFocusEvent = event instanceof FocusEvent;
-
     // Nếu là focus event và form đã được kích hoạt, không thực hiện toggle nữa
     if (isFocusEvent && this.isSearchFormActive) {
       return;
     }
-
     this.isSearchFormActive = !this.isSearchFormActive;
     const searchForm = this.elRef.nativeElement.querySelector('.search-form');
-
     if (this.isSearchFormActive) {
       this.renderer.addClass(searchForm, 'active');
     } else {
@@ -428,7 +356,6 @@ export class HeaderComponent implements OnInit {
 
   handleClickOutside(event: Event) {
     const searchForm = this.elRef.nativeElement.querySelector('.search-form');
-
     // Nếu không phải là sự kiện focus, thực hiện việc đóng form
     if (
       !(event instanceof FocusEvent) &&
@@ -447,11 +374,8 @@ export class HeaderComponent implements OnInit {
     return quickSearch.contains(event.target);
   }
 
-  //
-
   closeMainMenu(event: Event): void {
     const targetElement = event.target as HTMLElement;
-
     if (
       targetElement.classList.contains('ti-close') ||
       targetElement.closest('.ti-close')
@@ -495,7 +419,7 @@ export class HeaderComponent implements OnInit {
       this.elRef.nativeElement.querySelector('.sub-action-cart');
     this.renderer.removeClass(subActionCart, 'active');
   }
-  //
+
   updateQuantity(action: string): void {
     if (action === 'minus' && this.quantityInputValue > 0) {
       this.quantityInputValue -= 1;
@@ -509,10 +433,7 @@ export class HeaderComponent implements OnInit {
   }
 
   removeItemFromCart(): void {
-    // Lọc ra những sản phẩm có quantity khác 0 và tạo mảng mới
     this.cartItems = this.cartItems.filter((item) => item.quantity !== 0);
-
-    // Hiển thị thông báo
     this.openSnackBar('Đã xoá sản phẩm!');
   }
 

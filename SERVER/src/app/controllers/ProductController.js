@@ -16,22 +16,17 @@ const getProduct = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-softDeleteProduct = async (req, res) => {
+const softDeleteProduct = async (req, res) => {
   const { productId } = req.params;
 
   try {
-    // Tìm sản phẩm trong cơ sở dữ liệu
     const product = await Product.findById(productId);
-
-    // Kiểm tra nếu sản phẩm không tồn tại
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    // Cập nhật trạng thái is_deleted
     product.is_deleted = true;
 
-    // Lưu sản phẩm đã cập nhật vào cơ sở dữ liệu
     await product.save();
 
     return res.status(200).json({ message: "Soft delete successful" });
@@ -41,7 +36,7 @@ softDeleteProduct = async (req, res) => {
   }
 };
 
-toggleSoftDeleted = async (req, res) => {
+const toggleSoftDeleted = async (req, res) => {
   const productId = req.params.productId;
 
   try {
@@ -50,13 +45,8 @@ toggleSoftDeleted = async (req, res) => {
     if (!product) {
       return res.status(404).json({ error: "Product not found" });
     }
-
-    // Toggle the is_deleted property
     product.is_deleted = !product.is_deleted;
-
-    // Save the updated product
     await product.save();
-
     res.json({ message: "Soft delete toggled successfully", product });
   } catch (error) {
     console.error(error);
@@ -64,13 +54,7 @@ toggleSoftDeleted = async (req, res) => {
   }
 };
 
-const saveProduct2 = async (req, res) => {
-  const { variant } = req.body;
 
-  const sizeXXLValue = variant[0].sizeXXL;
-  console.log("123");
-  console.log(sizeXXLValue);
-};
 
 const saveProduct = async (req, res) => {
   try {
@@ -86,7 +70,6 @@ const saveProduct = async (req, res) => {
       collectionName,
     } = req.body;
     const author = "64ca103baeac1741e179f4c7";
-    // const author = req.session.user_id||'64ca103baeac1741e179f4c7';
     const receivedFiles = req.files;
     const imageList = convertFilesToDesiredFormat(receivedFiles);
     console.log(imageList);
@@ -101,17 +84,14 @@ const saveProduct = async (req, res) => {
       variants
     );
     await product.save();
-    console.log(product, "p");
 
     const type = await findOrCreateType(typeName);
     await findOrCreateSubType(type, subTypeName, product);
     if (collectionName) {
       await findOrCreateCollection(collectionName, product);
     }
-    console.log("Product and variants saved to MongoDB");
     res.sendStatus(200);
   } catch (error) {
-    console.error("Error saving product and variants:", error);
     res.sendStatus(500);
   }
 };
@@ -135,10 +115,7 @@ const convertFilesToDesiredFormat = (receivedFiles) => {
 };
 const createVariantsFromData = (req, typeName, imageList) => {
   const variantsString = req.body;
-  console.log(variantsString, "5555");
-  console.log(variantsString.variant, "5555");
   const variants = variantsString.variant.map((v, index) => {
-    console.log(v.color, "c5555");
     // const colorFake = "64cb721d066ac7727d33ceda";
     accessoryId = "64c4c7621539b1bd9c0fae5b";
     if (typeName === "Phụ kiện") {
@@ -152,8 +129,7 @@ const createVariantsFromData = (req, typeName, imageList) => {
         quantity: parseInt(req.body.variant[index].freeSize),
       });
       return variant;
-
-      console.log(parseInt(req.body.variant[index].freeSize));
+      // console.log(parseInt(req.body.variant[index].freeSize));
     } else {
       const variant = {
         color: v.color,
@@ -252,39 +228,6 @@ const findOrCreateCollection = async (subTypeName, product) => {
   return subType;
 };
 
-const getSubtypesByType = async (req, res, next) => {
-  try {
-    // const { typeName } = req.body;
-    const type = await Type.find({}).populate("subtypes");
-    // const subtypeNames = type.subtypes.map(subtype => subtype.subTypeName);
-    res.json(type);
-  } catch (err) {
-    console.error(err.message);
-  }
-};
-
-const getTypeAndSubtypeData = async (req, res) => {
-  try {
-    // Truy vấn để lấy dữ liệu của type và subtype
-    const typeData = await Type.find({}).populate("subtypes");
-
-    // Lấy thông tin type và subtype từ typeData bằng map
-    const resultArray = typeData.map((typeItem) => {
-      return {
-        typeName: typeItem.typeName,
-        subtypes: typeItem.subtypes.map(
-          (subtypeItem) => subtypeItem.subTypeName
-        ),
-      };
-    });
-
-    res.json(resutypePopulateSubtypeltArray);
-  } catch (error) {
-    console.error("Error getting type and subtype data:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-};
-
 const addFeedback = async (req, res) => {
   try {
     const { content_fb, images } = req.body;
@@ -323,7 +266,7 @@ const getProductDetail = async (req, res) => {
       path: "variants.color",
       select: "imageColor nameColor",
     });
-    console.log(data)
+    console.log(data);
     res.json(data);
   } catch (error) {
     console.error(error);

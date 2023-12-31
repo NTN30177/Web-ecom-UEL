@@ -10,7 +10,7 @@ const { User } = require("../models/user");
 const getCategoryProductsPagination = async (req, res) => {
   const slug = req.params.slug;
   const page = parseInt(req.query.page) || 1;
-  const pageSize = req.query.productsPerPage; // Số lượng sản phẩm trên mỗi trang
+  const pageSize = req.query.productsPerPage||8; // Số lượng sản phẩm trên mỗi trang
   const keySearch = req.query.keySearch;
   try {
     let products;
@@ -35,6 +35,7 @@ const getCategoryProductsPagination = async (req, res) => {
         console.log("err");
       }
     }
+
     const { filteredProducts, totalProducts } = filterProducts(
       products,
       req.query
@@ -46,7 +47,7 @@ const getCategoryProductsPagination = async (req, res) => {
       pageSize
     );
     const totalPage = Math.ceil(totalProducts / pageSize);
-    // console.log(paginatedProducts)
+    console.log(paginatedProducts,123456)
     res.json({
       productsByCategory: paginatedProducts,
       slug,
@@ -115,6 +116,7 @@ const filterProducts = (
   let totalProducts = 0; // Khởi tạo biến totalProducts
 
   if (keySearch) {
+    console.log(keySearch)
     filteredProducts = filteredProducts.filter(
       (product) =>
         product.title.toLowerCase().includes(keySearch.toLowerCase()) ||
@@ -124,6 +126,7 @@ const filterProducts = (
             .includes(keySearch.toLowerCase())
         )
     );
+    console.log(filteredProducts, '1236')
   }
   if (color != "undefined" && color.length > 0) {
     const arrayOfColor = color.split(",");
@@ -140,8 +143,6 @@ const filterProducts = (
   }
   if (size != "undefined" && size.length > 0) {
     const arrayOfSize = size.split(",");
-    console.log(typeof arrayOfSize)
-    console.log( arrayOfSize)
     filteredProducts = filteredProducts.filter((product) =>
       product.variants.some((variant) =>
         variant.variantColor.some(
@@ -170,7 +171,6 @@ const filterProducts = (
 const sort = (products, { sort }) => {
   try {
     let sortedProducts;
-    console.log("sortype:" + sort);
     if (sort === "asc") {
       sortedProducts = products.sort((a, b) => a.price - b.price);
     } else if (sort === "desc") {
@@ -188,18 +188,13 @@ const sort = (products, { sort }) => {
 };
 
 const paginateProducts = (products, page, pageSize) => {
-  console.log(pageSize)
-  console.log(products.length)
-  console.log(page)
   const startIndex = (page - 1) * pageSize;
   const endIndex = startIndex + parseInt(pageSize);
-  console.log(endIndex,'ed')
   const totalPage = Math.ceil(products.length / pageSize);
   const paginatedProducts = products.slice(0, endIndex);
-  console.log("totalpage", totalPage);
- 
   return { paginatedProducts, totalPage };
 };
+
 
 module.exports = {
   getCategoryProductsPagination,

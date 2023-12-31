@@ -1,16 +1,13 @@
-import { NzFormModule } from 'ng-zorro-antd/form';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   Validators,
-  ReactiveFormsModule,
   FormControl,
   FormArray,
   AbstractControl,
 } from '@angular/forms';
 import { ManageProductService } from '../../services/manage-product.service';
-import { HttpClient } from '@angular/common/http';
 import { IColor, ISubType, IType } from '../../interfaces/product';
 
 @Component({
@@ -19,38 +16,25 @@ import { IColor, ISubType, IType } from '../../interfaces/product';
   styleUrl: './add-product-2.component.css',
 })
 export class AddProduct2Component implements OnInit {
-  // variantForm: FormGroup;
   multipleImages: File[] = [];
-
   variantFormGroup: FormGroup | undefined;
   accessory: boolean = false;
-
   colors: IColor[] | undefined 
   types: IType[] | undefined;
   subTypes: ISubType[] | undefined;
   collections: ISubType[] | undefined;
-
-
   newType: any;
-
   newSubType: any;
-  // selectedSubType: boolean = false;
   showDivSubtype: boolean = true;
-
   i = 1;
-
   newCollection: any;
   selectedCollection: string = '';
   showDivCollection: boolean = true;
-
-  // showVariantForm: boolean = true;
   showInputType: boolean = false;
   showInputSubtype: boolean = false;
   showInputCollection: boolean = false;
-
   books: any;
   errMessage: any;
-
   rfDataModal: FormGroup;
   errFlag: boolean | undefined;
   colorList: any;
@@ -74,6 +58,7 @@ export class AddProduct2Component implements OnInit {
       
     });
   }
+
   ngOnInit(): void {
     this.addVariant();
     this.apiColor()
@@ -99,7 +84,6 @@ export class AddProduct2Component implements OnInit {
 
   onSubmit() {
     const data = this.onMultipleSubmit();
-    console.log(this.rfDataModal.value )
     this.checkTypeToValidate();
     if (this.rfDataModal.invalid || this.variant.invalid) {
       this.markFormGroupTouched(this.rfDataModal);
@@ -113,13 +97,10 @@ export class AddProduct2Component implements OnInit {
           this.errMessage = err;
         },
       });
-      console.log('save')
-
       alert('Lưu dữ liệu thành công');
     }
   }
   apiColor() {
-    console.log('1235')
     this._productService.getColor().subscribe({
       next: (data) => {
         this.colors = data;
@@ -131,7 +112,6 @@ export class AddProduct2Component implements OnInit {
     });
   }
   apiType() {
-    console.log('type')
     this._productService.getType().subscribe({
       next: (data) => {
         this.types = data;
@@ -142,11 +122,11 @@ export class AddProduct2Component implements OnInit {
       },
     });
   }
+
   apiSubType(type:any) {
     this._productService.getSubType(type).subscribe({
       next: (data) => {
         this.subTypes = data;
-        console.log(this.subTypes ,'s')
       },
       error: (err) => {
         this.errMessage = err;
@@ -164,7 +144,7 @@ export class AddProduct2Component implements OnInit {
     });
   }
 
-  validateCourse(value: any): void {
+  validateSelect(value: any): void {
     console.log(value);
     if (!value) {
       this.errFlag = true;
@@ -174,10 +154,7 @@ export class AddProduct2Component implements OnInit {
   }
 
   checkTypeToValidate() {
-    console.log(this.accessory);
     if (!this.accessory) {
-      console.log(this.accessory);
-
       const variantArray = this.rfDataModal.get('variant') as FormArray;
       variantArray.controls.forEach(
         (
@@ -217,13 +194,6 @@ export class AddProduct2Component implements OnInit {
           variantFormGroup.get('sizeM')?.updateValueAndValidity();
           variantFormGroup.get('sizeXL')?.updateValueAndValidity();
           variantFormGroup.get('sizeXXL')?.updateValueAndValidity();
-
-          // variantFormGroup.get('color')?.disable();
-          // variantFormGroup.get('sizeS')?.disable();
-          // variantFormGroup.get('sizeL')?.disable();
-          // variantFormGroup.get('sizeM')?.disable();
-          // variantFormGroup.get('sizeXL')?.disable();
-          // variantFormGroup.get('sizeXXL')?.disable();
         }
       );
     }
@@ -240,7 +210,7 @@ export class AddProduct2Component implements OnInit {
   accessoryId='Phụ kiện'
   selectChange(event: any) {
     const selectedValue = event.target.value;
-    if (selectedValue == this.accessoryId) {//Phụ kiện
+    if (selectedValue == this.accessoryId) {
       this.accessory = true;
       this.clearAllVariants();
       this.addVariant();
@@ -248,12 +218,10 @@ export class AddProduct2Component implements OnInit {
       this.accessory = false;
     }
     this.apiSubType(selectedValue)
-    console.log(selectedValue)
   }
 
   clickSaveAdd(type: string, event: Event): void {
     event.stopPropagation();
-
     if (type === 'typeName') {
       this.handleTypeName();
     } else if (type === 'subTypeName') {
@@ -323,22 +291,6 @@ export class AddProduct2Component implements OnInit {
   }
   
 
-
-  
-
-  handleSubTypeName2(): void {
-    const newSubTypeValue = this.rfDataModal.get('newSubTypeInput')?.value;
-    if (newSubTypeValue !== null) {
-      this.rfDataModal.get('subTypeName')?.setValue(newSubTypeValue);
-      this.rfDataModal.get('newSubTypeInput')?.setValue('');
-      if (newSubTypeValue !== '') {
-        // this.subTypes.push(newSubTypeValue);
-      }
-      // this.selectedSubType = true;
-      this.showInputSubtype = false;
-    }
-  }
-
   handleCollection(): void {
     const newCollectionValue = this.rfDataModal.get('newCollectionInput')?.value;
     console.log(newCollectionValue)
@@ -357,18 +309,7 @@ export class AddProduct2Component implements OnInit {
     this.showInputCollection = false;
   }
 
-  handleCollection2(): void {
-    const newCollectionValue =
-      this.rfDataModal.get('newCollectionInput')?.value;
-    if (newCollectionValue !== null) {
-      this.rfDataModal.get('collectionName')?.setValue(newCollectionValue);
-      this.rfDataModal.get('newCollectionInput')?.setValue('');
-      if (newCollectionValue !== '') {
-        // this.collections.push(newCollectionValue);
-      }
-      this.showInputCollection = false;
-    }
-  }
+
 
   addVariant() {
     const variantFormGroup = this.fb.group({
@@ -396,7 +337,6 @@ export class AddProduct2Component implements OnInit {
   
 
   imageCollections: { [fieldId: string]: File[] } = {};
-
   selectMultipleImage(event: Event, fieldId: number) {
     const target = event.target as HTMLInputElement;
     if (target.files && target.files.length > 0) {
@@ -412,7 +352,6 @@ export class AddProduct2Component implements OnInit {
 
   onMultipleSubmit() {
     const formData = new FormData();
-    // Append form values to formData
     for (let key in this.rfDataModal.value) {
       if (key != 'variant') {
         formData.append(key, this.rfDataModal.value[key]);
@@ -443,7 +382,6 @@ export class AddProduct2Component implements OnInit {
       }
     }
 
-    // Append files
     for (let key in this.imageCollections) {
       if (this.imageCollections.hasOwnProperty(key)) {
         const files = this.imageCollections[key];
@@ -453,11 +391,9 @@ export class AddProduct2Component implements OnInit {
         }
       }
     }
-    console.log('Form Data:', this.rfDataModal.value);
-    console.log('Files:', this.imageCollections);
-    console.log('Files:', formData);
     return formData;
   }
+  
   get variant(): FormArray {
     return this.rfDataModal.get('variant') as FormArray;
   }

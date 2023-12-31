@@ -1,10 +1,7 @@
-const { Address } = require("../models/address");
 const { User, UserAddress } = require("../models/user");
 const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
-const randomstring = require("randomstring");
 const { emailUser, emailPassword } = require("../../config/config");
-const { Province, District, Ward } = require("../models/address");
 const {
   Product,
   Type,
@@ -13,19 +10,9 @@ const {
   CartItem,
 } = require("../models/product");
 
-const { Campaign } = require("../models/campaign");
-const x = async (req, res, next) => {
-  try {
-    console.log(1);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 const saveAccount = async (req, res, next) => {
   try {
-    console.log(req.body);
-    const checkEmailExist = await User.findOne({ email: req.body.cus_email });
+    const checkEmailExist = await User.findOne({ email: req.body.cus_email.toLowerCase() });
     if (checkEmailExist) {
       console.log('11111')
       res.json({
@@ -33,7 +20,6 @@ const saveAccount = async (req, res, next) => {
         success: false,
       });
     } else{
-
       const spassword = await securePassword(req.body.cus_password);
       const cart = new CartItem({
         productItem: [],
@@ -50,12 +36,10 @@ const saveAccount = async (req, res, next) => {
       const user = new User({
         first_name: req.body.cus_firstname,
         last_name: req.body.cus_lastname,
-        email: req.body.cus_email,
+        email: req.body.cus_email.toLowerCase(),
         phone: req.body.cus_phonenumber,
         gender: req.body.cus_gender,
         date_of_birth: req.body.cus_dob,
-        // image: req.file.filename,
-        // image:
         password: spassword,
         is_admin: 0,
         cart: [cart._id],
@@ -70,8 +54,7 @@ const saveAccount = async (req, res, next) => {
             "Your registration has been succesSsfully. Please verify your email",
           success:true,
         });
-      } else {
-        
+      } else {  
         res.send({
           message: "Your registeration has been failed.",
         });
@@ -108,7 +91,7 @@ const sendVerifyEmail = async (name, email, user_id) => {
       html:
         "<p> Hi " +
         name +
-        ',please click here to <a href="http://localhost:3000/user/verify?id=' +
+        ',please click here to <a href="http://localhost:4200/validate-email?id=' +
         user_id +
         '">Verify</a> your mail.</p>',
     };
@@ -250,7 +233,6 @@ const getForGotPW = async (req, res) => {
     console.log(err.message);
   }
 };
-//for reset password send mail
 
 const sendResetPassword = async (name, email, token) => {
   try {
@@ -325,7 +307,7 @@ const subTypeApi = async (req, res, next) => {
 
 
 module.exports = {
-  x,
+ 
   saveAccount,
   verifyEmail,
   verifyLogin,

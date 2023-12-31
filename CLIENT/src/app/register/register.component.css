@@ -1,112 +1,111 @@
 
 :host {
-    font-family: 'Montserrat', sans-serif;
-    line-height: 25px;
-    color: #000;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 25px;
+  color: #000;
 
-  }
+}
 
 .container-register{
-    margin-top: 100px
+  margin-top: 100px
 }
 .text_head{
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: 1.44px;
-    text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 1.44px;
+  text-align: center;
 }
 p{
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 0.96px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.96px;
 }
 label{
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: 0.96px;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.96px;
 }
 ::placeholder{
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 0.8px;
-    text-indent: 10px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.8px;
+  text-indent: 10px;
 
 }
 form{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;            
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;            
 }
 form i {
-    margin-left: -30px;
-    cursor: pointer;
+  margin-left: -30px;
+  cursor: pointer;
 }
 .input-primary{
-    border-radius: 35px;
-    border: 1px solid var(--neutral-04, #88817F);
-    height: 50px;
-    margin-bottom: 5px;
-    text-indent: 10px;
-    font-size: 14px
+  border-radius: 35px;
+  border: 1px solid var(--neutral-04, #88817F);
+  height: 50px;
+  margin-bottom: 5px;
+  text-indent: 10px;
+  font-size: 14px
 }
 .btn-primary{
-    background-color: black;
-    color: var(--neutral-08, #FFF);
-    border-radius: 35px;
-    border: 1px solid black;
-    font-size: 16px;
-    letter-spacing: 0.96px;
-    font-weight: 700;
-    height: 50px;
-    transition: background-color 0.3s, color 0.3s; /* Hiệu ứng chuyển đổi */
+  background-color: black;
+  color: var(--neutral-08, #FFF);
+  border-radius: 35px;
+  border: 1px solid black;
+  font-size: 16px;
+  letter-spacing: 0.96px;
+  font-weight: 700;
+  height: 50px;
+  transition: background-color 0.3s, color 0.3s; /* Hiệu ứng chuyển đổi */
 
 }
 .btn-primary:hover{
-    background-color: white;
-    color: black;
-    border-radius: 35px;
-    border: 1px solid black;
-    font-size: 16px;
-    letter-spacing: 0.96px;
-    font-weight: 700;
-    height: 50px;
+  background-color: white;
+  color: black;
+  border-radius: 35px;
+  border: 1px solid black;
+  font-size: 16px;
+  letter-spacing: 0.96px;
+  font-weight: 700;
+  height: 50px;
 }
 /* Trạng thái bình thường */
 .login-link {
-    color: #c54c3d;
-    text-decoration: none;
-  }
-  
-  /* Trạng thái hover */
-  .login-link:hover {
-    color: black;
-  }
-  
+  color: #c54c3d;
+  text-decoration: none;
+}
+
+/* Trạng thái hover */
+.login-link:hover {
+  color: black;
+}
+
 .error-message{
-    color: red; font-size: 13px;
+  color: red; font-size: 13px;
 }
 
 mat-form-field {
-    width: 100%;
-  }
+  width: 100%;
+}
 
-  /* Add this CSS to style the snackbar */
+/* Add this CSS to style the snackbar */
 .snackbar-container {
-    /* position: fixed; */
-    z-index: 1000;
-    bottom: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 300px;
-  }
+  /* position: fixed; */
+  z-index: 1000;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+}
 /*   
-  .snackbar {
-    background-color: #333;
-    color: #fff;
-    padding: 16px;
-    border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    margin-bottom: 16px;
-    text-align: center;
-  } */
-  
+.snackbar {
+  background-color: #333;
+  color: #fff;
+  padding: 16px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 16px;
+  text-align: center;
+} */
