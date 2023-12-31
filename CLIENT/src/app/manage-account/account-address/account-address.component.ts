@@ -5,7 +5,7 @@ import { AccountAddressPopupComponent } from '../account-address-popup/account-a
 import { IUserAddress } from '../../interfaces/user';
 import { AccountAddressService } from '../../services/account-address.service';
 import { AuthService } from '../../services/auth.service';
-
+import { alertwarning} from '../../utils/utils';
 @Component({
   selector: 'app-account-address',
   templateUrl: './account-address.component.html',
@@ -16,7 +16,7 @@ export class AccountAddressComponent implements OnInit {
   userID: any;
   addressList: IUserAddress[] = [];
 
-
+  alertwarning=alertwarning
   constructor(
     private dialogRef: MatDialog,
     private addressService: AccountAddressService,
@@ -104,7 +104,5 @@ export class AccountAddressComponent implements OnInit {
     }
   }
 
-  alertwarning(){
-    alert("Chức năng đang được phát triển!")
-  }
+
 }

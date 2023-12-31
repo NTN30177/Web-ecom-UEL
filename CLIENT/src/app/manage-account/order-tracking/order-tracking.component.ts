@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OrderService } from '../../services/order.service';
-import { formatDate, formatMoneyVietNam } from '../../utils/utils';
+import { alertwarning, formatDate, formatMoneyVietNam } from '../../utils/utils';
 import { FeedbackOrderComponent } from '../order-tracking/feedback-order/feedback-order.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../../services/auth.service';
@@ -19,7 +19,8 @@ export class OrderTrackingComponent implements OnInit{
   orderId: any;
   orderDetails: any;
   userId: any;
-
+  alertwarning=alertwarning
+  
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.orderId = params['orderId'];
@@ -61,10 +62,6 @@ export class OrderTrackingComponent implements OnInit{
     const year = dateObject.getFullYear(); 
     return `${day}/${month}/${year}`;
   }
-  cancelOrder(){
-    alert("Chức năng đang được phát triển!")
-  }
-
   openFeedbackOrderDialog(orderId: String, productId: String): void {
     console.log(productId, orderId)
     this._authService.idUserSubject.subscribe((data)=>

@@ -20,3 +20,6 @@ export function formatDate(isoString: string): string {
   return `${day}/${month}/${year} ${hours}:${minutes}`;
 }
 
+export function alertwarning(){
+  alert("Chức năng đang được phát triển!")
+}

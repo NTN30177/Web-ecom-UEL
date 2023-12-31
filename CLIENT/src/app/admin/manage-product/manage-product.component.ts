@@ -4,7 +4,7 @@ import { ManageProductService } from '../../services/manage-product.service';
 import { DataTableDirective } from 'angular-datatables';
 import { IProduct, IVariant } from '../../interfaces/product';
 import { local } from '../../ENV/envi';
-import { formatMoneyVietNam } from '../../utils/utils';
+import { alertwarning, formatMoneyVietNam } from '../../utils/utils';
 
 
 @Component({
@@ -15,7 +15,7 @@ import { formatMoneyVietNam } from '../../utils/utils';
 export class ManageProductComponent implements OnInit, OnDestroy {
   formatMoneyVietNam = formatMoneyVietNam;
   local = local
-
+  alertwarning=alertwarning
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
   allProducts: IProduct[] = [];
@@ -85,50 +85,12 @@ export class ManageProductComponent implements OnInit, OnDestroy {
     return totalQuantity;
   }
 
-  // softDeleteProduct(productId: string): void {
-  //   const productIndex = this.allProducts.findIndex(product => product.id === productId);
-  //   if (productIndex !== -1) {
-  //     this.allProducts[productIndex].deleted = true;
-  //     // Add the deleted product to softDeletedProducts
-  //     this.softDeletedProducts.push(this.allProducts[productIndex]);
-  //     // Optionally, you can update your backend to handle soft deletion.
-  //     // Make an API call to update the deleted status on the server.
-
-  //     // Trigger DataTables rendering for both allProducts and softDeletedProducts
-  //     this.dtTrigger.next(null);
-  // }}
-
-  // private getSoftDeletedProducts(): IProduct[] {
-  //   return this.allProducts.filter(product => product.deleted);
-  // }
-
-  // softDeleteProduct(productId: string): void {
-  //   console.log(productId)
-  //   this.manageProductService.softDeleteProduct(productId).subscribe(() => {
-  //     // Cập nhật is_deleted trong danh sách sản phẩm của bạn
-  //     const productIndex = this.allProducts.findIndex(product => product._id === productId);
-  //     if (productIndex !== -1) {
-  //       if is_deleted = false :
-  //       this.allProducts[productIndex].is_deleted = true;
-  //       else: 
-  //       this.allProducts[productIndex].is_deleted = false;
-  //     }
-
-  //     // Trigger DataTables rendering
-  //     this.dtTrigger.next(null);
-  //   });
-  // }
 
   toggleIsDeleted(productId: string): void {
-    // Find the product in the array
     const productIndex = this.allProducts.findIndex(product => product._id === productId);
-    // Toggle the value of is_deleted
     this.allProducts[productIndex].is_deleted = !this.allProducts[productIndex].is_deleted;
-
-    // Call the service method to toggle is_deleted on the server
     this.manageProductService.toggleIsDeleted(productId).subscribe(() => {
-      // Trigger DataTables rendering
-      // this.dtTrigger.next(null);
+
     });
   }
 
