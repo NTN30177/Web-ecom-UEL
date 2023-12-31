@@ -52,7 +52,7 @@ p, label, ::placeholder {
 
 table {
     width: 100%;
-    text-align: center;
+    /* text-align: center; */
     border-collapse: collapse;
 }
 
@@ -84,7 +84,7 @@ mat-icon {
 .custom-datatable tbody td {
     border: none;
     padding: 15px;
-    text-align: center;
+    /* text-align: center; */
 }
 
 .custom-datatable tbody td:nth-child(1) {
