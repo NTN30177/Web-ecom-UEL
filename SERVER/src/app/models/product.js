@@ -158,11 +158,8 @@ module.exports = {
   Product,
   Subtype,
   Type,
-
-
-
   CartItem,
-  // Cart,
+
 
   Color,
 };

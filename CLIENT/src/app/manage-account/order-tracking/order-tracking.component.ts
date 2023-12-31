@@ -5,7 +5,7 @@ import { alertwarning, formatDate, formatMoneyVietNam } from '../../utils/utils'
 import { FeedbackOrderComponent } from '../order-tracking/feedback-order/feedback-order.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../../services/auth.service';
-import { data } from 'jquery';
+import { localProductImg } from '../../ENV/envi';
 
 @Component({
   selector: 'app-order-tracking',
@@ -14,12 +14,13 @@ import { data } from 'jquery';
   encapsulation: ViewEncapsulation.None,
 })
 export class OrderTrackingComponent implements OnInit{
+  localProductImg=localProductImg
   formatMoneyVietNam=formatMoneyVietNam
   formatDate=formatDate
+  alertwarning=alertwarning
   orderId: any;
   orderDetails: any;
   userId: any;
-  alertwarning=alertwarning
   
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -36,8 +37,8 @@ export class OrderTrackingComponent implements OnInit{
           this.orderDetails = data;
           console.log('Order details:', this.orderDetails)
 
-          // console.log('Order details:', data.dataWardDetail);
-          // console.log('Order details:', data);
+          console.log('Order details:', data.dataWardDetail);
+          console.log('Order details:', data);
         },
         (error) => {
           console.error('Error fetching order details:', error);
