@@ -62,6 +62,12 @@ export class AccountOrderComponent implements OnInit {
     this.orderService.getUserOrders(this.userID).subscribe(
       (data) => {
         this.orders = data;
+        this.orders.sort((a, b) => {
+          const dateA = new Date(a.createdAt).getTime();
+          const dateB = new Date(b.createdAt).getTime();
+  
+          return dateB - dateA;
+        });
         // console.log('OrderService respond account order list:', this.orders);
         // this.orders.forEach(order => {
         //   console.log('ORDER:', order);
