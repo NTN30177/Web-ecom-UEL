@@ -44,7 +44,7 @@ export class ManageOrderComponent implements OnInit {
   orders(): void {
     this._service.getOrders().subscribe((response: IOrders[]) => {
       this.allOrders = response;
-      console.log(this.allOrders);
+      // console.log(this.allOrders);
       // Trigger DataTables update after getting data
       this.dtTrigger.next(null);
     });

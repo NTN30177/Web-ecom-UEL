@@ -103,4 +103,8 @@ export class AccountAddressComponent implements OnInit {
       );
     }
   }
+
+  alertwarning(){
+    alert("Chức năng đang được phát triển!")
+  }
 }
