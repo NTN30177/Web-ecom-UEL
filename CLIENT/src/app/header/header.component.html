@@ -19,12 +19,17 @@
                         <li>
                             <a href="">Sản phẩm</a>
                             <ul class="sub-menu">
-                                <div class="list-submenu">
+                                <div class="list-submenu" *ngIf="types">
                                     <div class="list-submenu__item" *ngFor="let type of types">
-                                        <h3>{{type.typeName}}</h3>
+                                      <h3><a routerLink="/category/{{type.slug}}">{{type.typeName}}</a></h3>
+
                                         <ul *ngFor="let subtype of type.subtypes">
-                                            <li><a href="">{{subtype.subTypeName}}</a></li>
+                                            <li><a routerLink="/category/{{subtype.slug}}">{{subtype.subTypeName}}</a></li>
                                         </ul>
+                                    </div>
+
+                                    <div class="list-submenu__item" >
+                                      <h3><a routerLink="/category/all">Tất cả sản phẩm</a></h3>
                                     </div>
                                 
             

@@ -6,6 +6,8 @@ import {
   HostListener,
   OnInit,
   ViewChild,
+  EventEmitter,
+  Output,
 } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/auth.service';
@@ -79,6 +81,14 @@ export class HeaderComponent implements OnInit {
     this.getCategory();
     // this.getCart()
   }
+
+  @Output() linkClicked = new EventEmitter<string>();
+
+  handleClick(slug: string) {
+    // Gửi sự kiện tới bodycomponent với thông tin slug
+    this.linkClicked.emit(slug);
+  }
+
   getKeySearch() {
     if (this.userId) {
       this._accountInfoService

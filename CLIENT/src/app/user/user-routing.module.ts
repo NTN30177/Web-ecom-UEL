@@ -26,7 +26,7 @@ const routes: Routes = [
         path: 'pagination', component: PaginationComponent,
       },
       {
-        path:'filter-product', component: FilterProductComponent,
+        path:'category/:slug', component: FilterProductComponent,
       },
       {
         path: 'product-detail/:slug', component: ProductDetailComponent,

@@ -24,6 +24,7 @@ import { Options, LabelType } from '@angular-slider/ngx-slider';
 
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { SortPaginationService } from '../services/sort-pagination.service';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-filter-product',
@@ -42,6 +43,7 @@ export class FilterProductComponent implements AfterViewInit {
   listColor: any = false;
   selectedColorsId: any[] | undefined;
   totalProduct: any;
+  slug: any;
   // currentColor: any;
 
   constructor(
@@ -52,12 +54,15 @@ export class FilterProductComponent implements AfterViewInit {
     private _authServer: AuthService,
     private _cartService: CartService,
     private _cartComponent: CartComponent,
-    private _sortPaginationService: SortPaginationService
+    private _sortPaginationService: SortPaginationService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this._authServer.idUserSubject.subscribe((data) => {
       this.userIdFromHeader = data;
       console.log(data, '1111');
     });
+    this.slug = this.route.snapshot.params['slug'];
   }
 
   ngAfterViewInit(): void {
@@ -150,8 +155,13 @@ export class FilterProductComponent implements AfterViewInit {
   async ngOnInit(): Promise<void> {
     // Mặc định chọn màu đầu tiên
     this.getColor();
-    
-    this.sortFilter();
+    this.route.params.subscribe(params => {
+      this.slug=params['slug']
+      // params.slug sẽ chứa giá trị mới của slug
+      this.sortFilter();
+      
+    });
+
 
     await this.setupUserIdSubscription();
     console.log(this.userIdFromHeader, '123');
@@ -405,7 +415,7 @@ export class FilterProductComponent implements AfterViewInit {
     console.log('Selected Colors:', this.selectedColorsId);
     console.log('Selected Min Value:', this.minValue);
     console.log('Selected Max Value:', this.maxValue);
-    this.currentPage=1
+    this.currentPage = 1;
     this.sortFilter();
   }
 
@@ -413,14 +423,13 @@ export class FilterProductComponent implements AfterViewInit {
 
   onSortingChange(event: any): void {
     this.selectedSorting = event.value;
-    this.currentPage=1
+    this.currentPage = 1;
     this.sortFilter();
   }
 
   productsPerPage: any;
   currentPage = 1;
   sortFilter() {
-    const slug = 'phu-kien';
     this.productsPerPage = 5;
     const startIndex = (this.currentPage - 1) * this.productsPerPage;
     setTimeout(() => {
@@ -430,7 +439,7 @@ export class FilterProductComponent implements AfterViewInit {
         this.minValue,
         this.maxValue * 1000000,
         this.selectedSorting,
-        slug,
+        this.slug,
         startIndex,
         this.productsPerPage,
         this.currentPage
@@ -442,7 +451,7 @@ export class FilterProductComponent implements AfterViewInit {
           this.minValue,
           this.maxValue * 100000,
           this.selectedSorting,
-          slug,
+          this.slug,
           this.productsPerPage,
           this.currentPage
         )
@@ -452,12 +461,22 @@ export class FilterProductComponent implements AfterViewInit {
           console.log(this.products);
           this.updateProductsHaveModified();
           this.initializeSelectedColorIndex();
-          console.log(this.productsHaveModified);
+          console.log(this.productsHaveModified,'5555555555');
         });
     }, 100);
   }
   viewMore() {
     this.currentPage += 1;
     this.sortFilter();
+  }
+  changeSlug() {
+    this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationEnd) {
+        // Gọi sortFilter khi route đã thay đổi
+        this.currentPage = 1;
+
+        this.sortFilter();
+      }
+    });
   }
 }

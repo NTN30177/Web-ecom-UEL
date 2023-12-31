@@ -77,13 +77,23 @@ const filterProductsBySlug = async (slug) => {
     if (type) {
       const allProducts = type.subtypes.flatMap((subtype) => subtype.products);
       return allProducts;
-    } else {
+    } else if(slug=='all') {
+      const products = await Product.find({})
+      .populate({
+        path: "variants.color",
+        select: "imageColor nameColor",
+      }).lean();
+      return products;
+
+    }
+    else  {
       const subtype = await Subtype.findOne({ slug })
-        .populate({ path: "products" })
-        .populate({
+        .populate({ path: "products",
+        populate: {
           path: "variants.color",
           select: "imageColor nameColor",
-        })
+        },
+       })
         .lean();
       if (subtype) {
         return subtype.products;
@@ -117,8 +127,6 @@ const filterProducts = (
   }
   if (color != "undefined" && color.length > 0) {
     const arrayOfColor = color.split(",");
-    console.log(typeof arrayOfColor)
-    console.log( arrayOfColor)
       filteredProducts = filteredProducts.filter((product) =>
         product.variants.some(
           (variant) =>
@@ -129,7 +137,6 @@ const filterProducts = (
 
 
 
-    console.log(filteredProducts)
   }
   if (size != "undefined" && size.length > 0) {
     const arrayOfSize = size.split(",");
@@ -185,11 +192,12 @@ const paginateProducts = (products, page, pageSize) => {
   console.log(products.length)
   console.log(page)
   const startIndex = (page - 1) * pageSize;
-  const endIndex = startIndex + pageSize;
+  const endIndex = startIndex + parseInt(pageSize);
+  console.log(endIndex,'ed')
   const totalPage = Math.ceil(products.length / pageSize);
   const paginatedProducts = products.slice(0, endIndex);
   console.log("totalpage", totalPage);
-  console.log(paginatedProducts)
+ 
   return { paginatedProducts, totalPage };
 };
 
