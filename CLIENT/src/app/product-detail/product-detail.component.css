@@ -284,6 +284,7 @@ img:not([src]) {
     top: calc(50% - 9px);
     left: calc(50% - 9px);
     background-color: #fff;
+    background-image: url(https://static.coolmate.me/images/arrow-down.svg?a19aea680c08573712a5aca33fcaed3c);
     width: 16px;
     height: 16px;
     border-radius: 100px;
@@ -773,7 +774,7 @@ img:not([src]) {
 }
 
 @media (max-width: 1024px) {
-    .product-detail__information .product-detail__flash-sale, .product-detail__information .product-detail__quantity, .product-detail__information .product-detail__actions {
+    .product-detail__information .product-detail__quantity, .product-detail__information .product-detail__actions {
         margin-top: 16px;
 }
 }
@@ -858,12 +859,11 @@ img:not([src]) {
     font-weight: 600;
 }
 
-.product-single__button .btn-add-to-cart:before {
+.product-single__button .btn-add-to-cart .btn-icon{
     content: "";
     display: inline-block;
     width: 24px;
     height: 24px;
-    background-image: url(/CLIENT/src/assets/icon/SVG/shopping-cart.svg);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: 50%;
@@ -884,12 +884,11 @@ img:not([src]) {
     font-weight: 600;
 }
 
-.product-single__button .btn-buy:before {
+.product-single__button .btn-buy .btn-icon {
     content: "";
     display: inline-block;
     width: 24px;
     height: 24px;
-    background-image: url(/assets/images/shopping-bag.svg);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: 50%;
@@ -952,7 +951,7 @@ img:not([src]) {
 
 
 .product-features__list.col-md-6{
-    padding-left: 0px;
+    padding-left: 15px;
     display: inline;
 }
 
@@ -967,7 +966,7 @@ img:not([src]) {
     font-size: 32px;
     text-transform: uppercase;
     text-align: center;
-    line-height: 40px;
+    line-height: 0px;
 }
 
 .product-detail__size input[type=radio]:checked ~ span {
