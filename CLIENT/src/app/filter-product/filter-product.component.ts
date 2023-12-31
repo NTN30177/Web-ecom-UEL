@@ -63,7 +63,7 @@ export class FilterProductComponent implements AfterViewInit {
       
     });
     await this.setupUserIdSubscription();
-    this.productStates = Array(this.bannersArray.length).fill(false);
+    // this.productStates = Array(this.bannersArray.length).fill(false);
   }
 
 

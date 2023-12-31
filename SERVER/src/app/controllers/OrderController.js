@@ -2,6 +2,13 @@ const { Order } = require("../models/order");
 const { User } = require("../models/user");
 const { Ward, District, Province } = require("../models/address");
 const { UserAddress } = require("../models/user");
+const {
+  Product,
+  Type,
+  Subtype,
+  Color,
+  CartItem,
+} = require("../models/product");
 
 const saveOrder = async (req, res, next) => {
   try {
@@ -11,7 +18,6 @@ const saveOrder = async (req, res, next) => {
       userId: req.body.userId,
     };
 
-    // Tạo một mảng các order items từ dữ liệu trong cartItems
     const orderItems = requestData.cartItems.map((cartItem) => {
       return {
         product: cartItem.productId,
@@ -26,17 +32,15 @@ const saveOrder = async (req, res, next) => {
       };
     });
 
-    // Tạo đối tượng Order từ dữ liệu request
     const order = new Order({
       userId: requestData.userId,
       orderItems: orderItems,
       address: requestData.addressId,
-      status: "Đang xử lý", // Giả sử mặc định là "Đang xử lý"
-      totalPrice: calculateTotalPrice(orderItems), // Tính tổng giá trị đơn hàng từ các orderItems
-      totalQuantity: calculateTotalQuantity(orderItems), // Tính tổng số lượng từ các orderItems
+      status: "Đang xử lý",
+      totalPrice: calculateTotalPrice(orderItems), 
+      totalQuantity: calculateTotalQuantity(orderItems), 
     });
 
-    // Lưu đối tượng Order vào cơ sở dữ liệu
     const savedOrder = await order.save();
     console.log("Đơn hàng đã được lưu:", savedOrder);
     await User.findByIdAndUpdate(
@@ -44,10 +48,15 @@ const saveOrder = async (req, res, next) => {
       { $push: { orderList: savedOrder._id } },
       { new: true }
     );
-    console.log(savedOrder._id);
+    const user = await User.findById({_id:requestData.userId})
+    const cart = await CartItem.findByIdAndUpdate(
+      user.cart,
+      { productItem: [] }, 
+      { new: true }
+    );
+    console.log(cart)
     res.json({ orderId: savedOrder._id, Message: "Mua hàng thành công!" });
 
-    // Hàm tính tổng giá trị đơn hàng (bao gồm cả trường quantity)
     function calculateTotalPrice(orderItems) {
       return orderItems.reduce((total, orderItem) => {
         return (
@@ -65,7 +74,6 @@ const saveOrder = async (req, res, next) => {
       }, 0);
     }
 
-    // Hàm tính tổng số lượng của các sản phẩm trong đơn hàng
     function calculateTotalQuantity(orderItems) {
       return orderItems.reduce((totalQuantity, orderItem) => {
         return (
@@ -150,7 +158,6 @@ const getOrders = async (req, res) => {
       const { userId: { first_name, last_name }, ...rest } = order.toObject();
       return { first_name, last_name, ...rest };
     });
-    // console.log("order with user name:", modifiedOrders)
     res.json(modifiedOrders);
   } catch (error) {
     console.error(error);

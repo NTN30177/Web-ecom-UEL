@@ -16,6 +16,7 @@ import { PaymentThankComponent } from '../payment/payment-thank/payment-thank.co
 import { FilterProductComponent } from '../filter-product/filter-product.component';
 import { PaginationComponent } from '@coreui/angular';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
+import { ValidateEmailComponent } from '../validate-email/validate-email.component';
 
 const routes: Routes = [
   {
@@ -75,6 +76,9 @@ const routes: Routes = [
       },
       {
         path: 'app-delivery-policy', component: DeliveryPolicyComponent,
+      },
+      {
+        path: 'validate-email', component: ValidateEmailComponent,
       },
       
       {
