@@ -370,9 +370,7 @@ export class HomePageComponent implements AfterViewInit {
   selectedColorIndex: number[] = []; // Sử dụng một mảng để lưu trữ index cho từng sản phẩm
 
   initializeSelectedColorIndex(): void {
-    this.selectedColorIndex = new Array(this.productsHaveModified.length).fill(
-      0
-    );
+    this.selectedColorIndex = new Array(this.productsHaveModified.length).fill(0);
   }
 
   updateSelectedColorIndex(productIndex: number, colorI: number): void {

@@ -1,7 +1,7 @@
-<pre>
+<!-- <pre>
     {{ createcampaignForm.value | json }}
   </pre
->
+> -->
 
 <div class="container_content">
   <div class="frame_header">
@@ -168,13 +168,13 @@
     <div class="frame_btn_footer mt-5">
       <div class="row">
         <div class="form-group col-md-6 col-sm-6 ps-4">
-          <button class="btn_delete" id="btn_delete" name="btn_delete">
+          <button class="btn_delete" id="btn_delete" name="btn_delete" (click)="alertwarning()">
             Xóa
           </button>
         </div>
         <div class="col-md-6 col-sm-6 pe-4">
           <div class="form-group btn_group_footer text-end">
-            <button class="btn_cancel" id="btn_cancel" name="btn_cancel">
+            <button class="btn_cancel" id="btn_cancel" name="btn_cancel" (click)="alertwarning()">
               Hủy
             </button>
             <button

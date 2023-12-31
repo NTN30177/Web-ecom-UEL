@@ -76,9 +76,11 @@ export class ManageCampaignComponent implements OnInit, AfterViewInit, OnDestroy
 
   editCampaign(campaign: Campaign): void {
     console.log('Edit campaign:', campaign);
+    alert("Chức năng đang được phát triển!")
   }
 
   deleteCampaign(campaign: Campaign): void {
     console.log('Delete campaign:', campaign);
+    alert("Chức năng đang được phát triển!")
   }
 }

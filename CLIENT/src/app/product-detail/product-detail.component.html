@@ -48,17 +48,18 @@
                                         <div class="product-single__option">
                                             <div class="option-heading">
                                                 <span class="option-heading__title">Màu sắc:
-                                                    <span rel-script="product-option-title-color" class="text--bold">Đen</span>
+                                                    <span rel-script="product-option-title-color" class="text--bold"></span>
                                                 </span>
                                             </div>
-                                            <div class="option-select option-select--color">
-                                                <label class="option-select__item option-select__item--color den" *ngFor="let v of productsHaveModified[0].variants; index as colorI" >
-                                                    <div class="option-select__inner">
-                                                        <input type="radio" name="color" value="den" checked="checked"> 
-                                                        <span class="checkmark checkmark--color den" style="background-image: url(http://localhost:3000/productImages/{{productsHaveModified[0].imgHomePage[0].images[0]}});"></span>
-                                                    </div>
-                                                </label> 
-                                            </div>
+                                            <ul class="colors">
+                                                <li *ngFor="let v of productsHaveModified[0].variants; index as colorI" 
+                                                [ngClass]="{'color': true, 'color-active': colorI === selectedColorIndex[productIndex]}">
+                                                    <a href="javascript:void(0)" class="color-picked" data-id="{{ v._id }}" 
+                                                    (click)="changeColor(productsHaveModified[0], v.color._id); updateSelectedColorIndex(productIndex, colorI)" [ngClass]="{'active-color': colorI === 0}">
+                                                        <img src="http://localhost:3000/colorImages/{{v.color.imageColor}}" alt="">
+                                                    </a>
+                                                </li>
+                                            </ul>
                                             <div class="option-heading">
                                                 <span class="option-heading__title">Kích thước:
                                                     <span rel-script="product-option-title-color" class="text--bold">L</span>
@@ -101,8 +102,19 @@
                                             </div>
                                             <div class="product-detail__actions">
                                                 <div class="product-single__button col-sm-6">
-                                                    <a href="#" class="btn-add-to-cart">
-                                                        <img class="btn-icon" src="../assets/icon/SVG/shopping-cart1.svg">
+                                                    <a href="#" rel-script="product-add-to-cart" class="btn-add-to-cart">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
+                                                            <g clip-path="url(#clip0_2230_8332)">
+                                                            <path d="M9.5918 22C10.1441 22 10.5918 21.5523 10.5918 21C10.5918 20.4477 10.1441 20 9.5918 20C9.03951 20 8.5918 20.4477 8.5918 21C8.5918 21.5523 9.03951 22 9.5918 22Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M20.5918 22C21.1441 22 21.5918 21.5523 21.5918 21C21.5918 20.4477 21.1441 20 20.5918 20C20.0395 20 19.5918 20.4477 19.5918 21C19.5918 21.5523 20.0395 22 20.5918 22Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M1.5918 1H5.5918L8.2718 14.39C8.36324 14.8504 8.6137 15.264 8.97934 15.5583C9.34498 15.8526 9.80249 16.009 10.2718 16H19.9918C20.4611 16.009 20.9186 15.8526 21.2843 15.5583C21.6499 15.264 21.9004 14.8504 21.9918 14.39L23.5918 6H6.5918" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            </g>
+                                                            <defs>
+                                                            <clipPath id="clip0_2230_8332">
+                                                            <rect width="24" height="24" fill="white" transform="translate(0.591797)"/>
+                                                            </clipPath>
+                                                            </defs>
+                                                            </svg>
                                                         Thêm vào giỏ hàng</a>
                                                 </div>
                                                 <div class="product-single__button col-sm-6">
@@ -124,7 +136,12 @@
                                     </div> 
                                     <div class="product-policy__item">
                                         <div class="product-policy__icon">
-                                            <img src="../assets/icon/SVG/truck1.svg" alt="Giao hàng nhanh toàn quốc">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
+                                                <path d="M23.9248 4.875H2.0498V23.8333H23.9248V4.875Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M23.9248 12.167H29.7581L34.1331 16.542V23.8337H23.9248V12.167Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M8.61263 31.1247C10.6262 31.1247 12.2585 29.4924 12.2585 27.4788C12.2585 25.4653 10.6262 23.833 8.61263 23.833C6.59909 23.833 4.9668 25.4653 4.9668 27.4788C4.9668 29.4924 6.59909 31.1247 8.61263 31.1247Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M27.5706 31.1247C29.5842 31.1247 31.2165 29.4924 31.2165 27.4788C31.2165 25.4653 29.5842 23.833 27.5706 23.833C25.5571 23.833 23.9248 25.4653 23.9248 27.4788C23.9248 29.4924 25.5571 31.1247 27.5706 31.1247Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
                                         </div> 
                                         <span class="product-policy__title">Giao hàng nhanh<br>toàn quốc</span>
                                     </div> 
@@ -163,8 +180,8 @@
                 <div class="exclusive-content">
                     <div class="exclusive-inner active">
                         <p class="product-related__title">Sản phẩm bạn có thể thích</p>
-                        <owl-carousel-o [options]="newprodOptions">
-                            <ng-template carouselSlide  *ngFor="let product of productsHaveModified[0], index as productIndex" id="thumbProduct">
+                        <owl-carousel-o>
+                            <ng-template carouselSlide  *ngFor="let product of productsHaveModified, index as productIndex" id="thumbProduct">
                                 <div class="owl-stage stage-detail">
                                     <div class="owl-item">
                                         <div class="item-new-prod">
@@ -235,5 +252,7 @@
             </div>
         </div>
     </div>    
-</div>
 
+
+
+</div>

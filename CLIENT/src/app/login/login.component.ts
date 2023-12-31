@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.userIdFromHeader){
-      this.router.navigate(['/']);
+      // this.router.navigate(['/']);
     }
   }
 
