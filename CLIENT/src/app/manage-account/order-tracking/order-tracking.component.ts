@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OrderService } from '../../services/order.service';
-import { formatMoneyVietNam } from '../../utils/utils';
+import { formatDate, formatMoneyVietNam } from '../../utils/utils';
 import { FeedbackOrderComponent } from '../order-tracking/feedback-order/feedback-order.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../../services/auth.service';
@@ -15,7 +15,7 @@ import { data } from 'jquery';
 })
 export class OrderTrackingComponent implements OnInit{
   formatMoneyVietNam=formatMoneyVietNam
-
+  formatDate=formatDate
   orderId: any;
   orderDetails: any;
   userId: any;
@@ -33,11 +33,7 @@ export class OrderTrackingComponent implements OnInit{
       this.orderService.getOrderDetails(this.orderId).subscribe(
         (data) => {
           this.orderDetails = data;
-          console.log('Order details:', this.orderDetails);
-
-          const createdAt = this.orderDetails.dataOrderDetail[0].createdAt;
-          const formattedDate = this.formatDate(createdAt);
-          this.orderDetails.dataOrderDetail[0].createdAt = formattedDate;
+          console.log('Order details:', this.orderDetails)
 
           // console.log('Order details:', data.dataWardDetail);
           // console.log('Order details:', data);
@@ -56,16 +52,15 @@ export class OrderTrackingComponent implements OnInit{
 
   ) {}
 
-  formatDate(isoString: string): string {
-    const dateObject = new Date(isoString);
-    const day = dateObject.getDate();
-    const month = dateObject.getMonth() + 1; 
-    const year = dateObject.getFullYear();
-    const hours = dateObject.getHours();
-    const minutes = dateObject.getMinutes();
-    return `${day}/${month}/${year} ${hours}:${minutes}`;
-  }
 
+  calculateDeliveryEstimate(isoString: string): string {
+    const dateObject = new Date(isoString);
+    dateObject.setDate(dateObject.getDate() + 5);
+    const day = dateObject.getDate();
+    const month = dateObject.getMonth() + 1; // Months are zero-based
+    const year = dateObject.getFullYear(); 
+    return `${day}/${month}/${year}`;
+  }
   cancelOrder(){
     alert("Chức năng đang được phát triển!")
   }

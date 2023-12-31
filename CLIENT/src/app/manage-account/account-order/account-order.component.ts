@@ -6,6 +6,7 @@ import { OrderService } from '../../services/order.service';
 import { IOrders } from '../../interfaces/order';
 import { AuthService } from '../../services/auth.service';
 import { DataTableDirective } from 'angular-datatables';
+import { formatDate, formatMoneyVietNam } from '../../utils/utils';
 
 
 @Component({
@@ -15,6 +16,8 @@ import { DataTableDirective } from 'angular-datatables';
   encapsulation: ViewEncapsulation.None,
 })
 export class AccountOrderComponent implements OnInit {
+  formatDate=formatDate
+  formatMoneyVietNam=formatMoneyVietNam
   dtOptions: DataTables.Settings = {};
   userID: any;
   orders: IOrders[] = [];

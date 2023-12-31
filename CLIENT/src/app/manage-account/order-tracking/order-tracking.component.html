@@ -27,14 +27,14 @@
       <div class="header-icon">
         <img src="/CLIENT/src/assets/icon/icons/truck-tick.png" alt="#" />
       </div>
-      Thời gian giao hàng ước tính: 20-11-2023
+      Thời gian giao hàng ước tính: {{ calculateDeliveryEstimate(orderDetails.dataOrderDetail[0].createdAt)}} 
     </div>
   </div>
   <div class="order-process-bar">
     <ul>
       <li>
         <span>Đặt hàng thành công</span>
-        <p style="color:rgb(255, 0, 0)">Vào lúc {{ orderDetails.dataOrderDetail[0].createdAt }}</p>
+        <p style="color:rgb(255, 0, 0)">Vào lúc {{formatDate(orderDetails.dataOrderDetail[0].createdAt)}}</p>
       </li>
       <li>
         <span>Chuyển qua giao nhận</span>
