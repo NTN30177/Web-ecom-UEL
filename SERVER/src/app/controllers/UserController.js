@@ -14,7 +14,7 @@ const saveAccount = async (req, res, next) => {
   try {
     const checkEmailExist = await User.findOne({ email: req.body.cus_email.toLowerCase() });
     if (checkEmailExist) {
-      console.log('11111')
+      // console.log('11111')
       res.json({
         message: "Địa chỉ email tồn tại, vui lòng chọn địa chỉ mới hoặc đăng nhập",
         success: false,
@@ -109,10 +109,10 @@ const sendVerifyEmail = async (name, email, user_id) => {
 const verifyEmail = async (req, res) => {
   try {
     const updateInfo = await User.updateOne(
-      { _id: req.query.id },
+      { _id: req.query.id.toString() },
       { $set: { is_verified: 1 } }
     ).lean();
-    console.log(updateInfo);
+    console.log(updateInfo,123456);
     res.send(updateInfo);
   } catch (err) {
     console.log(err.message);
@@ -127,10 +127,10 @@ const verifyLogin = async (req, res, next) => {
         cus_password,
         userData.password
       );
-      console.log(passwordMatch, cus_password, userData.password);
+      // console.log(passwordMatch, cus_password, userData.password);
       if (passwordMatch) {
         if (userData.is_verified === 0) {
-          console.log(userData._id.toString());
+          // console.log(userData._id.toString());
       const name = userData.first_name+ userData.last_name 
 
           sendVerifyEmail(
@@ -201,7 +201,7 @@ const getProductHomePage = async (req, res) => {
       })
       .lean();
     console.log("123");
-    console.log(products);
+    // console.log(products);
     res.json({ products });
   } catch (err) {
     res.status(500).json({ error: "Internal Server Error" });
@@ -297,7 +297,7 @@ const subTypeApi = async (req, res, next) => {
       .populate("subtypes")
       .lean();
 
-    console.log(typePopulateSubType); // Log the actual data, not the promise object
+    // console.log(typePopulateSubType); // Log the actual data, not the promise object
     res.json({ typePopulateSubType });
   } catch (err) {
     console.error(err);

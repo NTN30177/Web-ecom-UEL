@@ -230,80 +230,8 @@ const getChartYear = async (req, res, next) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
-const exportUsers = async (req, res) => {
-  try {
-      const workbook = new excelJS.Workbook();
-      const worksheet = workbook.addWorksheet('My Users');
-      worksheet.columns = [
-          { header: 'S no.', key: 's_no' },
-          { header: 'Name.', key: 'name' },
-          { header: 'Email ID', key: 'email' },
-          { header: 'Mobile.', key: 'mobile' },
-          { header: 'Image', key: 'image' },
-          { header: 'Is Verified', key: 'is_verified' },
-      ];
-      let counter = 1;
-      const userData = await User.find({ is_admin: 0 }).lean();
-      userData.forEach((user) => {
-          user.s_no = counter;
-          worksheet.addRow(user);
-          counter++;
-      });
-      worksheet.getRow(1).eachCell((cell) => {
-          cell.font = { bold: true };
-      });
-      res.setHeader(
-          'Content-Type',
-          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-      );
-      res.setHeader('Content-disposition', 'attachment; filename=users.xlsx');
 
-      workbook.xlsx.write(res).then(() => {
-          res.status(200);
-      });
-  } catch (err) {
-      console.log(err.message);
-  }
-};
-
-//export user data into pdf
-const exportUsersPdf = async (req, res) => {
-  try {
-      const users = await User.find({ is_admin: 0 }).lean();
-      const data = { users };
-      const filePathName = path.resolve(
-          __dirname,
-          '../../resources/views/admin/htmltopdf.ejs',
-      );
-      const htmlString = fs.readFileSync(filePathName).toString();
-      let options = {
-          format: 'Letter',
-          orientation: 'portrait',
-          border: '10mm',
-      };
-      const ejsData = ejs.render(htmlString, data);
-      pdf.create(ejsData, options).toFile('users.pdf', (err, response) => {
-          if (err) console.log(err);
-          const filepath = path.resolve(__dirname, '../../../users.pdf');
-          // D:\OneDrive - uel.edu.vn\hk5\web4\test1\users.pdf
-          fs.readFile(filepath, (err, file) => {
-              if (err) {
-                  console.log(err);
-                  return res.status(500).send('Could not download file');
-              }
-              res.setHeader('Content-Type', 'application/pdf');
-              res.setHeader(
-                  'Content-Disposition',
-                  'attachment; filename="users.pdf',
-              );
-              res.send(file);
-          });
-      });
-  } catch (err) {
-      console.log(err.message);
-  }
-};
 
 module.exports = {
-  x,getChart1, getChartAccount, getChartYear, exportUsers, exportUsersPdf
+  x,getChart1, getChartAccount, getChartYear
 };

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ValidateEmailPopupComponent } from '../validate-email-popup/validate-email-popup.component';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-validate-email',
@@ -9,11 +10,21 @@ import { ValidateEmailPopupComponent } from '../validate-email-popup/validate-em
   styleUrls: ['./validate-email.component.css']
 })
 export class ValidateEmailComponent implements OnInit {
+  userId: any;
 
-  constructor(private dialog: MatDialog, private router: Router) { }
+  constructor(private dialog: MatDialog, private router: Router, 
+    private _authService:AuthService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.openSuccessDialog();
+    this.route.queryParams.subscribe(params => {
+      this.userId = params['id']; 
+      console.log( this.userId,' this.userId')
+      this._authService.validateEmail(this.userId).subscribe((data)=>{
+        
+      })
+  });
   }
 
   openSuccessDialog() {

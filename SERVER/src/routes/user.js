@@ -31,6 +31,7 @@ router.delete(
 router.put("/account/address/set-default", userController1.setDefaultAddress);
 
 router.get("/types-populate-subtypes", userController.subTypeApi);
+router.get("/validateEmail", userController.verifyEmail);
 router.post("/resetPassW", userController.resetPassword);
 
 module.exports = router;

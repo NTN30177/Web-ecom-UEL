@@ -153,6 +153,24 @@ export class AuthService {
     return this._http.get<boolean>(`${local}/user/is-email-verified/${email}`);
   }
 
+  validateEmail(id: any): Observable<any> {
+    const headers = new HttpHeaders().set(
+      'Content-Type',
+      'text/plain;charset=utf-8'
+    );
+    const requestOptions: Object = {
+      headers: headers,
+      responseType: 'text',
+    };
+    return this._http
+      .get<any>(`${local}/user/validateEmail?id=${id}`, requestOptions)
+
+      .pipe(
+        map((res) => JSON.parse(res) ),
+        retry(3),
+        catchError(this.handleError)
+      );
+  }
   resetPw(data: any, email:any): Observable<any> {
     const headers = new HttpHeaders().set(
       'Content-Type',

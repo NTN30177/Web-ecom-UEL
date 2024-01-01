@@ -20,7 +20,7 @@ function route(app) {
     app.use('/campaign',  campaignRouter);
     app.use('/api',  apiRouter);
     app.get('/error', function (req, res) {
-        res.render('404');
+        res.send('404');
     });
 
 
