@@ -171,7 +171,7 @@ export class ProductDetailComponent implements OnInit {
           // Return the object for a variant with variantColor
           return {
             colorID,
-            images: variantImages.slice(0, 2),
+            images: variantImages,
             variantColor: sizeQuantityArray,
           };
         }),

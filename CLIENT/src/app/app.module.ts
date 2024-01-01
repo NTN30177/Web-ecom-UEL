@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AddProductComponent } from './admin/add-product/add-product.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -87,7 +86,6 @@ import { ValidateEmailPopupComponent } from './validate-email-popup/validate-ema
 @NgModule({
   declarations: [
     AppComponent,
-    AddProductComponent,
     HeaderComponent,
     FooterComponent,
     PageNotFoundComponent,

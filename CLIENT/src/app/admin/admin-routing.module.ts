@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddProductComponent } from './add-product/add-product.component';
 import { ViewColorComponent } from './view-color/view-color.component';
 import { ManageProductComponent } from './manage-product/manage-product.component';
 import { AdminComponent } from './admin.component';
@@ -20,7 +19,6 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'add-product', component: AddProductComponent },
       { path: 'add-product-2', component: AddProduct2Component },
       { path: 'view-color', component: ViewColorComponent },
       { path: 'product', component: ManageProductComponent },
