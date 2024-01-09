@@ -141,9 +141,9 @@
                   </div>
                 </div>
               </div>
-              <div class="collection-section-loadmore">
+              <div class="collection-section-loadmore" >
                 <a class="collection-section-loadmore__btn btn" (click)="viewMore()" *ngIf="totalProduct>(productsPerPage*currentPage)">Xem thêm</a>
-                <p class="collection-section-loadmore__page">
+                <p class="collection-section-loadmore__page" *ngIf="totalProduct!=0">
                   Hiển thị
                   <span>1</span>
                   -
@@ -152,6 +152,9 @@
                   <span class="total-products">{{totalProduct}}</span>
                   sản phẩm
                 </p>
+                <p class="collection-section-loadmore__page" *ngIf="totalProduct==0">
+                  Không  tìm thấy sản phẩm nào
+</p>
               </div>
             </div>
           </div>
