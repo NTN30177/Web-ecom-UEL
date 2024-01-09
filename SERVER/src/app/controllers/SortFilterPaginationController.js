@@ -89,6 +89,7 @@ const filterProductsBySlug = async (slug) => {
         select: "imageColor nameColor",
       }).lean();
       return products;
+
     }
     else  {
       const subtype = await Subtype.findOne({ slug })

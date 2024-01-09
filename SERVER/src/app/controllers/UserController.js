@@ -1,3 +1,4 @@
+const randomstring = require("randomstring");
 const { User, UserAddress } = require("../models/user");
 const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
@@ -9,7 +10,6 @@ const {
   Color,
   CartItem,
 } = require("../models/product");
-const randomstring = require("randomstring");
 
 const saveAccount = async (req, res, next) => {
   try {
@@ -195,7 +195,7 @@ const getUserID = async (req, res) => {
 
 const getProductHomePage = async (req, res) => {
   try {
-    let products = await Product.find({ is_deleted: false })
+    let products = await Product.find({})
       .populate({
         path: "variants.color",
         select: "imageColor nameColor",
