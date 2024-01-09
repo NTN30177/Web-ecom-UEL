@@ -68,7 +68,7 @@ section {
 }
 .main-content .filter__right {
     padding-left: 20px;
-    max-width: calc( 100% - 270px );
+    width:1080px
 }
 .filter__right .classify__fiter {
     display: flex;

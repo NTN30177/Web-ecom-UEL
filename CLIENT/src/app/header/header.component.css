@@ -91,6 +91,7 @@ input[type="text"]::placeholder {
 #nav > li:hover > .sub-menu {
   animation: fadeInShow 0.5s;
   animation-duration: 0.5s;
+  top:55px;
 }
 
 #nav .sub-menu {
