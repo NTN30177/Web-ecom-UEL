@@ -6,35 +6,37 @@ import {
   ViewEncapsulation,
   ViewChild,
   ChangeDetectorRef,
-} from '@angular/core';
-import { local, localProductImg } from '../ENV/envi';
-declare var $: any;
-import { OwlOptions } from 'ngx-owl-carousel-o';
-import { HomeService } from '../services/home.service';
-import { IProduct } from '../interfaces/product';
-import { AuthService } from '../services/auth.service';
-import { CartComponent } from '../cart/cart.component';
-import { CartService } from '../services/cart.service';
-import { formatMoneyVietNam } from '../utils/utils';
-import { take } from 'rxjs';
-@Component({
+ } from '@angular/core';
+ import { local, localProductImg } from '../ENV/envi';
+ declare var $: any;
+ import { OwlOptions } from 'ngx-owl-carousel-o';
+ import { HomeService } from '../services/home.service';
+ import { IProduct } from '../interfaces/product';
+ import { AuthService } from '../services/auth.service';
+ import { CartComponent } from '../cart/cart.component';
+ import { CartService } from '../services/cart.service';
+ import { formatMoneyVietNam } from '../utils/utils';
+ import { take } from 'rxjs';
+ @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css'],
   encapsulation: ViewEncapsulation.None,
-})
-export class HomePageComponent implements AfterViewInit {
+ })
+ export class HomePageComponent implements AfterViewInit {
   formatMoneyVietNam = formatMoneyVietNam;
   localProductImg = localProductImg;
   productStates: boolean[] = [];
   i: number = 0;
-
+ 
+ 
   // products: any;
   errMessage: any;
   currentColor = 0;
   // currentColor: any;
   local = local;
-
+ 
+ 
   constructor(
     private el: ElementRef,
     private renderer: Renderer2,
@@ -47,20 +49,25 @@ export class HomePageComponent implements AfterViewInit {
       this.userIdFromHeader = data;
     });
   }
-
+ 
+ 
   ngAfterViewInit(): void {
     this.initOwlCarousel();
   }
-
+ 
+ 
   // Size table homepage
-
+ 
+ 
   private initOwlCarousel(): void {
     const owlSelector = '.exclusive-inner__list-products.owl-carousel';
     const owlElement = this.el.nativeElement.querySelector(owlSelector);
-
+ 
+ 
     if (owlElement) {
       this.renderer.addClass(owlElement, 'owl-carousel');
-
+ 
+ 
       const owlOptions: OwlOptions = {
         dots: false,
         nav: true,
@@ -73,11 +80,13 @@ export class HomePageComponent implements AfterViewInit {
           1025: { items: 5, margin: 30 },
         },
       };
-
+ 
+ 
       $(owlElement).owlCarousel(owlOptions);
     }
   }
-
+ 
+ 
   toggleSizeTable(productIndex: number): void {
     // đóng mở các sizetable khác
     for (let i = 0; i < this.productStates.length; i++) {
@@ -89,7 +98,8 @@ export class HomePageComponent implements AfterViewInit {
         this.renderer.removeClass(otherSizeTable, 'open');
       }
     }
-
+ 
+ 
     const sizeTableId = `sizeTable${productIndex}`;
     const sizeTable = this.el.nativeElement.querySelector(`#${sizeTableId}`);
     if (
@@ -98,7 +108,8 @@ export class HomePageComponent implements AfterViewInit {
       this.productStates[productIndex] !== undefined
     ) {
       this.productStates[productIndex] = !this.productStates[productIndex];
-
+ 
+ 
       if (this.productStates[productIndex]) {
         this.renderer.addClass(sizeTable, 'open');
       } else {
@@ -106,15 +117,18 @@ export class HomePageComponent implements AfterViewInit {
       }
     }
   }
-
+ 
+ 
   selectedColorId: number | null = null;
-
+ 
+ 
   bannersArray: any = [
     { imgName: '../assets/img/banner/banner-1.jpeg' },
     { imgName: '../assets/img/banner/banner-2.jpeg' },
     { imgName: '../assets/img/banner/banner-3.jpeg' },
   ];
-
+ 
+ 
   // Setting Carousel slider
   bannerOptions: OwlOptions = {
     loop: true,
@@ -135,7 +149,8 @@ export class HomePageComponent implements AfterViewInit {
     },
     nav: true,
   };
-
+ 
+ 
   // Setting new-prod homepage
   newprodOptions: OwlOptions = {
     loop: false,
@@ -165,18 +180,22 @@ export class HomePageComponent implements AfterViewInit {
     },
     nav: true,
   };
-
+ 
+ 
   isHovered: boolean | undefined;
   products: any;
-
+ 
+ 
   async ngOnInit(): Promise<void> {
     await this.setupUserIdSubscription();
     await this.apiProductHomePage();
-
+ 
+ 
     // Khởi tạo mảng productStates với giá trị false cho mỗi sản phẩm
     this.productStates = Array(this.bannersArray.length).fill(false);
   }
-
+ 
+ 
   private async setupUserIdSubscription(): Promise<void> {
     return new Promise<void>((resolve) => {
       const subscription = this._authService.idUserSubject
@@ -188,11 +207,13 @@ export class HomePageComponent implements AfterViewInit {
         });
     });
   }
-
+ 
+ 
   setHoveredState(isHovered: boolean): void {
     this.isHovered = isHovered;
   }
-
+ 
+ 
   async apiChangeQuantityProductItem(data: object) {
     try {
       const responseData = await this._cartService.putProductItemCart(data);
@@ -200,9 +221,11 @@ export class HomePageComponent implements AfterViewInit {
       this.errMessage = err;
     }
   }
-
+ 
+ 
   total_quantity: number = 0;
-
+ 
+ 
   totalCartItem(productsCart: any): number {
     this.total_quantity = 0;
     productsCart.forEach((product: any) => {
@@ -213,13 +236,16 @@ export class HomePageComponent implements AfterViewInit {
         });
       });
     });
-
+ 
+ 
     return this.total_quantity;
   }
-
+ 
+ 
   itemsCart: any = [];
   userIdFromHeader: any;
-
+ 
+ 
   async addToCart(
     colorID: any,
     product_Id: any,
@@ -227,31 +253,34 @@ export class HomePageComponent implements AfterViewInit {
     quantityACTION: number
   ) {
     if (this.userIdFromHeader) {
-      const data = {
-        colorId: colorID,
-        productId: product_Id,
-        size: sizeLIST,
-        quantityAction: quantityACTION,
-        userId: this.userIdFromHeader,
-      };
-      this._cartService.putProductItemCart(data).subscribe(
-        (result) => {
-          console.log('API call successful', result);
-        },
-        (error) => {
-          console.error('API call failed', error);
-        }
-      );
-      const cartList = await this._cartComponent.apiCartProduct(
-        this.userIdFromHeader
-      );
-      //
-      this._cartService.updateCartItems(cartList);
-      let total_quantity = await this.totalCartItem(cartList);
-      this._authService.updateCart(total_quantity);
+      try {
+        const data = {
+          colorId: colorID,
+          productId: product_Id,
+          size: sizeLIST,
+          quantityAction: quantityACTION,
+          userId: this.userIdFromHeader,
+        };
+  
+        // Await the result of the API call
+        const result = await this._cartService.putProductItemCart(data).toPromise();
+        console.log('API call successful', result);
+  
+        // Fetch cart items and update services
+        const cartList = await this._cartComponent.apiCartProduct(this.userIdFromHeader);
+        this._cartService.updateCartItems(cartList);
+        const total_quantity = await this.totalCartItem(cartList);
+        console.log(total_quantity);
+        this._authService.updateCart(total_quantity);
+      } catch (error) {
+        console.error('API call failed', error);
+        // Handle errors appropriately, e.g., display error messages to the user
+      }
     }
   }
-
+  
+ 
+ 
   cartNumber: number = 0;
   cartNumberFunc() {
     const localCartString = localStorage.getItem('localCart');
@@ -261,23 +290,23 @@ export class HomePageComponent implements AfterViewInit {
       //  this._authService.cartSubject.next(this.cartNumber)
     }
   }
-
+ 
+ 
   apiProductHomePage() {
     console.log('1235');
     this._homeService.getProductHomePage().subscribe({
       next: (data: any) => {
         this.products = data.products;
-
         this.updateProductsHaveModified();
         this.initializeSelectedColorIndex();
-        console.log(this.products, '123');
       },
       error: (err: any) => {
         this.errMessage = err;
       },
     });
   }
-
+ 
+ 
   changeColor(product: IProduct, colorId: string) {
     console.log(product._id, colorId);
     console.log(this.productsHaveModified);
@@ -287,7 +316,8 @@ export class HomePageComponent implements AfterViewInit {
       colorId
     );
   }
-
+ 
+ 
   moveImgHomePageToFront(
     productsHaveModified: any[],
     productId: string,
@@ -298,7 +328,6 @@ export class HomePageComponent implements AfterViewInit {
         const imgHomePageIndex = product.imgHomePage.findIndex(
           (img: any) => img.colorID === colorId
         );
-
         if (imgHomePageIndex !== -1) {
           const movedItem = product.imgHomePage.splice(imgHomePageIndex, 1)[0];
           product.imgHomePage.unshift(movedItem);
@@ -306,12 +335,15 @@ export class HomePageComponent implements AfterViewInit {
         break; // Dừng vòng lặp sau khi xử lý sản phẩm
       }
     }
-
+ 
+ 
     return productsHaveModified;
   }
-
+ 
+ 
   productsHaveModified: any;
-
+ 
+ 
   updateProductsHaveModified() {
     this.productsHaveModified = this.products.map((product: any) => {
       return {
@@ -319,8 +351,7 @@ export class HomePageComponent implements AfterViewInit {
         imgHomePage: product.variants.map((variant: any) => {
           const { _id: colorID } = variant.color;
           const { nameColor: nameColor } = variant.color;
-          const { images: variantImages, variantColor: sizes } = variant;
-
+          const { images: variantImages, variantColor: sizes } = variant; 
           // Create an array of objects for each size with quantity
           const sizeQuantityArray = sizes.map((sizeInfo: any) => {
             const { size, quantity } = sizeInfo;
@@ -350,14 +381,11 @@ export class HomePageComponent implements AfterViewInit {
   ) {
     // addActiveCartPopupClass() {
     console.log(title, price, color, size, img);
-    this.productPopUp = { title, price, color, size, img };
-
+    this.productPopUp = { title, price, color, size, img }; 
     if (this.popupContainer) {
       const popupContainerElement = this.popupContainer.nativeElement;
-
       if (popupContainerElement) {
-        this.renderer.addClass(popupContainerElement, 'active-cartpopup');
-
+        this.renderer.addClass(popupContainerElement, 'active-cartpopup'); 
         // After 2 seconds, remove the 'active-cartpopup' class
         setTimeout(() => {
           this.renderer.removeClass(popupContainerElement, 'active-cartpopup');
@@ -365,15 +393,19 @@ export class HomePageComponent implements AfterViewInit {
       }
     }
   }
-
+ 
+ 
   // thêm xo color-active
   selectedColorIndex: number[] = []; // Sử dụng một mảng để lưu trữ index cho từng sản phẩm
-
+ 
+ 
   initializeSelectedColorIndex(): void {
     this.selectedColorIndex = new Array(this.productsHaveModified.length).fill(0);
   }
-
+ 
+ 
   updateSelectedColorIndex(productIndex: number, colorI: number): void {
     this.selectedColorIndex[productIndex] = colorI;
   }
-}
+ }
+ 

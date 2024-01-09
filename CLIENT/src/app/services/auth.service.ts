@@ -30,6 +30,7 @@ export class AuthService {
   
   cartSubject = new BehaviorSubject<any>(null);
   updateCart(total_quantity: any) {
+    console.log(total_quantity, 'total')
     this.cartSubject.next(total_quantity);
   }
 
