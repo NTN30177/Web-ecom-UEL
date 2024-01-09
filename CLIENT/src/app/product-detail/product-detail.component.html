@@ -62,33 +62,22 @@
                                             </ul>
                                             <div class="option-heading">
                                                 <span class="option-heading__title">Kích thước:
-                                                    <span rel-script="product-option-title-color" class="text--bold">L</span>
                                                 </span>
                                                 <a href="#" class="option-heading__sizeguide" style="text-decoration: underline;
                                                 font-size: 14px; color: #9B3A23; margin-left: 72px;">Hướng dẫn chọn size</a>
                                             </div>
+                                            
                                             <div class="product-detail__size">
-                                                <div class="product-detail__size__input">
-                                                    <label>
-                                                        <input type="radio" name="size" value="s" />
-                                                        <span class="text-uppercase">s</span>
+                                                <div class="product-detail__size__input"  >
+                                                    <label *ngFor="let vc of productsHaveModified[0].imgHomePage[0].variantColor">
+                                                        <input type="radio" name="size" value="s" [ngClass]="{'disabled-size': vc.quantity === 0}" [disabled]="vc.quantity === 0" />
+                                                        <span class="text-uppercase" [ngClass]="{'disabled-text': vc.quantity === 0}">
+                                                            <ng-container *ngIf="vc.quantity === 0; else sizeText">{{vc.size}}</ng-container>
+                                                            <ng-template #sizeText>{{vc.size}}</ng-template>
+                                                        </span>
                                                     </label>
-                                                    <label>
-                                                        <input type="radio" name="size" value="m" />
-                                                        <span class="text-uppercase">m</span>
-                                                    </label>
-                                                    <label>
-                                                        <input type="radio" name="size" value="l" />
-                                                        <span class="text-uppercase">L</span>
-                                                    </label>
-                                                    <label>
-                                                        <input type="radio" name="size" value="xl" />
-                                                        <span class="text-uppercase">XL</span>
-                                                    </label>
-                                                    <label>
-                                                        <input type="radio" name="size" value="2xl" />
-                                                        <span class="text-uppercase">2XL</span>
-                                                    </label>
+                                                    
+                                                    
                                                 </div>
                                             </div>
                                             <div class="product-detail__quantity">

@@ -270,7 +270,6 @@ import {
         const cartList = await this._cartComponent.apiCartProduct(this.userIdFromHeader);
         this._cartService.updateCartItems(cartList);
         const total_quantity = await this.totalCartItem(cartList);
-        console.log(total_quantity);
         this._authService.updateCart(total_quantity);
       } catch (error) {
         console.error('API call failed', error);

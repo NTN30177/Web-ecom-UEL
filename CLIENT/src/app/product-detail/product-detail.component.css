@@ -9,6 +9,17 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	vertical-align: baseline;
 } 
 
+.disabled-size {
+    opacity: 0.5; /* Sử dụng opacity để làm mờ */
+    pointer-events: none; /* Ngăn chặn sự kiện click và hover trên phần tử */
+}
+
+/* Định nghĩa lớp CSS cho làm mờ văn bản và thêm gạch ngang */
+.disabled-text {
+    color: #999; /* Màu chữ xám để làm mờ văn bản */
+    text-decoration: line-through; /* Thêm gạch ngang cho văn bản */
+}
+
 .col-md-6 {
     position: relative;
     min-height: 1px;
