@@ -9,6 +9,7 @@ const {
   Color,
   CartItem,
 } = require("../models/product");
+const randomstring = require("randomstring");
 
 const saveAccount = async (req, res, next) => {
   try {
@@ -194,7 +195,7 @@ const getUserID = async (req, res) => {
 
 const getProductHomePage = async (req, res) => {
   try {
-    let products = await Product.find({})
+    let products = await Product.find({ is_deleted: false })
       .populate({
         path: "variants.color",
         select: "imageColor nameColor",

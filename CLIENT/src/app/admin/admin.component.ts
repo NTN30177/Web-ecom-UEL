@@ -33,7 +33,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
   isCollapsed = false;
 
   menuItems: MenuItem[] = [
-    { name: 'Dashboard', icon: 'fas fa-tachometer-alt', link: 'admin' },
+    { name: 'Dashboard', icon: 'fas fa-tachometer-alt', link: 'dashboard' },
     {
       name: 'Sản phẩm',
       icon: 'fas fa-shopping-basket',
