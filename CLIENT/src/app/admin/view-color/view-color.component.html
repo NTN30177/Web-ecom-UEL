@@ -19,14 +19,14 @@
       <table datatable id="example" class="custom-datatable">
         <thead>
           <tr>
-            <th>Tên màu sắc</th>
+            <th class="pl">Tên màu sắc</th>
             <th>Hình ảnh</th>
             <th>Hành động</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let color of listColor">
-            <td >{{color.nameColor}}</td>
+            <td class="pl">{{color.nameColor}}</td>
             <td><img src="http://localhost:3000/colorImages/{{ color.imageColor }}" alt="" /></td>
          
             <td class="action-icon">

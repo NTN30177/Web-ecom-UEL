@@ -5,11 +5,11 @@
     </h3>
     <div class="container" *ngIf="total_payment!=0">
       <div class="row cart-title">
-        <!-- <div class="col-1 d-flex align-items-center justify-content-center">
+        <div class="col-1 d-flex align-items-center justify-content-center">
           <input type="checkbox" id="checkAll" onclick="checkAll(this);" />
-        </div> -->
-        <div class="col-sm-auto col-auto">
-          <label for="checkAll text-center">Tất cả sản phẩm</label>
+        </div>
+        <div class="col-sm-auto col-2">
+          <label for="checkAll text-center">Chọn tất cả</label>
         </div>
         <p class="col text-end">GIÁ</p>
       </div>
@@ -21,7 +21,7 @@
       <div class="cart-list__variant" *ngFor="let v of product.variants">
         <div class="cart-list__varriantColor" *ngFor="let vc of v.variantColor">
           <div class="row cart-item__all">
-            <div class="">
+            <div class="col-1 d-flex align-items-center justify-content-center">
               <input type="checkbox" name="cartItem" class="checkboxProduct" />
             </div>
             <div class="col-3 col-sm-auto">
