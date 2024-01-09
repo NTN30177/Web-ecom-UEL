@@ -89,7 +89,6 @@ const filterProductsBySlug = async (slug) => {
         select: "imageColor nameColor",
       }).lean();
       return products;
-
     }
     else  {
       const subtype = await Subtype.findOne({ slug })
@@ -206,11 +205,13 @@ const getSlugData = async (slug) => {
         path: "subtypes",
         populate: {
           path: "products",
-          model: "Product",
+          model: "Product"
         },
       })
       .lean();
-
+if(slug=='all'){
+  return { type, slug }
+}
     if (type) {
       return { type, slug }
     }

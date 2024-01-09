@@ -67,7 +67,7 @@
       "$numberLong": "1703223736001"
     }
   },
-  "slug": "6585190efb0cdd158835bc9c",
+  "slug": "ao",
   "__v": 2
 },{
   "_id": {
@@ -133,58 +133,6 @@
   "__v": 15
 },{
   "_id": {
-    "$oid": "64c4c7621539b1bd9c0fae5b"
-  },
-  "typeName": "Phụ kiện",
-  "subtypes": [
-    {
-      "$oid": "65880a5b68b8fa01b62e49f7"
-    },
-    {
-      "$oid": "6588fa4673595a888d45687a"
-    },
-    {
-      "$oid": "6588fb6c73595a888d4568b2"
-    },
-    {
-      "$oid": "6589a14b4c45f8ca787e41fd"
-    },
-    {
-      "$oid": "6589a4b24c45f8ca787e4237"
-    }
-  ],
-  "createdAt": {
-    "$date": {
-      "$numberLong": "1690617698301"
-    }
-  },
-  "updatedAt": {
-    "$date": {
-      "$numberLong": "1703519410124"
-    }
-  },
-  "slug": "phu-kien",
-  "__v": 8
-},{
-  "_id": {
-    "$oid": "64c4c7f4e2a184d32cff6540"
-  },
-  "typeName": "Bộ sưu tập",
-  "subtypes": [],
-  "createdAt": {
-    "$date": {
-      "$numberLong": "1690617698301"
-    }
-  },
-  "updatedAt": {
-    "$date": {
-      "$numberLong": "1702828992314"
-    }
-  },
-  "slug": "bts",
-  "__v": 10
-},{
-  "_id": {
     "$oid": "658519b6fb0cdd158835bca0"
   },
   "typeName": "Đầm/ Áo dài",
@@ -216,5 +164,64 @@
     }
   },
   "slug": "dam-ao-dai",
+  "__v": 8
+},{
+  "_id": {
+    "$oid": "64c4c7f4e2a184d32cff6540"
+  },
+  "typeName": "Bộ sưu tập",
+  "subtypes": [
+    {
+      "$oid": "6591d454d0fc814fd4d5e1a4"
+    },
+    {
+      "$oid": "6591d3bdd0fc814fd4d5e1a3"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1690617698301"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1702828992314"
+    }
+  },
+  "slug": "bts",
+  "__v": 10
+},{
+  "_id": {
+    "$oid": "64c4c7621539b1bd9c0fae5b"
+  },
+  "typeName": "Phụ kiện",
+  "subtypes": [
+    {
+      "$oid": "65880a5b68b8fa01b62e49f7"
+    },
+    {
+      "$oid": "6588fa4673595a888d45687a"
+    },
+    {
+      "$oid": "6588fb6c73595a888d4568b2"
+    },
+    {
+      "$oid": "6589a14b4c45f8ca787e41fd"
+    },
+    {
+      "$oid": "6589a4b24c45f8ca787e4237"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1690617698301"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703519410124"
+    }
+  },
+  "slug": "phu-kien",
   "__v": 8
 }]

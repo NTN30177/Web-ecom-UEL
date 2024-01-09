@@ -620,4 +620,186 @@
   },
   "slug": "quan-tao-kieu",
   "__v": 0
+},{
+  "_id": {
+    "$oid": "6591d3bdd0fc814fd4d5e1a3"
+  },
+  "subTypeName": "EXPRESS FAIIL WINTER 2023 COLLECTION",
+  "products": [
+    {
+      "$oid": "6588e682ba239378ac24c89a"
+    },
+    {
+      "$oid": "6588f0ecb01e041f089b10f5"
+    },
+    {
+      "$oid": "6588f299b01e041f089b112c"
+    },
+    {
+      "$oid": "6588f31ab01e041f089b113d"
+    },
+    {
+      "$oid": "658521b7229a4e7e738a8ce4"
+    },
+    {
+      "$oid": "65880d2b334194b03d2f201b"
+    },
+    {
+      "$oid": "65880f54e455845cc1b9565f"
+    },
+    {
+      "$oid": "65880fa40a6c419634b5a57c"
+    },
+    {
+      "$oid": "65880a5b68b8fa01b62e49f0"
+    },
+    {
+      "$oid": "65880a9568b8fa01b62e49fb"
+    },
+    {
+      "$oid": "65880e2d0ae73cc6f7fabadb"
+    },
+    {
+      "$oid": "6589a14b4c45f8ca787e41f4"
+    },
+    {
+      "$oid": "6589a1ff4c45f8ca787e4206"
+    },
+    {
+      "$oid": "6589a2a74c45f8ca787e4210"
+    },
+    {
+      "$oid": "6589a34f4c45f8ca787e421a"
+    },
+    {
+      "$oid": "6589a4044c45f8ca787e4224"
+    },
+    {
+      "$oid": "6588fb6c73595a888d4568a9"
+    },
+    {
+      "$oid": "6588fa4673595a888d456871"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703470722954"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703473946652"
+    }
+  },
+  "slug": "EXPRESS-FAIIL-WINTER-2023-COLLECTION",
+  "__v": 3
+},{
+  "_id": {
+    "$oid": "6591d454d0fc814fd4d5e1a4"
+  },
+  "subTypeName": "EXPRESS FAIIL WINTER 2022 COLLECTION",
+  "products": [
+    {
+      "$oid": "6587e0ac020f233b6371b181"
+    },
+    {
+      "$oid": "6587f0e2026f8360883d398f"
+    },
+    {
+      "$oid": "6587f33f026f8360883d39ce"
+    },
+    {
+      "$oid": "6588f8572effb5a0d5b85195"
+    },
+    {
+      "$oid": "6588f9502effb5a0d5b851a7"
+    },
+    {
+      "$oid": "6588f0c72effb5a0d5b85141"
+    },
+    {
+      "$oid": "6588f29d2effb5a0d5b85153"
+    },
+    {
+      "$oid": "6588f6022effb5a0d5b85183"
+    },
+    {
+      "$oid": "6588ee2e2effb5a0d5b8510e"
+    },
+    {
+      "$oid": "6588ee9d2effb5a0d5b8511d"
+    },
+    {
+      "$oid": "6588eed92effb5a0d5b85129"
+    },
+    {
+      "$oid": "6588efc52effb5a0d5b85135"
+    },
+    {
+      "$oid": "6588e682ba239378ac24c89a"
+    },
+    {
+      "$oid": "6588f0ecb01e041f089b10f5"
+    },
+    {
+      "$oid": "6588f299b01e041f089b112c"
+    },
+    {
+      "$oid": "6588f31ab01e041f089b113d"
+    },
+    {
+      "$oid": "658521b7229a4e7e738a8ce4"
+    },
+    {
+      "$oid": "65880d2b334194b03d2f201b"
+    },
+    {
+      "$oid": "65880f54e455845cc1b9565f"
+    },
+    {
+      "$oid": "65880fa40a6c419634b5a57c"
+    },
+    {
+      "$oid": "65880a5b68b8fa01b62e49f0"
+    },
+    {
+      "$oid": "65880a9568b8fa01b62e49fb"
+    },
+    {
+      "$oid": "65880e2d0ae73cc6f7fabadb"
+    },
+    {
+      "$oid": "6589a14b4c45f8ca787e41f4"
+    },
+    {
+      "$oid": "6589a1ff4c45f8ca787e4206"
+    },
+    {
+      "$oid": "6589a2a74c45f8ca787e4210"
+    },
+    {
+      "$oid": "6589a34f4c45f8ca787e421a"
+    },
+    {
+      "$oid": "6589a4044c45f8ca787e4224"
+    },
+    {
+      "$oid": "6588fb6c73595a888d4568a9"
+    },
+    {
+      "$oid": "6588fa4673595a888d456871"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1703470722954"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1703473946652"
+    }
+  },
+  "slug": "EXPRESS-FAIIL-WINTER-2022-COLLECTION",
+  "__v": 3
 }]

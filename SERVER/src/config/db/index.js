@@ -3,7 +3,7 @@ async function connect(){
     try {
         // await mongoose.connect('mongodb://127.0.0.1:27017/NTN_F8_dev', {
 
-        await mongoose.connect('mongodb://127.0.0.1:27017/WEB_ECOM', {
+        await mongoose.connect('mongodb://127.0.0.1:27017/231MI5701_03', {
 
         });
         console.log('Connect successful');

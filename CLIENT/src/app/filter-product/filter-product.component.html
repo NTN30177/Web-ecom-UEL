@@ -1,7 +1,7 @@
 <main id="main" class="site-man">
   <div class="container">
     <section class="location">
-      <div class="main-location">
+      <div class="main-location" *ngIf="slugName">
         <a routerLink="">Trang chủ /
         </a>
         <span style="font-weight: 700;" *ngIf="slugName.type"><a routerLink="/category/{{slugName.type.slug}}"> {{slugName.type.typeName}}</a></span>
@@ -142,7 +142,7 @@
               </div>
               <div class="collection-section-loadmore">
                 <a class="collection-section-loadmore__btn btn" (click)="viewMore()" *ngIf="totalProduct>(productsPerPage*currentPage)">Xem thêm</a>
-                <p class="collection-section-loadmore__page">
+                <p class="collection-section-loadmore__page" *ngIf="totalProduct!=0">
                   Hiển thị
                   <span>1</span>
                   -
@@ -150,6 +150,9 @@
                   trên tổng số
                   <span class="total-products">{{totalProduct}}</span>
                   sản phẩm
+                </p>
+                <p class="collection-section-loadmore__page" *ngIf="totalProduct==0">
+                 Không tìm thấy sản phẩm nào
                 </p>
               </div>
             </div>

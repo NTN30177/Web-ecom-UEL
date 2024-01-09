@@ -53,7 +53,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     if(this.userIdFromHeader){
-      this.router.navigate(['/']);
+      // this.router.navigate(['/']);
     }
     this.initForm();
     this.setDefaultValues();
@@ -228,7 +228,7 @@ this.postRegister()
             });
             if (data.success) {
               const snackBarRef = this.snackBar.open('Vui lòng xác thực gmail', 'Close', {
-                duration: 4000,
+                duration: 10000,
                 horizontalPosition: 'center',
                 verticalPosition: 'top',
               });
