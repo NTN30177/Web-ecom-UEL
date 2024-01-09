@@ -40,7 +40,9 @@
           <div class="filter-setting__tit">Mức giá</div>
           <div class="sub-list-side">
             <div id="slider-range">
-              <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ngx-slider>
+              <!-- <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ngx-slider> -->
+              <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options" (mouseup)="onSliderMouseUp()"></ngx-slider>
+
             </div>
           </div>
         </div>
@@ -131,7 +133,6 @@
                                   <ng-template #noQuantity><del>{{ vc.size }}</del></ng-template>
                                 </button>
                               </li>
-
                             </ul>
                           </div>
                         </div>

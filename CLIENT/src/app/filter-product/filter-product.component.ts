@@ -343,18 +343,18 @@ export class FilterProductComponent implements AfterViewInit {
   }
 
   minValue: number = 0;
-  maxValue: number = 500;
+  maxValue: number = 10;
   options: Options = {
     floor: 0,
-    ceil: 500,
+    ceil: 10,
     translate: (value: number, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
-          return '<b>Min price:</b> $' + formatMoneyVietNam(value);
+          return  + (value) + 'triệu';
         case LabelType.High:
-          return '<b>Max price:</b> $' + formatMoneyVietNam(value);
+          return  + (value) + 'triệu';
         default:
-          return '$' + value;
+          return 'triệu' + value;
       }
     },
   };
@@ -387,7 +387,7 @@ export class FilterProductComponent implements AfterViewInit {
       console.log(
         this.selectedColorsId,
         this.sizesChoose,
-        this.minValue,
+        this.minValue* 1000000,
         this.maxValue * 1000000,
         this.selectedSorting,
         this.slug,
@@ -399,8 +399,8 @@ export class FilterProductComponent implements AfterViewInit {
         .sort(
           this.selectedColorsId,
           this.sizesChoose,
-          this.minValue,
-          this.maxValue * 100000,
+          this.minValue* 1000000,
+          this.maxValue * 1000000,
           this.selectedSorting,
           this.slug,
           this.productsPerPage,
@@ -421,5 +421,11 @@ export class FilterProductComponent implements AfterViewInit {
     this.currentPage += 1;
     this.sortFilter();
   }
+  onSliderMouseUp() {
+    this.currentPage = 1;
+    this.sortFilter()
+    
+  }
+
 
 }
