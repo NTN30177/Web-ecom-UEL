@@ -167,7 +167,6 @@ export class CartComponent implements OnInit {
       this.ship_code = 35000;
     }
     this._authServer.updateCart(this.total_quantity);
-
     return this.total_payment;
   }
 

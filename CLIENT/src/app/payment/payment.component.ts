@@ -7,6 +7,8 @@ import { CartService } from '../services/cart.service';
 import { formatMoneyVietNam } from '../utils/utils';
 import { AuthService } from '../services/auth.service';
 import { PaymentService } from '../services/payment.service';
+import { CartComponent } from '../cart/cart.component';
+import { HomePageComponent } from '../home-page/home-page.component';
 
 @Component({
   selector: 'app-payment',
@@ -25,7 +27,9 @@ export class PaymentComponent implements OnInit {
     private dialogRef: MatDialog,
     private _cartService: CartService,
     private _authService: AuthService,
-    private _paymentService: PaymentService
+    private _paymentService: PaymentService,
+    private _cartComponent: CartComponent,
+    private _homePageComponent: HomePageComponent,
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -33,7 +37,9 @@ export class PaymentComponent implements OnInit {
       this.cartItems = cartItems;
       await this.getUserId(); // Chờ hàm này chạy xong trước khi tiếp tục
       await this.getAddressUser(); // Chờ hàm này chạy xong trước khi tiếp tục
-      // Chờ hàm này chạy xong trước khi tiếp tục
+      // this._cartService.updateCartItems(cartItems);
+      const total_quantity = await this._homePageComponent.totalCartItem(cartItems);
+      this._authService.updateCart(total_quantity);
       await this.totalPayment();
 
     });
@@ -42,7 +48,6 @@ export class PaymentComponent implements OnInit {
   getUserId() {
     this._authService.idUserSubject.subscribe((data) => {
       this.userId = data;
-      // console.log(this.userId, 'uid');
     });
   }
   total_payment: number = 0;
@@ -55,13 +60,10 @@ export class PaymentComponent implements OnInit {
     this.total_variantColor = 0;
     this.ship_code = 0;
     this.cartItems.forEach((product: any) => {
-      // console.log(product);
       product.variants.forEach((variant: any) => {
         variant.variantColor.forEach((variantColor: any) => {
-          // console.log(variantColor);
           this.total_variantColor++;
           this._authService.cartSubject.next(this.total_quantity);
-          // Assuming there is a 'price' property for each variant
           this.total_payment += variantColor.quantity * product.productId.price;
           this.total_quantity += variantColor.quantity;
         });

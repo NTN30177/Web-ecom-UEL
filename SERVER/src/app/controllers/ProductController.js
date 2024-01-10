@@ -58,7 +58,6 @@ const toggleSoftDeleted = async (req, res) => {
 
 const saveProduct = async (req, res) => {
   try {
-    console.log("route");
     const {
       productName,
       productSku,
@@ -69,10 +68,9 @@ const saveProduct = async (req, res) => {
       subTypeName,
       collectionName,
     } = req.body;
-    const author = "64ca103baeac1741e179f4c7";
+    const author = "65928d92a510883c26c900be";
     const receivedFiles = req.files;
     const imageList = convertFilesToDesiredFormat(receivedFiles);
-    console.log(imageList);
     const variants = await createVariantsFromData(req, typeName, imageList);
     const product = createProduct(
       productName,
@@ -82,9 +80,9 @@ const saveProduct = async (req, res) => {
       description,
       author,
       variants
-    );
-    await product.save();
-
+      );
+      await product.save();
+      console.log('.......................')
     const type = await findOrCreateType(typeName);
     await findOrCreateSubType(type, subTypeName, product);
     if (collectionName) {
@@ -119,6 +117,7 @@ const createVariantsFromData = (req, typeName, imageList) => {
     // const colorFake = "64cb721d066ac7727d33ceda";
     accessoryId = "64c4c7621539b1bd9c0fae5b";
     if (typeName === "Phụ kiện") {
+      console.log('pk')
       const variant = {
         color: v.colorFreeSize,
         images: imageList[index],
@@ -129,7 +128,6 @@ const createVariantsFromData = (req, typeName, imageList) => {
         quantity: parseInt(req.body.variant[index].freeSize),
       });
       return variant;
-      // console.log(parseInt(req.body.variant[index].freeSize));
     } else {
       const variant = {
         color: v.color,
@@ -165,6 +163,7 @@ const createProduct = (
   author,
   variants
 ) => {
+  console.log('././././././././')
   return new Product({
     title,
     sku,

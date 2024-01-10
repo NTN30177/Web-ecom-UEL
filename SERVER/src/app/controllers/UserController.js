@@ -195,7 +195,7 @@ const getUserID = async (req, res) => {
 
 const getProductHomePage = async (req, res) => {
   try {
-    let products = await Product.find({})
+    let products = await Product.find({is_deleted:false})
       .populate({
         path: "variants.color",
         select: "imageColor nameColor",

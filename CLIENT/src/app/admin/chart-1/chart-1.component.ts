@@ -29,6 +29,7 @@ export class Chart1Component implements OnInit {
       console.log(data);
       this.arrX = data.arrX;
       this.arrDetail = data.arrDetail;
+      console.log(data.arrDetail,'1111')
       this.chartOptions = {
         chart: {
           type: 'column',

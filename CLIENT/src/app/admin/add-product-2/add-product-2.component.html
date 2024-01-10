@@ -56,8 +56,8 @@
         <div [formGroup]="contr" class="container product-info product-info__body variant-div ">
           <div class="col-12 p-0 d-flex justify-content-between" *ngIf="!accessory">
             <div class="form-group color">
-              <label for="color ">Màu sắc :</label>
-              <div>{{ i + 1 }}</div>
+              <label for="color ">Màu sắc {{ i + 1 }}:</label>
+
 
               <select class="col-auto mt-2" name="color" id="color" placeholder="Nhập color" formControlName="color">
                 <option value="">Chọn màu sắc</option>

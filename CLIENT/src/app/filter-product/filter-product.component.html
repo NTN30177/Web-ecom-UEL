@@ -117,12 +117,14 @@
                             </div>
                           </div>
                           <div class="add-to-cart">
+                            
                             <a href="javascript:void(0)#" class="js-cart-button"
                               (click)="toggleSizeTable(productIndex)">
                               <i class="ti-shopping-cart"></i>
                             </a>
                           </div>
-                          <div id="sizeTable{{productIndex}}" class="sizeTable js-list-size">
+                          <div id="sizeTable{{productIndex}}" class="sizeTable js-list-size" [ngClass]="{'open': productStates[productIndex]}">
+                          <!-- <div id="sizeTable{{productIndex}}" class="sizeTable js-list-size"> -->
                             <ul>
                               <li *ngFor="let vc of product.imgHomePage[0].variantColor"
                                 [class.disabled]="vc.quantity === 0"

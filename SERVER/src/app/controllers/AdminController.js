@@ -144,12 +144,11 @@ const getChartAccount = async (req, res, next) => {
           return acc;
         }, {});
         console.log(formattedData)
-    
         arr.forEach(item => {
           const count = formattedData[item.date] || 0;
           item.count += count;
         });
-    
+  
         const arrX = arr.map(item => item.date);
         const arrY = arr.map(item => item.count);
         console.log(arrX, arrY);

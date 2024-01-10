@@ -19,6 +19,7 @@ export class PaymentThankComponent {
   }
 
   ngOnInit():void{
+    this._authService.updateCart(0);
     this.getOrderInfo()
     this.getEmail()
   }

@@ -84,33 +84,37 @@ export class FilterProductComponent implements AfterViewInit {
     });
   }
 
-  toggleSizeTable(productIndex: number): void {
-    for (let i = 0; i < this.productStates.length; i++) {
-      const otherSizeTableId = `sizeTable${i}`;
-      const otherSizeTable = this.el.nativeElement.querySelector(
-        `#${otherSizeTableId}`
-      );
-      if (otherSizeTable) {
-        this.renderer.removeClass(otherSizeTable, 'open');
-      }
-    }
 
-    const sizeTableId = `sizeTable${productIndex}`;
-    const sizeTable = this.el.nativeElement.querySelector(`#${sizeTableId}`);
-    if (
-      sizeTable &&
-      this.productStates &&
-      this.productStates[productIndex] !== undefined
-    ) {
-      this.productStates[productIndex] = !this.productStates[productIndex];
-
-      if (this.productStates[productIndex]) {
-        this.renderer.addClass(sizeTable, 'open');
-      } else {
-        this.renderer.removeClass(sizeTable, 'open');
-      }
-    }
+toggleSizeTable(productIndex: number): void {
+    this.productStates[productIndex] = !this.productStates[productIndex];
   }
+  // toggleSizeTable(productIndex: number): void {
+  //   for (let i = 0; i < this.productStates.length; i++) {
+  //     const otherSizeTableId = `sizeTable${i}`;
+  //     const otherSizeTable = this.el.nativeElement.querySelector(
+  //       `#${otherSizeTableId}`
+  //     );
+  //     if (otherSizeTable) {
+  //       this.renderer.removeClass(otherSizeTable, 'open');
+  //     }
+  //   }
+
+  //   const sizeTableId = `sizeTable${productIndex}`;
+  //   const sizeTable = this.el.nativeElement.querySelector(`#${sizeTableId}`);
+  //   if (
+  //     sizeTable &&
+  //     this.productStates &&
+  //     this.productStates[productIndex] !== undefined
+  //   ) {
+  //     this.productStates[productIndex] = !this.productStates[productIndex];
+
+  //     if (this.productStates[productIndex]) {
+  //       this.renderer.addClass(sizeTable, 'open');
+  //     } else {
+  //       this.renderer.removeClass(sizeTable, 'open');
+  //     }
+  //   }
+  // }
 
   selectedColorId: number | null = null;
   imagesArray: any = [];

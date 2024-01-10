@@ -84,10 +84,6 @@ const addOrPutProductToCart = async (req, res, next) => {
     const variant = p.variants.find((v) => {
       const variantColorId = v.color._id.toString();
       const providedColorId = colorId.toString();
-
-      // console.log("Variant Color ID:", variantColorId);
-      // console.log("Provided Color ID:", providedColorId);
-
       return variantColorId === providedColorId;
     });
 

@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { ManageProductService } from '../../services/manage-product.service';
 import { IColor, ISubType, IType } from '../../interfaces/product';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-product-2',
@@ -40,7 +41,9 @@ export class AddProduct2Component implements OnInit {
   colorList: any;
   constructor(
     private _productService: ManageProductService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router,
+
   ) {
     this.rfDataModal = this.fb.group({
       productName: ['', [Validators.required]],
@@ -92,6 +95,7 @@ export class AddProduct2Component implements OnInit {
       this._productService.postProduct(data).subscribe({
         next: (data) => {
           this.books = data;
+          this.router.navigate(['/admin/manage-order']);
         },
         error: (err) => {
           this.errMessage = err;
